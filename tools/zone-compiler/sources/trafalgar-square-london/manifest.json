@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "slug": "trafalgar-square-london",
+  "label": "Trafalgar Square, London",
+  "bounds": {
+    "south": 51.503533,
+    "west": -0.135325,
+    "north": 51.512527,
+    "east": -0.120875
+  },
+  "approximateAreaSquareKilometres": 1.000149,
+  "snapshot": {
+    "file": "source.osm.json",
+    "format": "overpass-json",
+    "byteLength": 3242523,
+    "sha256": "a56dce2329fdc5f1130d300839251119f6261bb08216c0b70363aa646b423484"
+  },
+  "source": {
+    "dataset": "OpenStreetMap",
+    "api": "Overpass API",
+    "endpoint": "https://overpass-api.de/api/interpreter",
+    "osmBaseTimestamp": "2026-09-04T12:56:50Z",
+    "request": {
+      "method": "POST",
+      "parameter": "data",
+      "query": "[out:json][timeout:180][maxsize:536870912];\n(\n  way[\"highway\"](51.503533,-0.135325,51.512527,-0.120875);\n  way[\"building\"](51.503533,-0.135325,51.512527,-0.120875);\n  relation[\"building\"](51.503533,-0.135325,51.512527,-0.120875);\n  way[\"building:part\"](51.503533,-0.135325,51.512527,-0.120875);\n  relation[\"building:part\"](51.503533,-0.135325,51.512527,-0.120875);\n);\n(._;>;);\nout body qt;"
+    },
+    "attribution": "© OpenStreetMap contributors",
+    "attributionUrl": "https://www.openstreetmap.org/copyright",
+    "licence": {
+      "id": "ODbL-1.0",
+      "url": "https://opendatacommons.org/licenses/odbl/1-0/"
+    }
+  }
+}

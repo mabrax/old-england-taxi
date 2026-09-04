@@ -8,6 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
+    "zone:check": "tsx tools/zone-compiler/src/check-zone-source.ts",
     "test": "vitest run",
     "test:watch": "vitest"
   },
@@ -17,8 +18,10 @@
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^6.1.0",
+    "@types/node": "^26.4.1",
     "@types/three": "^0.185.4",
     "svelte-check": "^4.3.1",
+    "tsx": "^4.23.13",
     "typescript": "^5.9.2",
     "vite": "^7.1.4",
     "vitest": "^3.2.4"
