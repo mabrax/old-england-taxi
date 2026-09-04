@@ -35,6 +35,7 @@ if (args.includes('--help')) {
           status: 'ok',
           slug: first.metadata.slug,
           deterministic: true,
+          diagnostics: first.diagnostics,
           output: 'packaged by Phase 05 zone artifact',
           roads: {
             features: first.roads.length,

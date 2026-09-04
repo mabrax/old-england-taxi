@@ -81,8 +81,8 @@ describe.sequential('Phase 05 zone artifact', () => {
       roadFeatures: 475,
       centerlineSegments: 1_582,
       surfacePolygons: 11,
-      vertices: 6_401,
-      triangles: 6_537
+      vertices: 6_399,
+      triangles: 6_535
     });
     expect(artifact.geometry.buildings.statistics).toEqual({
       buildings: 1_005,
@@ -214,6 +214,71 @@ describe.sequential('Phase 05 zone artifact', () => {
         }
       })
     ).toThrow('Street graph edge and road centerline segment count');
+  });
+
+  it.each([
+    ['repeated triangle vertices', (value: ZoneArtifact) => {
+      value.geometry.roads.indices[1] = value.geometry.roads.indices[0];
+    }, 'degenerate'],
+    ['downward road triangles', (value: ZoneArtifact) => {
+      const indices = value.geometry.roads.indices;
+      [indices[1], indices[2]] = [indices[2], indices[1]];
+    }, 'face upward'],
+    ['missing index entries', (value: ZoneArtifact) => {
+      delete value.geometry.roads.indices[0];
+    }, 'non-negative safe integer'],
+    ['non-finite positions', (value: ZoneArtifact) => {
+      value.geometry.buildings.positions[0] = Infinity;
+    }, 'finite number'],
+    ['out-of-range source coordinates', (value: ZoneArtifact) => {
+      value.source.bounds.north = 100;
+    }, 'outside WGS84'],
+    ['a mismatched origin', (value: ZoneArtifact) => {
+      value.coordinates.system.origin.latitude += 0.01;
+    }, 'source bounds midpoint'],
+    ['a rolled-over calendar date', (value: ZoneArtifact) => {
+      value.source.snapshot.osmBaseTimestamp = '2026-02-30T12:56:50Z';
+    }, 'valid ISO UTC timestamp'],
+    ['inverted height limits', (value: ZoneArtifact) => {
+      value.compiler.buildingVolumes.heightRules.minimumHeightMetres = 2000;
+    }, 'inconsistent ranges']
+  ] as const)('rejects %s', (_name, mutate, message) => {
+    const invalid = structuredClone(artifact);
+    mutate(invalid);
+    expect(() => parseZoneArtifact(invalid)).toThrow(message);
+  });
+
+  it('rejects road triangles that collapse only when uploaded as Float32', () => {
+    const invalid = structuredClone(artifact);
+    const mesh = invalid.geometry.roads;
+    // Valid double-precision area; the first and third vertices become identical
+    // in a Float32 position attribute near x=1000.
+    mesh.positions = [1000, 0, 0, 1000, 0, 1, 1000.000001, 0, 0];
+    mesh.indices = [0, 1, 2];
+    mesh.bounds = { minimumX: 1000, maximumX: 1000.000001, minimumY: 0, maximumY: 0, minimumZ: 0, maximumZ: 1 };
+    mesh.statistics.vertices = 3;
+    mesh.statistics.triangles = 1;
+    expect(() => parseZoneArtifact(invalid)).toThrow('degenerate at Float32 precision');
+  });
+
+  it('rejects inconsistent way metadata and disconnected consecutive graph segments', () => {
+    const index = artifact.streetGraph.edges.findIndex((edge, index, edges) => index > 0 &&
+      edge.sourceWayId === edges[index - 1].sourceWayId &&
+      edge.sourceSegmentIndex === edges[index - 1].sourceSegmentIndex + 1);
+    expect(index).toBeGreaterThan(0);
+    const width = structuredClone(artifact);
+    width.streetGraph.edges[index].widthMetres += 1;
+    expect(() => parseZoneArtifact(width)).toThrow('inconsistent width or highway');
+    const disconnected = structuredClone(artifact);
+    const edge = disconnected.streetGraph.edges[index];
+    [edge.from, edge.to] = [edge.to, edge.from];
+    expect(() => parseZoneArtifact(disconnected)).toThrow('disconnected consecutive segments');
+  });
+
+  it('accepts valid fractional UTC timestamps consistently with the source loader', () => {
+    const valid = structuredClone(artifact);
+    valid.source.snapshot.osmBaseTimestamp = '2024-02-29T12:56:50.12Z';
+    expect(parseZoneArtifact(valid)).toBe(valid);
   });
 
   it('compiles reproducibly without network access', async () => {

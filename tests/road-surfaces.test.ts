@@ -1,5 +1,6 @@
 import { beforeAll, describe, expect, it } from 'vitest';
-import { compileLocalCoordinates } from '../tools/zone-compiler/src/local-coordinates';
+import { compileLocalCoordinates, createLocalCoordinateTransform } from '../tools/zone-compiler/src/local-coordinates';
+import { compileStreetGraph } from '../tools/zone-compiler/src/zone-artifact';
 import { loadZoneSource } from '../tools/zone-compiler/src/load-zone-source';
 import {
   compileRoadSurfaces,
@@ -164,6 +165,35 @@ describe('road surface geometry', () => {
       compileRoadSurfaces(local, { clipToSourceBounds: false })
     ).toThrow('zero-length segment');
   });
+
+  it('skips distant source segments while retaining pavement just outside the boundary', () => {
+    const local = createZone([]);
+    const transform = createLocalCoordinateTransform(local.metadata.sourceBounds);
+    const east = transform.project({ latitude: 0, longitude: local.metadata.sourceBounds.east }).x;
+    local.lines = [
+      createRoad(1, 'service', [[1, 0, 0], [2, 10, 0], [3, 2000, 0], [4, 3000, 0]]),
+      createRoad(2, 'service', [[5, 10000, 0], [6, 10010, 0]]),
+      createRoad(3, 'service', [[7, east + 1, -10], [8, east + 1, 10]], { width: '4' })
+    ];
+    const surface = compileRoadSurfaces(local);
+    expect(surface.roads.map((road) => road.id)).toEqual([1, 3]);
+    expect(surface.diagnostics).toEqual({ skippedOutsideRoads: 1, skippedOutsideSegments: 2, bufferedSegments: 3 });
+    expect(pointIsInSurface({ x: east - 0.5, z: 5 }, surface)).toBe(true);
+    const graph = compileStreetGraph(surface);
+    expect(graph.edges.map((edge) => edge.id)).toEqual(['1:0', '1:1']);
+    expect(graph.nodes.some((node) => node.id === 4 || node.id === 7)).toBe(false);
+  });
+
+  it('keeps geometric crossings disconnected unless OSM shares a node', () => {
+    const local = createZone([
+      createRoad(20, 'service', [[1, -10, 0], [2, 10, 0]]),
+      createRoad(10, 'service', [[3, 0, -10], [4, 0, 10]])
+    ]);
+    const surface = compileRoadSurfaces(local);
+    expect(surface.polygons).toHaveLength(1);
+    expect(compileStreetGraph(surface).statistics.connectedComponents).toBe(2);
+    expect(compileRoadSurfaces({ ...local, lines: [...local.lines].reverse() })).toEqual(surface);
+  });
 });
 
 describe.sequential('fixed-zone road surfaces', () => {
@@ -209,17 +239,18 @@ describe.sequential('fixed-zone road surfaces', () => {
         0
       )
     ).toBe(79);
-    expect(Math.min(...xs)).toBe(-501.664593);
-    expect(Math.max(...xs)).toBe(501.616898);
-    expect(Math.min(...zs)).toBe(-500.352);
-    expect(Math.max(...zs)).toBe(500.302);
-    expect(surface.mesh.vertexCount).toBe(6_401);
-    expect(surface.mesh.triangleCount).toBe(6_537);
-    expect(surface.mesh.areaSquareMetres).toBe(113_933.84925);
+    expect(Math.min(...xs)).toBe(Math.fround(-501.664593));
+    expect(Math.max(...xs)).toBe(Math.fround(501.616898));
+    expect(Math.min(...zs)).toBe(Math.fround(-500.352));
+    expect(Math.max(...zs)).toBe(Math.fround(500.302));
+    expect(surface.mesh.vertexCount).toBe(6_399);
+    expect(surface.mesh.triangleCount).toBe(6_535);
+    expect(surface.mesh.areaSquareMetres).toBe(113_933.847633);
     expect(surface.mesh.maximumDeviation).toBeLessThanOrEqual(1e-8);
     expect(positions.every(Number.isFinite)).toBe(true);
     expect(indices.every((index) => index >= 0 && index < surface.mesh.vertexCount)).toBe(true);
     expect(allTrianglesFaceUp(positions, indices)).toBe(true);
+    expect(allTrianglesFaceUp(Array.from(new Float32Array(positions)), indices)).toBe(true);
   });
 });
 

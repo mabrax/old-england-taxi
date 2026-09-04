@@ -114,6 +114,7 @@ export function compileRoadSurfaces(
     : undefined;
   const roads = local.lines
     .filter((line) => isSupportedRoad(line.tags))
+    .sort((first, second) => first.id - second.id)
     .map((line) => compileCenterline(line, sourceBoundsRing));
 
   if (roads.length === 0) {
@@ -121,9 +122,18 @@ export function compileRoadSurfaces(
   }
 
   const bufferPolygons: MultiPolygon = [];
+  const contributingRoads: CompiledRoadCenterline[] = [];
+  const diagnostics = { skippedOutsideRoads: 0, skippedOutsideSegments: 0, bufferedSegments: 0 };
+  const bounds = sourceBoundsRing === undefined ? undefined : {
+    minimumX: Math.min(...sourceBoundsRing.map(([x]) => x)),
+    maximumX: Math.max(...sourceBoundsRing.map(([x]) => x)),
+    minimumZ: Math.min(...sourceBoundsRing.map(([, z]) => z)),
+    maximumZ: Math.max(...sourceBoundsRing.map(([, z]) => z))
+  };
 
   for (const road of roads) {
     const radius = road.width.metres / 2;
+    const before = bufferPolygons.length;
 
     for (let index = 1; index < road.positions.length; index += 1) {
       const start = road.positions[index - 1];
@@ -132,12 +142,30 @@ export function compileRoadSurfaces(
         throw new Error(`Road way/${road.id} has an unresolved segment`);
       }
       if (horizontalDistance(start, end) <= POSITION_TOLERANCE) {
-        throw new Error(`Road way/${road.id} contains a zero-length segment`);
+        throw new Error(`Road way/${road.id} contains a zero-length segment at index ${index - 1}`);
+      }
+      // A conservative broad phase: include the buffer and rounding margin, not just
+      // the centerline. Near-boundary pavement can contribute without a graph edge.
+      const margin = radius + ROAD_GEOMETRY_INPUT_PRECISION_METRES;
+      if (bounds !== undefined && (
+        Math.max(start.x, end.x) + margin < bounds.minimumX ||
+        Math.min(start.x, end.x) - margin > bounds.maximumX ||
+        Math.max(start.z, end.z) + margin < bounds.minimumZ ||
+        Math.min(start.z, end.z) - margin > bounds.maximumZ
+      )) {
+        diagnostics.skippedOutsideSegments += 1;
+        continue;
       }
       bufferPolygons.push(createSegmentCapsule(start, end, radius));
     }
+    if (bufferPolygons.length > before) contributingRoads.push(road);
+    else diagnostics.skippedOutsideRoads += 1;
   }
+  diagnostics.bufferedSegments = bufferPolygons.length;
 
+  if (bufferPolygons.length === 0) {
+    throw new Error('Road buffering produced no surface inside the source bounds');
+  }
   let unioned = polygonClipping.union(bufferPolygons);
   if (sourceBoundsRing !== undefined) {
     unioned = polygonClipping.intersection(unioned, [sourceBoundsRing]);
@@ -170,7 +198,8 @@ export function compileRoadSurfaces(
       },
       clippedToSourceBounds: clipToSourceBounds
     },
-    roads,
+    roads: contributingRoads,
+    diagnostics,
     polygons,
     mesh
   };
@@ -186,8 +215,8 @@ export function triangulateRoadPolygons(
   for (const [polygonIndex, polygon] of polygons.entries()) {
     const triangulated = triangulatePolygon(polygon, polygonIndex);
     const vertexOffset = positions.length / 3;
-    positions.push(...triangulated.positions);
-    indices.push(...triangulated.indices.map((index) => index + vertexOffset));
+    for (const position of triangulated.positions) positions.push(position);
+    for (const index of triangulated.indices) indices.push(index + vertexOffset);
     maximumDeviation = Math.max(maximumDeviation, triangulated.deviation);
   }
 
@@ -244,10 +273,6 @@ function compileCenterline(
     ) {
       inZoneSegmentIndices.push(index - 1);
     }
-  }
-
-  if (inZoneSegmentIndices.length === 0) {
-    throw new Error(`Supported road way/${line.id} does not intersect the fixed zone`);
   }
 
   return {
@@ -353,8 +378,10 @@ function normalisePolygons(multiPolygon: MultiPolygon): RoadSurfacePolygon[] {
 
 function normaliseRing(ring: Ring, description: string): RoadSurfacePoint[] {
   const points = ring.map(([x, z]) => ({
-    x: roundOutput(x),
-    z: roundOutput(z)
+    // Triangulate in the precision used by Three.js position buffers. Rounding
+    // only after triangulation can collapse or reverse thin boundary triangles.
+    x: Math.fround(roundOutput(x)),
+    z: Math.fround(roundOutput(z))
   }));
   if (
     points.length > 1 &&

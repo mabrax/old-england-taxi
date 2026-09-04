@@ -305,7 +305,13 @@ function roundOutput(value: number): number {
 }
 
 function canonicalise(value: unknown): unknown {
-  if (Array.isArray(value)) return value.map(canonicalise);
+  if (Array.isArray(value)) {
+    // Geometry dominates the artifact. Primitive arrays already have canonical
+    // order; retaining them avoids cloning every coordinate and triangle index.
+    return value.every((item) => item === null || typeof item !== 'object')
+      ? value
+      : value.map(canonicalise);
+  }
   if (value === null || typeof value !== 'object') return value;
 
   return Object.fromEntries(

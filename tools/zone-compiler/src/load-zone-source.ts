@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { isUtcTimestamp } from '../../../src/lib/zone/timestamp';
 import {
   OSM_VERSION,
   ZONE_SOURCE_SCHEMA_VERSION,
@@ -191,6 +192,9 @@ function parseBounds(value: unknown): GeographicBounds {
 function parseOsmSnapshot(raw: string): OsmSnapshot {
   const value = parseJson(raw, 'OSM snapshot');
   const snapshot = expectRecord(value, 'OSM snapshot');
+  if (snapshot.remark !== undefined) {
+    throw new Error(`OSM snapshot contains an Overpass remark; partial results cannot be compiled: ${String(snapshot.remark)}`);
+  }
 
   if (snapshot.version !== OSM_VERSION) {
     throw new Error(`Unsupported OSM version: ${String(snapshot.version)}`);
@@ -269,7 +273,7 @@ function parseRelationMember(value: unknown, context: string): OsmRelationMember
 function parseTags(value: unknown, context: string): OsmTags | undefined {
   if (value === undefined) return undefined;
   const tags = expectRecord(value, `${context} tags`);
-  const parsed: OsmTags = {};
+  const parsed: OsmTags = Object.create(null) as OsmTags;
   for (const [key, tagValue] of Object.entries(tags)) {
     parsed[key] = expectString(tagValue, `${context} tag ${key}`, true);
   }
@@ -412,7 +416,7 @@ function expectSlug(value: unknown, description: string): string {
 
 function expectIsoTimestamp(value: unknown, description: string): string {
   const timestamp = expectString(value, description);
-  if (!timestamp.endsWith('Z') || Number.isNaN(Date.parse(timestamp))) {
+  if (!isUtcTimestamp(timestamp)) {
     throw new Error(`${description} must be a valid UTC ISO 8601 timestamp`);
   }
   return timestamp;

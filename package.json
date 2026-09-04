@@ -15,6 +15,8 @@
     "zone:artifact": "tsx tools/zone-compiler/src/check-zone-artifact.ts",
     "zone:artifact:write": "tsx tools/zone-compiler/src/check-zone-artifact.ts --write",
     "zone:artifact:inspect": "tsx tools/zone-compiler/src/inspect-zone-artifact.ts",
+    "zone:verify": "npm run zone:check && npm run zone:coordinates && npm run zone:roads && npm run zone:buildings && npm run zone:artifact && npm run zone:artifact:inspect",
+    "verify": "npm run zone:verify && npm test && npm run check && npm run build",
     "test": "vitest run",
     "test:watch": "vitest"
   },

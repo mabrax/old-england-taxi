@@ -1,13 +1,16 @@
 import {
   STREET_GRAPH_SCHEMA_VERSION,
   ZONE_ARTIFACT_SCHEMA_VERSION,
+  type GeographicBounds,
   type ZoneArtifact,
   type ZoneBounds3d
 } from './types';
+import { isUtcTimestamp } from './timestamp';
 
 const SHA256_PATTERN = /^[a-f0-9]{64}$/;
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const LENGTH_TOLERANCE_METRES = 1e-6;
+const identity = (value: number): number => value;
 
 export class ZoneArtifactValidationError extends Error {
   constructor(message: string) {
@@ -26,9 +29,11 @@ export function parseZoneArtifact(value: unknown): ZoneArtifact {
   expectMatchingString(artifact.slug, SLUG_PATTERN, 'Zone artifact slug');
   expectNonEmptyString(artifact.label, 'Zone artifact label');
 
-  validateSource(expectRecord(artifact.source, 'Zone artifact source'));
+  const source = expectRecord(artifact.source, 'Zone artifact source');
+  validateSource(source);
   const localBounds = validateCoordinates(
-    expectRecord(artifact.coordinates, 'Zone artifact coordinates')
+    expectRecord(artifact.coordinates, 'Zone artifact coordinates'),
+    source.bounds as GeographicBounds
   );
   const supportedHighways = validateCompiler(
     expectRecord(artifact.compiler, 'Zone artifact compiler')
@@ -68,6 +73,9 @@ function validateSource(source: Record<string, unknown>): void {
   if (south >= north || west >= east) {
     fail('Zone source bounds must have positive latitude and longitude spans');
   }
+  if (south < -90 || north > 90 || west < -180 || east > 180) {
+    fail('Zone source bounds are outside WGS84 latitude or longitude limits');
+  }
   expectPositiveNumber(
     source.approximateAreaSquareKilometres,
     'Zone source approximateAreaSquareKilometres'
@@ -95,7 +103,10 @@ function validateSource(source: Record<string, unknown>): void {
   expectUrl(licence.url, 'Zone source licence url');
 }
 
-function validateCoordinates(coordinates: Record<string, unknown>): ZoneBounds3d {
+function validateCoordinates(
+  coordinates: Record<string, unknown>,
+  sourceBounds: GeographicBounds
+): ZoneBounds3d {
   const system = expectRecord(coordinates.system, 'Zone coordinate system');
   expectLiteral(system.schemaVersion, 1, 'Zone coordinate schemaVersion');
   expectLiteral(system.sourceCrs, 'EPSG:4326', 'Zone coordinate sourceCrs');
@@ -113,6 +124,12 @@ function validateCoordinates(coordinates: Record<string, unknown>): ZoneBounds3d
   );
   if (latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180) {
     fail('Zone coordinate origin is outside WGS84 latitude or longitude limits');
+  }
+  if (
+    latitude !== (sourceBounds.south + sourceBounds.north) / 2 ||
+    longitude !== (sourceBounds.west + sourceBounds.east) / 2
+  ) {
+    fail('Zone coordinate origin must match the source bounds midpoint');
   }
   expectLiteral(
     origin.ellipsoidHeightMetres,
@@ -176,7 +193,13 @@ function validateCompiler(compiler: Record<string, unknown>): Set<string> {
   const buffer = expectRecord(roads.buffer, 'Zone compiler road buffer');
   expectLiteral(buffer.cap, 'round', 'Zone compiler road buffer cap');
   expectLiteral(buffer.join, 'round', 'Zone compiler road buffer join');
-  expectPositiveInteger(buffer.circleSegments, 'Zone compiler road circleSegments');
+  const circleSegments = expectPositiveInteger(
+    buffer.circleSegments,
+    'Zone compiler road circleSegments'
+  );
+  if (circleSegments < 4 || circleSegments % 2 !== 0) {
+    fail('Zone compiler road circleSegments must be even and at least four');
+  }
   expectPositiveNumber(
     buffer.inputPrecisionMetres,
     'Zone compiler road inputPrecisionMetres'
@@ -225,6 +248,14 @@ function validateCompiler(compiler: Record<string, unknown>): Set<string> {
   ]) {
     expectPositiveNumber(heightRules[field], `Zone compiler building ${field}`);
   }
+  if (
+    (heightRules.minimumHeightMetres as number) > (heightRules.maximumHeightMetres as number) ||
+    (heightRules.minimumLevels as number) > (heightRules.maximumLevels as number) ||
+    (heightRules.fallbackHeightMetres as number) < (heightRules.minimumHeightMetres as number) ||
+    (heightRules.fallbackHeightMetres as number) > (heightRules.maximumHeightMetres as number)
+  ) {
+    fail('Zone compiler building height rules have inconsistent ranges');
+  }
   expectLiteral(buildings.groundPlaneY, 0, 'Zone compiler building groundPlaneY');
   return new Set(supportedHighways);
 }
@@ -235,8 +266,12 @@ function validateRoadGeometry(geometry: Record<string, unknown>): {
 } {
   const { bounds, positions, indices } = validateIndexedGeometry(
     geometry,
-    'Zone artifact road geometry'
+    'Zone artifact road geometry',
+    true
   );
+  if (bounds.minimumY !== 0 || bounds.maximumY !== 0) {
+    fail('Road geometry must lie on the coordinate ground plane');
+  }
   const statistics = expectRecord(
     geometry.statistics,
     'Zone artifact road geometry statistics'
@@ -257,6 +292,9 @@ function validateBuildingGeometry(geometry: Record<string, unknown>): ZoneBounds
     geometry,
     'Zone artifact building geometry'
   );
+  if (bounds.minimumY !== 0 || bounds.maximumY <= 0) {
+    fail('Building geometry must rise from the coordinate ground plane');
+  }
   const statistics = expectRecord(
     geometry.statistics,
     'Zone artifact building geometry statistics'
@@ -283,7 +321,8 @@ function validateBuildingGeometry(geometry: Record<string, unknown>): ZoneBounds
 
 function validateIndexedGeometry(
   geometry: Record<string, unknown>,
-  description: string
+  description: string,
+  upward = false
 ): {
   bounds: ZoneBounds3d;
   positions: number[];
@@ -304,9 +343,46 @@ function validateIndexedGeometry(
       fail(`${description} indices[${index}] is outside the vertex array`);
     }
   }
+  validateTriangles(positions, indices, description, upward);
   const bounds = validateBounds3d(geometry.bounds, `${description} bounds`);
   expectBoundsEqual(bounds, calculateBounds(positions), `${description} bounds`);
   return { bounds, positions, indices };
+}
+
+function validateTriangles(
+  positions: number[],
+  indices: number[],
+  description: string,
+  upward: boolean
+): void {
+  for (let index = 0; index < indices.length; index += 3) {
+    const first = indices[index] * 3;
+    const second = indices[index + 1] * 3;
+    const third = indices[index + 2] * 3;
+    // Validate both the stored mesh and the Float32 geometry consumed by WebGL.
+    for (let precision = 0; precision < 2; precision += 1) {
+      const scalar = precision === 0 ? identity : Math.fround;
+      const ax = scalar(positions[first]);
+      const ay = scalar(positions[first + 1]);
+      const az = scalar(positions[first + 2]);
+      const abX = scalar(positions[second]) - ax;
+      const abY = scalar(positions[second + 1]) - ay;
+      const abZ = scalar(positions[second + 2]) - az;
+      const acX = scalar(positions[third]) - ax;
+      const acY = scalar(positions[third + 1]) - ay;
+      const acZ = scalar(positions[third + 2]) - az;
+      const normalX = abY * acZ - abZ * acY;
+      const normalY = abZ * acX - abX * acZ;
+      const normalZ = abX * acY - abY * acX;
+      const area = Math.hypot(normalX, normalY, normalZ);
+      if (!Number.isFinite(area) || area === 0) {
+        fail(`${description} triangle ${index / 3} is degenerate at ${precision === 0 ? 'stored' : 'Float32'} precision`);
+      }
+      if (upward && normalY <= 0) {
+        fail(`${description} triangle ${index / 3} must face upward at ${precision === 0 ? 'stored' : 'Float32'} precision`);
+      }
+    }
+  }
 }
 
 function validateStreetGraph(
@@ -354,6 +430,9 @@ function validateStreetGraph(
   );
   let previousWayId = -Infinity;
   let previousSegmentIndex = -Infinity;
+  let previousTo: number | undefined;
+  let previousHighway: string | undefined;
+  let previousWidth: number | undefined;
   let totalLengthMetres = 0;
   for (const [index, rawEdge] of rawEdges.entries()) {
     const edge = expectRecord(rawEdge, `Street graph edges[${index}]`);
@@ -371,8 +450,6 @@ function validateStreetGraph(
     ) {
       fail('Street graph edges must be ordered by unique way and segment index');
     }
-    previousWayId = sourceWayId;
-    previousSegmentIndex = sourceSegmentIndex;
     const id = expectNonEmptyString(edge.id, `Street graph edges[${index}].id`);
     if (id !== `${sourceWayId}:${sourceSegmentIndex}` || edgeIds.has(id)) {
       fail(`Street graph edges[${index}] has an invalid or duplicate id`);
@@ -392,7 +469,23 @@ function validateStreetGraph(
     if (!supportedHighways.has(highway)) {
       fail(`Street graph edges[${index}] uses unsupported highway ${highway}`);
     }
-    expectPositiveNumber(edge.widthMetres, `Street graph edges[${index}].widthMetres`);
+    const width = expectPositiveNumber(
+      edge.widthMetres,
+      `Street graph edges[${index}].widthMetres`
+    );
+    if (sourceWayId === previousWayId) {
+      if (width !== previousWidth || highway !== previousHighway) {
+        fail(`Street graph way/${sourceWayId} has inconsistent width or highway`);
+      }
+      if (sourceSegmentIndex === previousSegmentIndex + 1 && from !== previousTo) {
+        fail(`Street graph way/${sourceWayId} has disconnected consecutive segments`);
+      }
+    }
+    previousWayId = sourceWayId;
+    previousSegmentIndex = sourceSegmentIndex;
+    previousTo = to;
+    previousHighway = highway;
+    previousWidth = width;
     const lengthMetres = expectPositiveNumber(
       edge.lengthMetres,
       `Street graph edges[${index}].lengthMetres`
@@ -400,7 +493,7 @@ function validateStreetGraph(
     const expectedLength = roundOutput(
       Math.hypot(toPosition[0] - fromPosition[0], toPosition[2] - fromPosition[2])
     );
-    if (Math.abs(lengthMetres - expectedLength) > LENGTH_TOLERANCE_METRES) {
+    if (expectedLength <= 0 || Math.abs(lengthMetres - expectedLength) > LENGTH_TOLERANCE_METRES) {
       fail(`Street graph edges[${index}] length does not match its node positions`);
     }
     totalLengthMetres += lengthMetres;
@@ -527,17 +620,23 @@ function expectArray(value: unknown, description: string): unknown[] {
 
 function expectNumberArray(value: unknown, description: string): number[] {
   const values = expectArray(value, description);
-  values.forEach((item, index) =>
-    expectFiniteNumber(item, `${description}[${index}]`)
-  );
+  for (let index = 0; index < values.length; index += 1) {
+    const item = values[index];
+    if (typeof item !== 'number' || !Number.isFinite(item)) {
+      fail(`${description}[${index}] must be a finite number`);
+    }
+  }
   return values as number[];
 }
 
 function expectIntegerArray(value: unknown, description: string): number[] {
   const values = expectArray(value, description);
-  values.forEach((item, index) =>
-    expectNonNegativeInteger(item, `${description}[${index}]`)
-  );
+  for (let index = 0; index < values.length; index += 1) {
+    const item = values[index];
+    if (!Number.isSafeInteger(item) || (item as number) < 0) {
+      fail(`${description}[${index}] must be a non-negative safe integer`);
+    }
+  }
   return values as number[];
 }
 
@@ -624,8 +723,8 @@ function expectLiteral<T>(value: unknown, expected: T, description: string): T {
 
 function expectIsoTimestamp(value: unknown, description: string): string {
   const timestamp = expectNonEmptyString(value, description);
-  if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/.test(timestamp)) {
-    fail(`${description} must be an ISO UTC timestamp`);
+  if (!isUtcTimestamp(timestamp)) {
+    fail(`${description} must be a valid ISO UTC timestamp`);
   }
   return timestamp;
 }

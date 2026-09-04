@@ -1,5 +1,11 @@
 <script lang="ts">
-  let { onReset, resetEnabled }: { onReset: () => void; resetEnabled: boolean } = $props();
+  import type { ZoneSummary } from '../zone/types';
+
+  let { onReset, resetEnabled, summary }: {
+    onReset: () => void;
+    resetEnabled: boolean;
+    summary: ZoneSummary | undefined;
+  } = $props();
 </script>
 
 <aside class="control-rail" aria-label="Viewport controls">
@@ -19,9 +25,9 @@
     </div>
 
     <div class="scene-summary">
-      <span class="summary-line"><span class="summary-key">Road graph</span><span>1,582 edges</span></span>
-      <span class="summary-line"><span class="summary-key">Buildings</span><span>1,005 volumes</span></span>
-      <span class="summary-line"><span class="summary-key">Combined mesh</span><span>45,201 triangles</span></span>
+      <span class="summary-line"><span class="summary-key">Road graph</span><span>{summary?.graphEdges.toLocaleString('en-GB') ?? '—'} edges</span></span>
+      <span class="summary-line"><span class="summary-key">Buildings</span><span>{summary?.buildings.toLocaleString('en-GB') ?? '—'} volumes</span></span>
+      <span class="summary-line"><span class="summary-key">Combined mesh</span><span>{summary?.triangles.toLocaleString('en-GB') ?? '—'} triangles</span></span>
     </div>
 
     <button class="reset-button" type="button" onclick={onReset} disabled={!resetEnabled}>

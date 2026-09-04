@@ -26,12 +26,9 @@ artifact schema, and provenance details are documented in
 Run all project checks with:
 
 ```sh
-npm run zone:check
-npm run zone:coordinates
-npm run zone:roads
-npm run zone:buildings
-npm run zone:artifact
-npm test
-npm run check
-npm run build
+npm run verify # all six compiler checks, tests, static checks, and production build
 ```
+
+`npm run zone:verify` runs just the compiler checks. The completed Phase 01–05 audit,
+regressions, performance measurements, and browser verification are recorded in
+[`plans/zone-compiler/implementation-audit.md`](./plans/zone-compiler/implementation-audit.md).

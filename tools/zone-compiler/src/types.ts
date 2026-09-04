@@ -214,6 +214,11 @@ export interface TriangulatedRoadMesh {
 }
 
 export interface RoadSurfaceZone {
+  diagnostics: {
+    skippedOutsideRoads: number;
+    skippedOutsideSegments: number;
+    bufferedSegments: number;
+  };
   metadata: {
     schemaVersion: typeof ROAD_SURFACE_SCHEMA_VERSION;
     slug: string;

@@ -1,4 +1,5 @@
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { describe, expect, it, vi } from 'vitest';
@@ -6,6 +7,7 @@ import {
   DEFAULT_ZONE_SLUG,
   loadZoneSource
 } from '../tools/zone-compiler/src/load-zone-source';
+import type { OsmSnapshot } from '../tools/zone-compiler/src/types';
 
 describe.sequential('fixed OSM zone source', () => {
   it('loads and validates the checked-in manifest and snapshot', async () => {
@@ -133,4 +135,64 @@ describe.sequential('fixed OSM zone source', () => {
       await rm(temporarySources, { recursive: true, force: true });
     }
   });
+
+  it.each([
+    { name: 'duplicate elements', mutate: (snapshot: OsmSnapshot) => {
+      snapshot.elements.push(snapshot.elements[0]);
+    }, error: 'duplicate element node/1' },
+    { name: 'missing way references', mutate: (snapshot: OsmSnapshot) => {
+      snapshot.elements.push({ type: 'way', id: 2, nodes: [1, 999] });
+    }, error: 'missing node/999, referenced by way/2' },
+    { name: 'missing relation references', mutate: (snapshot: OsmSnapshot) => {
+      snapshot.elements.push({ type: 'relation', id: 2, members: [{ type: 'way', ref: 999, role: 'outer' }] });
+    }, error: 'missing way/999, referenced by relation/2' },
+    { name: 'unsafe OSM identifiers', mutate: (snapshot: OsmSnapshot) => {
+      snapshot.elements[0].id = Number.MAX_SAFE_INTEGER + 1;
+    }, error: 'positive safe integer' },
+    { name: 'rolled-over source timestamps', mutate: (snapshot: OsmSnapshot) => {
+      snapshot.osm3s.timestamp_osm_base = '2026-02-30T12:00:00Z';
+    }, error: 'valid UTC ISO 8601 timestamp' },
+    { name: 'Overpass partial-result remarks', mutate: (snapshot: OsmSnapshot) => {
+      Object.assign(snapshot, { remark: 'runtime error: Query timed out' });
+    }, error: 'partial results cannot be compiled' }
+  ])('rejects $name even when the snapshot checksum is correct', async ({ mutate, error }) => {
+    await withSourceFixture(mutate, async (directory) => {
+      await expect(loadZoneSource(DEFAULT_ZONE_SLUG, { sourcesDirectory: directory })).rejects.toThrow(error);
+    });
+  });
+
+  it('preserves arbitrary OSM tag names as own properties', async () => {
+    await withSourceFixture((snapshot) => {
+      snapshot.elements[0].tags = JSON.parse('{"__proto__":"mapped value","constructor":"mapped constructor"}') as Record<string, string>;
+    }, async (directory) => {
+      const loaded = await loadZoneSource(DEFAULT_ZONE_SLUG, { sourcesDirectory: directory });
+      const tags = loaded.osm.elements[0].tags;
+      expect(Object.hasOwn(tags ?? {}, '__proto__')).toBe(true);
+      expect(tags?.['__proto__']).toBe('mapped value');
+      expect(tags?.constructor).toBe('mapped constructor');
+    });
+  });
 });
+
+async function withSourceFixture(
+  mutate: (snapshot: OsmSnapshot) => void,
+  check: (sourcesDirectory: string) => Promise<void>
+): Promise<void> {
+  const reference = await loadZoneSource();
+  const snapshot: OsmSnapshot = { ...reference.osm, osm3s: { ...reference.osm.osm3s },
+    elements: [{ type: 'node', id: 1, lat: 51.5, lon: -0.12 }] };
+  mutate(snapshot);
+  const bytes = JSON.stringify(snapshot);
+  const manifest = { ...reference.manifest, snapshot: { ...reference.manifest.snapshot,
+    byteLength: Buffer.byteLength(bytes), sha256: createHash('sha256').update(bytes).digest('hex') } };
+  const directory = await mkdtemp(join(tmpdir(), 'zone-invalid-source-'));
+  try {
+    const zone = join(directory, DEFAULT_ZONE_SLUG);
+    await mkdir(zone);
+    await writeFile(join(zone, 'manifest.json'), JSON.stringify(manifest));
+    await writeFile(join(zone, manifest.snapshot.file), bytes);
+    await check(directory);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+}

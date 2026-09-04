@@ -43,6 +43,11 @@ The command resolves the source relative to the compiler module, not the current
 directory. It reads only local files, validates the manifest and OSM structure, verifies every
 OSM reference, and rejects any checksum mismatch.
 
+Overpass responses containing a `remark` are rejected even with matching checksums: partial
+query results are not a usable snapshot. Source and artifact timestamps share the same calendar
+validation, including optional milliseconds; impossible dates cannot silently roll into another
+month. OSM tag names are preserved as own properties, including names such as `constructor`.
+
 The snapshot is intentionally not refreshed by compiler runs. Replacing it is a deliberate source
 update: execute the recorded query, replace the file, and update the timestamp, byte length, and
 checksum together.
@@ -119,7 +124,16 @@ Widths use this fixed precedence:
 
 Each segment is buffered as a 12-sided round-ended capsule after millimetre input rounding.
 Polygon Clipping unions all overlaps, including connected intersections, before clipping the
-network to the manifest bounds. Earcut triangulates every resulting outer ring and hole. The
+network to the manifest bounds. Segments whose width-expanded bounding boxes cannot reach the
+zone are discarded before buffering; the margin includes rounding precision. A supported way
+entirely outside the cell no longer aborts a compile. Pavement just outside the centerline bounds
+can still enter the surface, while graph selection remains based on centerline intersection.
+`zone:roads` reports buffered segments and skipped outside segments/ways.
+
+Before Earcut triangulates the resulting outer rings and holes, their coordinates are converted
+to Float32 and consecutive coincident points are removed. This is the precision used by Three.js
+vertex buffers; triangulating higher precision coordinates first can reverse or collapse thin
+triangles during GPU upload. The artifact stores those exact Float32 values as JSON numbers. The
 compiler rejects zero-length segments, invalid polygons, non-finite vertices, degenerate triangles,
 empty triangulations, and triangulations whose area differs from their source polygon; triangle
 winding is normalised upward for Three.js.
@@ -141,7 +155,10 @@ npm run zone:buildings
 
 Supported footprints are closed ways with a non-`no` `building` tag and building multipolygon
 relations made entirely from outer and inner way members. Relation member ways are assembled by
-their shared OSM node references and are not emitted again as standalone buildings. Any feature
+their shared OSM node references using an endpoint index and are not emitted again as standalone
+buildings. Ways, relations, and member ways are processed in ascending source ID order, so OSM
+element/member array order does not choose the resulting mesh order. Phase 02 still preserves
+source order and way direction. Any feature
 with a `building:part` tag is excluded because parts belong to a later fidelity stage. Footprint
 rings retain their source node IDs and exact Phase 02 horizontal positions; they are not clipped,
 simplified, snapped, or offset.
@@ -158,6 +175,15 @@ and inner ring also emits closed wall quads using the exact footprint boundary a
 inferred height. The compiler rejects non-finite positions, zero-length edges, non-positive areas,
 degenerate triangles, bad indices, excessive triangulation deviation, and cap/footprint area
 mismatches.
+
+Ring topology is validated before triangulation: repeated boundary points, backtracking edges,
+self-intersections, overlapping outer volumes, and crossing, nested, or outside holes fail with
+OSM feature context. Courtyards belong to the smallest containing outer ring, supporting islands
+inside courtyards with their own holes. Duplicate relation members and ambiguous/dangling fragment
+endpoints also fail explicitly. Touching rings, including the touching-inner-ring convention
+permitted by OSM, are deliberately rejected by this compiler subset; it does not silently repair
+or reshape footprints. Simple ring edge checks prune by bounding boxes, but pathological rings
+can still require quadratic intersection work.
 
 The building compiler runs locally; Phase 05 combines its per-building meshes into the complete
 artifact.
@@ -206,13 +232,33 @@ way and zero-based source segment, highway class, inferred width, and length. Th
 topological data only: direction, traffic policy, route selection, and driveability stay deferred.
 
 Serialization recursively orders object keys, preserves array order, uses compact JSON, and ends
-with one newline. The write/check command compiles twice, validates both results, compares their
-bytes, and validates the file after writing. Compilation reads only local files and never refreshes
+with one newline. Primitive geometry arrays are serialized without a second full array copy.
+Mesh merging appends values without spreading arbitrarily large arrays into function arguments.
+The write/check command compiles twice, validates both results, compares their bytes, and validates
+the file after writing. Writes use a temporary file and a rename in the same directory so readers
+cannot see a partially written artifact. Compilation reads only local files and never refreshes
 the OSM source.
 
 The Vite application fetches `/zones/trafalgar-square-london.zone.json` as a static resource,
 validates it, and only then builds the existing Three.js scene. A missing, malformed, incompatible,
-or structurally invalid artifact produces a visible viewport error. No source loader, projection,
+or structurally invalid artifact produces a visible viewport error. Runtime validation checks
+triangle area and road winding at both stored and GPU precision, ground planes, geographic bounds
+and origin agreement, and consecutive graph-segment continuity and consistent per-way properties.
+Requests have a 30-second deadline covering the response body, and unmounting cancels the request.
+Only summary counts and the slug remain in Svelte state after scene construction. Sidebar and HUD
+counts come from the validated artifact; unavailable data is not presented as loaded. No source loader, projection,
 buffering, polygon union, triangulation, or building extrusion code is imported by the browser.
 Keeping geometry outside the JavaScript bundle also lets the artifact remain independently
 cacheable and inspectable.
+
+## Complete verification
+
+```sh
+npm ci
+npm run zone:verify # source, coordinates, roads, buildings, freshness, inspection
+npm run verify     # those checks plus Vitest, svelte-check, and the production build
+```
+
+Use the committed lockfile for reproducibility. Compiler measurements, fixed-zone migration
+details, remaining limits, and desktop/mobile browser evidence are recorded in
+[`implementation-audit.md`](../../plans/zone-compiler/implementation-audit.md).

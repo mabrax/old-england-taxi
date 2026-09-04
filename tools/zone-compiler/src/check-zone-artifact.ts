@@ -1,5 +1,5 @@
-import { createHash } from 'node:crypto';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { createHash, randomUUID } from 'node:crypto';
+import { mkdir, readFile, rename, rm, writeFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import { parseZoneArtifact } from '../../../src/lib/zone/zone-artifact';
 import {
@@ -18,10 +18,8 @@ if (args.includes('--help')) {
   process.exitCode = 1;
 } else {
   try {
-    const first = await compileZoneArtifact();
-    const second = await compileZoneArtifact();
-    const firstSerialised = serializeZoneArtifact(first);
-    const secondSerialised = serializeZoneArtifact(second);
+    const firstSerialised = serializeZoneArtifact(await compileZoneArtifact());
+    const secondSerialised = serializeZoneArtifact(await compileZoneArtifact());
     if (firstSerialised !== secondSerialised) {
       throw new Error('Repeated zone artifact compilation was not byte-stable');
     }
@@ -29,7 +27,13 @@ if (args.includes('--help')) {
     const writeArtifact = args.includes('--write');
     if (writeArtifact) {
       await mkdir(dirname(DEFAULT_ZONE_ARTIFACT_PATH), { recursive: true });
-      await writeFile(DEFAULT_ZONE_ARTIFACT_PATH, firstSerialised, 'utf8');
+      const temporaryPath = `${DEFAULT_ZONE_ARTIFACT_PATH}.${randomUUID()}.tmp`;
+      try {
+        await writeFile(temporaryPath, firstSerialised, { encoding: 'utf8', flag: 'wx' });
+        await rename(temporaryPath, DEFAULT_ZONE_ARTIFACT_PATH);
+      } finally {
+        await rm(temporaryPath, { force: true });
+      }
     } else {
       const existing = await readArtifact();
       if (existing !== firstSerialised) {
@@ -40,8 +44,8 @@ if (args.includes('--help')) {
     }
 
     const prepared = await readArtifact();
-    const parsed = parseZoneArtifact(JSON.parse(prepared) as unknown);
-    if (prepared !== firstSerialised || parsed.slug !== first.slug) {
+    const first = parseZoneArtifact(JSON.parse(prepared) as unknown);
+    if (prepared !== firstSerialised) {
       throw new Error('The prepared zone artifact does not match the compiler output');
     }
 

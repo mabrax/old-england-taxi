@@ -1,5 +1,5 @@
 import { readFile } from 'node:fs/promises';
-import { beforeAll, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import {
   DEFAULT_ZONE_ARTIFACT_URL,
   loadZoneArtifact,
@@ -8,6 +8,7 @@ import {
 
 describe('browser zone artifact loader', () => {
   let preparedBytes: string;
+  afterEach(() => vi.useRealTimers());
 
   beforeAll(async () => {
     preparedBytes = await readFile(
@@ -28,10 +29,11 @@ describe('browser zone artifact loader', () => {
 
     expect(DEFAULT_ZONE_ARTIFACT_URL).toBe('/zones/trafalgar-square-london.zone.json');
     expect(fetcher).toHaveBeenCalledWith(DEFAULT_ZONE_ARTIFACT_URL, {
-      headers: { Accept: 'application/json' }
+      headers: { Accept: 'application/json' },
+      signal: expect.any(AbortSignal)
     });
     expect(artifact.slug).toBe('trafalgar-square-london');
-    expect(artifact.geometry.roads.statistics.triangles).toBe(6_537);
+    expect(artifact.geometry.roads.statistics.triangles).toBe(6_535);
     expect(artifact.geometry.buildings.statistics.triangles).toBe(38_664);
   });
 
@@ -76,4 +78,58 @@ describe('browser zone artifact loader', () => {
       )
     ).rejects.toBeInstanceOf(ZoneArtifactLoadError);
   });
+
+  it('cancels a pending request and avoids fetching when already cancelled', async () => {
+    const controller = new AbortController();
+    const fetcher = abortableFetch();
+    const pending = loadZoneArtifact('/zone.json', fetcher, { signal: controller.signal });
+    const assertion = expect(pending).rejects.toThrow('cancelled');
+    controller.abort();
+    await assertion;
+    expect(fetcher.mock.calls[0]?.[1]?.signal?.aborted).toBe(true);
+    fetcher.mockClear();
+    await expect(loadZoneArtifact('/zone.json', fetcher, { signal: controller.signal })).rejects.toThrow('cancelled');
+    expect(fetcher).not.toHaveBeenCalled();
+  });
+
+  it('aborts a request that exceeds the deadline and clears its timer', async () => {
+    vi.useFakeTimers();
+    const fetcher = abortableFetch();
+    const pending = loadZoneArtifact('/zone.json', fetcher, { timeoutMs: 100 });
+    const assertion = expect(pending).rejects.toThrow('timed out after 100 ms');
+    await vi.advanceTimersByTimeAsync(100);
+    await assertion;
+    expect(fetcher.mock.calls[0]?.[1]?.signal?.aborted).toBe(true);
+    expect(vi.getTimerCount()).toBe(0);
+  });
+
+  it('keeps the deadline active while the response body is streaming', async () => {
+    vi.useFakeTimers();
+    const fetcher = vi.fn<typeof fetch>(async (_url, init) => new Response(new ReadableStream({
+      start(controller) {
+        controller.enqueue(new TextEncoder().encode('{'));
+        init?.signal?.addEventListener('abort', () => controller.error(init.signal?.reason));
+      }
+    })));
+    const pending = loadZoneArtifact('/zone.json', fetcher, { timeoutMs: 100 });
+    const assertion = expect(pending).rejects.toThrow('timed out');
+    await vi.advanceTimersByTimeAsync(100);
+    await assertion;
+    expect(vi.getTimerCount()).toBe(0);
+  });
+
+  it('cleans up its deadline and caller listener after success', async () => {
+    vi.useFakeTimers();
+    const controller = new AbortController();
+    const remove = vi.spyOn(controller.signal, 'removeEventListener');
+    await loadZoneArtifact('/zone.json', async () => new Response(preparedBytes), { signal: controller.signal });
+    expect(vi.getTimerCount()).toBe(0);
+    expect(remove).toHaveBeenCalledWith('abort', expect.any(Function));
+  });
 });
+
+function abortableFetch() {
+  return vi.fn<typeof fetch>((_url, init) => new Promise((_resolve, reject) => {
+    init?.signal?.addEventListener('abort', () => reject(init.signal?.reason), { once: true });
+  }));
+}

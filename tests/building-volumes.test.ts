@@ -175,6 +175,121 @@ describe('building extrusion geometry', () => {
       )
     ).toThrow('recorded area');
   });
+
+  it.each([
+    { name: 'a backtracking spike', ring: [[0, 0], [10, 0], [10, 10], [5, 10], [5, 15], [5, 10], [0, 10]] },
+    { name: 'a crossing boundary', ring: [[0, 0], [10, 0], [0, 8], [10, 10], [0, 10]] },
+    { name: 'an overlapping adjacent edge', ring: [[0, 0], [10, 0], [5, 0], [10, 10], [0, 10]] }
+  ])('rejects $name before triangulation', ({ ring }) => {
+    expect(() => extrudeBuildingFootprint(createFootprint([ring as [number, number][]]), 12))
+      .toThrow(/repeats|self-intersects|backtracks/);
+  });
+
+  it.each([
+    { name: 'outside', hole: [[20, 2], [22, 2], [22, 4], [20, 4]] },
+    { name: 'crossing', hole: [[8, 2], [12, 2], [12, 4], [8, 4]] },
+    { name: 'touching', hole: [[0, 2], [2, 2], [2, 4], [0, 4]] }
+  ])('rejects a $name courtyard with an explicit topology diagnostic', ({ hole }) => {
+    const footprint = createFootprint([
+      [[0, 0], [10, 0], [10, 10], [0, 10]], hole as [number, number][]
+    ]);
+    expect(() => extrudeBuildingFootprint(footprint, 12)).toThrow('strictly inside');
+  });
+
+  it('rejects nested holes and non-finite recorded areas', () => {
+    const footprint = createFootprint([
+      [[0, 0], [20, 0], [20, 20], [0, 20]],
+      [[2, 2], [10, 2], [10, 10], [2, 10]],
+      [[3, 3], [4, 3], [4, 4], [3, 4]]
+    ]);
+    expect(() => extrudeBuildingFootprint(footprint, 12)).toThrow('overlap, nest, or touch');
+    const simple = createFootprint([[[0, 0], [10, 0], [10, 10], [0, 10]]]);
+    expect(() => extrudeBuildingFootprint({ ...simple, areaSquareMetres: NaN }, 12)).toThrow('recorded area must be finite');
+  });
+});
+
+describe.sequential('building multipolygon robustness', () => {
+  let reference: LoadedZoneSource;
+  beforeAll(async () => { reference = await loadZoneSource(); });
+
+  it('assembles shuffled and reversed fragments without duplicating tagged member ways', () => {
+    const lines = [
+      fixtureLine(10, [[1, 0, 0], [2, 10, 0], [3, 10, 10]]),
+      fixtureLine(20, [[1, 0, 0], [4, 0, 10], [3, 10, 10]]),
+      fixtureLine(30, [[5, 2, 2], [6, 4, 2], [7, 4, 4], [8, 2, 4], [5, 2, 2]])
+    ];
+    const relation = createBuildingRelation([
+      { type: 'way', ref: 20, role: '' },
+      { type: 'way', ref: 30, role: 'inner' },
+      { type: 'way', ref: 10, role: 'outer' }
+    ]);
+    const source = buildingFixture(reference, lines, [relation]);
+    const before = JSON.stringify(source);
+    const zone = compileBuildingVolumes(source);
+    expect(zone.buildings).toHaveLength(1);
+    expect(zone.buildings[0].footprint.rings.map((ring) => ring.nodeIds)).toEqual([
+      [1, 2, 3, 4], [5, 6, 7, 8]
+    ]);
+    const shuffled = structuredClone(source);
+    shuffled.osm.elements.reverse();
+    const shuffledRelation = shuffled.osm.elements.find((item) => item.type === 'relation') as OsmRelation;
+    shuffledRelation.members.reverse();
+    expect(compileBuildingVolumes(shuffled)).toEqual(zone);
+    expect(JSON.stringify(source)).toBe(before);
+  });
+
+  it('assigns an island courtyard to its smallest containing outer', () => {
+    const lines = [
+      fixtureSquare(10, 1, 0, 20), fixtureSquare(20, 5, 2, 18),
+      fixtureSquare(30, 9, 5, 15), fixtureSquare(40, 13, 7, 13)
+    ];
+    const relation = createBuildingRelation(lines.map((line, index) => ({
+      type: 'way', ref: line.id, role: index % 2 === 0 ? 'outer' : 'inner'
+    })));
+    const zone = compileBuildingVolumes(buildingFixture(reference, lines, [relation]));
+    expect(zone.buildings).toHaveLength(2);
+    expect(zone.buildings.map((building) => building.footprint.rings.map((ring) => ring.nodeIds[0])))
+      .toEqual([[1, 5], [9, 13]]);
+  });
+
+  it('rejects overlapping outer volumes even when each ring triangulates independently', () => {
+    const lines = [fixtureSquare(10, 1, 0, 20), fixtureSquare(20, 5, 5, 15)];
+    const relation = createBuildingRelation(lines.map((line) => ({ type: 'way', ref: line.id, role: 'outer' })));
+    expect(() => compileBuildingVolumes(buildingFixture(reference, lines, [relation])))
+      .toThrow('relation/1 has overlapping outer footprints');
+  });
+
+  it('reports duplicate and dangling members with OSM provenance', () => {
+    const line = fixtureSquare(10, 1, 0, 20);
+    const member = { type: 'way' as const, ref: 10, role: 'outer' };
+    expect(() => compileBuildingVolumes(buildingFixture(reference, [line], [createBuildingRelation([member, member])])))
+      .toThrow('relation/1 repeats member way/10');
+    const open = fixtureLine(10, [[1, 0, 0], [2, 10, 0]]);
+    expect(() => compileBuildingVolumes(buildingFixture(reference, [open], [createBuildingRelation([member])])))
+      .toThrow('relation/1 outer members do not form unambiguous closed rings at node/1');
+  });
+
+  it('identifies the building when extrusion rejects a spiked outline', () => {
+    const line = fixtureLine(123, [[1, 0, 0], [2, 10, 0], [3, 10, 10], [4, 5, 10], [5, 5, 15], [4, 5, 10], [6, 0, 10], [1, 0, 0]]);
+    expect(() => compileBuildingVolumes(buildingFixture(reference, [line], [])))
+      .toThrow(/Building way\/123 footprint 0:.*backtracks|Building way\/123 footprint 0:.*repeats/);
+  });
+
+  it('combines large meshes without passing geometry arrays as function arguments', () => {
+    const source = buildingFixture(reference, [fixtureSquare(10, 1, 0, 20)], []);
+    const building = compileBuildingVolumes(source).buildings[0];
+    const mesh = building.mesh;
+    const copies = 3000;
+    const positions = Array.from({ length: mesh.positions.length * copies }, (_, index) => mesh.positions[index % mesh.positions.length]);
+    const indices = Array.from({ length: mesh.indices.length * copies }, (_, index) =>
+      mesh.indices[index % mesh.indices.length] + Math.floor(index / mesh.indices.length) * mesh.vertexCount);
+    const large = { ...building, mesh: { ...mesh, positions, indices,
+      roofTriangleCount: mesh.roofTriangleCount * copies, floorTriangleCount: mesh.floorTriangleCount * copies,
+      wallTriangleCount: mesh.wallTriangleCount * copies } };
+    const combined = combineBuildingMeshes([large, building]);
+    expect(combined.vertexCount).toBe(mesh.vertexCount * (copies + 1));
+    expect(combined.indices.at(-1)).toBe((mesh.indices.at(-1) as number) + mesh.vertexCount * copies);
+  });
 });
 
 describe.sequential('fixed-zone building volumes', () => {
@@ -304,6 +419,26 @@ function createBuildingLine(tags: Record<string, string>): LocalLineFeature {
     closed: true,
     tags
   };
+}
+
+function fixtureLine(id: number, nodes: Array<[number, number, number]>): LocalLineFeature {
+  return { type: 'line', id, nodeIds: nodes.map(([node]) => node),
+    positions: nodes.map(([, x, z]) => ({ x, y: 0, z })),
+    closed: nodes[0][0] === nodes.at(-1)?.[0], tags: { building: 'yes' } };
+}
+
+function fixtureSquare(id: number, first: number, low: number, high: number): LocalLineFeature {
+  return fixtureLine(id, [[first, low, low], [first + 1, high, low], [first + 2, high, high],
+    [first + 3, low, high], [first, low, low]]);
+}
+
+function buildingFixture(reference: LoadedZoneSource, lines: LocalLineFeature[], relations: OsmRelation[]): LoadedZoneSource {
+  const nodes = new Map(lines.flatMap((line) => line.nodeIds.map((id, index) => [id, {
+    type: 'node' as const, id, lat: 51.50803 - line.positions[index].z / 111195,
+    lon: -0.1281 + line.positions[index].x / 69200
+  }] as const)));
+  const ways = lines.map((line) => ({ type: 'way' as const, id: line.id, nodes: line.nodeIds, tags: line.tags }));
+  return { ...reference, osm: { ...reference.osm, elements: [...nodes.values(), ...ways, ...relations] } };
 }
 
 function createBuildingRelation(members: OsmRelation['members']): OsmRelation {

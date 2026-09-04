@@ -1,5 +1,6 @@
 import earcut, { deviation } from 'earcut';
 import { compileLocalCoordinates } from './local-coordinates';
+import { pointInRing, ringsIntersect, validateSimpleRing } from './footprint-topology';
 import {
   BUILDING_VOLUME_SCHEMA_VERSION,
   type BuildingFootprint,
@@ -111,16 +112,18 @@ export function compileBuildingVolumes(
   validateLocalSourcePair(source, local);
 
   const lineById = new Map(local.lines.map((line) => [line.id, line]));
-  const wayById = new Map(
-    source.osm.elements
-      .filter((element): element is OsmWay => element.type === 'way')
-      .map((way) => [way.id, way])
-  );
+  const ways = source.osm.elements
+    .filter((element): element is OsmWay => element.type === 'way')
+    .sort((first, second) => first.id - second.id);
+  const relations = source.osm.elements
+    .filter((element): element is OsmRelation => element.type === 'relation')
+    .sort((first, second) => first.id - second.id);
+  const wayById = new Map(ways.map((way) => [way.id, way]));
   const relationExtractions = new Map<number, RelationFootprintExtraction>();
   const relationMemberWayIds = new Set<number>();
 
-  for (const element of source.osm.elements) {
-    if (element.type !== 'relation' || !isSupportedBuildingRelation(element)) {
+  for (const element of relations) {
+    if (!isSupportedBuildingRelation(element)) {
       continue;
     }
     const extraction = extractRelationFootprints(element, lineById, wayById);
@@ -130,7 +133,9 @@ export function compileBuildingVolumes(
 
   const buildings: CompiledBuildingVolume[] = [];
 
-  for (const element of source.osm.elements) {
+  // Preserve the existing way-before-relation geometry layout, independent of
+  // the order Overpass happened to return elements in.
+  for (const element of [...ways, ...relations]) {
     if (element.type === 'way') {
       if (
         relationMemberWayIds.has(element.id) ||
@@ -365,8 +370,8 @@ export function combineBuildingMeshes(
 
   for (const building of buildings) {
     const vertexOffset = combined.positions.length / 3;
-    combined.positions.push(...building.mesh.positions);
-    combined.indices.push(...building.mesh.indices.map((index) => index + vertexOffset));
+    for (const position of building.mesh.positions) combined.positions.push(position);
+    for (const index of building.mesh.indices) combined.indices.push(index + vertexOffset);
     combined.roofTriangleCount += building.mesh.roofTriangleCount;
     combined.floorTriangleCount += building.mesh.floorTriangleCount;
     combined.wallTriangleCount += building.mesh.wallTriangleCount;
@@ -389,13 +394,20 @@ function compileBuilding(
   footprint: BuildingFootprint
 ): CompiledBuildingVolume {
   const height = inferBuildingHeight(tags);
-  return {
-    source: { type: sourceType, id: sourceId, footprintIndex },
-    building: tags.building,
-    footprint,
-    height,
-    mesh: extrudeBuildingFootprint(footprint, height.metres)
-  };
+  try {
+    return {
+      source: { type: sourceType, id: sourceId, footprintIndex },
+      building: tags.building,
+      footprint,
+      height,
+      mesh: extrudeBuildingFootprint(footprint, height.metres)
+    };
+  } catch (error) {
+    throw new Error(
+      `Building ${sourceType}/${sourceId} footprint ${footprintIndex}: ${error instanceof Error ? error.message : String(error)}`,
+      { cause: error }
+    );
+  }
 }
 
 function extractRelationFootprints(
@@ -403,6 +415,13 @@ function extractRelationFootprints(
   lineById: Map<number, LocalLineFeature>,
   wayById: Map<number, OsmWay>
 ): RelationFootprintExtraction {
+  const memberIds = new Set<number>();
+  for (const member of relation.members) {
+    if (memberIds.has(member.ref)) {
+      throw new Error(`Building relation/${relation.id} repeats member way/${member.ref}`);
+    }
+    memberIds.add(member.ref);
+  }
   const outerMembers = relation.members.filter(
     (member) => normaliseRelationRole(member.role) === 'outer'
   );
@@ -425,19 +444,47 @@ function extractRelationFootprints(
   );
   const holesByOuter = outerRings.map(() => [] as BuildingFootprintRing[]);
 
+  const allRings = [...outerRings, ...innerRings];
+  for (let index = 0; index < allRings.length; index += 1) {
+    validateSimpleRing(allRings[index].points, `Building relation/${relation.id} ring ${index}`);
+    for (let other = 0; other < index; other += 1) {
+      if (ringsIntersect(allRings[index].points, allRings[other].points)) {
+        throw new Error(`Building relation/${relation.id} rings ${other} and ${index} intersect or touch`);
+      }
+    }
+  }
+
   for (const inner of innerRings) {
     const sample = inner.points[0] as BuildingFootprintPoint;
     const containingOuterIndices = outerRings.flatMap((outer, index) =>
       pointInRing(sample, outer.points) ? [index] : []
     );
-    if (containingOuterIndices.length !== 1) {
+    if (containingOuterIndices.length === 0) {
       throw new Error(
-        `Building relation/${relation.id} inner ring does not belong to exactly one outer ring`
+        `Building relation/${relation.id} inner ring is outside every outer ring`
       );
     }
+    // Nested outer islands may have their own courtyards: choose the smallest
+    // containing outer, then ensure the resulting volumes do not overlap.
+    containingOuterIndices.sort((first, second) =>
+      Math.abs(calculateRingSignedArea(outerRings[first].points)) -
+      Math.abs(calculateRingSignedArea(outerRings[second].points))
+    );
     (holesByOuter[containingOuterIndices[0] as number] as BuildingFootprintRing[]).push(
       inner
     );
+  }
+  for (let inner = 0; inner < outerRings.length; inner += 1) {
+    for (let outer = 0; outer < outerRings.length; outer += 1) {
+      if (inner === outer) continue;
+      const sample = outerRings[inner].points[0];
+      if (
+        pointInRing(sample, outerRings[outer].points) &&
+        !holesByOuter[outer].some((hole) => pointInRing(sample, hole.points))
+      ) {
+        throw new Error(`Building relation/${relation.id} has overlapping outer footprints`);
+      }
+    }
   }
 
   return {
@@ -456,59 +503,59 @@ function assembleMemberRings(
   lineById: Map<number, LocalLineFeature>,
   wayById: Map<number, OsmWay>
 ): BuildingFootprintRing[] {
-  const unused: RingSegment[] = members.map((member) => {
+  const segments: RingSegment[] = [...members].sort((first, second) => first.ref - second.ref).map((member) => {
     const line = lineById.get(member.ref);
     const way = wayById.get(member.ref);
     if (line === undefined || way === undefined) {
-      throw new Error(
-        `Building relation/${relationId} ${role} member way/${member.ref} is unresolved`
-      );
+      throw new Error(`Building relation/${relationId} ${role} member way/${member.ref} is unresolved`);
     }
     validateLineMatchesWay(line, way);
     if (line.nodeIds.length !== line.positions.length || line.nodeIds.length < 2) {
-      throw new Error(
-        `Building relation/${relationId} ${role} member way/${member.ref} has invalid topology`
-      );
+      throw new Error(`Building relation/${relationId} ${role} member way/${member.ref} has invalid topology`);
     }
-    return {
-      nodeIds: [...line.nodeIds],
-      positions: line.positions.map((position) => ({ ...position }))
-    };
+    return { nodeIds: line.nodeIds, positions: line.positions };
   });
+  const byEndpoint = new Map<number, RingSegment[]>();
+  for (const segment of segments) {
+    const first = segment.nodeIds[0];
+    const last = segment.nodeIds.at(-1) as number;
+    if (first === last) continue;
+    for (const endpoint of [first, last]) {
+      const connected = byEndpoint.get(endpoint) ?? [];
+      connected.push(segment);
+      byEndpoint.set(endpoint, connected);
+    }
+  }
+  for (const [nodeId, connected] of byEndpoint) {
+    if (connected.length !== 2) {
+      throw new Error(`Building relation/${relationId} ${role} members do not form unambiguous closed rings at node/${nodeId} (${connected.length} incident ways)`);
+    }
+  }
+  const unused = new Set(segments);
   const rings: BuildingFootprintRing[] = [];
-
-  while (unused.length > 0) {
-    const firstSegment = unused.shift() as RingSegment;
+  for (const firstSegment of segments) {
+    if (!unused.delete(firstSegment)) continue;
     const nodeIds = [...firstSegment.nodeIds];
-    const positions = firstSegment.positions.map((position) => ({ ...position }));
-
+    const positions = [...firstSegment.positions];
     while (nodeIds[0] !== nodeIds.at(-1)) {
       const currentNodeId = nodeIds.at(-1) as number;
-      const nextIndex = unused.findIndex(
-        (segment) =>
-          segment.nodeIds[0] === currentNodeId || segment.nodeIds.at(-1) === currentNodeId
-      );
-      if (nextIndex < 0) {
-        throw new Error(
-          `Building relation/${relationId} ${role} members do not form closed rings`
-        );
+      const next = byEndpoint.get(currentNodeId)?.find((segment) => unused.has(segment));
+      if (next === undefined) {
+        throw new Error(`Building relation/${relationId} ${role} members do not form closed rings at node/${currentNodeId}`);
       }
-      const next = unused.splice(nextIndex, 1)[0] as RingSegment;
-      if (next.nodeIds.at(-1) === currentNodeId) {
-        next.nodeIds.reverse();
-        next.positions.reverse();
+      unused.delete(next);
+      const reversed = next.nodeIds.at(-1) === currentNodeId;
+      for (let offset = 1; offset < next.nodeIds.length; offset += 1) {
+        const index = reversed ? next.nodeIds.length - 1 - offset : offset;
+        nodeIds.push(next.nodeIds[index]);
+        positions.push(next.positions[index]);
       }
-      nodeIds.push(...next.nodeIds.slice(1));
-      positions.push(...next.positions.slice(1).map((position) => ({ ...position })));
     }
-
-    rings.push(
-      createClosedRing(
-        nodeIds,
-        positions,
-        `Building relation/${relationId} ${role} ring ${rings.length}`
-      )
-    );
+    rings.push(createClosedRing(
+      nodeIds,
+      positions,
+      `Building relation/${relationId} ${role} ring ${rings.length}`
+    ));
   }
 
   return rings;
@@ -573,7 +620,28 @@ function validateFootprint(footprint: BuildingFootprint): void {
         throw new Error(`Building footprint ring ${ringIndex} has non-finite coordinates`);
       }
     });
+    validateSimpleRing(ring.points, `Building footprint ring ${ringIndex}`);
   });
+  for (let index = 1; index < footprint.rings.length; index += 1) {
+    const hole = footprint.rings[index].points;
+    const outer = footprint.rings[0].points;
+    if (ringsIntersect(hole, outer) || !pointInRing(hole[0], outer)) {
+      throw new Error(`Building footprint hole ${index} must be strictly inside its outer ring`);
+    }
+    for (let other = 1; other < index; other += 1) {
+      const previous = footprint.rings[other].points;
+      if (
+        ringsIntersect(hole, previous) ||
+        pointInRing(hole[0], previous) ||
+        pointInRing(previous[0], hole)
+      ) {
+        throw new Error(`Building footprint holes ${other} and ${index} overlap, nest, or touch`);
+      }
+    }
+  }
+  if (!Number.isFinite(footprint.areaSquareMetres)) {
+    throw new Error('Building footprint recorded area must be finite');
+  }
   const calculatedArea = calculateFootprintArea(footprint.rings);
   if (!Number.isFinite(calculatedArea) || calculatedArea <= TRIANGLE_AREA_TOLERANCE) {
     throw new Error('Building footprint has invalid area');
@@ -667,7 +735,10 @@ function validateLocalSourcePair(
 ): void {
   if (
     source.manifest.slug !== local.metadata.slug ||
-    source.manifest.label !== local.metadata.label
+    source.manifest.label !== local.metadata.label ||
+    (['south', 'north', 'west', 'east'] as const).some(
+      (bound) => source.manifest.bounds[bound] !== local.metadata.sourceBounds[bound]
+    )
   ) {
     throw new Error('Building source and local-coordinate zone do not match');
   }
@@ -766,29 +837,6 @@ function triangleDoubleArea3d(
   const crossY = abZ * acX - abX * acZ;
   const crossZ = abX * acY - abY * acX;
   return Math.hypot(crossX, crossY, crossZ);
-}
-
-function pointInRing(
-  point: BuildingFootprintPoint,
-  ring: BuildingFootprintPoint[]
-): boolean {
-  let inside = false;
-  for (
-    let currentIndex = 0, previousIndex = ring.length - 1;
-    currentIndex < ring.length;
-    previousIndex = currentIndex, currentIndex += 1
-  ) {
-    const current = ring[currentIndex] as BuildingFootprintPoint;
-    const previous = ring[previousIndex] as BuildingFootprintPoint;
-    const crosses =
-      current.z > point.z !== previous.z > point.z &&
-      point.x <
-        ((previous.x - current.x) * (point.z - current.z)) /
-          (previous.z - current.z) +
-          current.x;
-    if (crosses) inside = !inside;
-  }
-  return inside;
 }
 
 function horizontalDistance(

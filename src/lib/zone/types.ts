@@ -3,6 +3,12 @@ export const STREET_GRAPH_SCHEMA_VERSION = 1 as const;
 
 export type ZoneStatus = 'loading' | 'ready' | 'error';
 
+export interface ZoneSummary {
+  graphEdges: number;
+  buildings: number;
+  triangles: number;
+}
+
 export interface GeographicBounds {
   south: number;
   west: number;
