@@ -14,7 +14,7 @@
 <svelte:head>
   <meta
     name="description"
-    content="The Route Simulator's deterministic Trafalgar Square road-surface preview."
+    content="The Route Simulator's deterministic Trafalgar Square road and building-volume preview."
   />
 </svelte:head>
 

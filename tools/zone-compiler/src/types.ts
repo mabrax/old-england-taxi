@@ -2,6 +2,7 @@ export const ZONE_SOURCE_SCHEMA_VERSION = 1 as const;
 export const OSM_VERSION = 0.6 as const;
 export const LOCAL_COORDINATE_SCHEMA_VERSION = 1 as const;
 export const ROAD_SURFACE_SCHEMA_VERSION = 1 as const;
+export const BUILDING_VOLUME_SCHEMA_VERSION = 1 as const;
 
 export interface GeographicBounds {
   south: number;
@@ -235,4 +236,77 @@ export interface RoadSurfaceZone {
   roads: CompiledRoadCenterline[];
   polygons: RoadSurfacePolygon[];
   mesh: TriangulatedRoadMesh;
+}
+
+export type BuildingSourceType = 'way' | 'relation';
+export type BuildingHeightSource = 'height' | 'building:levels' | 'fallback';
+
+export interface BuildingHeightInference {
+  metres: number;
+  source: BuildingHeightSource;
+  sourceValue: string;
+}
+
+export interface BuildingFootprintPoint {
+  x: number;
+  z: number;
+}
+
+export interface BuildingFootprintRing {
+  nodeIds: number[];
+  points: BuildingFootprintPoint[];
+}
+
+export interface BuildingFootprint {
+  rings: BuildingFootprintRing[];
+  areaSquareMetres: number;
+}
+
+export interface TriangulatedBuildingMesh {
+  positions: number[];
+  indices: number[];
+  vertexCount: number;
+  triangleCount: number;
+  roofTriangleCount: number;
+  floorTriangleCount: number;
+  wallTriangleCount: number;
+  maximumDeviation: number;
+}
+
+export interface CompiledBuildingVolume {
+  source: {
+    type: BuildingSourceType;
+    id: number;
+    footprintIndex: number;
+  };
+  building: string;
+  footprint: BuildingFootprint;
+  height: BuildingHeightInference;
+  mesh: TriangulatedBuildingMesh;
+}
+
+export interface BuildingVolumeZone {
+  metadata: {
+    schemaVersion: typeof BUILDING_VOLUME_SCHEMA_VERSION;
+    slug: string;
+    label: string;
+    sourceBounds: GeographicBounds;
+    coordinateSystem: LocalCoordinateSystemMetadata;
+    supportedFootprints: {
+      ways: 'closed-building-ways';
+      relations: 'way-member-building-multipolygons';
+      buildingParts: 'excluded';
+    };
+    heightRules: {
+      precedence: ['height', 'building:levels', 'fallback'];
+      minimumHeightMetres: number;
+      maximumHeightMetres: number;
+      minimumLevels: number;
+      maximumLevels: number;
+      levelHeightMetres: number;
+      fallbackHeightMetres: number;
+    };
+    groundPlaneY: 0;
+  };
+  buildings: CompiledBuildingVolume[];
 }

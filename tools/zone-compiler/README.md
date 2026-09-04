@@ -3,7 +3,8 @@
 The zone compiler is a local Node.js and TypeScript tool. Phase 01 gives it one fixed,
 checked-in OpenStreetMap source. Phase 02 converts that source into deterministic local
 coordinates. Phase 03 compiles supported carriageways into a triangulated road surface and a
-checked-in viewport preview; later phases will add buildings and the complete zone artifact.
+checked-in viewport preview. Phase 04 extrudes supported building footprints into a second preview;
+Phase 05 will package the complete zone artifact.
 
 ## Phase 01 technology
 
@@ -137,3 +138,46 @@ The complete versioned geometry, navigation graph, and source metadata artifact 
 
 Phase 03 does not add colliders, a street graph, vehicle behavior, building extrusion, terrain or
 elevation, lane markings, traffic systems, or the complete browser-loadable zone artifact.
+
+## Building volumes
+
+Run the Phase 04 building compiler and verify that the checked-in preview is current:
+
+```sh
+npm run zone:buildings
+```
+
+After an intentional compiler change, regenerate the building-only viewport data with:
+
+```sh
+npm run zone:buildings:write
+```
+
+Supported footprints are closed ways with a non-`no` `building` tag and building multipolygon
+relations made entirely from outer and inner way members. Relation member ways are assembled by
+their shared OSM node references and are not emitted again as standalone buildings. Any feature
+with a `building:part` tag is excluded because parts belong to a later fidelity stage. Footprint
+rings retain their source node IDs and exact Phase 02 horizontal positions; they are not clipped,
+simplified, snapped, or offset.
+
+Heights use this fixed precedence:
+
+1. A finite `height` from 0.5 through 1,000 metres. Unitless and explicit metre values are metres;
+   `ft`, `foot`, and `feet` values are converted to metres.
+2. A finite `building:levels` from 0.5 through 200 multiplied by 3 metres.
+3. The single 12 metre fallback.
+
+Earcut triangulates each footprint's roof and floor while preserving courtyard holes. Every outer
+and inner ring also emits closed wall quads using the exact footprint boundary at `y = 0` and the
+inferred height. The compiler rejects non-finite positions, zero-length edges, non-positive areas,
+degenerate triangles, bad indices, excessive triangulation deviation, and cap/footprint area
+mismatches.
+
+The generated Phase 04 preview contains only the combined indexed building mesh and compact
+viewport metadata. The browser renders it beside the existing Phase 03 road preview; the compiler
+still runs only in Node.js.
+
+## Phase 04 boundary
+
+Phase 04 does not add building parts, detailed roofs, interiors, terrain or elevation, landmarks,
+colliders, vehicles, a street graph, or the complete browser-loadable zone artifact.

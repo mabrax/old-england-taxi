@@ -32,3 +32,33 @@ export interface RoadSurfacePreview {
   positions: number[];
   indices: number[];
 }
+
+export interface BuildingVolumePreview {
+  schemaVersion: 1;
+  slug: string;
+  label: string;
+  coordinateSystem: {
+    units: 'metres';
+    x: 'east';
+    y: 'up';
+    z: 'south';
+  };
+  bounds: {
+    minimumX: number;
+    maximumX: number;
+    minimumY: number;
+    maximumY: number;
+    minimumZ: number;
+    maximumZ: number;
+  };
+  statistics: {
+    buildings: number;
+    wayFootprints: number;
+    relationFootprints: number;
+    holes: number;
+    vertices: number;
+    triangles: number;
+  };
+  positions: number[];
+  indices: number[];
+}

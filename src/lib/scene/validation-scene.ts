@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { buildingVolumePreview } from '../zone/building-volume-preview';
 import { roadSurfacePreview } from '../zone/road-surface-preview';
 import {
   clampPixelRatio,
@@ -20,14 +21,32 @@ const palette = {
   ground: 0xe8ece8,
   gridMinor: 0xd0d8d4,
   gridMajor: 0xaabbb5,
-  road: 0x4b5960
+  road: 0x4b5960,
+  building: 0xb8aa92
 };
 
 export function createValidationScene(container: HTMLElement): SceneController {
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(palette.background);
 
-  const { bounds } = roadSurfacePreview;
+  const bounds = {
+    minimumX: Math.min(
+      roadSurfacePreview.bounds.minimumX,
+      buildingVolumePreview.bounds.minimumX
+    ),
+    maximumX: Math.max(
+      roadSurfacePreview.bounds.maximumX,
+      buildingVolumePreview.bounds.maximumX
+    ),
+    minimumZ: Math.min(
+      roadSurfacePreview.bounds.minimumZ,
+      buildingVolumePreview.bounds.minimumZ
+    ),
+    maximumZ: Math.max(
+      roadSurfacePreview.bounds.maximumZ,
+      buildingVolumePreview.bounds.maximumZ
+    )
+  };
   const width = bounds.maximumX - bounds.minimumX;
   const depth = bounds.maximumZ - bounds.minimumZ;
   const span = Math.max(width, depth);
@@ -53,7 +72,7 @@ export function createValidationScene(container: HTMLElement): SceneController {
   renderer.domElement.className = 'scene-canvas';
   renderer.domElement.setAttribute(
     'aria-label',
-    `Three.js road surface preview for ${roadSurfacePreview.label}`
+    `Three.js road and building volume preview for ${roadSurfacePreview.label}`
   );
   container.appendChild(renderer.domElement);
 
@@ -107,6 +126,26 @@ export function createValidationScene(container: HTMLElement): SceneController {
   roads.name = 'phase-03-road-surfaces';
   roads.position.y = 0.04;
   scene.add(roads);
+
+  const buildingGeometry = new THREE.BufferGeometry();
+  buildingGeometry.setAttribute(
+    'position',
+    new THREE.Float32BufferAttribute(buildingVolumePreview.positions, 3)
+  );
+  buildingGeometry.setIndex(buildingVolumePreview.indices);
+  buildingGeometry.computeVertexNormals();
+  buildingGeometry.computeBoundingSphere();
+
+  const buildings = new THREE.Mesh(
+    buildingGeometry,
+    new THREE.MeshStandardMaterial({
+      color: palette.building,
+      roughness: 0.88,
+      metalness: 0
+    })
+  );
+  buildings.name = 'phase-04-building-volumes';
+  scene.add(buildings);
 
   const defaultPosition = camera.position.clone();
   const defaultTarget = new THREE.Vector3(centerX, 0, centerZ);
