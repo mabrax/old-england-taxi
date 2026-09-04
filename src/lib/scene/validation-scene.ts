@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { buildingVolumePreview } from '../zone/building-volume-preview';
-import { roadSurfacePreview } from '../zone/road-surface-preview';
+import type { ZoneArtifact } from '../zone/types';
 import {
   clampPixelRatio,
   createValidationCamera,
@@ -25,28 +24,14 @@ const palette = {
   building: 0xb8aa92
 };
 
-export function createValidationScene(container: HTMLElement): SceneController {
+export function createValidationScene(
+  container: HTMLElement,
+  artifact: ZoneArtifact
+): SceneController {
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(palette.background);
 
-  const bounds = {
-    minimumX: Math.min(
-      roadSurfacePreview.bounds.minimumX,
-      buildingVolumePreview.bounds.minimumX
-    ),
-    maximumX: Math.max(
-      roadSurfacePreview.bounds.maximumX,
-      buildingVolumePreview.bounds.maximumX
-    ),
-    minimumZ: Math.min(
-      roadSurfacePreview.bounds.minimumZ,
-      buildingVolumePreview.bounds.minimumZ
-    ),
-    maximumZ: Math.max(
-      roadSurfacePreview.bounds.maximumZ,
-      buildingVolumePreview.bounds.maximumZ
-    )
-  };
+  const bounds = artifact.coordinates.localBounds;
   const width = bounds.maximumX - bounds.minimumX;
   const depth = bounds.maximumZ - bounds.minimumZ;
   const span = Math.max(width, depth);
@@ -72,7 +57,14 @@ export function createValidationScene(container: HTMLElement): SceneController {
   renderer.domElement.className = 'scene-canvas';
   renderer.domElement.setAttribute(
     'aria-label',
-    `Three.js road and building volume preview for ${roadSurfacePreview.label}`
+    `Three.js road and building zone for ${artifact.label}`
+  );
+  renderer.domElement.dataset.zoneSlug = artifact.slug;
+  renderer.domElement.dataset.roadTriangles = String(
+    artifact.geometry.roads.statistics.triangles
+  );
+  renderer.domElement.dataset.buildingTriangles = String(
+    artifact.geometry.buildings.statistics.triangles
   );
   container.appendChild(renderer.domElement);
 
@@ -109,9 +101,9 @@ export function createValidationScene(container: HTMLElement): SceneController {
   const roadGeometry = new THREE.BufferGeometry();
   roadGeometry.setAttribute(
     'position',
-    new THREE.Float32BufferAttribute(roadSurfacePreview.positions, 3)
+    new THREE.Float32BufferAttribute(artifact.geometry.roads.positions, 3)
   );
-  roadGeometry.setIndex(roadSurfacePreview.indices);
+  roadGeometry.setIndex(artifact.geometry.roads.indices);
   roadGeometry.computeVertexNormals();
   roadGeometry.computeBoundingSphere();
 
@@ -123,16 +115,16 @@ export function createValidationScene(container: HTMLElement): SceneController {
       metalness: 0
     })
   );
-  roads.name = 'phase-03-road-surfaces';
+  roads.name = 'phase-05-road-surfaces';
   roads.position.y = 0.04;
   scene.add(roads);
 
   const buildingGeometry = new THREE.BufferGeometry();
   buildingGeometry.setAttribute(
     'position',
-    new THREE.Float32BufferAttribute(buildingVolumePreview.positions, 3)
+    new THREE.Float32BufferAttribute(artifact.geometry.buildings.positions, 3)
   );
-  buildingGeometry.setIndex(buildingVolumePreview.indices);
+  buildingGeometry.setIndex(artifact.geometry.buildings.indices);
   buildingGeometry.computeVertexNormals();
   buildingGeometry.computeBoundingSphere();
 
@@ -144,7 +136,7 @@ export function createValidationScene(container: HTMLElement): SceneController {
       metalness: 0
     })
   );
-  buildings.name = 'phase-04-building-volumes';
+  buildings.name = 'phase-05-building-volumes';
   scene.add(buildings);
 
   const defaultPosition = camera.position.clone();

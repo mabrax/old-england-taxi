@@ -195,6 +195,7 @@ export interface CompiledRoadCenterline {
   positions: LocalPosition[];
   width: RoadWidthInference;
   segmentCount: number;
+  inZoneSegmentIndices: number[];
   inZoneSegmentCount: number;
 }
 

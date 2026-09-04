@@ -111,6 +111,11 @@ button {
   box-shadow: 0 0 0 4px rgba(210, 232, 121, 0.11);
 }
 
+.status-dot.status-error {
+  background: #cf8267;
+  box-shadow: 0 0 0 4px rgba(207, 130, 103, 0.12);
+}
+
 .status-divider {
   width: 1px;
   height: 14px;
@@ -256,6 +261,11 @@ button {
 .reset-button:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 4px;
+}
+
+.reset-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
 }
 
 .rail-note {

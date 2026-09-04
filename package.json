@@ -11,9 +11,10 @@
     "zone:check": "tsx tools/zone-compiler/src/check-zone-source.ts",
     "zone:coordinates": "tsx tools/zone-compiler/src/check-local-coordinates.ts",
     "zone:roads": "tsx tools/zone-compiler/src/check-road-surfaces.ts",
-    "zone:roads:write": "tsx tools/zone-compiler/src/check-road-surfaces.ts --write",
     "zone:buildings": "tsx tools/zone-compiler/src/check-building-volumes.ts",
-    "zone:buildings:write": "tsx tools/zone-compiler/src/check-building-volumes.ts --write",
+    "zone:artifact": "tsx tools/zone-compiler/src/check-zone-artifact.ts",
+    "zone:artifact:write": "tsx tools/zone-compiler/src/check-zone-artifact.ts --write",
+    "zone:artifact:inspect": "tsx tools/zone-compiler/src/inspect-zone-artifact.ts",
     "test": "vitest run",
     "test:watch": "vitest"
   },

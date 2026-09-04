@@ -1,7 +1,7 @@
 <div class="viewport-hud" aria-label="Viewport information">
   <div class="hud-status">
     <span class="hud-pulse" aria-hidden="true"></span>
-    <span>Roads + 1,005 buildings</span>
+    <span>Zone · roads + 1,005 buildings</span>
   </div>
   <div class="hud-details">
     <span>Drag to orbit</span>

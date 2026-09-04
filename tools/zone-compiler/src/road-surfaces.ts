@@ -232,7 +232,7 @@ function compileCenterline(
     validatePosition(position, `Road way/${line.id}`)
   );
   const width = inferRoadWidth(line.tags);
-  let inZoneSegmentCount = 0;
+  const inZoneSegmentIndices: number[] = [];
 
   for (let index = 1; index < line.positions.length; index += 1) {
     const start = line.positions[index - 1];
@@ -242,11 +242,11 @@ function compileCenterline(
       sourceBoundsRing === undefined ||
       segmentIntersectsRing(start, end, sourceBoundsRing)
     ) {
-      inZoneSegmentCount += 1;
+      inZoneSegmentIndices.push(index - 1);
     }
   }
 
-  if (inZoneSegmentCount === 0) {
+  if (inZoneSegmentIndices.length === 0) {
     throw new Error(`Supported road way/${line.id} does not intersect the fixed zone`);
   }
 
@@ -257,7 +257,8 @@ function compileCenterline(
     positions: line.positions.map((position) => ({ ...position })),
     width,
     segmentCount: line.positions.length - 1,
-    inZoneSegmentCount
+    inZoneSegmentIndices,
+    inZoneSegmentCount: inZoneSegmentIndices.length
   };
 }
 

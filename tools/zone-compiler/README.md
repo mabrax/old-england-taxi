@@ -2,9 +2,9 @@
 
 The zone compiler is a local Node.js and TypeScript tool. Phase 01 gives it one fixed,
 checked-in OpenStreetMap source. Phase 02 converts that source into deterministic local
-coordinates. Phase 03 compiles supported carriageways into a triangulated road surface and a
-checked-in viewport preview. Phase 04 extrudes supported building footprints into a second preview;
-Phase 05 will package the complete zone artifact.
+coordinates. Phase 03 compiles supported carriageways into a triangulated road surface, Phase 04
+extrudes supported building footprints, and Phase 05 packages both with navigation and provenance
+data into one browser-loadable artifact.
 
 ## Phase 01 technology
 
@@ -89,16 +89,10 @@ graph, emit a zone artifact, or load geographic data in the browser.
 
 ## Road surfaces
 
-Run the Phase 03 road compiler and verify that the checked-in preview is current:
+Run the Phase 03 road compiler check:
 
 ```sh
 npm run zone:roads
-```
-
-After an intentional compiler change, regenerate the road-only viewport data with:
-
-```sh
-npm run zone:roads:write
 ```
 
 Supported centerlines are `motorway`, `trunk`, `primary`, `secondary`, `tertiary`, their link
@@ -130,9 +124,7 @@ compiler rejects zero-length segments, invalid polygons, non-finite vertices, de
 empty triangulations, and triangulations whose area differs from their source polygon; triangle
 winding is normalised upward for Three.js.
 
-The generated preview contains only the indexed Phase 03 road mesh and framing metadata needed
-by the existing Three.js viewport. The road compiler runs locally; it does not run in the browser.
-The complete versioned geometry, navigation graph, and source metadata artifact remains Phase 05.
+The road compiler runs locally; Phase 05 packages its indexed mesh into the complete artifact.
 
 ## Phase 03 boundary
 
@@ -141,16 +133,10 @@ elevation, lane markings, traffic systems, or the complete browser-loadable zone
 
 ## Building volumes
 
-Run the Phase 04 building compiler and verify that the checked-in preview is current:
+Run the Phase 04 building compiler check:
 
 ```sh
 npm run zone:buildings
-```
-
-After an intentional compiler change, regenerate the building-only viewport data with:
-
-```sh
-npm run zone:buildings:write
 ```
 
 Supported footprints are closed ways with a non-`no` `building` tag and building multipolygon
@@ -173,11 +159,60 @@ inferred height. The compiler rejects non-finite positions, zero-length edges, n
 degenerate triangles, bad indices, excessive triangulation deviation, and cap/footprint area
 mismatches.
 
-The generated Phase 04 preview contains only the combined indexed building mesh and compact
-viewport metadata. The browser renders it beside the existing Phase 03 road preview; the compiler
-still runs only in Node.js.
+The building compiler runs locally; Phase 05 combines its per-building meshes into the complete
+artifact.
 
 ## Phase 04 boundary
 
 Phase 04 does not add building parts, detailed roofs, interiors, terrain or elevation, landmarks,
 colliders, vehicles, a street graph, or the complete browser-loadable zone artifact.
+
+## Zone artifact
+
+Phase 05 emits exactly one prepared file for the fixed zone:
+
+```text
+public/
+  zones/
+    trafalgar-square-london.zone.json
+```
+
+From the repository root, use this workflow:
+
+```sh
+# Compile from the checked-in OSM snapshot and write the artifact.
+npm run zone:artifact:write
+
+# Recompile in memory and fail if the checked-in bytes are stale.
+npm run zone:artifact
+
+# Validate and summarize the prepared artifact without running geometry compilers.
+npm run zone:artifact:inspect
+```
+
+The schema is version `1` and is defined by `src/lib/zone/types.ts` plus the dependency-free
+runtime validator in `src/lib/zone/zone-artifact.ts`. The artifact contains:
+
+- the complete indexed road and building triangle meshes, their bounds, and auditable counts;
+- an undirected street graph with one edge for every road centerline segment selected by the road
+  compiler's fixed-bounds intersection rule;
+- the WGS84 origin, local metre axes, ground plane, geographic bounds, and combined local bounds;
+- the source snapshot identity, checksum, timestamp, acquisition request, attribution, and licence;
+- the exact Phase 01–04 schema versions and the road/building compilation rules needed to explain
+  the output.
+
+Graph nodes use OSM node IDs and exact Phase 02 local positions. Graph edges identify their OSM
+way and zero-based source segment, highway class, inferred width, and length. The graph is
+topological data only: direction, traffic policy, route selection, and driveability stay deferred.
+
+Serialization recursively orders object keys, preserves array order, uses compact JSON, and ends
+with one newline. The write/check command compiles twice, validates both results, compares their
+bytes, and validates the file after writing. Compilation reads only local files and never refreshes
+the OSM source.
+
+The Vite application fetches `/zones/trafalgar-square-london.zone.json` as a static resource,
+validates it, and only then builds the existing Three.js scene. A missing, malformed, incompatible,
+or structurally invalid artifact produces a visible viewport error. No source loader, projection,
+buffering, polygon union, triangulation, or building extrusion code is imported by the browser.
+Keeping geometry outside the JavaScript bundle also lets the artifact remain independently
+cacheable and inspectable.
