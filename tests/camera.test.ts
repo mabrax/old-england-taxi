@@ -31,4 +31,15 @@ describe('viewport camera helpers', () => {
     expect(camera.aspect).toBe(0.5);
     expect(camera.projectionMatrix).toBeInstanceOf(THREE.Matrix4);
   });
+
+  it('frames a metre-scale zone with matching clipping distances', () => {
+    const camera = createValidationCamera(
+      { width: 1_200, height: 800 },
+      { centerX: 25, centerZ: -40, span: 1_000 }
+    );
+
+    expect(camera.position.toArray()).toEqual([745, 1_150, 880]);
+    expect(camera.near).toBe(1);
+    expect(camera.far).toBe(5_000);
+  });
 });

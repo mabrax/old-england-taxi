@@ -1,6 +1,7 @@
 export const ZONE_SOURCE_SCHEMA_VERSION = 1 as const;
 export const OSM_VERSION = 0.6 as const;
 export const LOCAL_COORDINATE_SCHEMA_VERSION = 1 as const;
+export const ROAD_SURFACE_SCHEMA_VERSION = 1 as const;
 
 export interface GeographicBounds {
   south: number;
@@ -154,4 +155,84 @@ export interface LocalCoordinateZone {
   };
   points: LocalPointFeature[];
   lines: LocalLineFeature[];
+}
+
+export type SupportedRoadHighway =
+  | 'motorway'
+  | 'motorway_link'
+  | 'trunk'
+  | 'trunk_link'
+  | 'primary'
+  | 'primary_link'
+  | 'secondary'
+  | 'secondary_link'
+  | 'tertiary'
+  | 'tertiary_link'
+  | 'unclassified'
+  | 'residential'
+  | 'living_street'
+  | 'service'
+  | 'road';
+
+export type RoadWidthSource = 'width' | 'lanes' | 'highway-default';
+
+export interface RoadWidthInference {
+  metres: number;
+  source: RoadWidthSource;
+  sourceValue: string;
+}
+
+export interface RoadSurfacePoint {
+  x: number;
+  z: number;
+}
+
+export interface CompiledRoadCenterline {
+  id: number;
+  highway: SupportedRoadHighway;
+  nodeIds: number[];
+  positions: LocalPosition[];
+  width: RoadWidthInference;
+  segmentCount: number;
+  inZoneSegmentCount: number;
+}
+
+export interface RoadSurfacePolygon {
+  rings: RoadSurfacePoint[][];
+  areaSquareMetres: number;
+}
+
+export interface TriangulatedRoadMesh {
+  positions: number[];
+  indices: number[];
+  vertexCount: number;
+  triangleCount: number;
+  areaSquareMetres: number;
+  maximumDeviation: number;
+}
+
+export interface RoadSurfaceZone {
+  metadata: {
+    schemaVersion: typeof ROAD_SURFACE_SCHEMA_VERSION;
+    slug: string;
+    label: string;
+    sourceBounds: GeographicBounds;
+    coordinateSystem: LocalCoordinateSystemMetadata;
+    supportedHighways: SupportedRoadHighway[];
+    widthRules: {
+      precedence: ['width', 'lanes', 'highway-default'];
+      laneWidthMetres: number;
+      fallbackWidthMetres: Record<SupportedRoadHighway, number>;
+    };
+    buffer: {
+      cap: 'round';
+      join: 'round';
+      circleSegments: number;
+      inputPrecisionMetres: number;
+    };
+    clippedToSourceBounds: boolean;
+  };
+  roads: CompiledRoadCenterline[];
+  polygons: RoadSurfacePolygon[];
+  mesh: TriangulatedRoadMesh;
 }

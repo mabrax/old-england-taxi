@@ -10,10 +10,14 @@
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "zone:check": "tsx tools/zone-compiler/src/check-zone-source.ts",
     "zone:coordinates": "tsx tools/zone-compiler/src/check-local-coordinates.ts",
+    "zone:roads": "tsx tools/zone-compiler/src/check-road-surfaces.ts",
+    "zone:roads:write": "tsx tools/zone-compiler/src/check-road-surfaces.ts --write",
     "test": "vitest run",
     "test:watch": "vitest"
   },
   "dependencies": {
+    "earcut": "^3.2.3",
+    "polygon-clipping": "^0.15.7",
     "svelte": "^5.38.7",
     "three": "^0.179.1"
   },

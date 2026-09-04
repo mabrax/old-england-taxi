@@ -14,7 +14,7 @@
 <svelte:head>
   <meta
     name="description"
-    content="A quiet validation shell for the Route Simulator's Three.js viewport."
+    content="The Route Simulator's deterministic Trafalgar Square road-surface preview."
   />
 </svelte:head>
 

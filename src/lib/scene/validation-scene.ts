@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { roadSurfacePreview } from '../zone/road-surface-preview';
 import {
   clampPixelRatio,
   createValidationCamera,
@@ -15,77 +16,100 @@ export interface SceneController {
 }
 
 const palette = {
-  ground: 0xe6ebe9,
-  gridMinor: 0xcbd5d2,
-  gridMajor: 0xaebdb8,
-  navy: 0x314d5a,
-  sage: 0x6d8d83,
-  clay: 0xb5775f,
-  sand: 0xc7a66a
+  background: 0xd9e2e1,
+  ground: 0xe8ece8,
+  gridMinor: 0xd0d8d4,
+  gridMajor: 0xaabbb5,
+  road: 0x4b5960
 };
 
 export function createValidationScene(container: HTMLElement): SceneController {
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xd9e2e1);
+  scene.background = new THREE.Color(palette.background);
+
+  const { bounds } = roadSurfacePreview;
+  const width = bounds.maximumX - bounds.minimumX;
+  const depth = bounds.maximumZ - bounds.minimumZ;
+  const span = Math.max(width, depth);
+  const centerX = (bounds.minimumX + bounds.maximumX) / 2;
+  const centerZ = (bounds.minimumZ + bounds.maximumZ) / 2;
 
   const initialSize = getViewportSize(container);
-  const camera = createValidationCamera(initialSize);
+  const camera = createValidationCamera(initialSize, { centerX, centerZ, span });
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   const controls = new OrbitControls(camera, renderer.domElement);
 
   controls.enableDamping = true;
   controls.dampingFactor = 0.08;
   controls.enablePan = true;
-  controls.minDistance = 4;
-  controls.maxDistance = 32;
+  controls.minDistance = span * 0.18;
+  controls.maxDistance = span * 4;
   controls.maxPolarAngle = Math.PI * 0.49;
-  controls.target.set(0, 0.35, 0);
+  controls.target.set(centerX, 0, centerZ);
 
   renderer.setPixelRatio(clampPixelRatio(window.devicePixelRatio));
   renderer.setSize(initialSize.width, initialSize.height, false);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
-  renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.domElement.className = 'scene-canvas';
-  renderer.domElement.setAttribute('aria-label', 'Three.js neutral validation scene');
+  renderer.domElement.setAttribute(
+    'aria-label',
+    `Three.js road surface preview for ${roadSurfacePreview.label}`
+  );
   container.appendChild(renderer.domElement);
 
-  const hemisphereLight = new THREE.HemisphereLight(0xf4f7f5, 0x87928e, 2.2);
+  const hemisphereLight = new THREE.HemisphereLight(0xf7faf8, 0x87928e, 2.4);
   scene.add(hemisphereLight);
 
-  const keyLight = new THREE.DirectionalLight(0xfff8ed, 3.1);
-  keyLight.position.set(5, 10, 6);
-  keyLight.castShadow = true;
-  keyLight.shadow.mapSize.set(1024, 1024);
-  keyLight.shadow.camera.left = -12;
-  keyLight.shadow.camera.right = 12;
-  keyLight.shadow.camera.top = 12;
-  keyLight.shadow.camera.bottom = -12;
+  const keyLight = new THREE.DirectionalLight(0xfff8ed, 2.2);
+  keyLight.position.set(centerX + span * 0.5, span * 1.5, centerZ + span * 0.4);
   scene.add(keyLight);
 
+  const groundMargin = span * 0.08;
   const ground = new THREE.Mesh(
-    new THREE.PlaneGeometry(28, 28),
+    new THREE.PlaneGeometry(width + groundMargin, depth + groundMargin),
     new THREE.MeshStandardMaterial({ color: palette.ground, roughness: 0.94, metalness: 0 })
   );
   ground.rotation.x = -Math.PI / 2;
-  ground.receiveShadow = true;
+  ground.position.set(centerX, 0, centerZ);
   scene.add(ground);
 
-  const grid = new THREE.GridHelper(28, 28, palette.gridMajor, palette.gridMinor);
+  const grid = new THREE.GridHelper(
+    span + groundMargin,
+    10,
+    palette.gridMajor,
+    palette.gridMinor
+  );
+  grid.position.x = centerX;
   grid.position.y = 0.012;
+  grid.position.z = centerZ;
+  const gridMaterial = grid.material as THREE.LineBasicMaterial;
+  gridMaterial.transparent = true;
+  gridMaterial.opacity = 0.34;
   scene.add(grid);
 
-  const testObjects = new THREE.Group();
-  testObjects.name = 'phase-00-primitives';
-  scene.add(testObjects);
+  const roadGeometry = new THREE.BufferGeometry();
+  roadGeometry.setAttribute(
+    'position',
+    new THREE.Float32BufferAttribute(roadSurfacePreview.positions, 3)
+  );
+  roadGeometry.setIndex(roadSurfacePreview.indices);
+  roadGeometry.computeVertexNormals();
+  roadGeometry.computeBoundingSphere();
 
-  addBox(testObjects, { x: -2.6, y: 0.75, z: -1.3 }, { x: 1.8, y: 1.5, z: 1.8 }, palette.navy);
-  addBox(testObjects, { x: 2.4, y: 0.55, z: 1.2 }, { x: 2.2, y: 1.1, z: 1.4 }, palette.sage);
-  addSphere(testObjects, { x: -1.3, y: 0.85, z: 2.4 }, 0.85, palette.clay);
-  addSphere(testObjects, { x: 2.4, y: 0.6, z: -2.6 }, 0.6, palette.sand);
+  const roads = new THREE.Mesh(
+    roadGeometry,
+    new THREE.MeshStandardMaterial({
+      color: palette.road,
+      roughness: 0.92,
+      metalness: 0
+    })
+  );
+  roads.name = 'phase-03-road-surfaces';
+  roads.position.y = 0.04;
+  scene.add(roads);
 
   const defaultPosition = camera.position.clone();
-  const defaultTarget = new THREE.Vector3(0, 0.35, 0);
+  const defaultTarget = new THREE.Vector3(centerX, 0, centerZ);
   let disposed = false;
   let frame = 0;
 
@@ -130,38 +154,6 @@ export function createValidationScene(container: HTMLElement): SceneController {
       renderer.domElement.remove();
     }
   };
-}
-
-function addBox(
-  group: THREE.Group,
-  position: THREE.Vector3Like,
-  size: THREE.Vector3Like,
-  color: number
-): void {
-  const mesh = new THREE.Mesh(
-    new THREE.BoxGeometry(size.x, size.y, size.z),
-    new THREE.MeshStandardMaterial({ color, roughness: 0.76, metalness: 0.04 })
-  );
-  mesh.position.set(position.x, position.y, position.z);
-  mesh.castShadow = true;
-  mesh.receiveShadow = true;
-  group.add(mesh);
-}
-
-function addSphere(
-  group: THREE.Group,
-  position: THREE.Vector3Like,
-  radius: number,
-  color: number
-): void {
-  const mesh = new THREE.Mesh(
-    new THREE.SphereGeometry(radius, 32, 20),
-    new THREE.MeshStandardMaterial({ color, roughness: 0.62, metalness: 0.08 })
-  );
-  mesh.position.set(position.x, position.y, position.z);
-  mesh.castShadow = true;
-  mesh.receiveShadow = true;
-  group.add(mesh);
 }
 
 function disposeObject(object: THREE.Object3D): void {
