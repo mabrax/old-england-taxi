@@ -1,8 +1,8 @@
 # Zone compiler
 
 The zone compiler is a local Node.js and TypeScript tool. Phase 01 gives it one fixed,
-checked-in OpenStreetMap source; later phases will transform that source into a browser-loadable
-zone artifact.
+checked-in OpenStreetMap source. Phase 02 converts that source into deterministic local
+coordinates; later phases will turn those coordinates into a browser-loadable zone artifact.
 
 ## Phase 01 technology
 
@@ -47,7 +47,40 @@ checksum together.
 
 OpenStreetMap data is available under the ODbL. Attribution: © OpenStreetMap contributors.
 
-## Phase boundary
+## Local coordinates
 
-Phase 01 does not project coordinates, generate road or building geometry, emit a zone artifact,
-or load geographic data in the browser.
+Run the Phase 02 coordinate inspection from the repository root:
+
+```sh
+npm run zone:coordinates
+```
+
+Like the source check, the underlying compiler resolves the checked-in source relative to its own
+module rather than the process working directory.
+
+The transform uses the exact midpoint of the manifest bounds as its one origin. Input positions
+use WGS84 geographic coordinates (`EPSG:4326`) with explicit latitude and longitude fields. Each
+point is converted to an Earth-centred WGS84 position, offset from the origin, and rotated onto the
+origin's east/north tangent plane. Output is in metres with this right-handed Three.js convention:
+
+| Axis | Direction |
+| --- | --- |
+| `+x` | east |
+| `+y` | up |
+| `+z` | south (`-z` is north) |
+
+OSM provides no elevation in this snapshot, so Phase 02 deliberately flattens every point to
+`y = 0`; terrain remains deferred. All OSM nodes become point features. Every OSM way with at
+least two resolved node references becomes a line feature whose source order, identifier, node
+references, closed/open state, and tags are preserved. OSM relations do not contain coordinates
+themselves and stay in the loaded source as topology for the later phase that interprets them.
+
+The in-memory result retains the source bounds and a complete coordinate-system record: schema,
+source CRS, projection method, units, origin, axes, handedness, and ground plane. Tests compare
+local horizontal distances with independent WGS84 geodesic calculations using a maximum error of
+0.05 metres across the fixed source.
+
+## Phase 02 boundary
+
+Phase 02 does not infer road widths, generate surfaces, extrude buildings, construct a street
+graph, emit a zone artifact, or load geographic data in the browser.

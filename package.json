@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "zone:check": "tsx tools/zone-compiler/src/check-zone-source.ts",
+    "zone:coordinates": "tsx tools/zone-compiler/src/check-local-coordinates.ts",
     "test": "vitest run",
     "test:watch": "vitest"
   },
