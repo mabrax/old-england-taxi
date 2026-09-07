@@ -32,10 +32,10 @@ try {
       run('screenshot', screenshot);
       run('find', 'label', 'Generated geometry', 'check');
       run('find', 'label', 'Collision surfaces', 'click');
-      run('find', 'role', 'button', 'click', '--name', 'Resume physics', '--exact');
-      run('wait', '[data-physics-state="running"]');
+      run('find', 'role', 'button', 'click', '--name', 'Drive', '--exact');
+      run('wait', '--fn', 'document.querySelector("canvas").dataset.physicsStatus==="running"');
       run('wait', '--fn', 'Number(document.querySelector("canvas").dataset.physicsSteps)>0');
-      run('find', 'role', 'button', 'click', '--name', 'Pause physics', '--exact');
+      run('find', 'role', 'button', 'click', '--name', 'Pause driving', '--exact');
       const paused = state(); frames();
       assert(state().physicsSteps === paused.physicsSteps, 'Paused physics advanced');
       assert(!run('errors') && !run('console'), 'Unexpected browser error');
@@ -44,10 +44,10 @@ try {
     }
   }
   run('set', 'viewport', '1440', '900');
-  run('find', 'role', 'button', 'click', '--name', 'Resume physics', '--exact');
+  run('find', 'role', 'button', 'click', '--name', 'Resume driving', '--exact');
   run('tab', 'new', '--label', 'visibility-check', 'about:blank');
   run('tab', 't1');
-  run('wait', '[data-physics-state="paused"]');
+  run('wait', '--fn', 'document.querySelector("canvas").dataset.physicsStatus==="paused"');
   const afterTabReturn = state(); frames();
   assert(state().physicsSteps === afterTabReturn.physicsSteps, 'Tab return resumed simulation');
   observations.push({ check: 'real browser tab departure/return pauses and requires explicit resume', result: 'pass', afterTabReturn });
@@ -56,7 +56,7 @@ try {
   const zone = catalogue.zones[1];
   run('network', 'route', `${base}/api/zone-generation`, '--abort');
   run('open', `${base}/?zone=${zone.id}`);
-  run('wait', '[data-physics-state="paused"]'); run('wait', '.generation-connection');
+  run('wait', '[data-physics-state="paused"]'); run('find', 'role', 'button', 'click', '--name', 'Locations & tools', '--exact'); run('wait', '.generation-connection'); run('find', 'role', 'button', 'click', '--name', 'Close workspace', '--exact');
   assert(state().physicsColliders === '7', 'Physics depends on generation service');
   observations.push({ check: 'prepared world loads without generation service or source QA', result: 'pass' });
   run('network', 'unroute');
@@ -68,7 +68,7 @@ try {
   run('wait', '[data-physics-state="error"]');
   const failed = state();
   assert(failed.canvases === 1 && failed.physicsColliders === '0' && evaluate('document.querySelector("[data-zone-status]").dataset.zoneStatus') === 'ready', 'Physics failure removed artifact inspection');
-  run('click', '.reset-button');
+  run('find', 'role', 'button', 'click', '--name', 'Reset view', '--exact');
   run('screenshot', join(output, 'physics-unavailable.png'));
   observations.push({ check: 'physics initialization failure retains renderer and camera reset', result: 'pass', failed });
   run('network', 'unroute'); run('open', `${base}/?zone=${zone.id}`); run('wait', '[data-physics-state="paused"]');

@@ -1,5 +1,7 @@
 # Phase 03 — Driving interaction
 
+**Status: implementation complete and verified in the available environment; parent review pending (2026-09-07).** The user said “Proceed with phase three”; this includes reasonable decisions within this phase and does not require another implementation approval. Work starts from reviewed local `0e60304` on isolated `codex/driveability-driving-interaction` in worktree `9db0`. Phase 04 remains unstarted.
+
 ## Goal
 
 Make the vehicle understandable and controllable in desktop and iPad browsers while retaining zone inspection. The application is web-only; tablet support means using the web app in a browser.
@@ -27,4 +29,18 @@ Native apps, map-based selection, seamless zone handover, cache-management featu
 
 ## Dependency and planning agreement
 
-Depends on the verified [First vehicle](./phase-02-first-vehicle.md) exit. Discuss and detail this phase's implementation plan with the user when ready under the [stage working agreement](./README.md#working-agreement). Use focused interaction/camera checks here; [Phase 04](./phase-04-qualification.md) verifies the integrated session and records acceptance evidence.
+Depends on the independently reviewed [First vehicle](./phase-02-first-vehicle.md) exit. The authorized implementation plan follows. Use focused interaction/camera checks here; [Phase 04](./phase-04-qualification.md) verifies the integrated session and records acceptance evidence.
+
+## Implementation plan (2026-09-07)
+
+1. Keep one scene-owned world/vehicle/RAF and the existing 60 Hz bounded fixed-step session. Add explicit inspection, driving and paused interaction states, separate from artifact/physics readiness. New cells open in inspection; Drive/Resume is explicit and requires a safe vehicle, visible generated geometry, focused/visible page and no pending generation. Automatic recovery pauses with feedback.
+2. Add keyboard (WASD/arrows, Space brake, Escape pause) and independent captured pointer controls through the existing normalized command contract. S/down or Brake / reverse applies opposing throttle: it brakes to rest, then continues in reverse while held. Space or Stop brakes without reversing. Opposed pedals brake; opposed steering cancels. Retain simultaneous pedal/steering input. Keyboard input is accepted only while the canvas has focus; UI focus, editing, pointer cancellation/capture loss, blur, visibility and orientation changes clear controls and pause. Repeat key events cannot revive held input after reset/resume.
+3. Keep the controls in a compact viewport panel with two thumb groups, visible pressed states, speed/direction and explicit reset/pause feedback. Keep inspection and generation accessible through a workspace toggle on narrow screens; opening it pauses. Use safe-area padding, dynamic viewport height and no touch scrolling on driving pads; support both portrait and landscape without forcing browser orientation or fullscreen.
+4. Give the chase camera exclusive ownership in driving/paused mode; orbit owns inspection only. Follow the interpolated upright heading with bounded time-based smoothing and a stable rear view in reverse (no sudden side swap). Sweep a camera clearance volume against static physical geometry, including ground and walls, retract immediately and ease outward. Reset snaps camera smoothing independently of vehicle reset; vehicle reset snaps both and leaves driving paused. Test close walls, corners, ground, reverse, reset and ownership.
+5. Propagate generation busy state including submission, cancellation and reconnection. Any pending build prevents driving; failure retains the loaded world and allows explicit resume, while success navigates and disposes the old scene. Preserve loader/QA/report/attribution/catalogue and compiler boundaries. No prepared artifact, report, QA, catalogue, schema, acquisition or compiler change.
+6. Intended browser targets: current stable desktop Chromium, Firefox and Safari, and Safari on representative iPadOS iPads, portrait and landscape. Available Linux Chromium desktop and tablet/touch emulation are implementation evidence only. Record actual versions/hardware used, and explicitly leave unperformed iPad/other-engine checks and performance acceptance open; do not claim the full device exit condition from emulation. No native app or Phase 04 qualification.
+7. Run focused keyboard/pointer/state/camera/lifecycle tests, existing offline corpus/full suite/static/build and rendered browser regressions on isolated port 4188 with this worktree's cache. Record evidence and limitations in a linked verification record, commit, and send the report to the champion for independent review. Do not touch canonical main, preview 4175 or its cache; do not push, merge or deploy.
+
+## Implementation outcome and evidence boundary
+
+[Verification and limitations](./phase-03-verification.md) records the delivered input, interaction, camera and generation-lifecycle changes and links reproducible browser evidence. The complete device-level exit condition above is **not yet established**: actual iPad Safari, desktop Firefox/Safari and device performance have not been measured here. The implementable work and available Chromium checks are delivered for independent review; Phase 04 has not begun.

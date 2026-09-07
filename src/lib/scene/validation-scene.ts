@@ -1,4 +1,10 @@
 import * as THREE from 'three';
+import { createDrivingInput, type DrivingAction } from './driving-input';
+import { createChaseCamera } from './chase-camera';
+import { NEUTRAL } from '../physics/vehicle-config';
+
+export type DrivingMode = 'inspect' | 'driving' | 'paused';
+export interface DrivingState { mode: DrivingMode; message: string; speed: number; onPavement?: boolean }
 import { createVehicleView } from './vehicle-view';
 import type { VehicleCommand } from '../physics/vehicle-config';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
@@ -16,6 +22,10 @@ import {
 
 export interface SceneController {
   resetCamera: () => void;
+  drive: () => void;
+  pauseDriving: (reason?: string) => void;
+  setDrivingBlocked: (blocked: boolean) => void;
+  pointerDown: (event: PointerEvent, action: DrivingAction) => void;
   inspectVehicle: () => void;
   resetVehicle: () => void;
   exerciseVehicle: (command: VehicleCommand) => void;
@@ -39,7 +49,8 @@ export function createValidationScene(
   container: HTMLElement,
   artifact: ZoneArtifact,
   qa?: ZoneQa,
-  onPhysicsState: (state: PhysicsState) => void = () => {}
+  onPhysicsState: (state: PhysicsState) => void = () => {},
+  onDrivingState: (state: DrivingState) => void = () => {}
 ): SceneController {
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(palette.background);
@@ -68,6 +79,8 @@ export function createValidationScene(
   renderer.setSize(initialSize.width, initialSize.height, false);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.domElement.className = 'scene-canvas';
+  renderer.domElement.tabIndex = 0;
+  renderer.domElement.setAttribute('aria-description', 'Drive with WASD or arrow keys. Space brakes. Escape pauses. R resets the vehicle.');
   renderer.domElement.setAttribute(
     'aria-label',
     `Three.js road and building zone for ${artifact.label}`
@@ -185,7 +198,7 @@ export function createValidationScene(
   scene.add(overlays);
   renderer.domElement.dataset.qaLines = String(qa?.lines.length ?? 0);
   const setQaVisibility = (source: boolean, generated: boolean) => {
-    if (!generated) physics.pause();
+    if (!generated) inspect('Inspection pauses driving while geometry is hidden.');
     overlays.visible = source;
     roads.visible = buildings.visible = generated;
     renderer.domElement.dataset.sourceVisible = String(source);
@@ -196,6 +209,50 @@ export function createValidationScene(
   const defaultPosition = camera.position.clone();
   const defaultTarget = new THREE.Vector3(centerX, 0, centerZ);
   let disposed = false;
+  let mode: DrivingMode = 'inspect';
+  let blocked = false;
+  let message = 'Inspect the zone, or choose Drive when the vehicle is ready.';
+  let lastFrame: number | undefined;
+  let lastFeedback = 0;
+  const notify = () => {
+    renderer.domElement.dataset.drivingMode = mode;
+    renderer.domElement.dataset.cameraOwner = mode === 'inspect' ? 'orbit' : 'chase';
+    onDrivingState({ mode, message, speed: physics.vehicle?.speed ?? 0, onPavement: physics.vehicle?.onPavement });
+  };
+  const pauseDriving = (reason = 'Paused. Release controls, then Resume driving.') => {
+    if (disposed) return;
+    input.clear(); physics.pause();
+    if (mode !== 'inspect') mode = 'paused';
+    message = reason; lastFrame = undefined; notify();
+  };
+  const chase = createChaseCamera(camera, (from, to, radius) => physics.physical?.cameraSweep(from, to, radius) ?? 1);
+  const input = createDrivingInput(renderer.domElement, {
+    active: () => !disposed && mode === 'driving', pause: pauseDriving, reset: () => resetVehicle()
+  });
+  const inspect = (reason = 'Inspection pauses driving. Drag to orbit; scroll or pinch to zoom.') => {
+    pauseDriving(reason); mode = 'inspect';
+    camera.up.set(0, 1, 0);
+    controls.target.copy(vehicleView.root.visible ? vehicleView.root.position : defaultTarget);
+    // Drain old orbit damping before handing ownership back. The chase never calls update().
+    controls.enableDamping = false; controls.update(); controls.enableDamping = true;
+    controls.enabled = true; notify();
+  };
+  const resetVehicle = () => {
+    if (disposed) return;
+    pauseDriving(); physics.resetVehicle(); chase.reset();
+    message = physics.vehicle?.state.status === 'ready' ? 'Vehicle reset to its safe start. Release controls, then Resume driving.' : physics.vehicle?.state.message ?? 'Vehicle unavailable.';
+    if (mode === 'inspect') inspectVehicle();
+    notify();
+  };
+  const inspectVehicle = () => {
+    const pose = physics.vehicle?.frames.current;
+    if (disposed) return;
+    if (!pose) { inspect(); resetCamera(); return; }
+    inspect(); controls.minDistance = 3;
+    controls.target.set(pose.position.x, pose.position.y, pose.position.z);
+    camera.position.set(pose.position.x + 10, pose.position.y + 9, pose.position.z + 12);
+    controls.update();
+  };
   let frame = 0;
   let collisionVisible = false;
   const collisionInspection = new THREE.Group();
@@ -211,10 +268,15 @@ export function createValidationScene(
     renderer.domElement.dataset.physicsColliders = String(state.metrics?.colliders ?? 0);
     renderer.domElement.dataset.physicsSetupMs = String(state.metrics?.setupMs ?? 0);
     renderer.domElement.dataset.physicsInitializationMs = String(state.initializationMs ?? 0);
+    if (state.status !== 'running' && mode === 'driving') {
+      mode = 'paused'; input.clear(); chase.reset();
+      message = state.vehicle?.recoveries ? 'Vehicle recovered from an escaped, fallen or invalid state. Release controls, then Resume driving.' : state.vehicle?.message ?? state.message ?? 'Driving paused.';
+    }
     if (state.status === 'error') {
       collisionInspection.visible = simulationLimit.visible = vehicleView.root.visible = false;
     }
     onPhysicsState(state);
+    notify();
   });
   renderer.domElement.dataset.physicsStatus = 'loading';
   void physics.ready.then(() => {
@@ -252,6 +314,7 @@ export function createValidationScene(
 
   const render = (now = performance.now()) => {
     if (disposed) return;
+    if (mode === 'driving') physics.submit(input.command());
     physics.advance(now);
     const frames = physics.vehicle?.frames;
     vehicleView.root.visible = !!frames?.current;
@@ -263,14 +326,22 @@ export function createValidationScene(
       renderer.domElement.dataset.vehicleRecoveries = String(physics.vehicle?.state.recoveries);
     }
     renderer.domElement.dataset.physicsSteps = String(physics.timing.steps);
-    controls.update();
+    if (mode === 'inspect') controls.update();
+    else if (frames?.current) {
+      const result = chase.update({ position: vehicleView.root.position, rotation: vehicleView.root.quaternion }, lastFrame === undefined ? 0 : (now - lastFrame) / 1000);
+      renderer.domElement.dataset.chaseCamera = JSON.stringify(result);
+    }
+    lastFrame = now;
+    if (now - lastFeedback > 150) { lastFeedback = now; notify(); }
     renderer.render(scene, camera);
     frame = document.hidden ? 0 : window.requestAnimationFrame(render);
   };
 
-  const pause = () => physics.pause();
+  const pause = () => pauseDriving('Window focus lost. Resume driving when ready.');
+  const orientationChanged = () => pauseDriving('Orientation changed. Release controls, then Resume driving.');
+  window.addEventListener('orientationchange', orientationChanged);
   const visibilityChanged = () => {
-    physics.pause();
+    pauseDriving('Page visibility changed. Resume driving when ready.');
     if (frame) window.cancelAnimationFrame(frame);
     frame = 0;
     if (!document.hidden && !disposed) render();
@@ -291,6 +362,8 @@ export function createValidationScene(
 
   const resetCamera = () => {
     if (disposed) return;
+    if (mode !== 'inspect') { chase.reset(); return; }
+    camera.up.set(0, 1, 0);
     controls.minDistance = span * 0.18;
     camera.position.copy(defaultPosition);
     controls.target.copy(defaultTarget);
@@ -303,10 +376,12 @@ export function createValidationScene(
   const dispose = () => {
     if (disposed) return;
     disposed = true;
+    input.dispose();
     physics.dispose();
     window.cancelAnimationFrame(frame);
     document.removeEventListener('visibilitychange', visibilityChanged);
     window.removeEventListener('blur', pause);
+    window.removeEventListener('orientationchange', orientationChanged);
     window.removeEventListener('pagehide', pageHidden);
     window.removeEventListener('pageshow', pageShown);
     observer.disconnect();
@@ -325,17 +400,28 @@ export function createValidationScene(
 
   return {
     resetCamera,
-    inspectVehicle: () => {
-      const pose = physics.vehicle?.frames.current;
-      if (disposed || !pose) return;
-      physics.pause(); controls.minDistance = 3;
-      controls.target.set(pose.position.x, pose.position.y, pose.position.z);
-      camera.position.set(pose.position.x + 10, pose.position.y + 9, pose.position.z + 12);
-      controls.update();
+    inspectVehicle,
+    resetVehicle,
+    drive: () => {
+      if (disposed || blocked || document.hidden || !document.hasFocus() || !roads.visible || !buildings.visible || physics.vehicle?.state.status !== 'ready') return;
+      input.clear(); physics.pause();
+      // Flush orbit inertia before disabling it; only chase writes the camera in driving/paused mode.
+      controls.enableDamping = false; controls.update(); controls.enableDamping = true;
+      controls.enabled = false; controls.minDistance = 3;
+      camera.near = 0.1; camera.updateProjectionMatrix();
+      chase.reset(); lastFrame = undefined;
+      mode = 'driving'; message = 'Driving · S / ↓ brakes, then reverses. Space holds the brake.';
+      renderer.domElement.focus({ preventScroll: true });
+      physics.resume(); physics.submit(NEUTRAL); notify();
     },
-    resetVehicle: () => { if (!disposed) physics.resetVehicle(); },
+    pauseDriving,
+    setDrivingBlocked: value => {
+      blocked = value;
+      if (value) pauseDriving('Location work in progress. Driving is paused until it finishes.');
+    },
+    pointerDown: input.pointerDown,
     exerciseVehicle: command => {
-      if (!disposed && !document.hidden && document.hasFocus() && roads.visible && buildings.visible) physics.exercise(command);
+      if (!disposed && !blocked && !document.hidden && document.hasFocus() && roads.visible && buildings.visible) { inspect(); physics.exercise(command); }
     },
     resize,
     setQaVisibility,
@@ -345,7 +431,7 @@ export function createValidationScene(
       renderer.domElement.dataset.collisionVisible = String(collisionInspection.visible);
     },
     setPhysicsPaused: (paused: boolean) => {
-      if (paused || document.hidden || !document.hasFocus() || !roads.visible || !buildings.visible) physics.pause(); else physics.resume();
+      if (paused || blocked || document.hidden || !document.hasFocus() || !roads.visible || !buildings.visible) pauseDriving(); else physics.resume();
     },
     dispose
   };

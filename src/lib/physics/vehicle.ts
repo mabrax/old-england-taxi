@@ -2,7 +2,7 @@ import RAPIER from '@dimforge/rapier3d-compat';
 import type { ZoneArtifact } from '../zone/types';
 import { FIXED_STEP_SECONDS, type PhysicalWorld } from './physical-world';
 import { containsBox } from './world-geometry';
-import { createSpawnSearch, vehicleBounds } from './vehicle-spawn';
+import { createSpawnSearch, vehicleBounds, pavementRectangle } from './vehicle-spawn';
 import { NEUTRAL, VEHICLE, WHEEL_CONNECTIONS, rotate, transform, type Pose, type VehicleCommand } from './vehicle-config';
 export { initializeRapier, createPhysicalWorld } from './physical-world';
 export interface VehicleSnapshot extends Pose { wheels: { length: number; steering: number; rotation: number }[] }
@@ -106,6 +106,8 @@ export function createVehicle(physical: PhysicalWorld, artifact: ZoneArtifact) {
     get controller() { return controller; },
     get state(): VehicleState { return { status: body ? 'ready' : 'unavailable', message, resets, recoveries, inputReady: armed }; },
     get speed() { return speed(); },
+    // UI samples this at a limited cadence; it never changes eligibility, motion or recovery.
+    get onPavement() { return current ? search.pavement.covers(pavementRectangle(current)) : undefined; },
     get frames() { return { previous, current }; },
     clearInput, reset,
     submit(input: VehicleCommand) {

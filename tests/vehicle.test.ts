@@ -7,6 +7,14 @@ import { contactRun,observe,stepVehicle } from '../tools/physics/vehicle-evidenc
 beforeAll(initializeRapier);
 function setup(){const a=vehicleFixture(),p=createPhysicalWorld(a),v=createVehicle(p,a);return {a,p,v,dispose:()=>{v.dispose();p.dispose();}};}
 describe('ray-cast vehicle operating envelope',()=>{
+  it('reports pavement departure without moving or recovering the vehicle',()=>{
+    const {v,dispose}=setup();try{
+      expect(v.onPavement).toBe(true);
+      v.body!.setTranslation({x:0,y:1.02,z:50},true);v.clearInput();
+      expect(v.onPavement).toBe(false);expect(v.body!.translation().z).toBe(50);expect(v.state.recoveries).toBe(0);
+      v.reset();expect(v.onPavement).toBe(true);
+    }finally{dispose();}
+  });
   it('supports four wheels, accelerates, coasts, brakes to rest and reverses with explicit speed limits',()=>{
     const {p,v,dispose}=setup();try{
       stepVehicle(p,v,120);expect(observe(p,v).wheelContacts).toBe(4);expect(v.body!.mass()).toBeCloseTo(1100);

@@ -10,7 +10,7 @@ vi.mock('../src/lib/physics/vehicle', () => ({
 vi.mock('three', async importOriginal => {
   const actual = await importOriginal<typeof import('three')>();
   return { ...actual, WebGLRenderer: class {
-    domElement = { dataset: {}, setAttribute: vi.fn(), remove: vi.fn(), className: '' };
+    domElement = { dataset: {}, setAttribute: vi.fn(), remove: vi.fn(), focus: vi.fn(), className: '' };
     setPixelRatio = vi.fn(); setSize = vi.fn(); render = vi.fn(); dispose = vi.fn();
     constructor() { mocks.renderers.push(this); }
   } };
@@ -72,7 +72,7 @@ describe('scene and simulation share one lifetime', () => {
   it('repeated mount/dispose leaves no frame, listener, observer, control or world active', async () => {
     for (let i = 0; i < 8; i++) {
       const { controller } = create(); await settle();
-      expect(frames.size).toBe(1); expect(doc.listeners.size).toBe(1); expect(win.listeners.size).toBe(2);
+      expect(frames.size).toBe(1); expect(doc.listeners.size).toBe(6); expect(win.listeners.size).toBe(3);
       const world = mocks.create.mock.results.at(-1)!.value;
       controller.dispose(); controller.dispose();
       expect(world.dispose).toHaveBeenCalledTimes(1);
@@ -104,7 +104,7 @@ describe('scene and simulation share one lifetime', () => {
   });
 
   it('blur and visibility clear vehicle input through the existing session, and disposal releases it', async () => {
-    const vehicle = { clearInput: vi.fn(), dispose: vi.fn(), state: { status: 'ready', recoveries: 0 }, frames: {} };
+    const vehicle = { clearInput: vi.fn(), dispose: vi.fn(), state: { status: 'ready', recoveries: 0 }, submit: vi.fn(), frames: {} };
     mocks.vehicle.mockReturnValue(vehicle);
     const original = mocks.create.getMockImplementation()!;
     mocks.create.mockImplementation(() => ({ ...original(), world: { colliders: { len: () => 7 }, bodies: { len: () => 1 } } }));
@@ -114,6 +114,26 @@ describe('scene and simulation share one lifetime', () => {
     controller.setPhysicsPaused(false); doc.hidden = true; doc.dispatchEvent(new Event('visibilitychange'));
     expect(vehicle.clearInput).toHaveBeenCalledTimes(2);
     controller.dispose(); controller.dispose(); expect(vehicle.dispose).toHaveBeenCalledTimes(1);
+  });
+
+  it('drive/chase and inspect/orbit have exclusive ownership; blocking, hidden geometry and reset pause', async () => {
+    const vehicle = { clearInput: vi.fn(), dispose: vi.fn(), submit: vi.fn(), reset: vi.fn(), state: { status: 'ready', recoveries: 0 }, frames: {} };
+    mocks.vehicle.mockReturnValue(vehicle);
+    const original = mocks.create.getMockImplementation()!;
+    mocks.create.mockImplementation(() => ({ ...original(), world: { colliders: { len: () => 7 }, bodies: { len: () => 1 } } }));
+    const { controller, callback } = create(); await settle();
+    controller.drive(); expect(mocks.controls[0].enabled).toBe(false);
+    expect(callback.mock.lastCall?.[0].status).toBe('running');
+    const updates = mocks.controls[0].update.mock.calls.length;
+    const [id, frame] = [...frames][0]; frames.delete(id); frame(100);
+    expect(mocks.controls[0].update.mock.calls.length).toBe(updates);
+    controller.setDrivingBlocked(true); controller.drive(); expect(callback.mock.lastCall?.[0].status).toBe('paused');
+    controller.setDrivingBlocked(false); controller.drive(); expect(callback.mock.lastCall?.[0].status).toBe('running');
+    controller.resetVehicle(); expect(vehicle.reset).toHaveBeenCalledOnce(); expect(callback.mock.lastCall?.[0].status).toBe('paused');
+    controller.setQaVisibility(true, false); controller.drive();
+    expect(callback.mock.lastCall?.[0].status).toBe('paused'); expect(mocks.controls[0].enabled).toBe(true);
+    controller.setQaVisibility(true, true); controller.drive();
+    win.dispatchEvent(new Event('orientationchange')); expect(callback.mock.lastCall?.[0].status).toBe('paused');
   });
 
   it('suppresses late initialization after unmount and reports failure while retaining rendering', async () => {

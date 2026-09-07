@@ -31,7 +31,9 @@
     "zone:rendering": "node tools/zone-server/verify-rendering.mjs",
     "preview:start": "node tools/zone-server/start-preview.mjs",
     "vehicle:measure": "tsx tools/physics/measure-vehicle.ts",
-    "vehicle:browser": "node tools/physics/verify-vehicle-browser.mjs"
+    "vehicle:browser": "node tools/physics/verify-vehicle-browser.mjs",
+    "driving:browser": "node tools/physics/verify-driving-browser.mjs",
+    "driving:generation": "node tools/physics/verify-driving-generation.mjs"
   },
   "dependencies": {
     "@dimforge/rapier3d-compat": "0.20.0",

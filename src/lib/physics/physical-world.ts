@@ -1,5 +1,6 @@
 import RAPIER from '@dimforge/rapier3d-compat';
 import type { ZoneArtifact, ZoneBounds3d } from '../zone/types';
+import type { Vec3 } from './vehicle-config';
 import { BOUNDARY_HEIGHT_METRES, containsBox, derivePlayEnvelope, indexBuildingGeometry, needsRecovery, validBox } from './world-geometry';
 
 export const FIXED_STEP_SECONDS = 1 / 60;
@@ -60,6 +61,16 @@ export function createPhysicalWorld(artifact: ZoneArtifact) {
       world,
       step() { assertLive(); world.step(); },
       debugRender() { assertLive(); return world.debugRender(RAPIER.QueryFilterFlags.EXCLUDE_DYNAMIC); },
+      /** Camera volume query: static walls/buildings/ground only; never move the simulation. */
+      cameraSweep(from: Vec3, to: Vec3, radius: number) {
+        assertLive();
+        const velocity = { x: to.x - from.x, y: to.y - from.y, z: to.z - from.z };
+        const length = Math.hypot(velocity.x, velocity.y, velocity.z);
+        if (length < 1e-6) return 1;
+        const hit = world.castShape(from, { x: 0, y: 0, z: 0, w: 1 }, velocity,
+          new RAPIER.Ball(radius), 0, 1, true, RAPIER.QueryFilterFlags.EXCLUDE_DYNAMIC);
+        return hit ? Math.max(0, hit.time_of_impact - 0.05 / length) : 1;
+      },
       occupied(box: ZoneBounds3d) { assertLive(); return geometry.occupied(box); },
       clearance(box: ZoneBounds3d, boundaryMargin = 0) {
         assertLive();

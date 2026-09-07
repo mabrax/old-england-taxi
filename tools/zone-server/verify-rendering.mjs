@@ -53,9 +53,7 @@ try {
   drag(100, 30, 'right'); capture('pan');
   drag(0, 170); capture('overhead');
   wheel(5000); capture('far');
-  evaluate('document.querySelector(".reset-button").scrollIntoView({block:"center"});true');
-  run('click', '.reset-button');
-  evaluate('document.querySelector(".control-rail").scrollTop=0');
+  run('find', 'role', 'button', 'click', '--name', 'Reset view', '--exact');
   capture('reset');
   const errors = run('errors');
   if (errors) throw new Error(errors);

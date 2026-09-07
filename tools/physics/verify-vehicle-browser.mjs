@@ -36,8 +36,8 @@ try{
    const driven=join(output,`${mode}-${zone.id}-driven.png`);run('screenshot',driven);
    for(let i=1;i<=4;i++){click('Reset vehicle');run('wait','--fn',`document.querySelector('canvas').dataset.vehicleResets==='${i}'`);const reset=state();assert(reset.physicsStatus==='paused'&&Math.abs(Number(reset.vehicleSpeed))<.001,'Reset retained motion');assert(JSON.parse(reset.vehiclePose).position.x===JSON.parse(initial.vehiclePose).position.x,'Reset missed start');}
    // QA toggles and camera reset remain independent. Hidden geometry pauses movement.
-   click('Resume physics');run('find','label','Generated geometry','click');run('wait','[data-physics-state="paused"]');
-   click('Reset camera');run('find','label','Collision surfaces','check');const qa=state();assert(qa.collisionVisible==='true'&&qa.generatedVisible==='false','QA/collision regression');
+   click('Drive');click('Inspect');run('find','label','Generated geometry','click');run('wait','[data-physics-state="paused"]');
+   click('Reset view');run('find','label','Collision surfaces','check');const qa=state();assert(qa.collisionVisible==='true'&&qa.generatedVisible==='false','QA/collision regression');
    assert(!run('errors')&&!run('console'),'Unexpected browser output');assert(!qa.overflow&&qa.canvases===1,'Layout/canvas regression');
    observations.push({mode,label:zone.label,initial,commands,repeatedReset:'pass',qaPause:'pass',nearby,driven});console.log(`${mode}: ${zone.label} visible vehicle, commands, reset and QA passed`);
   }
@@ -48,10 +48,10 @@ try{
  writeFileSync(unavailableFile,JSON.stringify(fixture));
  run('open',`${base}/?artifact=/phase02-unavailable.zone.json&vehicle=1`);run('wait','[data-vehicle-state="unavailable"]');
  const unavailable=state();assert(unavailable.vehicleStatus==='unavailable'&&unavailable.physicsColliders==='6'&&unavailable.canvases===1,'Unsafe hints created vehicle');
- click('Reset camera');run('screenshot',join(output,'unavailable.png'));
+ click('Reset view');run('screenshot',join(output,'unavailable.png'));
  observations.push({check:'translated graph-hint safety fixture: no spawn, valid inspection',state:unavailable,message:evaluate('document.querySelector("[data-vehicle-state]").textContent')});
  run('open',`${base}/?zone=${catalogue.zones[0].id}&vehicle=1`);run('wait','[data-physics-state="paused"]');
- click('Resume physics');run('tab','new','--label','focus-loss','about:blank');run('tab','t1');run('wait','[data-physics-state="paused"]');
+ click('Drive');run('tab','new','--label','focus-loss','about:blank');run('tab','t1');run('wait','--fn','document.querySelector("canvas").dataset.physicsStatus==="paused"');
  const returned=state();frames();assert(state().physicsSteps===returned.physicsSteps,'Focus return advanced');
  observations.push({check:'actual tab departure/return pauses vehicle, no hidden catch-up',result:'pass',returned});run('tab','close','focus-loss');
  writeFileSync(join(output,'results.json'),JSON.stringify({base,checkedAt:new Date().toISOString(),browser:evaluate('navigator.userAgent'),observations},null,2)+'\n');

@@ -9,7 +9,7 @@ export function createVehicleView() {
     new THREE.MeshStandardMaterial({ color: 0xf0bc24, roughness: 0.7 }));
   root.add(body);
   const addPanel = (width: number, height: number, x: number, y: number, z: number, color: number) => {
-    const panel = new THREE.Mesh(new THREE.PlaneGeometry(width, height), new THREE.MeshStandardMaterial({ color, side: THREE.DoubleSide, polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1 }));
+    const panel = new THREE.Mesh(new THREE.PlaneGeometry(width, height), new THREE.MeshStandardMaterial({ color, side: THREE.DoubleSide, polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -8 }));
     panel.position.set(x, y, z); root.add(panel); return panel;
   };
   addPanel(1.6, 0.32, 0, 0.2, VEHICLE.halfLength, 0x253e49);

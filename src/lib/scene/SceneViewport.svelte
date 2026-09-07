@@ -3,9 +3,13 @@
   import { loadSelectedZone } from '../zone/load-selected-zone';
   import type { ZoneCatalogue } from '../zone/catalogue';
   import type { ZoneStatus, ZoneSummary } from '../zone/types';
-  import { createValidationScene, type SceneController } from './validation-scene';
+  import { createValidationScene, type SceneController, type DrivingMode, type DrivingState } from './validation-scene';
   import type { PhysicsState } from '../physics/physics-session';
 
+  export let blocked = false;
+  export let drivingMode: DrivingMode = 'inspect';
+  export let onDrive: () => void = () => {};
+  let driving: DrivingState = { mode: 'inspect', speed: 0, message: 'Choose Drive when the vehicle is ready.' };
   let container: HTMLDivElement;
   let controller: SceneController | undefined;
   let artifactSlug: string | undefined;
@@ -22,8 +26,13 @@
   let physics: PhysicsState = { status: 'loading' };
   let collisionVisible = false;
   let vehicleHarness = false;
+  $: controller?.setDrivingBlocked(blocked);
   $: controller?.setQaVisibility(qaEnabled && sourceVisible, generatedVisible);
   $: controller?.setCollisionVisibility(collisionVisible);
+
+  export function pauseDriving(reason?: string): void { controller?.pauseDriving(reason); }
+
+  function drive() { onDrive(); controller?.drive(); }
 
   export function resetCamera(): void {
     controller?.resetCamera();
@@ -39,7 +48,7 @@
         const loadedArtifact = loaded.artifact;
         if (disposed) return;
         artifactSlug = loadedArtifact.slug;
-        controller = createValidationScene(container, loadedArtifact, loaded.qa, state => { physics = state; });
+        controller = createValidationScene(container, loadedArtifact, loaded.qa, state => { physics = state; }, state => { driving = state; drivingMode = state.mode; });
         catalogue = loaded.catalogue;
         qaEnabled = !!loaded.qa;
         reportUrl = loaded.reportUrl;
@@ -95,9 +104,45 @@
       <span>{errorMessage}</span>
     </div>
   {/if}
+  {#if status === 'ready'}
+    <div class="driving-panel" data-driving-state={driving.mode} aria-label="Driving controls">
+      <div class="driving-toolbar" role="group" aria-label="Driving actions" on:pointerdown={event => { if ((event.target as HTMLElement).closest('button')) event.preventDefault(); }}>
+        <strong>{driving.mode === 'driving' ? 'Driving' : driving.mode === 'paused' ? 'Paused' : 'Inspecting'}</strong>
+        <span class="speed-readout">{Math.abs(driving.speed * 3.6).toFixed(0)} km/h {driving.speed < -0.08 ? '· Reverse' : ''}</span>
+        {#if driving.mode === 'driving'}
+          <button type="button" on:click={() => controller?.pauseDriving()}>Pause driving</button>
+        {:else}
+          <button class="drive-primary" type="button" disabled={blocked || physics.vehicle?.status !== 'ready' || !generatedVisible || physics.status === 'error'} on:click={drive}>{driving.mode === 'paused' ? 'Resume driving' : 'Drive'}</button>
+        {/if}
+        {#if driving.mode !== 'inspect'}<button type="button" on:click={() => controller?.inspectVehicle()}>Inspect</button>{/if}
+        <button type="button" disabled={physics.vehicle?.status !== 'ready'} on:click={() => controller?.resetVehicle()}>Reset vehicle</button>
+        <button type="button" on:click={() => controller?.resetCamera()}>Reset view</button>
+      </div>
+      <p class="driving-message" role="status">{blocked ? 'Location work in progress. Driving is paused.' : physics.status === 'loading' ? 'Preparing physical world…' : physics.status === 'error' ? 'Physics unavailable. Geometry inspection remains available.' : physics.vehicle?.status === 'unavailable' ? physics.vehicle.message : driving.message}</p>
+      {#if driving.mode === 'driving' && driving.onPavement === false}<p class="driving-surface" role="status">At the pavement edge or off road. Drive back within the amber limit; reset if stuck or overturned.</p>{/if}
+      {#if driving.mode !== 'inspect'}
+        <p class="driving-help">WASD / arrows · Hold S / ↓ to brake, then reverse · Space to stop · R to reset</p>
+        <p class="driving-attribution">Flat geometry · © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap contributors · ODbL</a></p>
+      {/if}
+    </div>
+    {#if driving.mode !== 'inspect'}
+      <div class="touch-driving" aria-label="Touch driving controls">
+        <div class="touch-steering">
+          {#each [['left', '←', 'Steer left'], ['right', '→', 'Steer right']] as [action, symbol, label]}
+            <button type="button" data-drive-input={action} aria-label={label} disabled={driving.mode !== 'driving'} on:pointerdown={event => controller?.pointerDown(event, action as 'left' | 'right')} on:contextmenu={event => event.preventDefault()}>{symbol}</button>
+          {/each}
+        </div>
+        <div class="touch-pedals">
+          {#each [['brake', 'Stop'], ['reverse', 'Brake / reverse'], ['forward', 'Accelerate']] as [action, label]}
+            <button type="button" data-drive-input={action} disabled={driving.mode !== 'driving'} on:pointerdown={event => controller?.pointerDown(event, action as 'brake' | 'reverse' | 'forward')} on:contextmenu={event => event.preventDefault()}>{label}</button>
+          {/each}
+        </div>
+      </div>
+    {/if}
+  {/if}
 </div>
 
-{#if status === 'ready'}
+{#if status === 'ready' && drivingMode === 'inspect'}
   <div class="qa-controls" aria-label="Zone inspection controls">
     {#if catalogue}
       <label>Available zones
@@ -119,14 +164,10 @@
         <strong>Physics {physics.status}</strong>
         <span>{physics.metrics?.colliders} colliders · Flat ground at 0 m</span>
         <label><input type="checkbox" bind:checked={collisionVisible} /> Collision surfaces</label>
-        <button type="button" on:click={() => controller?.setPhysicsPaused(physics.status === 'running')}>
-          {physics.status === 'running' ? 'Pause physics' : 'Resume physics'}
-        </button>
         <span>Amber: simulation limit</span>
         <span data-vehicle-state={physics.vehicle?.status}>{physics.vehicle?.message}</span>
         {#if physics.vehicle?.status === 'ready'}
           <button type="button" on:click={() => controller?.inspectVehicle()}>Inspect vehicle</button>
-          <button type="button" on:click={() => controller?.resetVehicle()}>Reset vehicle</button>
           {#if vehicleHarness}
             <details class="vehicle-harness">
               <summary>Vehicle development exercises</summary>
