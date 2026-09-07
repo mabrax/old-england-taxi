@@ -17,7 +17,7 @@
 <svelte:head>
   <meta
     name="description"
-    content="Inspect deterministic prepared zones and compare source road and building outlines."
+    content="Generate and inspect OpenStreetMap zones from a place name or coordinates."
   />
 </svelte:head>
 

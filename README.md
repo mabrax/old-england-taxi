@@ -1,6 +1,6 @@
 # old-england-taxi
 
-A deterministic Three.js viewport for one compiled OpenStreetMap cell around Trafalgar Square.
+Generate a small 3D OpenStreetMap cell from a place name or coordinates, then inspect its roads, buildings and source outlines in Three.js.
 
 ## Run locally
 
@@ -9,26 +9,29 @@ npm ci
 npm run dev
 ```
 
-The browser loads the checked-in zone artifact from `public/zones/`; it does not compile map data.
+Open the URL printed by Vite. In **Build somewhere new**, search for a place and select a result, or choose **Coordinates** and enter latitude/longitude. Choose a cell size and click **Build this location**. Progress follows download, compilation and verification; the finished zone opens automatically. You can cancel a running job or reload the page to reconnect to it.
 
-## Zone artifact workflow
+The local Node service downloads OSM data through Overpass and compiles it in a separate process. Place search uses the public [Photon API](https://github.com/komoot/photon); it runs only on explicit submission, is throttled, and caches results for 30 days. Coordinates work independently of place search. Set `ZONE_GEOCODER_URL` before starting Vite to use another HTTPS Photon-compatible provider.
 
-```sh
-npm run zone:artifact:write   # compile and write the prepared artifact
-npm run zone:artifact         # verify the checked-in artifact is current and deterministic
-npm run zone:artifact:inspect # validate and print artifact metadata and counts
-```
+New zones persist in the ignored `.zone-cache/ready/` directory and appear alongside the five checked-in examples. Repeating an identical coordinate/cell request verifies and reuses its immutable snapshot; changing its display label does not acquire a new snapshot. Partial or failed builds are never listed. Stop the server before deleting an unwanted cache entry to reacquire newer data.
 
-The immutable OSM input, phase-specific compiler checks, coordinate convention, geometry rules,
-artifact schema, and provenance details are documented in
-[`tools/zone-compiler/README.md`](./tools/zone-compiler/README.md).
+Generation supports 500 m–2 km square cells in the UI (100 m–2 km rectangular cells through the CLI). The entire cell must stay between 75°S and 75°N and may not cross the antimeridian. Usable road and building data are required; unsupported geometry or unavailable providers can prevent generation. The current renderer uses flat terrain and approximate building heights where tags are missing. It does not reconstruct bridges, tunnels or building parts, or qualify driving routes.
 
-Run all project checks with:
+The service is for localhost development/preview. A static-only deployment can show prepared files but cannot generate zones. To test a production build locally:
 
 ```sh
-npm run verify # all six compiler checks, tests, static checks, and production build
+npm run build
+npm run preview -- --host 127.0.0.1 --port 4175 --strictPort
 ```
 
-`npm run zone:verify` runs just the compiler checks. The completed Phase 01–05 audit,
-regressions, performance measurements, and browser verification are recorded in
-[`plans/zone-compiler/implementation-audit.md`](./plans/zone-compiler/implementation-audit.md).
+## Compiler and verification
+
+```sh
+npm run zone:create -- --lat 52.2053 --lon 0.1198 --width 700 --height 700 --label "Cambridge centre"
+npm run zone:verify   # verify the checked-in corpus offline
+npm run verify       # corpus verification, tests, static checks and production build
+npm run zone:browser # prepared-corpus browser checks against port 4175
+npm run zone:live-browser # opt-in live search/build and browser recovery checks
+```
+
+See the [compiler documentation](./tools/zone-compiler/README.md) for CLI commands, immutable source snapshots, geometry policies, reports and provenance. The [on-demand generation notes](./plans/on-demand-generation.md) describe the local service, limits and verification evidence. Earlier compiler and parameterized-generation qualification records remain in [plans](./plans/README.md).

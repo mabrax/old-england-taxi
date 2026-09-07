@@ -80,7 +80,7 @@
   {#if status === 'loading'}
     <div class="scene-overlay" role="status">
       <span class="loader-ring" aria-hidden="true"></span>
-      <span>Loading prepared zone…</span>
+      <span>Loading zone…</span>
     </div>
   {:else if status === 'error'}
     <div class="scene-overlay scene-error" role="alert">
@@ -94,8 +94,8 @@
 {#if status === 'ready'}
   <div class="qa-controls" aria-label="Zone inspection controls">
     {#if catalogue}
-      <label>Prepared zone
-        <select aria-label="Prepared zone" value={artifactSlug} on:change={(event) => {
+      <label>Available zones
+        <select aria-label="Available zones" value={artifactSlug} on:change={(event) => {
           const params = new URLSearchParams(window.location.search);
           params.set('zone', event.currentTarget.value);
           window.location.search = params.toString();

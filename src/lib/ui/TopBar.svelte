@@ -9,6 +9,6 @@
     <span class="status-dot" class:status-error={status === 'error'} aria-hidden="true"></span>
     <span>{status === 'ready' ? 'Renderer online' : status === 'error' ? 'Zone error' : 'Loading zone'}</span>
     <span class="status-divider" aria-hidden="true"></span>
-    <span class="status-muted">Prepared zone inspection</span>
+    <span class="status-muted">Live zone generation</span>
   </div>
 </header>

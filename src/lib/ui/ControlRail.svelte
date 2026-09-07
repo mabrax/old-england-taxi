@@ -1,4 +1,5 @@
 <script lang="ts">
+  import GenerationPanel from './GenerationPanel.svelte';
   import type { ZoneSummary } from '../zone/types';
 
   let { onReset, resetEnabled, summary }: {
@@ -11,15 +12,22 @@
 <aside class="control-rail" aria-label="Viewport controls">
   <div class="rail-heading">
     <span class="eyebrow">Current workspace</span>
-    <h1>Compiled zone</h1>
-    <p>Inspect the selected prepared artifact with continuous roads and aligned building volumes.</p>
+    <h1>Explore a location</h1>
+    <p>Search the world, choose a point, and build its roads and buildings.</p>
   </div>
+
+  <GenerationPanel onReady={(id) => {
+    const url = new URL(window.location.href);
+    url.searchParams.delete('artifact');
+    url.searchParams.set('zone', id);
+    window.location.assign(url.href);
+  }} />
 
   <div class="rail-card">
     <div class="card-heading">
       <span class="card-icon" aria-hidden="true">05</span>
       <div>
-        <span class="eyebrow">Prepared zone</span>
+        <span class="eyebrow">Loaded zone</span>
         <h2>{summary?.label ?? 'No zone loaded'}</h2>
       </div>
     </div>
@@ -42,7 +50,7 @@
   </div>
 
   <div class="rail-footer">
-    <span>Prepared artifact</span>
+    <span>Verified map geometry</span>
     <span class="footer-code">RTE / 05</span>
   </div>
 </aside>

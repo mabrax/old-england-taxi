@@ -43,7 +43,7 @@ try {
     }
   }
   // Exercise the actual catalogue selector, retaining QA mode across navigation.
-  run('select', 'select[aria-label="Prepared zone"]', zones[0].id);
+  run('select', 'select[aria-label="Available zones"]', zones[0].id);
   run('wait', `[data-zone-slug="${zones[0].id}"][data-zone-status="ready"]`);
   assert(run('get', 'url').includes('qa=1'), 'Selector lost QA mode');
   const id = zones[0].id;

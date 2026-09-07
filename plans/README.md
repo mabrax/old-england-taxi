@@ -13,3 +13,5 @@ Each top-level document defines one bounded stage. Stages that benefit from incr
 Stages are tackled in order. A stage starts only after the previous exit condition is met, and its phases are tackled in order unless the stage brief explicitly says otherwise.
 
 Existing later-stage filenames remain stable for links; their headings and ordering reflect the promoted stage.
+
+The user-requested [on-demand location generation extension](./on-demand-generation.md) follows the completed parameterized generation stage and adds browser input plus a local generation service.

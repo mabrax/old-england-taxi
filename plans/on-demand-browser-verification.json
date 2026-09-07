@@ -1,0 +1,64 @@
+{
+  "base": "http://127.0.0.1:4175",
+  "checkedAt": "2026-09-07T03:05:25.517Z",
+  "observations": [
+    {
+      "check": "place search \u2192 build \u2192 automatic navigation",
+      "result": "pass",
+      "id": "cell-1351cbd8dbeb8b40ab1f71779a80beaf1d42b64c4e268ca5cd6ab81dbc9af618"
+    },
+    {
+      "mode": "desktop",
+      "canvases": 1,
+      "id": "cell-1351cbd8dbeb8b40ab1f71779a80beaf1d42b64c4e268ca5cd6ab81dbc9af618",
+      "overflow": false,
+      "qaLines": 1147,
+      "status": "ready",
+      "screenshot": "/tmp/live-zone-browser-6kfpwq/desktop.png"
+    },
+    {
+      "mode": "mobile",
+      "canvases": 1,
+      "id": "cell-1351cbd8dbeb8b40ab1f71779a80beaf1d42b64c4e268ca5cd6ab81dbc9af618",
+      "overflow": false,
+      "qaLines": 1147,
+      "status": "ready",
+      "screenshot": "/tmp/live-zone-browser-6kfpwq/mobile.png"
+    },
+    {
+      "check": "unsupported coordinates and retry",
+      "result": "pass"
+    },
+    {
+      "check": "reload, connection loss, reconnect and cached result",
+      "source": "real generation service with browser status requests temporarily blocked",
+      "result": "pass",
+      "cached": true
+    },
+    {
+      "check": "service restart / missing job recovery",
+      "result": "pass"
+    }
+  ],
+  "freshGenerations": [
+    {
+      "location": "Shibuya Crossing, Tokyo",
+      "latitude": 35.6594951,
+      "longitude": 139.7004982,
+      "cellMetres": 500,
+      "buildings": 426,
+      "graphEdges": 552,
+      "triangles": 11481
+    },
+    {
+      "location": "Central Santiago",
+      "latitude": -33.4372,
+      "longitude": -70.6506,
+      "cellMetres": 500,
+      "buildings": 214,
+      "graphEdges": 141,
+      "triangles": 12720,
+      "elapsedMilliseconds": 3127
+    }
+  ]
+}
