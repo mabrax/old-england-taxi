@@ -1,5 +1,7 @@
 # Phase 04 — Qualification
 
+**Status: authorized and in progress (2026-09-07).** User instruction “proceed with phase 04” permits this plan and reasonable choices within scope. Prior implementation review passed; outstanding device requirements are carried forward.
+
 ## Goal
 
 Establish exactly which physical driving behaviors the stage supports, with reproducible evidence and explicit limits.
@@ -27,4 +29,38 @@ Native app builds or testing, legal-route or all-street certification, global ma
 
 ## Dependency and planning agreement
 
-Depends on the verified [Driving interaction](./phase-03-driving-interaction.md) exit and evidence accumulated in earlier phases. Discuss and detail the qualification implementation plan with the user when ready under the [stage working agreement](./README.md#working-agreement). Do not substitute historical compiler/rendering checks for new physical evidence or weaken acceptance silently after seeing results.
+Starts from reviewed Phase 03 `5b12c38`, retaining the complete local foundation. The user authorized starting despite outstanding iPad/other-browser/device evidence; this does not waive those requirements. Historical evidence informs this plan but is not a new qualification result.
+
+
+## Authorized implementation and qualification plan
+
+1. Work only on `codex/driveability-qualification` in `/home/mabrax/.codex/worktrees/63c8/old-england-taxi`, from `5b12c38`. Preview port **4190**, local `.zone-cache/phase-04/`; preserve canonical main `712fe6f`, preview 4175 and all existing worktrees/caches.
+2. Rerun all five prepared cells with unchanged generic spawn, geometry, vehicle configuration and hashes. Cambridge college/street area and Chicago grid near their recorded generic starts are contrasting normal-driving areas. Assess Tower Bridge separately; Lucca and Trafalgar add dense geometry. Record exact poses, commands, contacts, queries and source feature evidence; fixture starts are labelled separately.
+3. Add passive opt-in `qualify=1` PerformanceObserver step/frame measurements and read-only renderer/resource counts; no mutable runtime handle, compiler dependency, vehicle tuning or artifact changes. Run controlled rare-state fixtures and meaningful uncovered regressions, with bounded fixes if needed.
+4. Rerun the offline corpus/full tests/static/build and actual rendered keyboard/touch/camera/generation/navigation/failure regressions. Exercise the installed Firefox engine in addition to Chromium where it launches. Do not equate Linux touch emulation with iPad Safari.
+5. Run the fixed budgets and durations below. Keep every failed attempt and explain harness failures separately. Record runtime/build hashes, OS/CPU, browser version, GPU backend and unavailable measurements.
+6. Produce linked raw records, a concise device procedure, accurate stage/roadmap status, and an isolated commit. Hand it to the parent champion for independent review; no canonical merge, push or deployment.
+
+## Prospective budgets (fixed before acceptance runs)
+
+These are **engineering choices under the user's authorization**, not numeric requirements supplied by the user. They target forgiving 30 fps-or-better urban exploration on each intended representative desktop/iPad browser. They are fixed across the available runs and outstanding-device procedure. Earlier Phase 01 browser init 557–1049 ms/setup 34–211 ms, and Phase 02 Node spawn 2.7–15.9 ms informed headroom; neither historical Node timings nor asset sizes establish browser acceptance.
+
+| Measurement | Target |
+| --- | --- |
+| Synchronous static-world setup, each cold visit | ≤1000 ms |
+| Module + WASM + world + vehicle initialization, each cold visit | ≤3000 ms |
+| Navigation to safe vehicle, rendered canvas and usable Drive, loopback/no artificial network throttle | ≤5000 ms |
+| Foreground RAF interval, per sustained scenario | p95 ≤33.4 ms; p99 ≤50 ms |
+| Scene frame CPU wall duration (simulation, camera, submission; excludes asynchronous GPU completion) | p95 ≤16.7 ms |
+| Full fixed physics step (vehicle before/world/vehicle after) | p95 ≤2 ms; p99 ≤4 ms |
+| Dropped simulation catch-up time | ≤1% of measured foreground duration |
+| JS heap after explicit GC where available | ≤256 MiB; cycle-20 increase over cycle-5 ≤max(20 MiB, 10% of cycle-5) |
+| Live resource ownership after every loaded/reset cycle | 1 canvas, 1 body, 1 controller, 7 colliders; stable Three geometry/texture/program counts for the same cell |
+
+Cold protocol: three fresh browser contexts per cell, no QA, no generation API, one visit per context. HTTP/browser cache is fresh; OS disk cache cannot be forced cold here. Record readiness and the first rendered vehicle separately if necessary. Sustained protocol: Cambridge and Chicago **60 s each**, Lucca and Trafalgar **120 s each**, at 1440×900/DPR 1 on desktop; initial 2 s settling excluded, then repeated forward/turn/brake/reverse commands through real keyboard input with explicit resets between short maneuver cycles. This qualifies repeated urban maneuvers, not uninterrupted travel along an entire road. Tower Bridge receives cold, normal-motion and browser functional checks. Record all pauses/resets/recoveries; unexpected recovery fails correctness.
+
+Lifecycle: **20 same-tab load/dispose cycles** alternating dense Lucca/Trafalgar, with three reset/Drive/pause operations per load and ≥2 s active time per load. Sample heap after explicit GC and resource counts; compare cycles 5 and 20 and same-cell plateaus. Full-navigation cleanup is checked by browser evidence; same-document cleanup and late initialization remain separately checked by ownership tests. Memory without a reliable API is **unmeasured**, not passed; JS heap excludes native/WASM/GPU allocations, so counts/plateau observations cannot close total device-memory acceptance.
+
+Cadence/contact: fixed **1/60 s**, max **5 catch-up steps**; replay 30/60/120/144 Hz plus stalled-frame/hidden-tab handling. Forward **8 m/s**, reverse **3 m/s**, speed tolerance **0.01 m/s**; included-wall/ground penetration **≤0.03 m**, boundary full-envelope overhang **<0.04 m**, no occupied-building centre frames or unintended recovery. Maximum-speed stops **<5 m and ≤1.2 s**. Source limits may explain missing real geometry, never a failed included-wall contact.
+
+Actual desktop Safari and iPad Safari (portrait/landscape, multi-touch, physical rotation, browser chrome, virtual keyboard, assistive technology and performance) remain required. Available software/headless results apply only to their named configuration. A failed browser budget or missing device/engine keeps relevant acceptance and full stage exit open; no target is silently removed.
