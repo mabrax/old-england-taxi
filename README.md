@@ -21,8 +21,12 @@ The service is for localhost development/preview. A static-only deployment can s
 
 ```sh
 npm run build
-npm run preview -- --host 127.0.0.1 --port 4175 --strictPort
+npm run preview:start
 ```
+
+Open `http://127.0.0.1:4175`. This launcher returns once the generation API is ready and leaves preview running independently of the launching terminal. Repeating it reuses the running service. Logs and process details are in `.zone-cache/preview.log` and `.zone-cache/preview-process.json`. For a foreground process, use `npm run preview -- --host 127.0.0.1 --port 4175 --strictPort` instead. Restart the preview after changing server code.
+
+If the server becomes unreachable, the loaded map stays visible and the generation form offers **Reconnect**. Restore the server, then reconnect to resume a known job or retry your search with the entered location preserved. Reconnecting does not submit a new search or build automatically.
 
 ## Compiler and verification
 

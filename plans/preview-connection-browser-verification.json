@@ -1,0 +1,49 @@
+{
+  "base": "http://127.0.0.1:4175",
+  "checkedAt": "2026-09-07T13:45:06.357Z",
+  "observations": [
+    {
+      "check": "place search → build → automatic navigation",
+      "result": "pass",
+      "id": "cell-1351cbd8dbeb8b40ab1f71779a80beaf1d42b64c4e268ca5cd6ab81dbc9af618"
+    },
+    {
+      "mode": "desktop",
+      "canvases": 1,
+      "id": "cell-1351cbd8dbeb8b40ab1f71779a80beaf1d42b64c4e268ca5cd6ab81dbc9af618",
+      "overflow": false,
+      "qaLines": 1147,
+      "status": "ready"
+    },
+    {
+      "mode": "mobile",
+      "canvases": 1,
+      "id": "cell-1351cbd8dbeb8b40ab1f71779a80beaf1d42b64c4e268ca5cd6ab81dbc9af618",
+      "overflow": false,
+      "qaLines": 1147,
+      "status": "ready"
+    },
+    {
+      "check": "unsupported coordinates and retry",
+      "result": "pass"
+    },
+    {
+      "check": "reload, connection loss, reconnect and cached result",
+      "source": "real generation service with browser status requests temporarily blocked",
+      "result": "pass",
+      "cached": true
+    },
+    {
+      "check": "service restart / missing job recovery",
+      "result": "pass"
+    },
+    {
+      "check": "search connection loss, preserved query, explicit reconnect and successful retry",
+      "result": "pass"
+    },
+    {
+      "check": "unavailable server at page load can reconnect without reloading",
+      "result": "pass"
+    }
+  ]
+}

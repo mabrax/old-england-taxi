@@ -113,6 +113,12 @@ describe('place search', () => {
     await expect(new Geocoder(root, async () => new Response('x'.repeat(256 * 1024 + 1))).search('Large')).rejects.toThrow('too large');
     expect(await readdir(join(root, 'search'))).toHaveLength(1);
   });
+  it('identifies an upstream network failure and keeps coordinate generation independent', async () => {
+    const root = await workspace();
+    const geocoder = new Geocoder(root, async () => { throw new TypeError('fetch failed'); });
+    await expect(geocoder.search('Pelluco')).rejects.toThrow('map provider');
+    expect(await readdir(root)).toEqual([]);
+  });
   it('rejects malformed coordinates, invalid queries and insecure provider configuration', async () => {
     const root = await workspace();
     expect(() => parsePhoton({ features: [{ geometry: { coordinates: ['20', 10] }, properties: { name: 'Invalid' } }] })).toThrow();

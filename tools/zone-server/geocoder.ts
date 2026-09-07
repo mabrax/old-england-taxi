@@ -50,6 +50,11 @@ export class Geocoder {
       await mkdir(join(this.root, 'search'), { recursive: true });
       await atomicWrite(file, JSON.stringify(locations));
       return locations;
+    } catch (error) {
+      if (error instanceof TypeError || (error instanceof Error && ['TimeoutError', 'AbortError'].includes(error.name))) {
+        throw new Error('Place search could not reach the map provider. Try again, or enter coordinates instead.', { cause: error });
+      }
+      throw error;
     } finally { this.busy = false; }
   }
 }

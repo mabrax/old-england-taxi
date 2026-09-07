@@ -80,6 +80,37 @@ try {
   assert(evaluate('document.querySelector("[role=alert]").textContent').includes('restarted'), 'Expired job was not explained');
   assert(evaluate('sessionStorage.getItem("zone-generation-job")') === null, 'Expired job blocked future work');
   observations.push({ check: 'service restart / missing job recovery', result: 'pass' });
+
+  // A search can lose the server before a job exists. Reconnect must preserve the form
+  // and only check connectivity, leaving the user in control of resubmission.
+  run('set', 'viewport', '1440', '900');
+  run('find', 'role', 'button', 'click', '--name', 'Place name', '--exact');
+  const query = 'pelluco, puerto montt, los lagos, chile';
+  run('fill', '#location-query', query);
+  run('network', 'route', `${base}/api/zone-generation/search`, '--abort');
+  run('find', 'role', 'button', 'click', '--name', 'Find', '--exact');
+  run('wait', '.generation-connection');
+  assert(evaluate('document.querySelector(".generation-connection").textContent').includes('local generation server'), 'Search connection loss was not explained');
+  assert(evaluate('document.querySelector("#location-query").value') === query, 'Search failure lost the entered location');
+  assert(evaluate('document.querySelector("[data-zone-status]").dataset.zoneStatus') === 'ready', 'Search failure removed the loaded map');
+  run('screenshot', join(output, 'search-connection-loss.png'));
+  run('network', 'unroute');
+  run('click', '.reconnect-button');
+  run('wait', '--fn', '!document.querySelector(".generation-connection") && !document.querySelector("#location-query").disabled');
+  assert(evaluate('document.querySelector("#location-query").value') === query, 'Reconnect lost the entered location');
+  assert(!evaluate('document.querySelector(".location-results") || sessionStorage.getItem("zone-generation-job")'), 'Reconnect unexpectedly replayed a search or build');
+  run('find', 'role', 'button', 'click', '--name', 'Find', '--exact');
+  run('wait', '.location-results button');
+  assert(evaluate('document.querySelector(".location-results").textContent').includes('Pelluco'), 'Search did not recover');
+  observations.push({ check: 'search connection loss, preserved query, explicit reconnect and successful retry', result: 'pass' });
+
+  run('network', 'route', `${base}/api/zone-generation`, '--abort');
+  run('open', run('get', 'url'));
+  run('wait', '.generation-connection');
+  run('network', 'unroute');
+  run('click', '.reconnect-button');
+  run('wait', '--fn', '!document.querySelector(".generation-connection") && !document.querySelector("#location-query").disabled');
+  observations.push({ check: 'unavailable server at page load can reconnect without reloading', result: 'pass' });
   writeFileSync(join(output, 'results.json'), JSON.stringify({ base, checkedAt: new Date().toISOString(), observations }, null, 2));
   console.log(`Browser evidence: ${output}`);
 } finally { run('close'); }

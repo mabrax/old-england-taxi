@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { GenerationApiError, generationApi, generationFailureMessage, parseGenerationJob, parseLocationChoices } from '../zone/generation-client';
+  import { GenerationApiError, GenerationConnectionError, generationApi, generationFailureMessage, parseGenerationJob, parseLocationChoices } from '../zone/generation-client';
   import { isFinished, type GenerationJob, type LocationChoice } from '../zone/generation-types';
 
   let { onReady, onProgress }: { onReady: (id: string) => void; onProgress: (job: GenerationJob | undefined) => void } = $props();
@@ -20,6 +20,7 @@
   let pendingId = $state<string>();
   let elapsed = $state(0);
   let available = $state(true);
+  let reconnecting = $state(false);
   let disposed = false;
   let pollTimer: ReturnType<typeof setTimeout> | undefined;
   const busy = $derived(submitting || !!pendingId || !!job && !isFinished(job.state));
@@ -28,7 +29,8 @@
   const storageKey = 'zone-generation-job';
 
   function setMode(next: typeof mode) {
-    mode = next; selected = undefined; locations = []; searched = false; error = '';
+    mode = next; selected = undefined; locations = []; searched = false;
+    if (available) error = '';
   }
   async function search() {
     searching = true; error = ''; locations = []; selected = undefined; searched = false;
@@ -36,8 +38,9 @@
       const results = parseLocationChoices(await generationApi('/search', { query }));
       if (disposed) return;
       locations = results; searched = true;
+      available = true; connectionError = false;
       if (results.length === 1) selected = results[0];
-    } catch (reason) { if (!disposed) error = message(reason); }
+    } catch (reason) { if (!disposed) handleRequestFailure(reason); }
     finally { if (!disposed) searching = false; }
   }
   async function generate() {
@@ -51,7 +54,7 @@
       sessionStorage.setItem(storageKey, next.jobId);
       pendingId = next.jobId;
       accept(next);
-    } catch (reason) { if (!disposed) error = message(reason); }
+    } catch (reason) { if (!disposed) handleRequestFailure(reason); }
     finally { if (!disposed) submitting = false; }
   }
   function accept(next: GenerationJob) {
@@ -92,17 +95,33 @@
   }
   function handleConnectionFailure(reason: unknown) {
     error = message(reason); connectionError = true;
+    if (reason instanceof GenerationConnectionError) available = false;
     if (reason instanceof GenerationApiError && reason.status === 404) {
       pendingId = undefined; job = undefined; connectionError = false;
       onProgress(undefined);
       sessionStorage.removeItem(storageKey);
     }
   }
+  function handleRequestFailure(reason: unknown) {
+    error = message(reason);
+    if (reason instanceof GenerationConnectionError) { available = false; connectionError = true; }
+  }
+  async function reconnect() {
+    reconnecting = true;
+    try {
+      await generationApi();
+      if (disposed) return;
+      available = true; connectionError = false; error = '';
+      if (pendingId) await poll(pendingId);
+    } catch (reason) {
+      if (!disposed) { available = false; connectionError = true; error = message(reason); }
+    } finally { if (!disposed) reconnecting = false; }
+  }
   function message(reason: unknown) { return reason instanceof Error ? reason.message : 'The request failed. Please try again.'; }
   onMount(() => {
     const existing = sessionStorage.getItem(storageKey);
-    void generationApi().catch(reason => { if (!disposed) { available = false; error = message(reason); } });
-    if (existing && /^[a-f0-9-]{36}$/.test(existing)) { pendingId = existing; void poll(existing); }
+    if (existing && /^[a-f0-9-]{36}$/.test(existing)) pendingId = existing;
+    void reconnect();
     const clock = setInterval(() => { if (job) elapsed = Math.max(0, Math.floor((Date.now() - job.createdAt) / 1000)); }, 1000);
     return () => { disposed = true; clearInterval(clock); clearTimeout(pollTimer); };
   });
@@ -110,6 +129,13 @@
 
 <section class="generation-panel" aria-label="Generate a new zone">
   <div class="generation-heading"><span class="eyebrow">Build somewhere new</span><span class="generation-live">ON DEMAND</span></div>
+  {#if !available}
+    <div class="generation-connection" role="alert">
+      <strong>Generation server unavailable</strong>
+      <p>{error}</p>
+      <button type="button" class="reconnect-button" onclick={reconnect} disabled={reconnecting}>{reconnecting ? 'Connecting…' : 'Reconnect'}</button>
+    </div>
+  {/if}
   <div class="location-tabs" aria-label="Location input">
     <button type="button" class:active={mode === 'place'} aria-pressed={mode === 'place'} onclick={() => setMode('place')} disabled={busy}>Place name</button>
     <button type="button" class:active={mode === 'coordinates'} aria-pressed={mode === 'coordinates'} onclick={() => setMode('coordinates')} disabled={busy}>Coordinates</button>
@@ -162,7 +188,7 @@
       {/if}
     </div>
   {/if}
-  {#if error}<p class="generation-error" role="alert">{error}</p>{/if}
-  {#if connectionError && pendingId}<button type="button" class="reconnect-button" onclick={() => poll(pendingId!)}>Check progress</button>{/if}
+  {#if error && available}<p class="generation-error" role="alert">{error}</p>{/if}
+  {#if connectionError && pendingId && available}<button type="button" class="reconnect-button" onclick={() => poll(pendingId!)}>Check progress</button>{/if}
   <a class="generation-attribution" href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">Search and map data © OpenStreetMap contributors</a>
 </section>

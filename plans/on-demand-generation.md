@@ -33,3 +33,5 @@ Existing supported latitude, cell-size, antimeridian and geometry constraints ar
 - `npm run zone:live-browser` passed against production preview: live place-search submission, cached generation and automatic navigation, desktop/mobile rendering and QA/reset controls, invalid-coordinate recovery, real job reconnection after blocked progress requests and reload, and missing-job recovery after restart. [Machine-readable evidence](./on-demand-browser-verification.json) records the run.
 
 The subsequent [Angelmó fix](./angelmo-generation-fix.md) records a real road-union precision failure, its reduced regression fixture, and prominent viewport status/error feedback.
+
+The [preview connection recovery fix](./preview-connection-recovery.md) records the Pelluco fetch failure, independent preview startup and browser recovery checks.

@@ -12,19 +12,27 @@ export class GenerationApiError extends Error {
   constructor(message: string, public status: number) { super(message); }
 }
 
+export class GenerationConnectionError extends Error {}
+
 export async function generationApi(path = '', body?: unknown): Promise<unknown> {
-  const response = await fetch(`${import.meta.env.BASE_URL}api/zone-generation${path}`, {
+  let response: Response;
+  try { response = await fetch(`${import.meta.env.BASE_URL}api/zone-generation${path}`, {
     method: body === undefined ? 'GET' : 'POST',
     headers: body === undefined ? { Accept: 'application/json' } : {
       Accept: 'application/json', 'Content-Type': 'application/json', 'X-Zone-Client': 'browser-v1'
     },
     ...(body === undefined ? {} : { body: JSON.stringify(body) }),
-    signal: AbortSignal.timeout(20_000)
-  });
-  if (!response.headers.get('content-type')?.includes('application/json')) {
-    throw new Error('Live generation needs the local server. Start npm run dev or npm run preview, then reload.');
+    signal: AbortSignal.timeout(path === '' ? 5_000 : 20_000)
+  }); } catch {
+    throw new GenerationConnectionError('Cannot reach the local generation server. Your loaded map is still available. Reconnect to try again.');
   }
-  const value = await response.json();
+  if (!response.headers.get('content-type')?.includes('application/json')) {
+    throw new GenerationConnectionError('Live generation needs the local server. Start npm run preview:start, then reconnect.');
+  }
+  let value;
+  try { value = await response.json(); } catch {
+    throw new GenerationConnectionError('The generation server response was interrupted or invalid. Reconnect to try again.');
+  }
   if (!response.ok) throw new GenerationApiError(typeof value?.error === 'string' ? value.error : `Request failed (HTTP ${response.status})`, response.status);
   return value;
 }

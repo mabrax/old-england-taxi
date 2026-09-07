@@ -669,3 +669,6 @@ button {
 .has-generation-notice .qa-controls, .has-generation-notice .scene-badge { visibility: hidden; }
 .generation-progress details { margin-top: 8px; overflow-wrap: anywhere; }
 @media (max-width: 740px) { .generation-notice { top: 8px; left: 8px; right: 8px; width: calc(100% - 16px); padding: 12px; max-height: calc(56dvh - 90px); font-size: 12px; } }
+
+.generation-connection { padding: 12px; border: 1px solid #c48d69; border-radius: 7px; background: #38291f; color: #ffd5ba; font-size: 12px; line-height: 1.5; }
+.generation-connection p { margin: 6px 0 10px; }
