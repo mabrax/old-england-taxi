@@ -1,0 +1,1328 @@
+{
+  "base": "http://127.0.0.1:4191",
+  "checkedAt": "2026-09-07T21:47:50.890Z",
+  "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36",
+  "observations": [
+    {
+      "mode": "desktop",
+      "label": "Chicago River North grid",
+      "initial": {
+        "boundaryHeight": "20",
+        "buildingTriangles": "6720",
+        "cameraOwner": "orbit",
+        "canvases": 1,
+        "collisionVisible": "false",
+        "drivingMode": "inspect",
+        "engine": "three.js r179",
+        "generatedVisible": "true",
+        "overflow": false,
+        "physicsColliders": "7",
+        "physicsInitializationMs": "1135",
+        "physicsSetupMs": "57.5",
+        "physicsStatus": "paused",
+        "physicsSteps": "0",
+        "playEnvelope": "{\"minimumX\":-299.0121154785156,\"maximumX\":299.0121765136719,\"minimumZ\":-299.0060119628906,\"maximumZ\":298.9939880371094}",
+        "qaLines": "960",
+        "roadTriangles": "3407",
+        "sourceVisible": "true",
+        "vehiclePose": "{\"position\":{\"x\":-83.77054595947266,\"y\":1.0199999809265137,\"z\":217.4877166748047},\"rotation\":{\"x\":0,\"y\":0.7142094373703003,\"z\":0,\"w\":0.6999320387840271},\"wheels\":[{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0}]}",
+        "vehicleRecoveries": "0",
+        "vehicleResets": "0",
+        "vehicleSpeed": "0",
+        "vehicleStatus": "ready",
+        "zoneSlug": "cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410"
+      },
+      "commands": [
+        {
+          "name": "Accelerate",
+          "steps": 60,
+          "speed": 2.5426044261837495,
+          "pose": {
+            "position": {
+              "x": -82.69168853759766,
+              "y": 0.8089388012886047,
+              "z": 217.4658660888672
+            },
+            "rotation": {
+              "x": -0.003748012240976095,
+              "y": 0.7141993641853333,
+              "z": 0.003824227023869753,
+              "w": 0.6999219059944153
+            },
+            "wheels": [
+              {
+                "length": 0.4034436273574829,
+                "steering": 0,
+                "rotation": 3.374655246734619
+              },
+              {
+                "length": 0.4034431505203247,
+                "steering": 0,
+                "rotation": 3.37465500831604
+              },
+              {
+                "length": 0.37452714920043945,
+                "steering": 0,
+                "rotation": 3.3751094341278076
+              },
+              {
+                "length": 0.37452667236328124,
+                "steering": 0,
+                "rotation": 3.3751094341278076
+              }
+            ]
+          }
+        },
+        {
+          "name": "Coast",
+          "steps": 60,
+          "speed": 2.256172554550974,
+          "pose": {
+            "position": {
+              "x": -80.2927017211914,
+              "y": 0.8089643120765686,
+              "z": 217.4172821044922
+            },
+            "rotation": {
+              "x": -1.1913823705356208e-8,
+              "y": 0.7142094373703003,
+              "z": 1.745795330521105e-8,
+              "w": 0.6999320983886719
+            },
+            "wheels": [
+              {
+                "length": 0.38896434783935546,
+                "steering": 0,
+                "rotation": 10.869601249694824
+              },
+              {
+                "length": 0.38896434783935546,
+                "steering": 0,
+                "rotation": 10.869600296020508
+              },
+              {
+                "length": 0.3889642286300659,
+                "steering": 0,
+                "rotation": 10.869540214538574
+              },
+              {
+                "length": 0.38896434783935546,
+                "steering": 0,
+                "rotation": 10.869540214538574
+              }
+            ]
+          }
+        },
+        {
+          "name": "Brake",
+          "steps": 60,
+          "speed": 0.00008682343908885953,
+          "pose": {
+            "position": {
+              "x": -79.9848403930664,
+              "y": 0.8089657425880432,
+              "z": 217.4109344482422
+            },
+            "rotation": {
+              "x": 0.000425502221332863,
+              "y": 0.7142091989517212,
+              "z": -0.00043420729343779385,
+              "w": 0.6999320387840271
+            },
+            "wheels": [
+              {
+                "length": 0.38732486248016357,
+                "steering": 0,
+                "rotation": 11.788492202758789
+              },
+              {
+                "length": 0.38732486248016357,
+                "steering": 0,
+                "rotation": 11.788491249084473
+              },
+              {
+                "length": 0.3906078267097473,
+                "steering": 0,
+                "rotation": 11.788213729858398
+              },
+              {
+                "length": 0.3906078267097473,
+                "steering": 0,
+                "rotation": 11.788213729858398
+              }
+            ]
+          }
+        },
+        {
+          "name": "Reverse",
+          "steps": 60,
+          "speed": -2.993076402007786,
+          "pose": {
+            "position": {
+              "x": -81.5827407836914,
+              "y": 0.8089219927787781,
+              "z": 217.4431610107422
+            },
+            "rotation": {
+              "x": 0.0037471347022801638,
+              "y": 0.7141995429992676,
+              "z": -0.0038233327213674784,
+              "w": 0.699921727180481
+            },
+            "wheels": [
+              {
+                "length": 0.37451332092285156,
+                "steering": 0,
+                "rotation": 6.786753177642822
+              },
+              {
+                "length": 0.37451379776000976,
+                "steering": 0,
+                "rotation": 6.786753177642822
+              },
+              {
+                "length": 0.4034230041503906,
+                "steering": 0,
+                "rotation": 6.786929607391357
+              },
+              {
+                "length": 0.4034234809875488,
+                "steering": 0,
+                "rotation": 6.786928653717041
+              }
+            ]
+          }
+        },
+        {
+          "name": "Brake",
+          "steps": 60,
+          "speed": -0.00013430383900417948,
+          "pose": {
+            "position": {
+              "x": -82.1288833618164,
+              "y": 0.8089683055877686,
+              "z": 217.4541473388672
+            },
+            "rotation": {
+              "x": -0.0006581674097105861,
+              "y": 0.7142090797424316,
+              "z": 0.0006715449271723628,
+              "w": 0.6999318599700928
+            },
+            "wheels": [
+              {
+                "length": 0.391508572101593,
+                "steering": 0,
+                "rotation": 5.128273963928223
+              },
+              {
+                "length": 0.391508572101593,
+                "steering": 0,
+                "rotation": 5.128273963928223
+              },
+              {
+                "length": 0.38643097162246703,
+                "steering": 0,
+                "rotation": 5.12758207321167
+              },
+              {
+                "length": 0.38643097162246703,
+                "steering": 0,
+                "rotation": 5.1275811195373535
+              }
+            ]
+          }
+        },
+        {
+          "name": "Turn left",
+          "steps": 60,
+          "speed": 2.846535835020223,
+          "pose": {
+            "position": {
+              "x": -80.6796646118164,
+              "y": 0.8088945150375366,
+              "z": 216.9713592529297
+            },
+            "rotation": {
+              "x": 0.0005125033785589039,
+              "y": 0.7853361368179321,
+              "z": 0.0068552508018910885,
+              "w": 0.6190314888954163
+            },
+            "wheels": [
+              {
+                "length": 0.3959605622291565,
+                "steering": 0,
+                "rotation": 10.633668899536133
+              },
+              {
+                "length": 0.40934263944625854,
+                "steering": 0,
+                "rotation": 9.737654685974121
+              },
+              {
+                "length": 0.3685993480682373,
+                "steering": 0,
+                "rotation": 10.306455612182617
+              },
+              {
+                "length": 0.3819813656806946,
+                "steering": 0,
+                "rotation": 9.336324691772461
+              }
+            ]
+          }
+        },
+        {
+          "name": "Turn right",
+          "steps": 60,
+          "speed": 4.9502422297629085,
+          "pose": {
+            "position": {
+              "x": -76.8423843383789,
+              "y": 0.8088834881782532,
+              "z": 217.4724578857422
+            },
+            "rotation": {
+              "x": -0.0072205825708806515,
+              "y": 0.6148244738578796,
+              "z": -0.001592520042322576,
+              "w": 0.7886292338371277
+            },
+            "wheels": [
+              {
+                "length": 0.40990667819976806,
+                "steering": 0,
+                "rotation": 22.58123779296875
+              },
+              {
+                "length": 0.3935024070739746,
+                "steering": 0,
+                "rotation": 23.689077377319336
+              },
+              {
+                "length": 0.3844416069984436,
+                "steering": 0,
+                "rotation": 21.37506866455078
+              },
+              {
+                "length": 0.36803733587265014,
+                "steering": 0,
+                "rotation": 22.574974060058594
+              }
+            ]
+          }
+        }
+      ],
+      "repeatedReset": "pass",
+      "qaPause": "pass",
+      "nearby": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/vehicle-browser/desktop-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-vehicle.png",
+      "driven": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/vehicle-browser/desktop-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-driven.png"
+    },
+    {
+      "mode": "desktop",
+      "label": "Cambridge centre",
+      "initial": {
+        "boundaryHeight": "20",
+        "buildingTriangles": "29156",
+        "cameraOwner": "orbit",
+        "canvases": 1,
+        "collisionVisible": "false",
+        "drivingMode": "inspect",
+        "engine": "three.js r179",
+        "generatedVisible": "true",
+        "overflow": false,
+        "physicsColliders": "7",
+        "physicsInitializationMs": "1145.7000000029802",
+        "physicsSetupMs": "182.6000000089407",
+        "physicsStatus": "paused",
+        "physicsSteps": "0",
+        "playEnvelope": "{\"minimumX\":-349.0244140625,\"maximumX\":349.0246887207031,\"minimumZ\":-349.0119934082031,\"maximumZ\":348.9880065917969}",
+        "qaLines": "1698",
+        "roadTriangles": "1744",
+        "sourceVisible": "true",
+        "vehiclePose": "{\"position\":{\"x\":152.4167022705078,\"y\":1.0199999809265137,\"z\":-318.10467529296875},\"rotation\":{\"x\":0,\"y\":-0.9995778799057007,\"z\":0,\"w\":0.02905355580151081},\"wheels\":[{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0}]}",
+        "vehicleRecoveries": "0",
+        "vehicleResets": "0",
+        "vehicleSpeed": "0",
+        "vehicleStatus": "ready",
+        "zoneSlug": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43"
+      },
+      "commands": [
+        {
+          "name": "Accelerate",
+          "steps": 60,
+          "speed": 2.542612175035526,
+          "pose": {
+            "position": {
+              "x": 152.3542022705078,
+              "y": 0.8089388012886047,
+              "z": -319.18182373046875
+            },
+            "rotation": {
+              "x": -0.00015515892300754786,
+              "y": -0.9995636343955994,
+              "z": -0.0053522419184446335,
+              "w": 0.029053058475255966
+            },
+            "wheels": [
+              {
+                "length": 0.40344350814819335,
+                "steering": 0,
+                "rotation": 3.374654531478882
+              },
+              {
+                "length": 0.40344231605529784,
+                "steering": 0,
+                "rotation": 3.3746542930603027
+              },
+              {
+                "length": 0.37452810287475585,
+                "steering": 0,
+                "rotation": 3.3751091957092285
+              },
+              {
+                "length": 0.37452691078186034,
+                "steering": 0,
+                "rotation": 3.3751091957092285
+              }
+            ]
+          }
+        },
+        {
+          "name": "Coast",
+          "steps": 60,
+          "speed": 2.2561787362486334,
+          "pose": {
+            "position": {
+              "x": 152.2149200439453,
+              "y": 0.8089643120765686,
+              "z": -321.57757568359375
+            },
+            "rotation": {
+              "x": 1.1988612325097847e-9,
+              "y": -0.9995778799057007,
+              "z": -2.797820108924043e-8,
+              "w": 0.029053501784801483
+            },
+            "wheels": [
+              {
+                "length": 0.38896434783935546,
+                "steering": 0,
+                "rotation": 10.869621276855469
+              },
+              {
+                "length": 0.38896434783935546,
+                "steering": 0,
+                "rotation": 10.869620323181152
+              },
+              {
+                "length": 0.3889642286300659,
+                "steering": 0,
+                "rotation": 10.869561195373535
+              },
+              {
+                "length": 0.3889642286300659,
+                "steering": 0,
+                "rotation": 10.869561195373535
+              }
+            ]
+          }
+        },
+        {
+          "name": "Brake",
+          "steps": 60,
+          "speed": 0.00008682774213260652,
+          "pose": {
+            "position": {
+              "x": 152.1967315673828,
+              "y": 0.808965802192688,
+              "z": -321.88470458984375
+            },
+            "rotation": {
+              "x": 0.000017651849702815525,
+              "y": -0.9995777010917664,
+              "z": 0.0006077069556340575,
+              "w": 0.029053522273898125
+            },
+            "wheels": [
+              {
+                "length": 0.38732486248016357,
+                "steering": 0,
+                "rotation": 11.788517951965332
+              },
+              {
+                "length": 0.38732486248016357,
+                "steering": 0,
+                "rotation": 11.788517951965332
+              },
+              {
+                "length": 0.3906078267097473,
+                "steering": 0,
+                "rotation": 11.788240432739258
+              },
+              {
+                "length": 0.39060794591903686,
+                "steering": 0,
+                "rotation": 11.788241386413574
+              }
+            ]
+          }
+        },
+        {
+          "name": "Reverse",
+          "steps": 60,
+          "speed": -2.9930764990463516,
+          "pose": {
+            "position": {
+              "x": 152.2895050048828,
+              "y": 0.8089219331741333,
+              "z": -320.28973388671875
+            },
+            "rotation": {
+              "x": 0.00015509294462390244,
+              "y": -0.9995635747909546,
+              "z": 0.00535096088424325,
+              "w": 0.029053080826997757
+            },
+            "wheels": [
+              {
+                "length": 0.37451332092285156,
+                "steering": 0,
+                "rotation": 6.786776542663574
+              },
+              {
+                "length": 0.3745146322250366,
+                "steering": 0,
+                "rotation": 6.786775588989258
+              },
+              {
+                "length": 0.4034220504760742,
+                "steering": 0,
+                "rotation": 6.786952018737793
+              },
+              {
+                "length": 0.4034232425689697,
+                "steering": 0,
+                "rotation": 6.786952972412109
+              }
+            ]
+          }
+        },
+        {
+          "name": "Brake",
+          "steps": 60,
+          "speed": -0.0001343037004701217,
+          "pose": {
+            "position": {
+              "x": 152.3209991455078,
+              "y": 0.8089683651924133,
+              "z": -319.74481201171875
+            },
+            "rotation": {
+              "x": -0.000027252066502114758,
+              "y": -0.9995774626731873,
+              "z": -0.0009398936526849866,
+              "w": 0.02905352972447872
+            },
+            "wheels": [
+              {
+                "length": 0.39150869131088256,
+                "steering": 0,
+                "rotation": 5.128299236297607
+              },
+              {
+                "length": 0.39150845289230346,
+                "steering": 0,
+                "rotation": 5.128298759460449
+              },
+              {
+                "length": 0.3864310908317566,
+                "steering": 0,
+                "rotation": 5.127605438232422
+              },
+              {
+                "length": 0.38643097162246703,
+                "steering": 0,
+                "rotation": 5.127606391906738
+              }
+            ]
+          }
+        },
+        {
+          "name": "Turn left",
+          "steps": 60,
+          "speed": 2.8465354416982223,
+          "pose": {
+            "position": {
+              "x": 151.7838897705078,
+              "y": 0.8088944554328918,
+              "z": -321.17401123046875
+            },
+            "rotation": {
+              "x": -0.005294025409966707,
+              "y": -0.9906297922134399,
+              "z": -0.004385413136333227,
+              "w": 0.1364012211561203
+            },
+            "wheels": [
+              {
+                "length": 0.3959603238105774,
+                "steering": 0,
+                "rotation": 10.633696556091309
+              },
+              {
+                "length": 0.4093427586555481,
+                "steering": 0,
+                "rotation": 9.737678527832031
+              },
+              {
+                "length": 0.3685991096496582,
+                "steering": 0,
+                "rotation": 10.306477546691895
+              },
+              {
+                "length": 0.3819814848899841,
+                "steering": 0,
+                "rotation": 9.336353302001953
+              }
+            ]
+          }
+        },
+        {
+          "name": "Turn right",
+          "steps": 60,
+          "speed": 4.950254393600995,
+          "pose": {
+            "position": {
+              "x": 152.1386260986328,
+              "y": 0.8088834881782532,
+              "z": -325.02777099609375
+            },
+            "rotation": {
+              "x": 0.006155182141810656,
+              "y": -0.9945439696311951,
+              "z": -0.004097094293683767,
+              "w": -0.10405562818050385
+            },
+            "wheels": [
+              {
+                "length": 0.4099065589904785,
+                "steering": 0,
+                "rotation": 22.581275939941406
+              },
+              {
+                "length": 0.3935024070739746,
+                "steering": 0,
+                "rotation": 23.689123153686523
+              },
+              {
+                "length": 0.3844416069984436,
+                "steering": 0,
+                "rotation": 21.375099182128906
+              },
+              {
+                "length": 0.36803733587265014,
+                "steering": 0,
+                "rotation": 22.57501983642578
+              }
+            ]
+          }
+        }
+      ],
+      "repeatedReset": "pass",
+      "qaPause": "pass",
+      "nearby": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/vehicle-browser/desktop-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-vehicle.png",
+      "driven": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/vehicle-browser/desktop-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-driven.png"
+    },
+    {
+      "mode": "mobile-viewport",
+      "label": "Chicago River North grid",
+      "initial": {
+        "boundaryHeight": "20",
+        "buildingTriangles": "6720",
+        "cameraOwner": "orbit",
+        "canvases": 1,
+        "collisionVisible": "false",
+        "drivingMode": "inspect",
+        "engine": "three.js r179",
+        "generatedVisible": "true",
+        "overflow": false,
+        "physicsColliders": "7",
+        "physicsInitializationMs": "1189.2000000029802",
+        "physicsSetupMs": "124.09999999403954",
+        "physicsStatus": "paused",
+        "physicsSteps": "0",
+        "playEnvelope": "{\"minimumX\":-299.0121154785156,\"maximumX\":299.0121765136719,\"minimumZ\":-299.0060119628906,\"maximumZ\":298.9939880371094}",
+        "qaLines": "960",
+        "roadTriangles": "3407",
+        "sourceVisible": "true",
+        "vehiclePose": "{\"position\":{\"x\":-83.77054595947266,\"y\":1.0199999809265137,\"z\":217.4877166748047},\"rotation\":{\"x\":0,\"y\":0.7142094373703003,\"z\":0,\"w\":0.6999320387840271},\"wheels\":[{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0}]}",
+        "vehicleRecoveries": "0",
+        "vehicleResets": "0",
+        "vehicleSpeed": "0",
+        "vehicleStatus": "ready",
+        "zoneSlug": "cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410"
+      },
+      "commands": [
+        {
+          "name": "Accelerate",
+          "steps": 60,
+          "speed": 2.5426044261837495,
+          "pose": {
+            "position": {
+              "x": -82.69168853759766,
+              "y": 0.8089388012886047,
+              "z": 217.4658660888672
+            },
+            "rotation": {
+              "x": -0.003748012240976095,
+              "y": 0.7141993641853333,
+              "z": 0.003824227023869753,
+              "w": 0.6999219059944153
+            },
+            "wheels": [
+              {
+                "length": 0.4034436273574829,
+                "steering": 0,
+                "rotation": 3.374655246734619
+              },
+              {
+                "length": 0.4034431505203247,
+                "steering": 0,
+                "rotation": 3.37465500831604
+              },
+              {
+                "length": 0.37452714920043945,
+                "steering": 0,
+                "rotation": 3.3751094341278076
+              },
+              {
+                "length": 0.37452667236328124,
+                "steering": 0,
+                "rotation": 3.3751094341278076
+              }
+            ]
+          }
+        },
+        {
+          "name": "Coast",
+          "steps": 60,
+          "speed": 2.256172554550974,
+          "pose": {
+            "position": {
+              "x": -80.2927017211914,
+              "y": 0.8089643120765686,
+              "z": 217.4172821044922
+            },
+            "rotation": {
+              "x": -1.1913823705356208e-8,
+              "y": 0.7142094373703003,
+              "z": 1.745795330521105e-8,
+              "w": 0.6999320983886719
+            },
+            "wheels": [
+              {
+                "length": 0.38896434783935546,
+                "steering": 0,
+                "rotation": 10.869601249694824
+              },
+              {
+                "length": 0.38896434783935546,
+                "steering": 0,
+                "rotation": 10.869600296020508
+              },
+              {
+                "length": 0.3889642286300659,
+                "steering": 0,
+                "rotation": 10.869540214538574
+              },
+              {
+                "length": 0.38896434783935546,
+                "steering": 0,
+                "rotation": 10.869540214538574
+              }
+            ]
+          }
+        },
+        {
+          "name": "Brake",
+          "steps": 60,
+          "speed": 0.00008682343908885953,
+          "pose": {
+            "position": {
+              "x": -79.9848403930664,
+              "y": 0.8089657425880432,
+              "z": 217.4109344482422
+            },
+            "rotation": {
+              "x": 0.000425502221332863,
+              "y": 0.7142091989517212,
+              "z": -0.00043420729343779385,
+              "w": 0.6999320387840271
+            },
+            "wheels": [
+              {
+                "length": 0.38732486248016357,
+                "steering": 0,
+                "rotation": 11.788492202758789
+              },
+              {
+                "length": 0.38732486248016357,
+                "steering": 0,
+                "rotation": 11.788491249084473
+              },
+              {
+                "length": 0.3906078267097473,
+                "steering": 0,
+                "rotation": 11.788213729858398
+              },
+              {
+                "length": 0.3906078267097473,
+                "steering": 0,
+                "rotation": 11.788213729858398
+              }
+            ]
+          }
+        },
+        {
+          "name": "Reverse",
+          "steps": 60,
+          "speed": -2.993076402007786,
+          "pose": {
+            "position": {
+              "x": -81.5827407836914,
+              "y": 0.8089219927787781,
+              "z": 217.4431610107422
+            },
+            "rotation": {
+              "x": 0.0037471347022801638,
+              "y": 0.7141995429992676,
+              "z": -0.0038233327213674784,
+              "w": 0.699921727180481
+            },
+            "wheels": [
+              {
+                "length": 0.37451332092285156,
+                "steering": 0,
+                "rotation": 6.786753177642822
+              },
+              {
+                "length": 0.37451379776000976,
+                "steering": 0,
+                "rotation": 6.786753177642822
+              },
+              {
+                "length": 0.4034230041503906,
+                "steering": 0,
+                "rotation": 6.786929607391357
+              },
+              {
+                "length": 0.4034234809875488,
+                "steering": 0,
+                "rotation": 6.786928653717041
+              }
+            ]
+          }
+        },
+        {
+          "name": "Brake",
+          "steps": 60,
+          "speed": -0.00013430383900417948,
+          "pose": {
+            "position": {
+              "x": -82.1288833618164,
+              "y": 0.8089683055877686,
+              "z": 217.4541473388672
+            },
+            "rotation": {
+              "x": -0.0006581674097105861,
+              "y": 0.7142090797424316,
+              "z": 0.0006715449271723628,
+              "w": 0.6999318599700928
+            },
+            "wheels": [
+              {
+                "length": 0.391508572101593,
+                "steering": 0,
+                "rotation": 5.128273963928223
+              },
+              {
+                "length": 0.391508572101593,
+                "steering": 0,
+                "rotation": 5.128273963928223
+              },
+              {
+                "length": 0.38643097162246703,
+                "steering": 0,
+                "rotation": 5.12758207321167
+              },
+              {
+                "length": 0.38643097162246703,
+                "steering": 0,
+                "rotation": 5.1275811195373535
+              }
+            ]
+          }
+        },
+        {
+          "name": "Turn left",
+          "steps": 60,
+          "speed": 2.846535835020223,
+          "pose": {
+            "position": {
+              "x": -80.6796646118164,
+              "y": 0.8088945150375366,
+              "z": 216.9713592529297
+            },
+            "rotation": {
+              "x": 0.0005125033785589039,
+              "y": 0.7853361368179321,
+              "z": 0.0068552508018910885,
+              "w": 0.6190314888954163
+            },
+            "wheels": [
+              {
+                "length": 0.3959605622291565,
+                "steering": 0,
+                "rotation": 10.633668899536133
+              },
+              {
+                "length": 0.40934263944625854,
+                "steering": 0,
+                "rotation": 9.737654685974121
+              },
+              {
+                "length": 0.3685993480682373,
+                "steering": 0,
+                "rotation": 10.306455612182617
+              },
+              {
+                "length": 0.3819813656806946,
+                "steering": 0,
+                "rotation": 9.336324691772461
+              }
+            ]
+          }
+        },
+        {
+          "name": "Turn right",
+          "steps": 60,
+          "speed": 4.9502422297629085,
+          "pose": {
+            "position": {
+              "x": -76.8423843383789,
+              "y": 0.8088834881782532,
+              "z": 217.4724578857422
+            },
+            "rotation": {
+              "x": -0.0072205825708806515,
+              "y": 0.6148244738578796,
+              "z": -0.001592520042322576,
+              "w": 0.7886292338371277
+            },
+            "wheels": [
+              {
+                "length": 0.40990667819976806,
+                "steering": 0,
+                "rotation": 22.58123779296875
+              },
+              {
+                "length": 0.3935024070739746,
+                "steering": 0,
+                "rotation": 23.689077377319336
+              },
+              {
+                "length": 0.3844416069984436,
+                "steering": 0,
+                "rotation": 21.37506866455078
+              },
+              {
+                "length": 0.36803733587265014,
+                "steering": 0,
+                "rotation": 22.574974060058594
+              }
+            ]
+          }
+        }
+      ],
+      "repeatedReset": "pass",
+      "qaPause": "pass",
+      "nearby": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/vehicle-browser/mobile-viewport-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-vehicle.png",
+      "driven": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/vehicle-browser/mobile-viewport-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-driven.png"
+    },
+    {
+      "mode": "mobile-viewport",
+      "label": "Cambridge centre",
+      "initial": {
+        "boundaryHeight": "20",
+        "buildingTriangles": "29156",
+        "cameraOwner": "orbit",
+        "canvases": 1,
+        "collisionVisible": "false",
+        "drivingMode": "inspect",
+        "engine": "three.js r179",
+        "generatedVisible": "true",
+        "overflow": false,
+        "physicsColliders": "7",
+        "physicsInitializationMs": "477.90000000596046",
+        "physicsSetupMs": "117.20000000298023",
+        "physicsStatus": "paused",
+        "physicsSteps": "0",
+        "playEnvelope": "{\"minimumX\":-349.0244140625,\"maximumX\":349.0246887207031,\"minimumZ\":-349.0119934082031,\"maximumZ\":348.9880065917969}",
+        "qaLines": "1698",
+        "roadTriangles": "1744",
+        "sourceVisible": "true",
+        "vehiclePose": "{\"position\":{\"x\":152.4167022705078,\"y\":1.0199999809265137,\"z\":-318.10467529296875},\"rotation\":{\"x\":0,\"y\":-0.9995778799057007,\"z\":0,\"w\":0.02905355580151081},\"wheels\":[{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0}]}",
+        "vehicleRecoveries": "0",
+        "vehicleResets": "0",
+        "vehicleSpeed": "0",
+        "vehicleStatus": "ready",
+        "zoneSlug": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43"
+      },
+      "commands": [
+        {
+          "name": "Accelerate",
+          "steps": 60,
+          "speed": 2.542612175035526,
+          "pose": {
+            "position": {
+              "x": 152.3542022705078,
+              "y": 0.8089388012886047,
+              "z": -319.18182373046875
+            },
+            "rotation": {
+              "x": -0.00015515892300754786,
+              "y": -0.9995636343955994,
+              "z": -0.0053522419184446335,
+              "w": 0.029053058475255966
+            },
+            "wheels": [
+              {
+                "length": 0.40344350814819335,
+                "steering": 0,
+                "rotation": 3.374654531478882
+              },
+              {
+                "length": 0.40344231605529784,
+                "steering": 0,
+                "rotation": 3.3746542930603027
+              },
+              {
+                "length": 0.37452810287475585,
+                "steering": 0,
+                "rotation": 3.3751091957092285
+              },
+              {
+                "length": 0.37452691078186034,
+                "steering": 0,
+                "rotation": 3.3751091957092285
+              }
+            ]
+          }
+        },
+        {
+          "name": "Coast",
+          "steps": 60,
+          "speed": 2.2561787362486334,
+          "pose": {
+            "position": {
+              "x": 152.2149200439453,
+              "y": 0.8089643120765686,
+              "z": -321.57757568359375
+            },
+            "rotation": {
+              "x": 1.1988612325097847e-9,
+              "y": -0.9995778799057007,
+              "z": -2.797820108924043e-8,
+              "w": 0.029053501784801483
+            },
+            "wheels": [
+              {
+                "length": 0.38896434783935546,
+                "steering": 0,
+                "rotation": 10.869621276855469
+              },
+              {
+                "length": 0.38896434783935546,
+                "steering": 0,
+                "rotation": 10.869620323181152
+              },
+              {
+                "length": 0.3889642286300659,
+                "steering": 0,
+                "rotation": 10.869561195373535
+              },
+              {
+                "length": 0.3889642286300659,
+                "steering": 0,
+                "rotation": 10.869561195373535
+              }
+            ]
+          }
+        },
+        {
+          "name": "Brake",
+          "steps": 60,
+          "speed": 0.00008682774213260652,
+          "pose": {
+            "position": {
+              "x": 152.1967315673828,
+              "y": 0.808965802192688,
+              "z": -321.88470458984375
+            },
+            "rotation": {
+              "x": 0.000017651849702815525,
+              "y": -0.9995777010917664,
+              "z": 0.0006077069556340575,
+              "w": 0.029053522273898125
+            },
+            "wheels": [
+              {
+                "length": 0.38732486248016357,
+                "steering": 0,
+                "rotation": 11.788517951965332
+              },
+              {
+                "length": 0.38732486248016357,
+                "steering": 0,
+                "rotation": 11.788517951965332
+              },
+              {
+                "length": 0.3906078267097473,
+                "steering": 0,
+                "rotation": 11.788240432739258
+              },
+              {
+                "length": 0.39060794591903686,
+                "steering": 0,
+                "rotation": 11.788241386413574
+              }
+            ]
+          }
+        },
+        {
+          "name": "Reverse",
+          "steps": 60,
+          "speed": -2.9930764990463516,
+          "pose": {
+            "position": {
+              "x": 152.2895050048828,
+              "y": 0.8089219331741333,
+              "z": -320.28973388671875
+            },
+            "rotation": {
+              "x": 0.00015509294462390244,
+              "y": -0.9995635747909546,
+              "z": 0.00535096088424325,
+              "w": 0.029053080826997757
+            },
+            "wheels": [
+              {
+                "length": 0.37451332092285156,
+                "steering": 0,
+                "rotation": 6.786776542663574
+              },
+              {
+                "length": 0.3745146322250366,
+                "steering": 0,
+                "rotation": 6.786775588989258
+              },
+              {
+                "length": 0.4034220504760742,
+                "steering": 0,
+                "rotation": 6.786952018737793
+              },
+              {
+                "length": 0.4034232425689697,
+                "steering": 0,
+                "rotation": 6.786952972412109
+              }
+            ]
+          }
+        },
+        {
+          "name": "Brake",
+          "steps": 60,
+          "speed": -0.0001343037004701217,
+          "pose": {
+            "position": {
+              "x": 152.3209991455078,
+              "y": 0.8089683651924133,
+              "z": -319.74481201171875
+            },
+            "rotation": {
+              "x": -0.000027252066502114758,
+              "y": -0.9995774626731873,
+              "z": -0.0009398936526849866,
+              "w": 0.02905352972447872
+            },
+            "wheels": [
+              {
+                "length": 0.39150869131088256,
+                "steering": 0,
+                "rotation": 5.128299236297607
+              },
+              {
+                "length": 0.39150845289230346,
+                "steering": 0,
+                "rotation": 5.128298759460449
+              },
+              {
+                "length": 0.3864310908317566,
+                "steering": 0,
+                "rotation": 5.127605438232422
+              },
+              {
+                "length": 0.38643097162246703,
+                "steering": 0,
+                "rotation": 5.127606391906738
+              }
+            ]
+          }
+        },
+        {
+          "name": "Turn left",
+          "steps": 60,
+          "speed": 2.8465354416982223,
+          "pose": {
+            "position": {
+              "x": 151.7838897705078,
+              "y": 0.8088944554328918,
+              "z": -321.17401123046875
+            },
+            "rotation": {
+              "x": -0.005294025409966707,
+              "y": -0.9906297922134399,
+              "z": -0.004385413136333227,
+              "w": 0.1364012211561203
+            },
+            "wheels": [
+              {
+                "length": 0.3959603238105774,
+                "steering": 0,
+                "rotation": 10.633696556091309
+              },
+              {
+                "length": 0.4093427586555481,
+                "steering": 0,
+                "rotation": 9.737678527832031
+              },
+              {
+                "length": 0.3685991096496582,
+                "steering": 0,
+                "rotation": 10.306477546691895
+              },
+              {
+                "length": 0.3819814848899841,
+                "steering": 0,
+                "rotation": 9.336353302001953
+              }
+            ]
+          }
+        },
+        {
+          "name": "Turn right",
+          "steps": 60,
+          "speed": 4.950254393600995,
+          "pose": {
+            "position": {
+              "x": 152.1386260986328,
+              "y": 0.8088834881782532,
+              "z": -325.02777099609375
+            },
+            "rotation": {
+              "x": 0.006155182141810656,
+              "y": -0.9945439696311951,
+              "z": -0.004097094293683767,
+              "w": -0.10405562818050385
+            },
+            "wheels": [
+              {
+                "length": 0.4099065589904785,
+                "steering": 0,
+                "rotation": 22.581275939941406
+              },
+              {
+                "length": 0.3935024070739746,
+                "steering": 0,
+                "rotation": 23.689123153686523
+              },
+              {
+                "length": 0.3844416069984436,
+                "steering": 0,
+                "rotation": 21.375099182128906
+              },
+              {
+                "length": 0.36803733587265014,
+                "steering": 0,
+                "rotation": 22.57501983642578
+              }
+            ]
+          }
+        }
+      ],
+      "repeatedReset": "pass",
+      "qaPause": "pass",
+      "nearby": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/vehicle-browser/mobile-viewport-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-vehicle.png",
+      "driven": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/vehicle-browser/mobile-viewport-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-driven.png"
+    },
+    {
+      "check": "translated graph-hint safety fixture: no spawn, valid inspection",
+      "state": {
+        "boundaryHeight": "20",
+        "buildingTriangles": "6720",
+        "cameraOwner": "orbit",
+        "canvases": 1,
+        "collisionVisible": "false",
+        "drivingMode": "inspect",
+        "engine": "three.js r179",
+        "generatedVisible": "true",
+        "overflow": false,
+        "physicsColliders": "6",
+        "physicsInitializationMs": "346.3999999910593",
+        "physicsSetupMs": "22.599999994039536",
+        "physicsStatus": "paused",
+        "physicsSteps": "0",
+        "playEnvelope": "{\"minimumX\":-299.0121154785156,\"maximumX\":299.0121765136719,\"minimumZ\":-299.0060119628906,\"maximumZ\":298.9939880371094}",
+        "qaLines": "0",
+        "roadTriangles": "3407",
+        "sourceVisible": "false",
+        "vehicleStatus": "unavailable",
+        "zoneSlug": "cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410"
+      },
+      "message": "Driving unavailable: no safe paved start in 256 candidates (boundary, pavement). Inspection remains available."
+    },
+    {
+      "check": "actual tab departure/return pauses vehicle, no hidden catch-up",
+      "result": "pass",
+      "returned": {
+        "boundaryHeight": "20",
+        "buildingTriangles": "6720",
+        "cameraOwner": "chase",
+        "canvases": 1,
+        "chaseCamera": "{\"target\":[-83.77054595947266,1.1589703917503358,217.4877166748047],\"position\":[-92.76871136619371,6.658970391750335,217.6694288463521],\"occluded\":false,\"overhead\":false}",
+        "collisionVisible": "false",
+        "drivingMode": "paused",
+        "engine": "three.js r179",
+        "generatedVisible": "true",
+        "overflow": false,
+        "physicsColliders": "7",
+        "physicsInitializationMs": "328.5",
+        "physicsSetupMs": "25.899999991059303",
+        "physicsStatus": "paused",
+        "physicsSteps": "40",
+        "playEnvelope": "{\"minimumX\":-299.0121154785156,\"maximumX\":299.0121765136719,\"minimumZ\":-299.0060119628906,\"maximumZ\":298.9939880371094}",
+        "qaLines": "0",
+        "roadTriangles": "3407",
+        "sourceVisible": "false",
+        "vehiclePose": "{\"position\":{\"x\":-83.77054595947266,\"y\":0.8089703917503357,\"z\":217.4877166748047},\"rotation\":{\"x\":-4.3630171697728315e-10,\"y\":0.7142094373703003,\"z\":1.7555881748343438e-10,\"w\":0.6999320387840271},\"wheels\":[{\"length\":0.388970308303833,\"steering\":0,\"rotation\":2.6923016593904947e-10},{\"length\":0.388970308303833,\"steering\":0,\"rotation\":2.692300271611714e-10},{\"length\":0.388970308303833,\"steering\":0,\"rotation\":2.6923016593904947e-10},{\"length\":0.388970308303833,\"steering\":0,\"rotation\":2.692300271611714e-10}]}",
+        "vehicleRecoveries": "0",
+        "vehicleResets": "0",
+        "vehicleSpeed": "-5.437879060996001e-11",
+        "vehicleStatus": "ready",
+        "zoneSlug": "cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410"
+      }
+    }
+  ]
+}

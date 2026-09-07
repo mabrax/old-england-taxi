@@ -4,24 +4,37 @@ import type { PhysicalWorld } from '../../src/lib/physics/physical-world';
 import { createVehicle, type FirstVehicle } from '../../src/lib/physics/vehicle';
 import { VEHICLE, rotate, yawPose, type VehicleCommand } from '../../src/lib/physics/vehicle-config';
 import { vehicleBounds, indexPavement, pavementRectangle } from '../../src/lib/physics/vehicle-spawn';
+import { Cuboid } from '@dimforge/rapier3d-compat';
+import { boxPenetration } from './box-contact';
 export function stepVehicle(p: PhysicalWorld, v: FirstVehicle, steps: number, inspect: () => void = () => {}) {
   for (let i=0;i<steps;i++) { v.beforeStep(); p.step(); v.afterStep(); inspect(); }
 }
 export function observe(p: PhysicalWorld, v: FirstVehicle) {
   const body=v.body!;const position=body.translation(), rotation=body.rotation();
-  let penetration=0, contacts=0;
+  let penetration=0, contacts=0, reportedShapePenetration=0, buildingContacts=0, boundaryContacts=0, groundContacts=0;
+  const classify = (other: ReturnType<typeof body.collider>) => {
+    if (!(other.shape instanceof Cuboid)) buildingContacts++;
+    else if (other.translation().y < 0) groundContacts++;
+    else boundaryContacts++;
+  };
   p.world.contactPairsWith(body.collider(0), other=>p.world.contactPair(body.collider(0),other,manifold=>{
-    for(let i=0;i<manifold.numContacts();i++){contacts++;penetration=Math.max(penetration,-manifold.contactDist(i));}
+    if (manifold.numContacts()) classify(other);
+    for(let i=0;i<manifold.numContacts();i++){contacts++;if(!(other.shape instanceof Cuboid))penetration=Math.max(penetration,-manifold.contactDist(i));}
   }));
   // Fresh shape contacts check the POST-step body, independently of solver manifold timing.
   p.world.forEachCollider(other=>{
     if (other.parent()) return;
     const contact=body.collider(0).contactCollider(other,0);
-    if(contact){contacts++;penetration=Math.max(penetration,-contact.distance);}
+    if(contact){contacts++;classify(other);reportedShapePenetration=Math.max(reportedShapePenetration,-contact.distance);}
+    const shape=other.shape;
+    if (shape instanceof Cuboid) {
+      penetration=Math.max(penetration,boxPenetration({position,rotation}, {x:VEHICLE.halfWidth,y:VEHICLE.halfHeight,z:VEHICLE.halfLength},
+        {position:other.translation(),rotation:other.rotation()}, shape.halfExtents));
+    } else if(contact) penetration=Math.max(penetration,-contact.distance);
   });
   const bounds=vehicleBounds({position,rotation}),e=p.envelope;
   const centreOccupied=p.occupied({minimumX:position.x,maximumX:position.x,minimumY:position.y,maximumY:position.y,minimumZ:position.z,maximumZ:position.z});
-  return { position:{...position},rotation:{...rotation}, speed:v.speed, penetration,contacts,centreOccupied,
+  return { position:{...position},rotation:{...rotation}, speed:v.speed, penetration,reportedShapePenetration,contacts,buildingContacts,boundaryContacts,groundContacts,centreOccupied,
     boundaryOverhang:Math.max(0,e.minimumX-bounds.minimumX,bounds.maximumX-e.maximumX,e.minimumZ-bounds.minimumZ,bounds.maximumZ-e.maximumZ),
     wheelContacts:[0,1,2,3].filter(i=>v.controller!.wheelIsInContact(i)).length,
     minimumChassisY:position.y-Math.abs(rotate({x:VEHICLE.halfWidth,y:0,z:0},rotation).y)-Math.abs(rotate({x:0,y:VEHICLE.halfHeight,z:0},rotation).y)-Math.abs(rotate({x:0,y:0,z:VEHICLE.halfLength},rotation).y)
@@ -32,15 +45,16 @@ export function contactRun(p: PhysicalWorld, v: FirstVehicle, x:number,z:number,
   v.body!.setTranslation(pose.position,true);v.body!.setRotation(pose.rotation,true);
   v.body!.setLinvel(rotate({x:0,y:0,z:speed},pose.rotation),true);v.body!.setAngvel({x:0,y:0,z:0},true);
   v.submit({throttle:0,steering:0,brake:0});v.submit({throttle:Math.sign(speed),steering,brake:0});
-  let maximumPenetration=0, contactFrames=0, occupiedFrames=0,minimumChassisY=Infinity,maximumBoundaryOverhang=0,maximumSpeed=0;
+  let maximumPenetration=0, maximumReportedShapePenetration=0, contactFrames=0, buildingContactFrames=0,boundaryContactFrames=0,occupiedFrames=0,minimumChassisY=Infinity,maximumBoundaryOverhang=0,maximumSpeed=0;
   const traces: ReturnType<typeof observe>[] = [];
   stepVehicle(p,v,steps,()=>{
-    const o=observe(p,v);maximumPenetration=Math.max(maximumPenetration,o.penetration);contactFrames+=Number(o.contacts>0);
+    const o=observe(p,v);maximumPenetration=Math.max(maximumPenetration,o.penetration);maximumReportedShapePenetration=Math.max(maximumReportedShapePenetration,o.reportedShapePenetration);contactFrames+=Number(o.contacts>0);
+    buildingContactFrames+=Number(o.buildingContacts>0);boundaryContactFrames+=Number(o.boundaryContacts>0);
     occupiedFrames+=Number(o.centreOccupied);minimumChassisY=Math.min(minimumChassisY,o.minimumChassisY);
     maximumBoundaryOverhang=Math.max(maximumBoundaryOverhang,o.boundaryOverhang);maximumSpeed=Math.max(maximumSpeed,Math.abs(o.speed));
     if(traces.length<5 && (contactFrames===1 || traces.length===0))traces.push(o);
   });
-  return { initial:{x,z,yaw,speed,steering},maximumPenetration,contactFrames,occupiedFrames,minimumChassisY,maximumBoundaryOverhang,maximumSpeed,recoveries:v.state.recoveries, final:observe(p,v),traces };
+  return { initial:{x,z,yaw,speed,steering},maximumPenetration,maximumReportedShapePenetration,contactFrames,buildingContactFrames,boundaryContactFrames,occupiedFrames,minimumChassisY,maximumBoundaryOverhang,maximumSpeed,recoveries:v.state.recoveries, final:observe(p,v),traces };
 }
 export function preparedWalls(a:ZoneArtifact,p:PhysicalWorld) {
   const mesh=a.geometry.buildings,points=mesh.positions,seen=new Set<string>();

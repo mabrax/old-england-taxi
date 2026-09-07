@@ -14,7 +14,8 @@ type PhysicsModule = Pick<typeof import('./physical-world'), 'initializeRapier' 
 export function createPhysicsSession(
   artifact: ZoneArtifact,
   onState: (state: PhysicsState) => void,
-  load: () => Promise<PhysicsModule> = () => import('./vehicle')
+  load: () => Promise<PhysicsModule> = () => import('./vehicle'),
+  measureStep?: (start: number, end: number) => void
 ) {
   let physical: PhysicalWorld | undefined;
   let vehicle: FirstVehicle | undefined;
@@ -100,7 +101,9 @@ export function createPhysicsSession(
             publish({ ...state, status: 'paused', vehicle: vehicle.state });
             timing.steps++; break;
           }
-          const duration = performance.now() - start;
+          const end = performance.now();
+          const duration = end - start;
+          measureStep?.(start, end);
           timing.totalStepMs += duration;
           timing.maximumStepMs = Math.max(timing.maximumStepMs, duration);
           timing.steps++;

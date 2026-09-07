@@ -11,7 +11,7 @@ const run = (...args) => execFileSync('npx', ['--yes', 'agent-browser', '--sessi
 const assert = (ok, message) => { if (!ok) throw new Error(message); };
 const click = name => run('find', 'role', 'button', 'click', '--name', name, '--exact');
 const zones = JSON.parse(readFileSync('public/zones/index.json')).zones;
-let socket, id = 0, targetSession;
+let socket, id = 0, targetSession, targetId, browserContextId;
 const pending = new Map();
 async function connect() {
   socket = new WebSocket(run('get', 'cdp-url'));
@@ -21,7 +21,10 @@ async function connect() {
     if (request) { pending.delete(message.id); message.error ? request.reject(new Error(message.error.message)) : request.resolve(message.result); }
   };
   const targets = await send('Target.getTargets', {}, false);
-  const target = targets.targetInfos.find(t => t.type === 'page' && t.url.startsWith(base));
+  const activeUrl = run('get', 'url');
+  const target = targets.targetInfos.find(t => t.type === 'page' && t.url === activeUrl);
+  if (!target) throw new Error('Active agent-browser page was not found in CDP');
+  targetId = target.targetId; browserContextId = target.browserContextId;
   targetSession = (await send('Target.attachToTarget', { targetId: target.targetId, flatten: true }, false)).sessionId;
 }
 function send(method, params = {}, attached = true) {
@@ -35,15 +38,33 @@ async function evaluate(expression) {
   if (result.exceptionDetails) throw new Error(JSON.stringify(result.exceptionDetails));
   return result.result.value;
 }
-const state = () => evaluate(`({...document.querySelector('canvas').dataset,focus:document.activeElement.tagName,overflow:document.documentElement.scrollWidth>innerWidth,canvases:document.querySelectorAll('canvas').length})`);
+const state = () => evaluate(`({...document.querySelector('canvas').dataset,focus:document.activeElement.tagName,hidden:document.hidden,overflow:document.documentElement.scrollWidth>innerWidth,canvases:document.querySelectorAll('canvas').length,viewport:{width:innerWidth,height:innerHeight,dpr:devicePixelRatio}})`);
+async function setViewport(width, height) {
+  // A recording uses another context; set metrics on the exact CDP input target.
+  await send('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile: false });
+  const actual = await evaluate('new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(()=>r({width:innerWidth,height:innerHeight}))))');
+  assert(actual.width === width && actual.height === height, `Viewport mismatch: ${JSON.stringify(actual)}, expected ${width}×${height}`);
+}
 const key = (code, down, repeat = false) => send('Input.dispatchKeyEvent', { type: down ? 'keyDown' : 'keyUp', code, key: code === 'Space' ? ' ' : code === 'Escape' ? 'Escape' : code.slice(3).toLowerCase(), windowsVirtualKeyCode: code === 'Space' ? 32 : code === 'Escape' ? 27 : code.slice(3).charCodeAt(0), autoRepeat: repeat });
 const steps = amount => evaluate(`new Promise((resolve,reject)=>{const start=Number(document.querySelector('canvas').dataset.physicsSteps),until=performance.now()+15000;let occluded=0,minimumCameraY=Infinity;const tick=()=>{const d=document.querySelector('canvas').dataset,c=JSON.parse(d.chaseCamera||'null');if(c){occluded+=Number(c.occluded);minimumCameraY=Math.min(minimumCameraY,c.position[1]);}if(Number(d.physicsSteps)>=start+${amount})resolve({occluded,minimumCameraY});else if(performance.now()>until)reject(Error('step wait timed out: '+d.physicsStatus));else requestAnimationFrame(tick)};tick()})`);
-const shot = name => { const path = join(output, `${name}.png`); run('screenshot', path); return path; };
+const shot = async name => {
+  const viewport = await evaluate('({width:innerWidth,height:innerHeight})');
+  const { data } = await send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true, clip: { x: 0, y: 0, ...viewport, scale: 1 } });
+  const path = join(output, `${name}.png`); writeFileSync(path, Buffer.from(data, 'base64')); return path;
+};
 const observe = [];
+let recording = false, failure;
 try {
-  run('open', base); run('wait', '[data-physics-state="paused"]'); run('snapshot', '-i'); await connect();
+  run('open', base);
+  if (process.env.RECORD_DRIVING === '1') {
+    run('record', 'start', join(output, 'driving.webm')); recording = true;
+    // Recording creates another context. Give its page a unique URL so CDP
+    // observes the page receiving trusted input, rather than the previous tab.
+    run('open', `${base}/?qualification-recording=${process.pid}`);
+  }
+  run('wait', '[data-physics-state="paused"]'); run('snapshot', '-i'); await connect();
   for (const zone of ((process.env.TOUCH_ONLY || process.env.CAMERA_ONLY) ? [] : zones.slice(0, 2))) {
-    run('set', 'viewport', '1440', '900'); run('open', `${base}/?zone=${zone.id}&qa=1`); run('wait', '[data-physics-state="paused"]'); run('snapshot', '-i');
+    run('open', `${base}/?zone=${zone.id}&qa=1`); await setViewport(1440, 900); run('wait', '[data-physics-state="paused"]'); run('snapshot', '-i');
     const initial = await state(); assert(initial.physicsSteps === '0' && initial.cameraOwner === 'orbit', 'New scene did not start in neutral inspection');
     click('Drive'); assert((await state()).focus === 'CANVAS', 'Drive did not focus canvas');
     await key('KeyW', true); await steps(90); await key('KeyA', true); const motion = await steps(30); await key('KeyA', false); await key('KeyW', false);
@@ -53,7 +74,7 @@ try {
     await key('KeyS', true); await steps(90); const reversed = await state(); await key('KeyS', false);
     assert(Number(reversed.vehicleSpeed) < -2.5, 'S did not reverse');
     await key('Space', true); await steps(75); await key('Space', false);
-    const drivingShot = shot(`desktop-${zone.id}`);
+    const drivingShot = await shot(`desktop-${zone.id}`);
     const beforeView = await state(); click('Reset view'); const afterView = await state();
     assert(afterView.vehicleResets === beforeView.vehicleResets && afterView.drivingMode === 'driving', 'Camera reset changed vehicle or paused');
     await key('KeyW', true); await steps(30); await key('KeyR', true); await key('KeyR', false);
@@ -71,9 +92,8 @@ try {
     console.log(`Keyboard, steering/brake/reverse/reset/rearming/camera: ${zone.label} passed`);
   }
   for (const [name, width, height] of (process.env.CAMERA_ONLY ? [] : [['tablet-portrait', 820, 1180], ['tablet-landscape', 1180, 820], ['phone-portrait', 390, 844], ['phone-landscape', 844, 390]])) {
-    run('set', 'viewport', String(width), String(height));
     await send('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 });
-    run('open', `${base}/?zone=${zones[1].id}`); run('wait', '[data-physics-state="paused"]'); click('Drive'); run('snapshot', '-i');
+    run('open', `${base}/?zone=${zones[1].id}`); await setViewport(width, height); run('wait', '[data-physics-state="paused"]'); click('Drive'); run('snapshot', '-i');
     await evaluate(`window.__pointerLog=[];for(const name of ['pointerdown','pointerup','pointercancel','lostpointercapture'])document.addEventListener(name,e=>window.__pointerLog.push({name,id:e.pointerId,target:e.target.dataset.driveInput}))`);
     const button = action => evaluate(`(()=>{const r=document.querySelector('[data-drive-input="${action}"]').getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2,width:r.width,height:r.height}})()`);
     const accelerator = await button('forward'), left = await button('left');
@@ -99,7 +119,7 @@ try {
     assert(Number(touchReverse.vehicleSpeed)<-2.5,'Touch brake-to-reverse failed');
     const touchStop = await pedal('brake',75); assert(Math.abs(Number(touchStop.vehicleSpeed))<0.01,'Touch Stop failed');
     click('Reset vehicle'); click('Resume driving');
-    const screenshot = shot(name);
+    const screenshot = await shot(name);
     const layout = await evaluate(`({overflow:document.documentElement.scrollWidth>innerWidth,scrollY,buttons:[...document.querySelectorAll('.touch-driving button')].map(b=>{const r=b.getBoundingClientRect();return {label:b.textContent,x:r.x,y:r.y,w:r.width,h:r.height,visible:document.elementFromPoint(r.x+r.width/2,r.y+r.height/2)===b}})})`);
     assert(!layout.overflow && layout.scrollY === 0 && layout.buttons.every(b => b.visible && b.w >= 44 && b.h >= 44 && b.y + b.h <= height), 'Controls overflow, scroll, overlap or undersize');
     // Real mouse capture loss is separately forced through the DOM release API while pointer is active.
@@ -116,21 +136,21 @@ try {
   }
   await send('Emulation.setTouchEmulationEnabled', { enabled: false });
   execFileSync(process.execPath,['--import','tsx','tools/physics/browser-fixtures.ts']);
-  run('set','viewport','1440','900');
+  await setViewport(1440, 900);
   run('open',`${base}/?artifact=/phase03-camera.zone.json`);run('wait','[data-physics-state="paused"]');click('Drive');
   const wallStart=await state();assert(JSON.parse(wallStart.chaseCamera).occluded,'Wall did not retract camera');
-  const wallShot=shot('rear-wall-retraction');
+  const wallShot=await shot('rear-wall-retraction');
   await key('KeyS',true);await steps(180);await key('KeyS',false);
   const wallContact=await state();assert(JSON.parse(wallContact.chaseCamera).overhead,'Close wall did not select overhead camera');
-  const overheadShot=shot('rear-wall-overhead');
+  const overheadShot=await shot('rear-wall-overhead');
   click('Reset vehicle');click('Resume driving');const wallReset=await state();
   assert(JSON.parse(wallReset.chaseCamera).position[0]<-10.35,'Reset camera penetrates wall');
   observe.push({check:'rendered wall retraction, reverse to wall, overhead fallback and reset',wallStart,wallContact,wallReset,wallShot,overheadShot});
   run('open',`${base}/?artifact=/phase03-unavailable.zone.json`);run('wait','[data-vehicle-state="unavailable"]');
   const unavailable=await state();assert(unavailable.physicsColliders==='6'&&await evaluate('document.querySelector(".drive-primary").disabled'),'Unavailable spawn allowed driving');
-  click('Reset view');observe.push({check:'no safe spawn retains inspection and disables Drive',unavailable,screenshot:shot('unavailable')});
+  click('Reset view');observe.push({check:'no safe spawn retains inspection and disables Drive',unavailable,screenshot:await shot('unavailable')});
 
-  run('set', 'viewport', '1440', '900');
+  await setViewport(1440, 900);
   run('open', `${base}/?zone=${zones[1].id}`); run('wait','[data-physics-state="paused"]'); click('Drive');
   await steps(120); await key('KeyW',true); await steps(60); await key('KeyA',true); await steps(90);
   await key('KeyW',false); await key('Space',true); await steps(120);
@@ -143,14 +163,22 @@ try {
   assert(returnedToRoad.vehicleRecoveries==='0'&&returnedToRoad.vehicleResets==='0','Offroad movement triggered recovery');
   observe.push({check:'keyboard driven off-road departure and return, Cambridge; no reset/recovery',offroad,departureMessage,returnedToRoad});
   run('open', `${base}/?zone=${zones[0].id}`); run('wait', '[data-physics-state="paused"]'); click('Drive');
-  run('tab', 'new', '--label', 'focus-check', 'about:blank'); run('tab', 't1');
+  // Recording creates another browser context, so a CLI tab index may identify
+  // the old page. Verify an actual hidden transition in this input context.
+  const other = await send('Target.createTarget', { url: 'about:blank', ...(browserContextId ? { browserContextId } : {}) }, false);
+  await send('Target.activateTarget', { targetId: other.targetId }, false);
+  await evaluate('new Promise(r=>setTimeout(r,300))');
+  const hidden = await state(); assert(hidden.hidden, 'Tab fixture did not hide the input page');
+  await send('Target.activateTarget', { targetId }, false);
   const returned = await state(); assert(returned.drivingMode === 'paused', 'Tab return resumed driving');
   await evaluate('new Promise(r=>setTimeout(r,150))'); assert((await state()).physicsSteps === returned.physicsSteps, 'Hidden elapsed time caught up');
-  run('tab', 'close', 'focus-check');
-  observe.push({ check: 'actual tab departure/return', returned });
+  await send('Target.closeTarget', { targetId: other.targetId }, false);
+  observe.push({ check: 'actual tab departure/return', hidden, returned });
   click('Resume driving'); click('Locations & tools');
   run('fill', '#location-query', 'wasd'); await key('KeyW', true); await key('KeyW', false);
   const editing = await state(); assert(editing.drivingMode === 'paused', 'Editing did not pause');
   observe.push({ check: 'location editing leaves current vehicle paused', editing });
-  writeFileSync(join(output, 'results.json'), JSON.stringify({ checkedAt: new Date().toISOString(), base, browser: await evaluate('navigator.userAgent'), observe }, null, 2) + '\n');
-} catch(error) { console.log(await state()); console.log(await evaluate('window.__pointerLog')); shot('failure-debug'); throw error; } finally { socket?.close(); run('close'); }
+} catch(error) { failure = String(error); console.log(await state()); console.log(await evaluate('window.__pointerLog')); await shot('failure-debug'); throw error; } finally {
+  writeFileSync(join(output, 'results.json'), JSON.stringify({ checkedAt: new Date().toISOString(), base, browser: await evaluate('navigator.userAgent'), result: failure ? 'failed' : 'pass', failure, observe }, null, 2) + '\n');
+  socket?.close(); if (recording) run('record', 'stop'); run('close');
+}

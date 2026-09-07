@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { createDrivingInput, type DrivingAction } from './driving-input';
 import { createChaseCamera } from './chase-camera';
+import { onPageExit } from './page-lifetime';
 import { NEUTRAL } from '../physics/vehicle-config';
 
 export type DrivingMode = 'inspect' | 'driving' | 'paused';
@@ -52,6 +53,13 @@ export function createValidationScene(
   onPhysicsState: (state: PhysicsState) => void = () => {},
   onDrivingState: (state: DrivingState) => void = () => {}
 ): SceneController {
+  // Opt-in, passive qualification instrumentation. Observers consume and clear entries;
+  // no pose mutation or physics/control handle is exposed to the browser harness.
+  const measuring = new URLSearchParams(window.location.search).get('qualify') === '1';
+  const measure = (name: string, start: number, end: number) => {
+    performance.measure(name, { start, end });
+    performance.clearMeasures(name);
+  };
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(palette.background);
 
@@ -277,7 +285,7 @@ export function createValidationScene(
     }
     onPhysicsState(state);
     notify();
-  });
+  }, undefined, measuring ? (start, end) => measure('driveability:step', start, end) : undefined);
   renderer.domElement.dataset.physicsStatus = 'loading';
   void physics.ready.then(() => {
     if (disposed || !physics.physical) return;
@@ -314,6 +322,7 @@ export function createValidationScene(
 
   const render = (now = performance.now()) => {
     if (disposed) return;
+    const started = measuring ? performance.now() : 0;
     if (mode === 'driving') physics.submit(input.command());
     physics.advance(now);
     const frames = physics.vehicle?.frames;
@@ -332,8 +341,18 @@ export function createValidationScene(
       renderer.domElement.dataset.chaseCamera = JSON.stringify(result);
     }
     lastFrame = now;
-    if (now - lastFeedback > 150) { lastFeedback = now; notify(); }
+    if (now - lastFeedback > 150) {
+      lastFeedback = now; notify();
+      if (measuring) renderer.domElement.dataset.qualificationResources = JSON.stringify({
+        ...renderer.info.memory, programs: renderer.info.programs?.length,
+        colliders: physics.physical?.world.colliders.len() ?? 0,
+        bodies: physics.physical?.world.bodies.len() ?? 0,
+        controllers: physics.physical?.world.vehicleControllers.size ?? 0,
+        droppedMs: physics.timing.droppedMs
+      });
+    }
     renderer.render(scene, camera);
+    if (measuring) measure('driveability:frame', started, performance.now());
     frame = document.hidden ? 0 : window.requestAnimationFrame(render);
   };
 
@@ -382,21 +401,14 @@ export function createValidationScene(
     document.removeEventListener('visibilitychange', visibilityChanged);
     window.removeEventListener('blur', pause);
     window.removeEventListener('orientationchange', orientationChanged);
-    window.removeEventListener('pagehide', pageHidden);
-    window.removeEventListener('pageshow', pageShown);
+    detachPageExit();
     observer.disconnect();
     controls.dispose();
     disposeObject(scene);
     renderer.dispose();
     renderer.domElement.remove();
   };
-  // Release the world on navigation too. A bfcache return reloads the disposed page.
-  const pageShown = (event: PageTransitionEvent) => { if (event.persisted) window.location.reload(); };
-  const pageHidden = (event: PageTransitionEvent) => {
-    dispose();
-    if (event.persisted) window.addEventListener('pageshow', pageShown, { once: true });
-  };
-  window.addEventListener('pagehide', pageHidden);
+  const detachPageExit = onPageExit(dispose);
 
   return {
     resetCamera,

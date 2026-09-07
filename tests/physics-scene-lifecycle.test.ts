@@ -56,7 +56,7 @@ beforeEach(() => {
   doc = Object.assign(new TrackedEvents(), { hidden: false, hasFocus: () => true });
   win = new TrackedEvents(); frames = new Map(); let id = 0;
   Object.assign(win, {
-    devicePixelRatio: 1,
+    devicePixelRatio: 1, location: { search: '' },
     requestAnimationFrame: (callback: FrameRequestCallback) => { frames.set(++id, callback); return id; },
     cancelAnimationFrame: (handle: number) => frames.delete(handle)
   });

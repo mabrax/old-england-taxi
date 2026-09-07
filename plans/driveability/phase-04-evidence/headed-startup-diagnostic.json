@@ -1,0 +1,34 @@
+{
+  "checkedAt": "2026-09-07T22:03:40.411Z",
+  "errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "state": {
+    "dataset": {
+      "engine": "three.js r179",
+      "zoneSlug": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+      "roadTriangles": "1800",
+      "buildingTriangles": "33372",
+      "qaLines": "0",
+      "sourceVisible": "false",
+      "generatedVisible": "true",
+      "physicsStatus": "paused",
+      "physicsSteps": "0",
+      "drivingMode": "inspect",
+      "cameraOwner": "orbit",
+      "qualificationResources": "{\"geometries\":0,\"textures\":0,\"programs\":0,\"colliders\":0,\"bodies\":0,\"controllers\":0,\"droppedMs\":0}",
+      "collisionVisible": "false",
+      "vehicleStatus": "ready",
+      "physicsColliders": "7",
+      "physicsSetupMs": "137.79999999701977",
+      "physicsInitializationMs": "257.09999999403954",
+      "playEnvelope": "{\"minimumX\":-349.0164489746094,\"maximumX\":349.0157165527344,\"minimumZ\":-349.0090026855469,\"maximumZ\":348.9909973144531}",
+      "boundaryHeight": "20"
+    },
+    "body": "RENDERER ONLINE\nLIVE ZONE GENERATION\nLocations & tools\nInspecting\n0 km/h\nDrive\nReset vehicle\nReset view\n\nInspect the zone, or choose Drive when the vehicle is ready.\n\nAvailable zones\nChicago River North grid\nCambridge centre\nLondon Tower Bridge\nLucca historic centre\nTrafalgar Square, London\nPhysics paused\n7 colliders · Flat ground at 0 m\nCollision surfaces\nAmber: simulation limit\nVehicle ready. Physics starts paused.\nInspect vehicle\nOpen source comparison\nFlat geometry · © OpenStreetMap contributors · ODbL\nZone · roads + 1,325 buildings\nDRAG TO ORBIT\n·\nSCROLL TO INSPECT",
+    "hidden": false,
+    "hasFocus": true,
+    "width": 1440,
+    "height": 900
+  }
+}

@@ -1,6 +1,8 @@
 # Phase 04 — Qualification
 
-**Status: authorized and in progress (2026-09-07).** User instruction “proceed with phase 04” permits this plan and reasonable choices within scope. Prior implementation review passed; outstanding device requirements are carried forward.
+**Status: available-environment qualification recorded; independent review and full stage exit pending (2026-09-07).** User instruction “proceed with phase 04” permits this plan and reasonable choices within scope. Prior implementation review passed; outstanding device requirements are carried forward.
+
+The [qualification record](./phase-04-verification.md) and [remaining-device procedure](./phase-04-device-procedure.md) retain the completed results, failed attempts and open acceptance gates.
 
 ## Goal
 
@@ -34,7 +36,7 @@ Starts from reviewed Phase 03 `5b12c38`, retaining the complete local foundation
 
 ## Authorized implementation and qualification plan
 
-1. Work only on `codex/driveability-qualification` in `/home/mabrax/.codex/worktrees/63c8/old-england-taxi`, from `5b12c38`. Preview port **4190**, local `.zone-cache/phase-04/`; preserve canonical main `712fe6f`, preview 4175 and all existing worktrees/caches.
+1. Work only on `codex/driveability-qualification` in `/home/mabrax/.codex/worktrees/63c8/old-england-taxi`, from `5b12c38`. Preview port initially **4190**, then **4191** after Firefox rejected reserved port 4190; local `.zone-cache/phase-04/`; preserve canonical main `712fe6f`, preview 4175 and all existing worktrees/caches.
 2. Rerun all five prepared cells with unchanged generic spawn, geometry, vehicle configuration and hashes. Cambridge college/street area and Chicago grid near their recorded generic starts are contrasting normal-driving areas. Assess Tower Bridge separately; Lucca and Trafalgar add dense geometry. Record exact poses, commands, contacts, queries and source feature evidence; fixture starts are labelled separately.
 3. Add passive opt-in `qualify=1` PerformanceObserver step/frame measurements and read-only renderer/resource counts; no mutable runtime handle, compiler dependency, vehicle tuning or artifact changes. Run controlled rare-state fixtures and meaningful uncovered regressions, with bounded fixes if needed.
 4. Rerun the offline corpus/full tests/static/build and actual rendered keyboard/touch/camera/generation/navigation/failure regressions. Exercise the installed Firefox engine in addition to Chromium where it launches. Do not equate Linux touch emulation with iPad Safari.
@@ -64,3 +66,11 @@ Lifecycle: **20 same-tab load/dispose cycles** alternating dense Lucca/Trafalgar
 Cadence/contact: fixed **1/60 s**, max **5 catch-up steps**; replay 30/60/120/144 Hz plus stalled-frame/hidden-tab handling. Forward **8 m/s**, reverse **3 m/s**, speed tolerance **0.01 m/s**; included-wall/ground penetration **≤0.03 m**, boundary full-envelope overhang **<0.04 m**, no occupied-building centre frames or unintended recovery. Maximum-speed stops **<5 m and ≤1.2 s**. Source limits may explain missing real geometry, never a failed included-wall contact.
 
 Actual desktop Safari and iPad Safari (portrait/landscape, multi-touch, physical rotation, browser chrome, virtual keyboard, assistive technology and performance) remain required. Available software/headless results apply only to their named configuration. A failed browser budget or missing device/engine keeps relevant acceptance and full stage exit open; no target is silently removed.
+
+
+## Run amendments (targets unchanged)
+
+- Firefox rejected port 4190 before loading the app (`deniedPortAccess`). The phase-owned preview moved to **4191**. Canonical 4175 was not changed. This is a setup correction, not a relaxed budget.
+- Initial all-cell contact sampling flagged a 0.146779 m shape-query distance near the Tower Bridge boundary. Independent box geometry showed the chassis remained inside the boundary. The evidence helper now uses 15-axis box SAT for cuboids, preserves raw reported shape distances, and retains the failed attempt and pose regression. Vehicle/contact settings did not change.
+- The initial Chromium/SwiftShader run missed frame-interval targets. Its navigation memory plateau also exceeded the fixed cycle-5-to-20 growth limit. Cleanup now covers the viewport/loading owner on pagehide and uses a shared restoration callback, releasing the cached scene reference and aborting unfinished loading. Restoring a disposed history entry still reloads into inspection. The original failed data remains evidence, and final-code runs use the same budgets.
+- Available accelerated Chromium is a separate named configuration (displayed browser, ANGLE/NVIDIA RTX 4070 Ti SUPER). It is additional hardware evidence, not a replacement label for the software run. Firefox runs use its actual installed engine. None is Safari or iPad evidence.

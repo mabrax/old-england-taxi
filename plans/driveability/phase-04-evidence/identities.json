@@ -1,0 +1,270 @@
+{
+  "baseline": "5b12c38",
+  "allProtectedBytesEqualBaseline": true,
+  "protectedFiles": [
+    {
+      "path": "package-lock.json",
+      "bytes": 70873,
+      "sha256": "097bcfed147177f18b9421287cd3ecd8d9be19d9f00e731cd6f6bc7f8c4c4835"
+    },
+    {
+      "path": "public/zones/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410.qa.json",
+      "bytes": 297774,
+      "sha256": "f2864b3d99615088370b0fba8f73492ced83913e11f90f1c49a0e55e0292e5d4"
+    },
+    {
+      "path": "public/zones/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410.report.json",
+      "bytes": 122202,
+      "sha256": "f396cfdcae119b03e54a7b93ae32d3cb2df81a477a7e59606bc5331e5bf097c7"
+    },
+    {
+      "path": "public/zones/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410.zone.json",
+      "bytes": 923918,
+      "sha256": "4a9037e4db68a6cd55cd3db90a0aa50988b550ca1f3cd7d68125d4a35f6473b6"
+    },
+    {
+      "path": "public/zones/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43.qa.json",
+      "bytes": 710154,
+      "sha256": "ae696975dde2fda1b447d4854ca292ffbbb82a8b2ebd614f9ed5d4c7e5ba3101"
+    },
+    {
+      "path": "public/zones/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43.report.json",
+      "bytes": 209592,
+      "sha256": "7cb13ba3bb9d1015af899dd3656451a7e024215fdda0008174e8b6cb684f227e"
+    },
+    {
+      "path": "public/zones/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43.zone.json",
+      "bytes": 2608666,
+      "sha256": "6dea8e06c7a3f40ac306b07236dcbd3779ba8cf4e87caaa3e490069217760cd4"
+    },
+    {
+      "path": "public/zones/cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a.qa.json",
+      "bytes": 496430,
+      "sha256": "bd649ab6fce6eb9da0f3e6e49f3486dd498988cb07c41bc358d0b0731cffb743"
+    },
+    {
+      "path": "public/zones/cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a.report.json",
+      "bytes": 184619,
+      "sha256": "32a98c3226d5f37a0f14c43bf22e7d10e962e96254a16d2e5c9f688e3160c0a2"
+    },
+    {
+      "path": "public/zones/cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a.zone.json",
+      "bytes": 1167949,
+      "sha256": "5f4887e391bafe1ded5e82519e42ceaaed35998655810b61b1f4019571cfb00d"
+    },
+    {
+      "path": "public/zones/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87.qa.json",
+      "bytes": 689300,
+      "sha256": "f2952ad3a63cae8825e78bd7650d37e2ae4e69c5080ddf1659c7349196670962"
+    },
+    {
+      "path": "public/zones/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87.report.json",
+      "bytes": 208763,
+      "sha256": "4745e930f7cb057a6789ee101e5a8ab080da6b6e4594212c1f6e6893f323e4fc"
+    },
+    {
+      "path": "public/zones/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87.zone.json",
+      "bytes": 3101104,
+      "sha256": "8eff07f47eba43f30f5084232c0f4bfd086f6cc740660ad9435f6493c044e3cf"
+    },
+    {
+      "path": "public/zones/index.json",
+      "bytes": 3985,
+      "sha256": "7901258d0076a35e2a634f3123a59cba6f7693d4df5091f1938a389b1ad60a30"
+    },
+    {
+      "path": "public/zones/trafalgar-square-london.qa.json",
+      "bytes": 1501514,
+      "sha256": "f8a8523520ca498422c7a91d788b021ce144445e0886fdb44b7121d4b64d02ef"
+    },
+    {
+      "path": "public/zones/trafalgar-square-london.report.json",
+      "bytes": 520415,
+      "sha256": "55cae79a4e82a6769c2e68972b8918732c5e21bdaf46ebd8ed939aa4b3614d4b"
+    },
+    {
+      "path": "public/zones/trafalgar-square-london.zone.json",
+      "bytes": 3977485,
+      "sha256": "3636dcb2c69face98dea581333c9309ed5c021364a0b953074b1a98c19e2fc6a"
+    },
+    {
+      "path": "tools/zone-compiler/README.md",
+      "bytes": 8289,
+      "sha256": "818d5fae21714d7847e36d87896f20140b567ff7f99949c881782e24228a88c0"
+    },
+    {
+      "path": "tools/zone-compiler/sources/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410/manifest.json",
+      "bytes": 2067,
+      "sha256": "7b30c3cd6ae26b01f923cc29d188f99c6f6f07f69761183507030185f4fab087"
+    },
+    {
+      "path": "tools/zone-compiler/sources/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410/source.osm.json",
+      "bytes": 718984,
+      "sha256": "055d488fccf0a1dc1915d40982590f718200c5883a05ef8f9625027ee7de29b7"
+    },
+    {
+      "path": "tools/zone-compiler/sources/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43/manifest.json",
+      "bytes": 2073,
+      "sha256": "21a162ce6f124dacc3bc8e17115623885192b9a17e587ef3c1bcde581e01ff23"
+    },
+    {
+      "path": "tools/zone-compiler/sources/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43/source.osm.json",
+      "bytes": 1488077,
+      "sha256": "fffc7bfa5a2f737baf7230fbd13905e99d5aa03e2206f2bc4785c9e378211647"
+    },
+    {
+      "path": "tools/zone-compiler/sources/cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a/manifest.json",
+      "bytes": 2095,
+      "sha256": "c742d5928a259b187bd1015d4ef1f345be9a2508c35d07b3fec94ca0eb696125"
+    },
+    {
+      "path": "tools/zone-compiler/sources/cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a/source.osm.json",
+      "bytes": 996276,
+      "sha256": "13759df362152b8c74cafc199cadc22d731a63ca7466c81c3925f801de50da3d"
+    },
+    {
+      "path": "tools/zone-compiler/sources/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87/manifest.json",
+      "bytes": 2075,
+      "sha256": "b0850e199b21264ec756d1c187d19486b2fd3a7b1c5c1b3c50df5f8adda98cc2"
+    },
+    {
+      "path": "tools/zone-compiler/sources/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87/source.osm.json",
+      "bytes": 1075188,
+      "sha256": "b53365cd47469391b4bc62e042bd8b7a88968048da3415df209d81a49f9eb5c3"
+    },
+    {
+      "path": "tools/zone-compiler/sources/trafalgar-square-london/manifest.json",
+      "bytes": 1363,
+      "sha256": "5fff6ee286e4e3daa8c9fab6ff1e262be781c4906fce556d95384b9f82822dd6"
+    },
+    {
+      "path": "tools/zone-compiler/sources/trafalgar-square-london/source.osm.json",
+      "bytes": 3242523,
+      "sha256": "a56dce2329fdc5f1130d300839251119f6261bb08216c0b70363aa646b423484"
+    },
+    {
+      "path": "tools/zone-compiler/src/acquire-zone.ts",
+      "bytes": 7090,
+      "sha256": "1cb83efd3444237f49712258950119445fe4c11eabec40e120e810235d29102b"
+    },
+    {
+      "path": "tools/zone-compiler/src/building-geometry-error.ts",
+      "bytes": 462,
+      "sha256": "0908b49baf1b30ce2f7761d913d57674799045c7bdd1b603fa92c96986c52748"
+    },
+    {
+      "path": "tools/zone-compiler/src/building-volumes.ts",
+      "bytes": 30643,
+      "sha256": "3a1187538a2346753567a9ab42a5828d1dc7b8dfccd9e10ab15bdd0ae2842242"
+    },
+    {
+      "path": "tools/zone-compiler/src/check-building-volumes.ts",
+      "bytes": 364,
+      "sha256": "3f705365028db392c27837b107f9376b117437b4116a83d23f32dced7743069c"
+    },
+    {
+      "path": "tools/zone-compiler/src/check-local-coordinates.ts",
+      "bytes": 366,
+      "sha256": "a1b24452c1d4d8d554d976476481f0625f888fc9df7882754a223a25147dea56"
+    },
+    {
+      "path": "tools/zone-compiler/src/check-road-surfaces.ts",
+      "bytes": 360,
+      "sha256": "7147683cce230b14a6f8b7f77c7faf6309f709ca78c55e485df9dfbf657e5141"
+    },
+    {
+      "path": "tools/zone-compiler/src/check-zone-artifact.ts",
+      "bytes": 361,
+      "sha256": "ec56ac2eab9a6664517b40d5349a826f2a400fbc1a8feb532885d1075e4cdc34"
+    },
+    {
+      "path": "tools/zone-compiler/src/check-zone-source.ts",
+      "bytes": 361,
+      "sha256": "61bb10a015b682d2edf7003ce80177625a54c22aec30aace2572579ba278399a"
+    },
+    {
+      "path": "tools/zone-compiler/src/cli.ts",
+      "bytes": 4017,
+      "sha256": "bbe5396a4384544d0a940b634abffce0a286c1b0a4cac57ddc9e722abff618ad"
+    },
+    {
+      "path": "tools/zone-compiler/src/footprint-topology.ts",
+      "bytes": 4764,
+      "sha256": "7dae0a31b530d36e20e53db284f791f077ad8d9a6ef5cf1146f4e96c5a46c15f"
+    },
+    {
+      "path": "tools/zone-compiler/src/generation-request.ts",
+      "bytes": 3240,
+      "sha256": "99843be167727243954e85697ae699ee6c84788a20b6ec4a0b0c2d8ce18433a9"
+    },
+    {
+      "path": "tools/zone-compiler/src/inspect-zone-artifact.ts",
+      "bytes": 362,
+      "sha256": "04aa2072b61d6545ba3b62c97834f926ccfa0be55df68df7462b59b1bfa8f1a6"
+    },
+    {
+      "path": "tools/zone-compiler/src/load-zone-source.ts",
+      "bytes": 15907,
+      "sha256": "d6007192142c3439e5fd6d176f89952c391f22f318496ac8bc994b077de7d8a6"
+    },
+    {
+      "path": "tools/zone-compiler/src/local-coordinates.ts",
+      "bytes": 6729,
+      "sha256": "a652cfa4864effd866ad5e31d000f292517c3df3361a870a1a614093702dc874"
+    },
+    {
+      "path": "tools/zone-compiler/src/road-surfaces.ts",
+      "bytes": 21670,
+      "sha256": "65fdcfcd1aee775f4366755468ac034d4191db8a2b23bd99cbba47345a42cf2e"
+    },
+    {
+      "path": "tools/zone-compiler/src/run.ts",
+      "bytes": 283,
+      "sha256": "6201faf020d3e45d0ed70092ab319a164c2a1c1544af9242b34a03769fba800f"
+    },
+    {
+      "path": "tools/zone-compiler/src/types.ts",
+      "bytes": 6965,
+      "sha256": "d4c43200cba459a3a1c660bbfa4888b61e16fd71aa92e313cd9049d8d98b3891"
+    },
+    {
+      "path": "tools/zone-compiler/src/validation-report.ts",
+      "bytes": 9529,
+      "sha256": "0a646410f7f693d0d926d04943aec0e8853368cc1892c4c5138ff7738b98863f"
+    },
+    {
+      "path": "tools/zone-compiler/src/zone-artifact-path.ts",
+      "bytes": 474,
+      "sha256": "307140234661507391fa3331013b980c52a410ab34c4b702e5e17375618ebecf"
+    },
+    {
+      "path": "tools/zone-compiler/src/zone-artifact.ts",
+      "bytes": 11323,
+      "sha256": "03b5dd930145a7d90bc36e601e9a780ab3073d1566d562c4b988380382e837d7"
+    },
+    {
+      "path": "tools/zone-compiler/src/zone-workflow.ts",
+      "bytes": 6111,
+      "sha256": "50a20caa59f7a109fdeda79e82911ffb773e3ba8d403588e967cb7a27dc06897"
+    },
+    {
+      "path": "tools/zone-compiler/verify-browser.mjs",
+      "bytes": 5185,
+      "sha256": "fbec7d7d443dc1008d39de65df95917f3c4eeb38cc4446190987a24433368479"
+    }
+  ],
+  "finalBuild": {
+    "index-CdNYqW5q.css": {
+      "bytes": 17294,
+      "sha256": "06f29bdd9fe5db477aa2ee64ba5fa1981eba2f8a290ca69fb8d9669a28ef6171"
+    },
+    "index-DMVfcGjF.js": {
+      "bytes": 607500,
+      "sha256": "f5b2ee56bf0cc2523c311af00dea206d37372e8788e4192a7421946e34d0659d"
+    },
+    "vehicle-BOrgGqf6.js": {
+      "bytes": 2863351,
+      "sha256": "4e42fca70b2e5f81a22cc9aba9ef30131d77ea6877747f7253064eaf159dfeab"
+    }
+  }
+}

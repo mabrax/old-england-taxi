@@ -1,0 +1,4606 @@
+{
+  "checkedAt": "2026-09-07T20:42:23.009Z",
+  "runtime": "v26.8.1",
+  "rapier": "0.20.0",
+  "stepSeconds": 0.016666666666666666,
+  "maxCatchUp": 5,
+  "configuration": {
+    "halfWidth": 1,
+    "halfHeight": 0.45,
+    "halfLength": 2.2,
+    "mass": 1100,
+    "wheelX": 0.72,
+    "wheelZ": 1.35,
+    "connectionY": -0.1,
+    "wheelRadius": 0.32,
+    "wheelWidth": 0.22,
+    "suspensionRest": 0.45,
+    "suspensionTravel": 0.15,
+    "suspensionStiffness": 35,
+    "suspensionCompression": 4.4,
+    "suspensionRelaxation": 5.2,
+    "maxSuspensionForce": 12000,
+    "frictionSlip": 1.4,
+    "sideFriction": 1,
+    "engineForce": 900,
+    "brakeImpulse": 35,
+    "forwardLimit": 8,
+    "reverseLimit": 3,
+    "steeringLimit": 0.4,
+    "steeringRate": 1.2,
+    "stopSpeed": 0.08,
+    "linearDamping": 0.12,
+    "angularDamping": 1,
+    "clearanceMargin": 0.15,
+    "launchForward": 6,
+    "launchReverse": 3,
+    "boundaryMargin": 10,
+    "contactTolerance": 0.03,
+    "recoveryMargin": 0.5,
+    "maximumCandidates": 256
+  },
+  "cells": [
+    {
+      "id": "cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410",
+      "label": "Chicago River North grid",
+      "sha256": "4a9037e4db68a6cd55cd3db90a0aa50988b550ca1f3cd7d68125d4a35f6473b6",
+      "envelope": {
+        "minimumX": -299.0121154785156,
+        "maximumX": 299.0121765136719,
+        "minimumZ": -299.0060119628906,
+        "maximumZ": 298.9939880371094
+      },
+      "start": {
+        "pose": {
+          "position": {
+            "x": -83.77054413980494,
+            "y": 1.02,
+            "z": 217.48772349694485
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0.7142094544139039,
+            "z": 0,
+            "w": 0.6999320361476489
+          }
+        },
+        "attempts": 6,
+        "rejections": {
+          "boundary": 4,
+          "pavement": 4,
+          "building": 2
+        }
+      },
+      "contacts": [
+        {
+          "kind": "head",
+          "placement": "controlled mesh-derived clear test start; NOT generic runtime spawn",
+          "attempts": [
+            {
+              "candidate": {
+                "x": -181.84557261357426,
+                "z": 216.31262238313303,
+                "yaw": 0.020351154798918497,
+                "wall": {
+                  "a": {
+                    "x": -227.69582475018035,
+                    "y": 54,
+                    "z": 227.24792800950644
+                  },
+                  "b": {
+                    "x": -135.5883254765001,
+                    "y": 0,
+                    "z": 225.37317520468818
+                  },
+                  "nx": -0.020349750023402724,
+                  "nz": -0.9997929223964255,
+                  "length": 92.12657662439315
+                }
+              },
+              "initial": {
+                "x": -181.84557261357426,
+                "z": 216.31262238313303,
+                "yaw": 0.020351154798918497,
+                "speed": 8,
+                "steering": 0
+              },
+              "maximumPenetration": 0.004509799648076296,
+              "contactFrames": 182,
+              "occupiedFrames": 0,
+              "minimumChassisY": 0.33531740895542633,
+              "maximumBoundaryOverhang": 0,
+              "maximumSpeed": 7.984022265889105,
+              "recoveries": 0,
+              "final": {
+                "position": {
+                  "x": -181.6885986328125,
+                  "y": 0.8000749349594116,
+                  "z": 224.10595703125
+                },
+                "rotation": {
+                  "x": 0.00014571865904144943,
+                  "y": 0.01017729565501213,
+                  "z": -0.000051580514991655946,
+                  "w": 0.999948263168335
+                },
+                "speed": 0.0009003212421884205,
+                "penetration": 0,
+                "contacts": 4,
+                "centreOccupied": false,
+                "boundaryOverhang": 0,
+                "wheelContacts": 4,
+                "minimumChassisY": 0.3493313281066819
+              },
+              "traces": [
+                {
+                  "position": {
+                    "x": -181.84288024902344,
+                    "y": 0.8098394870758057,
+                    "z": 216.4459228515625
+                  },
+                  "rotation": {
+                    "x": -0.00021876559185329825,
+                    "y": 0.010175401344895363,
+                    "z": 0.0000022261403955781134,
+                    "w": 0.9999482035636902
+                  },
+                  "speed": 7.984022265889105,
+                  "penetration": 0,
+                  "contacts": 0,
+                  "centreOccupied": false,
+                  "boundaryOverhang": 0,
+                  "wheelContacts": 4,
+                  "minimumChassisY": 0.3588769117328275
+                },
+                {
+                  "position": {
+                    "x": -181.6881103515625,
+                    "y": 0.8115454912185669,
+                    "z": 224.1085662841797
+                  },
+                  "rotation": {
+                    "x": -0.00586186908185482,
+                    "y": 0.009791389107704163,
+                    "z": 0.00004754487599711865,
+                    "w": 0.9999349117279053
+                  },
+                  "speed": -0.04538412702254005,
+                  "penetration": 0.004509799648076296,
+                  "contacts": 5,
+                  "centreOccupied": false,
+                  "boundaryOverhang": 0,
+                  "wheelContacts": 4,
+                  "minimumChassisY": 0.3357641169693126
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "glancing",
+          "placement": "controlled mesh-derived clear test start; NOT generic runtime spawn",
+          "attempts": [
+            {
+              "candidate": {
+                "x": -181.84557261357426,
+                "z": 216.31262238313303,
+                "yaw": 0.020351154798918497,
+                "wall": {
+                  "a": {
+                    "x": -227.69582475018035,
+                    "y": 54,
+                    "z": 227.24792800950644
+                  },
+                  "b": {
+                    "x": -135.5883254765001,
+                    "y": 0,
+                    "z": 225.37317520468818
+                  },
+                  "nx": -0.020349750023402724,
+                  "nz": -0.9997929223964255,
+                  "length": 92.12657662439315
+                }
+              },
+              "initial": {
+                "x": -181.84557261357426,
+                "z": 216.31262238313303,
+                "yaw": 0.4203511547989185,
+                "speed": 8,
+                "steering": 0
+              },
+              "maximumPenetration": 0,
+              "contactFrames": 148,
+              "occupiedFrames": 0,
+              "minimumChassisY": 0.3002336282888723,
+              "maximumBoundaryOverhang": 0,
+              "maximumSpeed": 7.984021921233216,
+              "recoveries": 0,
+              "final": {
+                "position": {
+                  "x": -177.94810485839844,
+                  "y": 0.8015061020851135,
+                  "z": 224.0295867919922
+                },
+                "rotation": {
+                  "x": 0.00003816126627498306,
+                  "y": 0.010219128802418709,
+                  "z": -0.007811378221958876,
+                  "w": 0.9999172687530518
+                },
+                "speed": -0.024392548299473942,
+                "penetration": 0,
+                "contacts": 5,
+                "centreOccupied": false,
+                "boundaryOverhang": 0,
+                "wheelContacts": 4,
+                "minimumChassisY": 0.3354212074655057
+              },
+              "traces": [
+                {
+                  "position": {
+                    "x": -181.79112243652344,
+                    "y": 0.8098394870758057,
+                    "z": 216.434326171875
+                  },
+                  "rotation": {
+                    "x": -0.0002139624994015321,
+                    "y": 0.20863161981105804,
+                    "z": 0.00004564374830806628,
+                    "w": 0.9779943227767944
+                  },
+                  "speed": 7.984021921233216,
+                  "penetration": 0,
+                  "contacts": 0,
+                  "centreOccupied": false,
+                  "boundaryOverhang": 0,
+                  "wheelContacts": 4,
+                  "minimumChassisY": 0.35887691202963073
+                },
+                {
+                  "position": {
+                    "x": -178.47372436523438,
+                    "y": 0.8132098317146301,
+                    "z": 223.82492065429688
+                  },
+                  "rotation": {
+                    "x": -0.004136842675507069,
+                    "y": 0.2063743621110916,
+                    "z": -0.00065964664099738,
+                    "w": 0.9784641861915588
+                  },
+                  "speed": 0.5889234105079355,
+                  "penetration": 0,
+                  "contacts": 5,
+                  "centreOccupied": false,
+                  "boundaryOverhang": 0,
+                  "wheelContacts": 4,
+                  "minimumChassisY": 0.3430161474039962
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "corner",
+          "placement": "controlled mesh-derived clear test start; NOT generic runtime spawn",
+          "attempts": [
+            {
+              "candidate": {
+                "x": -256.59013832193153,
+                "z": -19.36978841207515,
+                "yaw": -0.7668847224328567,
+                "corner": {
+                  "x": -262.8351966812985,
+                  "z": -12.889105879494128
+                }
+              },
+              "initial": {
+                "x": -256.59013832193153,
+                "z": -19.36978841207515,
+                "yaw": -0.7668847224328567,
+                "speed": 8,
+                "steering": 0
+              },
+              "maximumPenetration": 0,
+              "contactFrames": 190,
+              "occupiedFrames": 0,
+              "minimumChassisY": 0.3353172995048994,
+              "maximumBoundaryOverhang": 0,
+              "maximumSpeed": 7.984022275077711,
+              "recoveries": 0,
+              "final": {
+                "position": {
+                  "x": -261.3066711425781,
+                  "y": 0.8001079559326172,
+                  "z": -14.478333473205566
+                },
+                "rotation": {
+                  "x": -0.000011720822840288747,
+                  "y": -0.3740229308605194,
+                  "z": -0.000007900315722508822,
+                  "w": 0.9274194240570068
+                },
+                "speed": -0.0011397545587034227,
+                "penetration": 0,
+                "contacts": 8,
+                "centreOccupied": false,
+                "boundaryOverhang": 0,
+                "wheelContacts": 4,
+                "minimumChassisY": 0.350041239933697
+              },
+              "traces": [
+                {
+                  "position": {
+                    "x": -256.68267822265625,
+                    "y": 0.8098394870758057,
+                    "z": -19.273780822753906
+                  },
+                  "rotation": {
+                    "x": -0.00020289076201152056,
+                    "y": -0.3741150498390198,
+                    "z": -0.00008184007310774177,
+                    "w": 0.9273822903633118
+                  },
+                  "speed": 7.984022275077711,
+                  "penetration": 0,
+                  "contacts": 0,
+                  "centreOccupied": false,
+                  "boundaryOverhang": 0,
+                  "wheelContacts": 4,
+                  "minimumChassisY": 0.3588769056743911
+                },
+                {
+                  "position": {
+                    "x": -261.30328369140625,
+                    "y": 0.810238242149353,
+                    "z": -14.479372024536133
+                  },
+                  "rotation": {
+                    "x": -0.004771464038640261,
+                    "y": -0.37410950660705566,
+                    "z": -0.0019251001067459583,
+                    "w": 0.9273703694343567
+                  },
+                  "speed": -0.2694807987480155,
+                  "penetration": 0,
+                  "contacts": 8,
+                  "centreOccupied": false,
+                  "boundaryOverhang": 0,
+                  "wheelContacts": 4,
+                  "minimumChassisY": 0.33762311073590645
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "queries": [
+        {
+          "kind": "roof-centroid occupied point",
+          "triangle": 0,
+          "box": {
+            "minimumX": -113.81211442227605,
+            "maximumX": -113.81211442227605,
+            "minimumZ": 324.22685262347835,
+            "maximumZ": 324.22685262347835,
+            "minimumY": 0.1,
+            "maximumY": 1
+          },
+          "occupied": true
+        }
+      ],
+      "motion": {
+        "sequence": [
+          {
+            "steps": 120,
+            "command": {
+              "throttle": 1,
+              "steering": 0,
+              "brake": 0
+            }
+          },
+          {
+            "steps": 60,
+            "command": {
+              "throttle": 0,
+              "steering": 0,
+              "brake": 0
+            }
+          },
+          {
+            "steps": 120,
+            "command": {
+              "throttle": 0,
+              "steering": 0,
+              "brake": 1
+            }
+          },
+          {
+            "steps": 120,
+            "command": {
+              "throttle": -1,
+              "steering": 0,
+              "brake": 0
+            }
+          },
+          {
+            "steps": 120,
+            "command": {
+              "throttle": 0,
+              "steering": 0,
+              "brake": 1
+            }
+          }
+        ],
+        "frames": [
+          {
+            "position": {
+              "x": -77.66471099853516,
+              "y": 0.8089219927787781,
+              "z": 217.3641815185547
+            },
+            "rotation": {
+              "x": -0.0037471302784979343,
+              "y": 0.7141993641853333,
+              "z": 0.0038233224768191576,
+              "w": 0.6999219059944153
+            },
+            "speed": 5.8130195623827285,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.335392866452779,
+            "fullyPaved": true
+          },
+          {
+            "position": {
+              "x": -72.18131256103516,
+              "y": 0.8089643120765686,
+              "z": 217.2533416748047
+            },
+            "rotation": {
+              "x": -1.4651760693595861e-8,
+              "y": 0.7142094373703003,
+              "z": 1.1682186773498415e-8,
+              "w": 0.6999320983886719
+            },
+            "speed": 5.1572858662133205,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.3589642256666235,
+            "fullyPaved": true
+          },
+          {
+            "position": {
+              "x": -70.56644439697266,
+              "y": 0.8089643716812134,
+              "z": 217.2208709716797
+            },
+            "rotation": {
+              "x": 0.00002790549842757173,
+              "y": 0.714209258556366,
+              "z": -0.000028270582333789207,
+              "w": 0.699932336807251
+            },
+            "speed": 0.000005671545084489077,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.35878930584175445,
+            "fullyPaved": true
+          },
+          {
+            "position": {
+              "x": -75.16361236572266,
+              "y": 0.8089219927787781,
+              "z": 217.3116912841797
+            },
+            "rotation": {
+              "x": 0.003746920730918646,
+              "y": 0.7141991257667542,
+              "z": -0.003823532722890377,
+              "w": 0.6999221444129944
+            },
+            "speed": -2.9930763000164977,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.3353929375976622,
+            "fullyPaved": true
+          },
+          {
+            "position": {
+              "x": -75.70975494384766,
+              "y": 0.8089643120765686,
+              "z": 217.3226776123047
+            },
+            "rotation": {
+              "x": -0.00000861444823385682,
+              "y": 0.7142089605331421,
+              "z": 0.000008842369425110519,
+              "w": 0.6999325752258301
+            },
+            "speed": -0.0000017625476013906608,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.3589099218585431,
+            "fullyPaved": true
+          }
+        ],
+        "offroadFrames": 0,
+        "fullyPavedFrames": 540,
+        "minimumWheelContacts": 4,
+        "maximumSpeed": 5.8130195623827285,
+        "occupiedFrames": 0,
+        "recoveries": 0
+      },
+      "reset": {
+        "state": {
+          "status": "ready",
+          "message": "Vehicle reset to the revalidated start. Send neutral before driving.",
+          "resets": 1,
+          "recoveries": 0,
+          "inputReady": false
+        },
+        "pose": {
+          "position": {
+            "x": -83.77054595947266,
+            "y": 1.0199999809265137,
+            "z": 217.4877166748047
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0.7142094373703003,
+            "z": 0,
+            "w": 0.6999320387840271
+          },
+          "wheels": [
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            },
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            },
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            },
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            }
+          ]
+        },
+        "linear": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "angular": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "heldAccepted": false
+      },
+      "stationaryContact": {
+        "steps": 600,
+        "maximumPenetration": 0,
+        "occupiedFrames": 0,
+        "final": {
+          "position": {
+            "x": -181.6885986328125,
+            "y": 0.8089644908905029,
+            "z": 224.10595703125
+          },
+          "rotation": {
+            "x": 1.2476969457608789e-9,
+            "y": 0.01017729565501213,
+            "z": 3.2676306105372532e-9,
+            "w": 0.999948263168335
+          },
+          "speed": 1.7338573394182815e-10,
+          "penetration": 0,
+          "contacts": 4,
+          "centreOccupied": false,
+          "boundaryOverhang": 0,
+          "wheelContacts": 4,
+          "minimumChassisY": 0.3589644789869257
+        }
+      },
+      "stuckReset": {
+        "state": {
+          "status": "ready",
+          "message": "Vehicle reset to the revalidated start. Send neutral before driving.",
+          "resets": 3,
+          "recoveries": 0,
+          "inputReady": false
+        },
+        "pose": {
+          "position": {
+            "x": -83.77054595947266,
+            "y": 1.0199999809265137,
+            "z": 217.4877166748047
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0.7142094373703003,
+            "z": 0,
+            "w": 0.6999320387840271
+          },
+          "wheels": [
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            },
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            },
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            },
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            }
+          ]
+        }
+      },
+      "offroad": {
+        "sequence": [
+          {
+            "steps": 60,
+            "command": {
+              "throttle": 1,
+              "steering": 0,
+              "brake": 0
+            }
+          },
+          {
+            "steps": 90,
+            "command": {
+              "throttle": 1,
+              "steering": 1,
+              "brake": 0
+            }
+          },
+          {
+            "steps": 120,
+            "command": {
+              "throttle": 0,
+              "steering": 1,
+              "brake": 1
+            }
+          },
+          {
+            "steps": 190,
+            "command": {
+              "throttle": -1,
+              "steering": 1,
+              "brake": 0
+            }
+          },
+          {
+            "steps": 120,
+            "command": {
+              "throttle": 0,
+              "steering": 1,
+              "brake": 1
+            }
+          }
+        ],
+        "frames": [
+          {
+            "position": {
+              "x": -82.1705093383789,
+              "y": 0.8089219331741333,
+              "z": 217.4553680419922
+            },
+            "rotation": {
+              "x": -0.0037471377290785313,
+              "y": 0.7141993641853333,
+              "z": 0.0038233224768191576,
+              "w": 0.6999219059944153
+            },
+            "speed": 3.0801450492387836,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.33539277331075923,
+            "fullyPaved": true
+          },
+          {
+            "position": {
+              "x": -76.70511627197266,
+              "y": 0.8088786005973816,
+              "z": 213.3381805419922
+            },
+            "rotation": {
+              "x": 0.0047051250003278255,
+              "y": 0.956065833568573,
+              "z": 0.005990799516439438,
+              "w": 0.2930532693862915
+            },
+            "speed": 6.087502237240427,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.32728827594493637,
+            "fullyPaved": false
+          },
+          {
+            "position": {
+              "x": -76.1941909790039,
+              "y": 0.8089644312858582,
+              "z": 211.1117401123047
+            },
+            "rotation": {
+              "x": -0.00012044086179230362,
+              "y": 0.9921758770942688,
+              "z": -0.00009582928032614291,
+              "w": 0.12484792619943619
+            },
+            "speed": 0.000011428219286417695,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.35834933947986414,
+            "fullyPaved": false
+          },
+          {
+            "position": {
+              "x": -80.65616607666016,
+              "y": 0.8089106678962708,
+              "z": 217.1975555419922
+            },
+            "rotation": {
+              "x": 0.0011418359354138374,
+              "y": 0.7463358640670776,
+              "z": -0.005915130488574505,
+              "w": 0.6655421853065491
+            },
+            "speed": -2.9195772150817354,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.33000587803885506,
+            "fullyPaved": true
+          },
+          {
+            "position": {
+              "x": -81.20218658447266,
+              "y": 0.8089644312858582,
+              "z": 217.3608856201172
+            },
+            "rotation": {
+              "x": 0.000009642179065849632,
+              "y": 0.7166751623153687,
+              "z": 0.000034690412576310337,
+              "w": 0.6974071860313416
+            },
+            "speed": -0.000002589584106847871,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.35882242132487113,
+            "fullyPaved": true
+          }
+        ],
+        "offroadFrames": 286,
+        "fullyPavedFrames": 203,
+        "minimumWheelContacts": 4,
+        "maximumSpeed": 6.087502237240427,
+        "occupiedFrames": 0,
+        "recoveries": 0
+      }
+    },
+    {
+      "id": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43",
+      "label": "Cambridge centre",
+      "sha256": "6dea8e06c7a3f40ac306b07236dcbd3779ba8cf4e87caaa3e490069217760cd4",
+      "envelope": {
+        "minimumX": -349.0244140625,
+        "maximumX": 349.0246887207031,
+        "minimumZ": -349.0119934082031,
+        "maximumZ": 348.9880065917969
+      },
+      "start": {
+        "pose": {
+          "position": {
+            "x": 152.41670111327755,
+            "y": 1.02,
+            "z": -318.1046747868087
+          },
+          "rotation": {
+            "x": 0,
+            "y": -0.9995778563429596,
+            "z": 0,
+            "w": 0.029053555872108148
+          }
+        },
+        "attempts": 2,
+        "rejections": {
+          "boundary": 1,
+          "pavement": 1
+        }
+      },
+      "contacts": [
+        {
+          "kind": "head",
+          "placement": "controlled mesh-derived clear test start; NOT generic runtime spawn",
+          "attempts": [
+            {
+              "candidate": {
+                "x": -215.98305234770945,
+                "z": 78.81457958170115,
+                "yaw": -3.034350477446664,
+                "wall": {
+                  "a": {
+                    "x": -182.64889816201978,
+                    "y": 29,
+                    "z": 65.16820316828591
+                  },
+                  "b": {
+                    "x": -251.4579411535589,
+                    "y": 0,
+                    "z": 72.57585465551921
+                  },
+                  "nx": 0.10703673100798995,
+                  "nz": 0.9942550669798587,
+                  "length": 69.20663044801263
+                }
+              },
+              "initial": {
+                "x": -215.98305234770945,
+                "z": 78.81457958170115,
+                "yaw": -3.034350477446664,
+                "speed": 8,
+                "steering": 0
+              },
+              "maximumPenetration": 0.004561500158160925,
+              "contactFrames": 182,
+              "occupiedFrames": 0,
+              "minimumChassisY": 0.33531736111147176,
+              "maximumBoundaryOverhang": 0,
+              "maximumSpeed": 7.984023342044988,
+              "recoveries": 0,
+              "final": {
+                "position": {
+                  "x": -216.82110595703125,
+                  "y": 0.800104558467865,
+                  "z": 71.06491088867188
+                },
+                "rotation": {
+                  "x": 0.001353538129478693,
+                  "y": -0.998561441898346,
+                  "z": 0.000015777179214637727,
+                  "w": 0.05360362306237221
+                },
+                "speed": -0.00871246915802242,
+                "penetration": 0,
+                "contacts": 4,
+                "centreOccupied": false,
+                "boundaryOverhang": 0,
+                "wheelContacts": 4,
+                "minimumChassisY": 0.3470161572719929
+              },
+              "traces": [
+                {
+                  "position": {
+                    "x": -215.99732971191406,
+                    "y": 0.8098394870758057,
+                    "z": 78.68201446533203
+                  },
+                  "rotation": {
+                    "x": -0.000011725371223292314,
+                    "y": -0.998562753200531,
+                    "z": -0.00021846243180334568,
+                    "w": 0.053595397621393204
+                  },
+                  "speed": 7.984023342044988,
+                  "penetration": 0,
+                  "contacts": 0,
+                  "centreOccupied": false,
+                  "boundaryOverhang": 0,
+                  "wheelContacts": 4,
+                  "minimumChassisY": 0.35887691178639486
+                },
+                {
+                  "position": {
+                    "x": -216.82203674316406,
+                    "y": 0.8135141134262085,
+                    "z": 71.06230926513672
+                  },
+                  "rotation": {
+                    "x": -0.000260379136307165,
+                    "y": -0.998553991317749,
+                    "z": -0.00418422557413578,
+                    "w": 0.05359501764178276
+                  },
+                  "speed": -0.11126852908149135,
+                  "penetration": 0.004561500158160925,
+                  "contacts": 5,
+                  "centreOccupied": false,
+                  "boundaryOverhang": 0,
+                  "wheelContacts": 4,
+                  "minimumChassisY": 0.3450130606914222
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "glancing",
+          "placement": "controlled mesh-derived clear test start; NOT generic runtime spawn",
+          "attempts": [
+            {
+              "candidate": {
+                "x": -215.98305234770945,
+                "z": 78.81457958170115,
+                "yaw": -3.034350477446664,
+                "wall": {
+                  "a": {
+                    "x": -182.64889816201978,
+                    "y": 29,
+                    "z": 65.16820316828591
+                  },
+                  "b": {
+                    "x": -251.4579411535589,
+                    "y": 0,
+                    "z": 72.57585465551921
+                  },
+                  "nx": 0.10703673100798995,
+                  "nz": 0.9942550669798587,
+                  "length": 69.20663044801263
+                }
+              },
+              "initial": {
+                "x": -215.98305234770945,
+                "z": 78.81457958170115,
+                "yaw": -2.634350477446664,
+                "speed": 8,
+                "steering": 0
+              },
+              "maximumPenetration": 0,
+              "contactFrames": 148,
+              "occupiedFrames": 0,
+              "minimumChassisY": 0.30024870006964666,
+              "maximumBoundaryOverhang": 0,
+              "maximumSpeed": 7.984022475911152,
+              "recoveries": 0,
+              "final": {
+                "position": {
+                  "x": -220.53121948242188,
+                  "y": 0.8012906908988953,
+                  "z": 71.46436309814453
+                },
+                "rotation": {
+                  "x": 0.008627488277852535,
+                  "y": -0.9985228776931763,
+                  "z": -0.00048281002091243863,
+                  "w": 0.053641024976968765
+                },
+                "speed": -0.0054819075071825705,
+                "penetration": 0,
+                "contacts": 4,
+                "centreOccupied": false,
+                "boundaryOverhang": 0,
+                "wheelContacts": 4,
+                "minimumChassisY": 0.3339916432347902
+              },
+              "traces": [
+                {
+                  "position": {
+                    "x": -216.04786682128906,
+                    "y": 0.8098394870758057,
+                    "z": 78.69806671142578
+                  },
+                  "rotation": {
+                    "x": -0.00005489376781042665,
+                    "y": -0.9680101871490479,
+                    "z": -0.00021177800954319537,
+                    "w": 0.25091084837913513
+                  },
+                  "speed": 7.984022475911152,
+                  "penetration": 0,
+                  "contacts": 0,
+                  "centreOccupied": false,
+                  "boundaryOverhang": 0,
+                  "wheelContacts": 4,
+                  "minimumChassisY": 0.35887691196489613
+                },
+                {
+                  "position": {
+                    "x": -219.9954071044922,
+                    "y": 0.8131968379020691,
+                    "z": 71.62333679199219
+                  },
+                  "rotation": {
+                    "x": 0.0004737969138659537,
+                    "y": -0.9685757160186768,
+                    "z": -0.004165174905210733,
+                    "w": 0.24868349730968475
+                  },
+                  "speed": 0.5888657113083791,
+                  "penetration": 0,
+                  "contacts": 5,
+                  "centreOccupied": false,
+                  "boundaryOverhang": 0,
+                  "wheelContacts": 4,
+                  "minimumChassisY": 0.34299078496871377
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "corner",
+          "placement": "controlled mesh-derived clear test start; NOT generic runtime spawn",
+          "attempts": [
+            {
+              "candidate": {
+                "x": 38.67529335653057,
+                "z": 147.05376674306328,
+                "yaw": -1.7962341151864185,
+                "corner": {
+                  "x": 29.90302629398559,
+                  "z": 145.04196889452368
+                }
+              },
+              "initial": {
+                "x": 38.67529335653057,
+                "z": 147.05376674306328,
+                "yaw": -1.7962341151864185,
+                "speed": 8,
+                "steering": 0
+              },
+              "maximumPenetration": 0,
+              "contactFrames": 190,
+              "occupiedFrames": 0,
+              "minimumChassisY": 0.3353172584527956,
+              "maximumBoundaryOverhang": 0,
+              "maximumSpeed": 7.984022050003002,
+              "recoveries": 0,
+              "final": {
+                "position": {
+                  "x": 32.052146911621094,
+                  "y": 0.7998356819152832,
+                  "z": 145.53558349609375
+                },
+                "rotation": {
+                  "x": -4.482812983042095e-7,
+                  "y": -0.7822854518890381,
+                  "z": 0.000028525306333904155,
+                  "w": 0.6229200959205627
+                },
+                "speed": -0.0001106307726003203,
+                "penetration": 0,
+                "contacts": 8,
+                "centreOccupied": false,
+                "boundaryOverhang": 0,
+                "wheelContacts": 4,
+                "minimumChassisY": 0.3497024862764005
+              },
+              "traces": [
+                {
+                  "position": {
+                    "x": 38.545318603515625,
+                    "y": 0.8098394870758057,
+                    "z": 147.02398681640625
+                  },
+                  "rotation": {
+                    "x": -0.00013631634647026658,
+                    "y": -0.7821550369262695,
+                    "z": -0.0001711172953946516,
+                    "w": 0.6230838298797607
+                  },
+                  "speed": 7.984022050003002,
+                  "penetration": 0,
+                  "contacts": 0,
+                  "centreOccupied": false,
+                  "boundaryOverhang": 0,
+                  "wheelContacts": 4,
+                  "minimumChassisY": 0.35887691218906437
+                },
+                {
+                  "position": {
+                    "x": 32.05491638183594,
+                    "y": 0.8102661967277527,
+                    "z": 145.53663635253906
+                  },
+                  "rotation": {
+                    "x": -0.00320317386649549,
+                    "y": -0.7821472883224487,
+                    "z": -0.004019784741103649,
+                    "w": 0.6230725646018982
+                  },
+                  "speed": -0.2694307929282748,
+                  "penetration": 0,
+                  "contacts": 8,
+                  "centreOccupied": false,
+                  "boundaryOverhang": 0,
+                  "wheelContacts": 4,
+                  "minimumChassisY": 0.33767305812955045
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "queries": [
+        {
+          "kind": "roof-centroid occupied point",
+          "triangle": 0,
+          "box": {
+            "minimumX": 210.67352003238057,
+            "maximumX": 210.67352003238057,
+            "minimumZ": 61.52479817805133,
+            "maximumZ": 61.52479817805133,
+            "minimumY": 0.1,
+            "maximumY": 1
+          },
+          "occupied": true
+        }
+      ],
+      "motion": {
+        "sequence": [
+          {
+            "steps": 120,
+            "command": {
+              "throttle": 1,
+              "steering": 0,
+              "brake": 0
+            }
+          },
+          {
+            "steps": 60,
+            "command": {
+              "throttle": 0,
+              "steering": 0,
+              "brake": 0
+            }
+          },
+          {
+            "steps": 120,
+            "command": {
+              "throttle": 0,
+              "steering": 0,
+              "brake": 1
+            }
+          },
+          {
+            "steps": 120,
+            "command": {
+              "throttle": -1,
+              "steering": 0,
+              "brake": 0
+            }
+          },
+          {
+            "steps": 120,
+            "command": {
+              "throttle": 0,
+              "steering": 0,
+              "brake": 1
+            }
+          }
+        ],
+        "frames": [
+          {
+            "position": {
+              "x": 152.0622100830078,
+              "y": 0.8089219927787781,
+              "z": -324.19940185546875
+            },
+            "rotation": {
+              "x": -0.00015510086086578667,
+              "y": -0.9995635747909546,
+              "z": -0.005350979510694742,
+              "w": 0.0290530938655138
+            },
+            "speed": 5.813009131950527,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.3353930638147308,
+            "fullyPaved": true
+          },
+          {
+            "position": {
+              "x": 151.7437286376953,
+              "y": 0.8089644908905029,
+              "z": -329.67449951171875
+            },
+            "rotation": {
+              "x": 6.5002256910418055e-9,
+              "y": -0.9995779395103455,
+              "z": -2.622357975212708e-8,
+              "w": 0.029053539037704468
+            },
+            "speed": 5.157276433247079,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.35896436186767167,
+            "fullyPaved": true
+          },
+          {
+            "position": {
+              "x": 151.6501007080078,
+              "y": 0.8089643120765686,
+              "z": -331.28582763671875
+            },
+            "rotation": {
+              "x": 0.0000012370951480988879,
+              "y": -0.9995778799057007,
+              "z": 0.000039698883483652025,
+              "w": 0.029053546488285065
+            },
+            "speed": 0.000005670855402123691,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.35878938763890017,
+            "fullyPaved": true
+          },
+          {
+            "position": {
+              "x": 151.9186553955078,
+              "y": 0.8089220523834229,
+              "z": -326.70257568359375
+            },
+            "rotation": {
+              "x": 0.00015511148376390338,
+              "y": -0.9995636343955994,
+              "z": 0.0053509813733398914,
+              "w": 0.029053086414933205
+            },
+            "speed": -2.993077205750219,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.33539313371851015,
+            "fullyPaved": true
+          },
+          {
+            "position": {
+              "x": 151.9501495361328,
+              "y": 0.8089643120765686,
+              "z": -326.15765380859375
+            },
+            "rotation": {
+              "x": -4.0438169435219606e-7,
+              "y": -0.9995778799057007,
+              "z": -0.000012415133824106306,
+              "w": 0.029053544625639915
+            },
+            "speed": -0.00000177352008263835,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.35890956997651324,
+            "fullyPaved": true
+          }
+        ],
+        "offroadFrames": 0,
+        "fullyPavedFrames": 540,
+        "minimumWheelContacts": 4,
+        "maximumSpeed": 5.813009131950527,
+        "occupiedFrames": 0,
+        "recoveries": 0
+      },
+      "reset": {
+        "state": {
+          "status": "ready",
+          "message": "Vehicle reset to the revalidated start. Send neutral before driving.",
+          "resets": 1,
+          "recoveries": 0,
+          "inputReady": false
+        },
+        "pose": {
+          "position": {
+            "x": 152.4167022705078,
+            "y": 1.0199999809265137,
+            "z": -318.10467529296875
+          },
+          "rotation": {
+            "x": 0,
+            "y": -0.9995778799057007,
+            "z": 0,
+            "w": 0.02905355580151081
+          },
+          "wheels": [
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            },
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            },
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            },
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            }
+          ]
+        },
+        "linear": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "angular": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "heldAccepted": false
+      },
+      "stationaryContact": {
+        "steps": 600,
+        "maximumPenetration": 0,
+        "occupiedFrames": 0,
+        "final": {
+          "position": {
+            "x": -216.82110595703125,
+            "y": 0.8089642524719238,
+            "z": 71.06491088867188
+          },
+          "rotation": {
+            "x": 3.0177244036977413e-10,
+            "y": -0.9985622763633728,
+            "z": -2.384558772661194e-9,
+            "w": 0.053604330867528915
+          },
+          "speed": -3.37659565500171e-10,
+          "penetration": 0,
+          "contacts": 5,
+          "centreOccupied": false,
+          "boundaryOverhang": 0,
+          "wheelContacts": 4,
+          "minimumChassisY": 0.3589642412078031
+        }
+      },
+      "stuckReset": {
+        "state": {
+          "status": "ready",
+          "message": "Vehicle reset to the revalidated start. Send neutral before driving.",
+          "resets": 3,
+          "recoveries": 0,
+          "inputReady": false
+        },
+        "pose": {
+          "position": {
+            "x": 152.4167022705078,
+            "y": 1.0199999809265137,
+            "z": -318.10467529296875
+          },
+          "rotation": {
+            "x": 0,
+            "y": -0.9995778799057007,
+            "z": 0,
+            "w": 0.02905355580151081
+          },
+          "wheels": [
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            },
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            },
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            },
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            }
+          ]
+        }
+      },
+      "offroad": {
+        "sequence": [
+          {
+            "steps": 60,
+            "command": {
+              "throttle": 1,
+              "steering": 0,
+              "brake": 0
+            }
+          },
+          {
+            "steps": 90,
+            "command": {
+              "throttle": 1,
+              "steering": 1,
+              "brake": 0
+            }
+          },
+          {
+            "steps": 120,
+            "command": {
+              "throttle": 0,
+              "steering": 1,
+              "brake": 1
+            }
+          },
+          {
+            "steps": 160,
+            "command": {
+              "throttle": -1,
+              "steering": 1,
+              "brake": 0
+            }
+          },
+          {
+            "steps": 120,
+            "command": {
+              "throttle": 0,
+              "steering": 1,
+              "brake": 1
+            }
+          }
+        ],
+        "frames": [
+          {
+            "position": {
+              "x": 152.3239288330078,
+              "y": 0.8089219927787781,
+              "z": -319.70184326171875
+            },
+            "rotation": {
+              "x": -0.00015509911463595927,
+              "y": -0.9995635747909546,
+              "z": -0.00535096088424325,
+              "w": 0.0290530938655138
+            },
+            "speed": 3.080161465493822,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.33539314337006015,
+            "fullyPaved": true
+          },
+          {
+            "position": {
+              "x": 148.9408721923828,
+              "y": 0.8599820137023926,
+              "z": -324.8277587890625
+            },
+            "rotation": {
+              "x": 0.014292865991592407,
+              "y": -0.8825612664222717,
+              "z": -0.001772045623511076,
+              "w": 0.4699767529964447
+            },
+            "speed": -0.2510691745921687,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 3,
+            "minimumChassisY": 0.36059954288422674,
+            "fullyPaved": false
+          },
+          {
+            "position": {
+              "x": 149.0390167236328,
+              "y": 0.8089643120765686,
+              "z": -324.9134521484375
+            },
+            "rotation": {
+              "x": -0.000004493801952776266,
+              "y": -0.8685662746429443,
+              "z": -2.2350880612975743e-7,
+              "w": 0.49557310342788696
+            },
+            "speed": -3.456827127533788e-7,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.35894607428085107,
+            "fullyPaved": false
+          },
+          {
+            "position": {
+              "x": 153.3909454345703,
+              "y": 0.8089107275009155,
+              "z": -320.4056396484375
+            },
+            "rotation": {
+              "x": 0.003231910290196538,
+              "y": -0.9995699524879456,
+              "z": 0.005084027070552111,
+              "w": 0.028700489550828934
+            },
+            "speed": -2.919577856387691,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.3300059464585129,
+            "fullyPaved": true
+          },
+          {
+            "position": {
+              "x": 153.5227813720703,
+              "y": 0.8089644312858582,
+              "z": -319.8509521484375
+            },
+            "rotation": {
+              "x": -0.00003066864883294329,
+              "y": -0.9998900294303894,
+              "z": -0.00001863140641944483,
+              "w": -0.014836423099040985
+            },
+            "speed": -0.0000025948666596350212,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.35882258192992084,
+            "fullyPaved": true
+          }
+        ],
+        "offroadFrames": 158,
+        "fullyPavedFrames": 295,
+        "minimumWheelContacts": 3,
+        "maximumSpeed": 5.844968100163906,
+        "occupiedFrames": 0,
+        "recoveries": 0
+      }
+    },
+    {
+      "id": "cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a",
+      "label": "London Tower Bridge",
+      "sha256": "5f4887e391bafe1ded5e82519e42ceaaed35998655810b61b1f4019571cfb00d",
+      "envelope": {
+        "minimumX": -374.02801513671875,
+        "maximumX": 374.0014953613281,
+        "minimumZ": -374.0140075683594,
+        "maximumZ": 373.9859924316406
+      },
+      "start": {
+        "pose": {
+          "position": {
+            "x": 85.47010788395892,
+            "y": 1.02,
+            "z": -255.52688148377655
+          },
+          "rotation": {
+            "x": 0,
+            "y": -0.06553389061106005,
+            "z": 0,
+            "w": 0.9978503440804025
+          }
+        },
+        "attempts": 5,
+        "rejections": {
+          "building": 2,
+          "boundary": 2,
+          "pavement": 1
+        }
+      },
+      "contacts": [
+        {
+          "kind": "head",
+          "placement": "controlled mesh-derived clear test start; NOT generic runtime spawn",
+          "attempts": [
+            {
+              "candidate": {
+                "x": 56.77058134017442,
+                "z": -257.41280323883564,
+                "yaw": -1.6353103656114776,
+                "wall": {
+                  "a": {
+                    "x": 50.53652546278641,
+                    "y": 12,
+                    "z": -316.02850257965247
+                  },
+                  "b": {
+                    "x": 43.04624339598138,
+                    "y": 0,
+                    "z": -200.08648982266502
+                  },
+                  "nx": 0.9979196910790518,
+                  "nz": 0.06446929623231472,
+                  "length": 116.18371076696485
+                }
+              },
+              "initial": {
+                "x": 56.77058134017442,
+                "z": -257.41280323883564,
+                "yaw": -1.6353103656114776,
+                "speed": 8,
+                "steering": 0
+              },
+              "maximumPenetration": 0.004524019546806812,
+              "contactFrames": 182,
+              "occupiedFrames": 0,
+              "minimumChassisY": 0.33531741173452845,
+              "maximumBoundaryOverhang": 0,
+              "maximumSpeed": 7.984022941962199,
+              "recoveries": 0,
+              "final": {
+                "position": {
+                  "x": 48.99158477783203,
+                  "y": 0.7999972105026245,
+                  "z": -257.9074401855469
+                },
+                "rotation": {
+                  "x": 0.0011694823624566197,
+                  "y": -0.7295269966125488,
+                  "z": -0.0009704892872832716,
+                  "w": 0.6839503049850464
+                },
+                "speed": -0.019454506400835195,
+                "penetration": 0,
+                "contacts": 5,
+                "centreOccupied": false,
+                "boundaryOverhang": 0,
+                "wheelContacts": 4,
+                "minimumChassisY": 0.34656119168092536
+              },
+              "traces": [
+                {
+                  "position": {
+                    "x": 56.63752365112305,
+                    "y": 0.8098394870758057,
+                    "z": -257.4213562011719
+                  },
+                  "rotation": {
+                    "x": -0.00014962884597480297,
+                    "y": -0.7295441627502441,
+                    "z": -0.0001596074434928596,
+                    "w": 0.6839337348937988
+                  },
+                  "speed": 7.984022941962199,
+                  "penetration": 0,
+                  "contacts": 0,
+                  "centreOccupied": false,
+                  "boundaryOverhang": 0,
+                  "wheelContacts": 4,
+                  "minimumChassisY": 0.3588769116907193
+                },
+                {
+                  "position": {
+                    "x": 48.98884582519531,
+                    "y": 0.813543438911438,
+                    "z": -257.9089050292969
+                  },
+                  "rotation": {
+                    "x": -0.0028861146420240402,
+                    "y": -0.7295348644256592,
+                    "z": -0.0030234779696911573,
+                    "w": 0.6839309334754944
+                  },
+                  "speed": -0.10793320465180806,
+                  "penetration": 0.004524019546806812,
+                  "contacts": 5,
+                  "centreOccupied": false,
+                  "boundaryOverhang": 0,
+                  "wheelContacts": 4,
+                  "minimumChassisY": 0.34509342363607987
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "glancing",
+          "placement": "controlled mesh-derived clear test start; NOT generic runtime spawn",
+          "attempts": [
+            {
+              "candidate": {
+                "x": 56.77058134017442,
+                "z": -257.41280323883564,
+                "yaw": -1.6353103656114776,
+                "wall": {
+                  "a": {
+                    "x": 50.53652546278641,
+                    "y": 12,
+                    "z": -316.02850257965247
+                  },
+                  "b": {
+                    "x": 43.04624339598138,
+                    "y": 0,
+                    "z": -200.08648982266502
+                  },
+                  "nx": 0.9979196910790518,
+                  "nz": 0.06446929623231472,
+                  "length": 116.18371076696485
+                }
+              },
+              "initial": {
+                "x": 56.77058134017442,
+                "z": -257.41280323883564,
+                "yaw": -1.2353103656114777,
+                "speed": 8,
+                "steering": 0
+              },
+              "maximumPenetration": 0,
+              "contactFrames": 148,
+              "occupiedFrames": 0,
+              "minimumChassisY": 0.3002093617076418,
+              "maximumBoundaryOverhang": 0,
+              "maximumSpeed": 7.984022354578643,
+              "recoveries": 0,
+              "final": {
+                "position": {
+                  "x": 48.75099563598633,
+                  "y": 0.8017741441726685,
+                  "z": -254.18653869628906
+                },
+                "rotation": {
+                  "x": 0.006389756221324205,
+                  "y": -0.7295058369636536,
+                  "z": -0.005942930467426777,
+                  "w": 0.6839188933372498
+                },
+                "speed": 0.007702540607227979,
+                "penetration": 0,
+                "contacts": 5,
+                "centreOccupied": false,
+                "boundaryOverhang": 0,
+                "wheelContacts": 4,
+                "minimumChassisY": 0.3342384238904051
+              },
+              "traces": [
+                {
+                  "position": {
+                    "x": 56.64469528198242,
+                    "y": 0.8098394870758057,
+                    "z": -257.3688659667969
+                  },
+                  "rotation": {
+                    "x": -0.00017835576727520674,
+                    "y": -0.579125165939331,
+                    "z": -0.00012669869465753436,
+                    "w": 0.8152386546134949
+                  },
+                  "speed": 7.984022354578643,
+                  "penetration": 0,
+                  "contacts": 0,
+                  "centreOccupied": false,
+                  "boundaryOverhang": 0,
+                  "wheelContacts": 4,
+                  "minimumChassisY": 0.35887691043229464
+                },
+                {
+                  "position": {
+                    "x": 48.9994010925293,
+                    "y": 0.8132325410842896,
+                    "z": -254.68893432617188
+                  },
+                  "rotation": {
+                    "x": -0.0023016249760985374,
+                    "y": -0.5810056328773499,
+                    "z": -0.003494044067338109,
+                    "w": 0.8138888478279114
+                  },
+                  "speed": 0.5889065584379788,
+                  "penetration": 0,
+                  "contacts": 5,
+                  "centreOccupied": false,
+                  "boundaryOverhang": 0,
+                  "wheelContacts": 4,
+                  "minimumChassisY": 0.3430606482628093
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "corner",
+          "placement": "controlled mesh-derived clear test start; NOT generic runtime spawn",
+          "attempts": [
+            {
+              "candidate": {
+                "x": -135.17673955455476,
+                "z": 365.3727624090656,
+                "yaw": -0.025107156047758754,
+                "corner": {
+                  "x": -135.40268021956282,
+                  "z": 374.3699258962929
+                }
+              },
+              "initial": {
+                "x": -135.17673955455476,
+                "z": 365.3727624090656,
+                "yaw": -0.025107156047758754,
+                "speed": 8,
+                "steering": 0
+              },
+              "maximumPenetration": 0.14677906036376953,
+              "contactFrames": 168,
+              "occupiedFrames": 0,
+              "minimumChassisY": 0.3141919997100737,
+              "maximumBoundaryOverhang": 0.002794360492771375,
+              "maximumSpeed": 7.984022190372756,
+              "recoveries": 0,
+              "final": {
+                "position": {
+                  "x": -135.63595581054688,
+                  "y": 0.8002212643623352,
+                  "z": 371.6399230957031
+                },
+                "rotation": {
+                  "x": -0.0007700916030444205,
+                  "y": 0.08752600848674774,
+                  "z": 0.010796375572681427,
+                  "w": 0.9961034655570984
+                },
+                "speed": 0.0018567375537556531,
+                "penetration": 0,
+                "contacts": 5,
+                "centreOccupied": false,
+                "boundaryOverhang": 0,
+                "wheelContacts": 4,
+                "minimumChassisY": 0.32141985536562545
+              },
+              "traces": [
+                {
+                  "position": {
+                    "x": -135.18003845214844,
+                    "y": 0.8098394870758057,
+                    "z": 365.5060729980469
+                  },
+                  "rotation": {
+                    "x": -0.0002187595673603937,
+                    "y": -0.012553248554468155,
+                    "z": -0.000002746359996308456,
+                    "w": 0.9999212026596069
+                  },
+                  "speed": 7.984022190372756,
+                  "penetration": 0,
+                  "contacts": 0,
+                  "centreOccupied": false,
+                  "boundaryOverhang": 0,
+                  "wheelContacts": 4,
+                  "minimumChassisY": 0.358876912208149
+                },
+                {
+                  "position": {
+                    "x": -135.33963012695312,
+                    "y": 0.8112356066703796,
+                    "z": 371.7562561035156
+                  },
+                  "rotation": {
+                    "x": -0.004950905684381723,
+                    "y": -0.01156537514179945,
+                    "z": -0.00006556097650900483,
+                    "w": 0.9999209642410278
+                  },
+                  "speed": 0.3095863739066622,
+                  "penetration": 0,
+                  "contacts": 5,
+                  "centreOccupied": false,
+                  "boundaryOverhang": 0.002794360492771375,
+                  "wheelContacts": 4,
+                  "minimumChassisY": 0.3394554778909934
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "queries": [
+        {
+          "kind": "roof-centroid occupied point",
+          "triangle": 0,
+          "box": {
+            "minimumX": -336.405853145822,
+            "maximumX": -336.405853145822,
+            "minimumZ": -103.27705441749136,
+            "maximumZ": -103.27705441749136,
+            "minimumY": 0.1,
+            "maximumY": 1
+          },
+          "occupied": true
+        }
+      ],
+      "motion": {
+        "sequence": [
+          {
+            "steps": 120,
+            "command": {
+              "throttle": 1,
+              "steering": 0,
+              "brake": 0
+            }
+          },
+          {
+            "steps": 60,
+            "command": {
+              "throttle": 0,
+              "steering": 0,
+              "brake": 0
+            }
+          },
+          {
+            "steps": 120,
+            "command": {
+              "throttle": 0,
+              "steering": 0,
+              "brake": 1
+            }
+          },
+          {
+            "steps": 120,
+            "command": {
+              "throttle": -1,
+              "steering": 0,
+              "brake": 0
+            }
+          },
+          {
+            "steps": 120,
+            "command": {
+              "throttle": 0,
+              "steering": 0,
+              "brake": 1
+            }
+          }
+        ],
+        "frames": [
+          {
+            "position": {
+              "x": 84.67140197753906,
+              "y": 0.8089220523834229,
+              "z": -249.47244262695312
+            },
+            "rotation": {
+              "x": -0.005341821815818548,
+              "y": -0.06553280353546143,
+              "z": -0.00035102336551062763,
+              "w": 0.9978361129760742
+            },
+            "speed": 5.813027350923221,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.3353930748178271,
+            "fullyPaved": true
+          },
+          {
+            "position": {
+              "x": 83.95393371582031,
+              "y": 0.8089642524719238,
+              "z": -244.03494262695312
+            },
+            "rotation": {
+              "x": -2.3052365349940374e-8,
+              "y": -0.06553377956151962,
+              "z": -5.047041007344433e-9,
+              "w": 0.9978503584861755
+            },
+            "speed": 5.157292018159422,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.3589641427532823,
+            "fullyPaved": true
+          },
+          {
+            "position": {
+              "x": 83.74263000488281,
+              "y": 0.8089644312858582,
+              "z": -242.43374633789062
+            },
+            "rotation": {
+              "x": 0.000039657868910580873,
+              "y": -0.06553374975919724,
+              "z": 0.000002567937372077722,
+              "w": 0.9978504180908203
+            },
+            "speed": 0.000005674102803634727,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.35878949969070345,
+            "fullyPaved": true
+          },
+          {
+            "position": {
+              "x": 84.34352111816406,
+              "y": 0.8089219331741333,
+              "z": -246.99160766601562
+            },
+            "rotation": {
+              "x": 0.005341837648302317,
+              "y": -0.06553265452384949,
+              "z": 0.0003506844805087894,
+              "w": 0.9978360533714294
+            },
+            "speed": -2.9930761155556453,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.3353931054768338,
+            "fullyPaved": true
+          },
+          {
+            "position": {
+              "x": 84.41499328613281,
+              "y": 0.8089643716812134,
+              "z": -247.53311157226562
+            },
+            "rotation": {
+              "x": -0.00001232528029504465,
+              "y": -0.06553362309932709,
+              "z": -7.904268386482727e-7,
+              "w": 0.9978504180908203
+            },
+            "speed": -0.0000017633758330663886,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.3589099912566807,
+            "fullyPaved": true
+          }
+        ],
+        "offroadFrames": 0,
+        "fullyPavedFrames": 540,
+        "minimumWheelContacts": 4,
+        "maximumSpeed": 5.813027350923221,
+        "occupiedFrames": 0,
+        "recoveries": 0
+      },
+      "reset": {
+        "state": {
+          "status": "ready",
+          "message": "Vehicle reset to the revalidated start. Send neutral before driving.",
+          "resets": 1,
+          "recoveries": 0,
+          "inputReady": false
+        },
+        "pose": {
+          "position": {
+            "x": 85.47010803222656,
+            "y": 1.0199999809265137,
+            "z": -255.52688598632812
+          },
+          "rotation": {
+            "x": 0,
+            "y": -0.06553389132022858,
+            "z": 0,
+            "w": 0.9978503584861755
+          },
+          "wheels": [
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            },
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            },
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            },
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            }
+          ]
+        },
+        "linear": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "angular": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "heldAccepted": false
+      },
+      "stationaryContact": {
+        "steps": 600,
+        "maximumPenetration": 0,
+        "occupiedFrames": 0,
+        "final": {
+          "position": {
+            "x": 48.99158477783203,
+            "y": 0.8089643120765686,
+            "z": -257.9074401855469
+          },
+          "rotation": {
+            "x": 3.092335054688533e-9,
+            "y": -0.7295262217521667,
+            "z": 1.4541510218180065e-9,
+            "w": 0.6839528679847717
+          },
+          "speed": 4.5344032124654946e-10,
+          "penetration": 0,
+          "contacts": 5,
+          "centreOccupied": false,
+          "boundaryOverhang": 0,
+          "wheelContacts": 4,
+          "minimumChassisY": 0.35896429558007914
+        }
+      },
+      "stuckReset": {
+        "state": {
+          "status": "ready",
+          "message": "Vehicle reset to the revalidated start. Send neutral before driving.",
+          "resets": 3,
+          "recoveries": 0,
+          "inputReady": false
+        },
+        "pose": {
+          "position": {
+            "x": 85.47010803222656,
+            "y": 1.0199999809265137,
+            "z": -255.52688598632812
+          },
+          "rotation": {
+            "x": 0,
+            "y": -0.06553389132022858,
+            "z": 0,
+            "w": 0.9978503584861755
+          },
+          "wheels": [
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            },
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            },
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            },
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+      "label": "Lucca historic centre",
+      "sha256": "8eff07f47eba43f30f5084232c0f4bfd086f6cc740660ad9435f6493c044e3cf",
+      "envelope": {
+        "minimumX": -349.0164489746094,
+        "maximumX": 349.0157165527344,
+        "minimumZ": -349.0090026855469,
+        "maximumZ": 348.9909973144531
+      },
+      "start": {
+        "pose": {
+          "position": {
+            "x": -318.1946648150051,
+            "y": 1.02,
+            "z": 319.0031438932979
+          },
+          "rotation": {
+            "x": 0,
+            "y": -0.7310018984258919,
+            "z": 0,
+            "w": 0.6823754278238205
+          }
+        },
+        "attempts": 1,
+        "rejections": {}
+      },
+      "contacts": [
+        {
+          "kind": "head",
+          "placement": "controlled mesh-derived clear test start; NOT generic runtime spawn",
+          "attempts": [
+            {
+              "candidate": {
+                "x": -274.31207381583414,
+                "z": -289.3707674664351,
+                "yaw": -1.8139937283781005,
+                "wall": {
+                  "a": {
+                    "x": -294.2120151890371,
+                    "y": 12,
+                    "z": -250.6910817648433
+                  },
+                  "b": {
+                    "x": -273.8235920470331,
+                    "y": 0,
+                    "z": -332.86659644108965
+                  },
+                  "nx": 0.9705729802201032,
+                  "nz": 0.24080716365313362,
+                  "length": 84.66701252863116
+                }
+              },
+              "initial": {
+                "x": -274.31207381583414,
+                "z": -289.3707674664351,
+                "yaw": -1.8139937283781005,
+                "speed": 8,
+                "steering": 0
+              },
+              "maximumPenetration": 0.004761866293847561,
+              "contactFrames": 182,
+              "occupiedFrames": 0,
+              "minimumChassisY": 0.33531732561249095,
+              "maximumBoundaryOverhang": 0,
+              "maximumSpeed": 7.984022602460836,
+              "recoveries": 0,
+              "final": {
+                "position": {
+                  "x": -281.8775939941406,
+                  "y": 0.8004016280174255,
+                  "z": -291.2481689453125
+                },
+                "rotation": {
+                  "x": 0.0004316131817176938,
+                  "y": -0.7876520752906799,
+                  "z": -0.0002121529687428847,
+                  "w": 0.6161201000213623
+                },
+                "speed": -0.00305825673821285,
+                "penetration": 0,
+                "contacts": 4,
+                "centreOccupied": false,
+                "boundaryOverhang": 0,
+                "wheelContacts": 4,
+                "minimumChassisY": 0.34902567027855885
+              },
+              "traces": [
+                {
+                  "position": {
+                    "x": -274.44146728515625,
+                    "y": 0.8098394870758057,
+                    "z": -289.4029846191406
+                  },
+                  "rotation": {
+                    "x": -0.0001347912329947576,
+                    "y": -0.7876570224761963,
+                    "z": -0.0001723212335491553,
+                    "w": 0.6161139607429504
+                  },
+                  "speed": 7.984022602460836,
+                  "penetration": 0,
+                  "contacts": 0,
+                  "centreOccupied": false,
+                  "boundaryOverhang": 0,
+                  "wheelContacts": 4,
+                  "minimumChassisY": 0.3588769117630836
+                },
+                {
+                  "position": {
+                    "x": -281.8793029785156,
+                    "y": 0.8133786916732788,
+                    "z": -291.252197265625
+                  },
+                  "rotation": {
+                    "x": -0.0025970893912017345,
+                    "y": -0.7876235246658325,
+                    "z": -0.003254472743719816,
+                    "w": 0.6161428093910217
+                  },
+                  "speed": -0.16319063249434995,
+                  "penetration": 0.004761866293847561,
+                  "contacts": 5,
+                  "centreOccupied": false,
+                  "boundaryOverhang": 0,
+                  "wheelContacts": 4,
+                  "minimumChassisY": 0.34499437716415526
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "glancing",
+          "placement": "controlled mesh-derived clear test start; NOT generic runtime spawn",
+          "attempts": [
+            {
+              "candidate": {
+                "x": -274.31207381583414,
+                "z": -289.3707674664351,
+                "yaw": -1.8139937283781005,
+                "wall": {
+                  "a": {
+                    "x": -294.2120151890371,
+                    "y": 12,
+                    "z": -250.6910817648433
+                  },
+                  "b": {
+                    "x": -273.8235920470331,
+                    "y": 0,
+                    "z": -332.86659644108965
+                  },
+                  "nx": 0.9705729802201032,
+                  "nz": 0.24080716365313362,
+                  "length": 84.66701252863116
+                }
+              },
+              "initial": {
+                "x": -274.31207381583414,
+                "z": -289.3707674664351,
+                "yaw": -1.4139937283781006,
+                "speed": 8,
+                "steering": 0
+              },
+              "maximumPenetration": 0,
+              "contactFrames": 147,
+              "occupiedFrames": 0,
+              "minimumChassisY": 0.30066128398633984,
+              "maximumBoundaryOverhang": 0,
+              "maximumSpeed": 7.98402252502304,
+              "recoveries": 0,
+              "final": {
+                "position": {
+                  "x": -282.7753601074219,
+                  "y": 0.8016949892044067,
+                  "z": -287.62908935546875
+                },
+                "rotation": {
+                  "x": 0.006402135826647282,
+                  "y": -0.7875933051109314,
+                  "z": -0.0049377731047570705,
+                  "w": 0.6161423325538635
+                },
+                "speed": -0.012010037279094377,
+                "penetration": 0,
+                "contacts": 5,
+                "centreOccupied": false,
+                "boundaryOverhang": 0,
+                "wheelContacts": 4,
+                "minimumChassisY": 0.3353395731552041
+              },
+              "traces": [
+                {
+                  "position": {
+                    "x": -274.44366455078125,
+                    "y": 0.8098394870758057,
+                    "z": -289.3500061035156
+                  },
+                  "rotation": {
+                    "x": -0.00016633972700219601,
+                    "y": -0.6495533585548401,
+                    "z": -0.00014210700464900583,
+                    "w": 0.760316014289856
+                  },
+                  "speed": 7.98402252502304,
+                  "penetration": 0,
+                  "contacts": 0,
+                  "centreOccupied": false,
+                  "boundaryOverhang": 0,
+                  "wheelContacts": 4,
+                  "minimumChassisY": 0.358876911461121
+                },
+                {
+                  "position": {
+                    "x": -282.4411926269531,
+                    "y": 0.8127695322036743,
+                    "z": -288.079345703125
+                  },
+                  "rotation": {
+                    "x": -0.002204315271228552,
+                    "y": -0.6511139869689941,
+                    "z": -0.0036848473828285933,
+                    "w": 0.7589677572250366
+                  },
+                  "speed": 0.5894000777277648,
+                  "penetration": 0,
+                  "contacts": 5,
+                  "centreOccupied": false,
+                  "boundaryOverhang": 0,
+                  "wheelContacts": 4,
+                  "minimumChassisY": 0.3421453423918888
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "corner",
+          "placement": "controlled mesh-derived clear test start; NOT generic runtime spawn",
+          "attempts": [
+            {
+              "candidate": {
+                "x": -266.1765313483107,
+                "z": -337.61238011399917,
+                "yaw": -1.0153656343825344,
+                "corner": {
+                  "x": -273.8235920470331,
+                  "z": -332.86659644108965
+                }
+              },
+              "initial": {
+                "x": -266.1765313483107,
+                "z": -337.61238011399917,
+                "yaw": -1.0153656343825344,
+                "speed": 8,
+                "steering": 0
+              },
+              "maximumPenetration": 0,
+              "contactFrames": 190,
+              "occupiedFrames": 0,
+              "minimumChassisY": 0.33531708639530683,
+              "maximumBoundaryOverhang": 0,
+              "maximumSpeed": 7.984022168497985,
+              "recoveries": 0,
+              "final": {
+                "position": {
+                  "x": -271.9503479003906,
+                  "y": 0.8001380562782288,
+                  "z": -334.03021240234375
+                },
+                "rotation": {
+                  "x": 0.000006933635631867219,
+                  "y": -0.4862257242202759,
+                  "z": 0.000026593766961013898,
+                  "w": 0.8738332390785217
+                },
+                "speed": -0.009621091268772905,
+                "penetration": 0,
+                "contacts": 8,
+                "centreOccupied": false,
+                "boundaryOverhang": 0,
+                "wheelContacts": 4,
+                "minimumChassisY": 0.35001476912148366
+              },
+              "traces": [
+                {
+                  "position": {
+                    "x": -266.2898254394531,
+                    "y": 0.8098394870758057,
+                    "z": -337.54205322265625
+                  },
+                  "rotation": {
+                    "x": -0.00019118320778943598,
+                    "y": -0.48615363240242004,
+                    "z": -0.00010635910439305007,
+                    "w": 0.8738733530044556
+                  },
+                  "speed": 7.984022168497985,
+                  "penetration": 0,
+                  "contacts": 0,
+                  "centreOccupied": false,
+                  "boundaryOverhang": 0,
+                  "wheelContacts": 4,
+                  "minimumChassisY": 0.35887691229188756
+                },
+                {
+                  "position": {
+                    "x": -271.9471435546875,
+                    "y": 0.8101728558540344,
+                    "z": -334.0306701660156
+                  },
+                  "rotation": {
+                    "x": -0.004507543984800577,
+                    "y": -0.4861467480659485,
+                    "z": -0.0025063720531761646,
+                    "w": 0.8738619685173035
+                  },
+                  "speed": -0.2695769908610125,
+                  "penetration": 0,
+                  "contacts": 8,
+                  "centreOccupied": false,
+                  "boundaryOverhang": 0,
+                  "wheelContacts": 4,
+                  "minimumChassisY": 0.3375018685703574
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "queries": [
+        {
+          "kind": "roof-centroid occupied point",
+          "triangle": 0,
+          "box": {
+            "minimumX": -75.08302970646663,
+            "maximumX": -75.08302970646663,
+            "minimumZ": -0.7041173846507965,
+            "maximumZ": -0.7041173846507965,
+            "minimumY": 0.1,
+            "maximumY": 1
+          },
+          "occupied": true
+        }
+      ],
+      "motion": {
+        "sequence": [
+          {
+            "steps": 120,
+            "command": {
+              "throttle": 1,
+              "steering": 0,
+              "brake": 0
+            }
+          },
+          {
+            "steps": 60,
+            "command": {
+              "throttle": 0,
+              "steering": 0,
+              "brake": 0
+            }
+          },
+          {
+            "steps": 120,
+            "command": {
+              "throttle": 0,
+              "steering": 0,
+              "brake": 1
+            }
+          },
+          {
+            "steps": 120,
+            "command": {
+              "throttle": -1,
+              "steering": 0,
+              "brake": 0
+            }
+          },
+          {
+            "steps": 120,
+            "command": {
+              "throttle": 0,
+              "steering": 0,
+              "brake": 1
+            }
+          }
+        ],
+        "frames": [
+          {
+            "position": {
+              "x": -324.2872009277344,
+              "y": 0.8089219331741333,
+              "z": 318.5829772949219
+            },
+            "rotation": {
+              "x": -0.0036532501690089703,
+              "y": -0.7309920787811279,
+              "z": -0.003913039807230234,
+              "w": 0.6823649406433105
+            },
+            "speed": 5.813026294722858,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.33539266983442434,
+            "fullyPaved": true
+          },
+          {
+            "position": {
+              "x": -329.7583923339844,
+              "y": 0.8089642524719238,
+              "z": 318.2062683105469
+            },
+            "rotation": {
+              "x": -1.5589906254831476e-8,
+              "y": -0.7310019731521606,
+              "z": -2.0354852026116532e-8,
+              "w": 0.6823753714561462
+            },
+            "speed": 5.157290649282972,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.3589641352076672,
+            "fullyPaved": true
+          },
+          {
+            "position": {
+              "x": -331.3692321777344,
+              "y": 0.8089644312858582,
+              "z": 318.0954284667969
+            },
+            "rotation": {
+              "x": 0.000027409076210460626,
+              "y": -0.7310010194778442,
+              "z": 0.000028746173484250903,
+              "w": 0.6823764443397522
+            },
+            "speed": 0.000005670647526720711,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.3587888381272967,
+            "fullyPaved": true
+          },
+          {
+            "position": {
+              "x": -326.7864685058594,
+              "y": 0.8089219331741333,
+              "z": 318.4106140136719
+            },
+            "rotation": {
+              "x": 0.0036528557538986206,
+              "y": -0.7309911251068115,
+              "z": 0.003913413267582655,
+              "w": 0.6823659539222717
+            },
+            "speed": -2.9930760118051976,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.33539305485525533,
+            "fullyPaved": true
+          },
+          {
+            "position": {
+              "x": -326.2420349121094,
+              "y": 0.8089643120765686,
+              "z": 318.4479675292969
+            },
+            "rotation": {
+              "x": -0.00000864575122250244,
+              "y": -0.7310001254081726,
+              "z": -0.000008908889867598191,
+              "w": 0.6823773384094238
+            },
+            "speed": -0.0000017721533722022852,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.3589092174909303,
+            "fullyPaved": true
+          }
+        ],
+        "offroadFrames": 0,
+        "fullyPavedFrames": 540,
+        "minimumWheelContacts": 4,
+        "maximumSpeed": 5.813026294722858,
+        "occupiedFrames": 0,
+        "recoveries": 0
+      },
+      "reset": {
+        "state": {
+          "status": "ready",
+          "message": "Vehicle reset to the revalidated start. Send neutral before driving.",
+          "resets": 1,
+          "recoveries": 0,
+          "inputReady": false
+        },
+        "pose": {
+          "position": {
+            "x": -318.1946716308594,
+            "y": 1.0199999809265137,
+            "z": 319.0031433105469
+          },
+          "rotation": {
+            "x": 0,
+            "y": -0.7310019135475159,
+            "z": 0,
+            "w": 0.682375431060791
+          },
+          "wheels": [
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            },
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            },
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            },
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            }
+          ]
+        },
+        "linear": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "angular": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "heldAccepted": false
+      },
+      "stationaryContact": {
+        "steps": 600,
+        "maximumPenetration": 0,
+        "occupiedFrames": 0,
+        "final": {
+          "position": {
+            "x": -281.8775939941406,
+            "y": 0.8089644312858582,
+            "z": -291.2481689453125
+          },
+          "rotation": {
+            "x": 4.761357974558678e-9,
+            "y": -0.7876549363136292,
+            "z": 1.0238913050741871e-9,
+            "w": 0.6161167025566101
+          },
+          "speed": 5.339881716050947e-10,
+          "penetration": 0,
+          "contacts": 5,
+          "centreOccupied": false,
+          "boundaryOverhang": 0,
+          "wheelContacts": 4,
+          "minimumChassisY": 0.35896440859080603
+        }
+      },
+      "stuckReset": {
+        "state": {
+          "status": "ready",
+          "message": "Vehicle reset to the revalidated start. Send neutral before driving.",
+          "resets": 3,
+          "recoveries": 0,
+          "inputReady": false
+        },
+        "pose": {
+          "position": {
+            "x": -318.1946716308594,
+            "y": 1.0199999809265137,
+            "z": 319.0031433105469
+          },
+          "rotation": {
+            "x": 0,
+            "y": -0.7310019135475159,
+            "z": 0,
+            "w": 0.682375431060791
+          },
+          "wheels": [
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            },
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            },
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            },
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "trafalgar-square-london",
+      "label": "Trafalgar Square, London",
+      "sha256": "3636dcb2c69face98dea581333c9309ed5c021364a0b953074b1a98c19e2fc6a",
+      "envelope": {
+        "minimumX": -500.6645812988281,
+        "maximumX": 500.6169128417969,
+        "minimumZ": -499.35198974609375,
+        "maximumZ": 499.302001953125
+      },
+      "start": {
+        "pose": {
+          "position": {
+            "x": -448.627529192787,
+            "y": 1.02,
+            "z": 413.0413833055337
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0.8807038390261838,
+            "z": 0,
+            "w": 0.4736673388830413
+          }
+        },
+        "attempts": 1,
+        "rejections": {}
+      },
+      "contacts": [
+        {
+          "kind": "head",
+          "placement": "controlled mesh-derived clear test start; NOT generic runtime spawn",
+          "attempts": [
+            {
+              "candidate": {
+                "x": -308.75636058678674,
+                "z": 271.7626394794878,
+                "yaw": -2.6188047178599376,
+                "wall": {
+                  "a": {
+                    "x": -375.72646179491215,
+                    "y": 12,
+                    "z": 298.8138704914228
+                  },
+                  "b": {
+                    "x": -251.77221193440457,
+                    "y": 0,
+                    "z": 227.38279768784963
+                  },
+                  "nx": 0.4992976277871584,
+                  "nz": 0.8664305389851606,
+                  "length": 143.06311271725676
+                }
+              },
+              "initial": {
+                "x": -308.75636058678674,
+                "z": 271.7626394794878,
+                "yaw": -2.6188047178599376,
+                "speed": 8,
+                "steering": 0
+              },
+              "maximumPenetration": 0.004494576249271631,
+              "contactFrames": 182,
+              "occupiedFrames": 0,
+              "minimumChassisY": 0.33531724833962745,
+              "maximumBoundaryOverhang": 0,
+              "maximumSpeed": 7.984022250199175,
+              "recoveries": 0,
+              "final": {
+                "position": {
+                  "x": -312.6558837890625,
+                  "y": 0.8004418015480042,
+                  "z": 265.0132141113281
+                },
+                "rotation": {
+                  "x": 0.0014203049940988421,
+                  "y": -0.9660322070121765,
+                  "z": -0.00036957216798327863,
+                  "w": 0.258417546749115
+                },
+                "speed": 0.00038145839251399927,
+                "penetration": 0,
+                "contacts": 5,
+                "centreOccupied": false,
+                "boundaryOverhang": 0,
+                "wheelContacts": 4,
+                "minimumChassisY": 0.3474645537041851
+              },
+              "traces": [
+                {
+                  "position": {
+                    "x": -308.822998046875,
+                    "y": 0.8098394870758057,
+                    "z": 271.64715576171875
+                  },
+                  "rotation": {
+                    "x": -0.00005653790140058845,
+                    "y": -0.9660306572914124,
+                    "z": -0.00021134500275366008,
+                    "w": 0.2584274113178253
+                  },
+                  "speed": 7.984022250199175,
+                  "penetration": 0,
+                  "contacts": 0,
+                  "centreOccupied": false,
+                  "boundaryOverhang": 0,
+                  "wheelContacts": 4,
+                  "minimumChassisY": 0.35887691268466215
+                },
+                {
+                  "position": {
+                    "x": -312.657470703125,
+                    "y": 0.8135426640510559,
+                    "z": 265.0111389160156
+                  },
+                  "rotation": {
+                    "x": -0.001111083896830678,
+                    "y": -0.9660211801528931,
+                    "z": -0.004004018846899271,
+                    "w": 0.2584294378757477
+                  },
+                  "speed": -0.1031096129433823,
+                  "penetration": 0.004494576249271631,
+                  "contacts": 5,
+                  "centreOccupied": false,
+                  "boundaryOverhang": 0,
+                  "wheelContacts": 4,
+                  "minimumChassisY": 0.34519859886874055
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "glancing",
+          "placement": "controlled mesh-derived clear test start; NOT generic runtime spawn",
+          "attempts": [
+            {
+              "candidate": {
+                "x": -308.75636058678674,
+                "z": 271.7626394794878,
+                "yaw": -2.6188047178599376,
+                "wall": {
+                  "a": {
+                    "x": -375.72646179491215,
+                    "y": 12,
+                    "z": 298.8138704914228
+                  },
+                  "b": {
+                    "x": -251.77221193440457,
+                    "y": 0,
+                    "z": 227.38279768784963
+                  },
+                  "nx": 0.4992976277871584,
+                  "nz": 0.8664305389851606,
+                  "length": 143.06311271725676
+                }
+              },
+              "initial": {
+                "x": -308.75636058678674,
+                "z": 271.7626394794878,
+                "yaw": -2.2188047178599377,
+                "speed": 8,
+                "steering": 0
+              },
+              "maximumPenetration": 0.00007053627632558346,
+              "contactFrames": 148,
+              "occupiedFrames": 0,
+              "minimumChassisY": 0.2999512250761413,
+              "maximumBoundaryOverhang": 0,
+              "maximumSpeed": 7.984022577258257,
+              "recoveries": 0,
+              "final": {
+                "position": {
+                  "x": -315.8758850097656,
+                  "y": 0.801759660243988,
+                  "z": 266.86895751953125
+                },
+                "rotation": {
+                  "x": 0.008355394005775452,
+                  "y": -0.9659854769706726,
+                  "z": -0.002149243140593171,
+                  "w": 0.258452445268631
+                },
+                "speed": -0.017312614930526736,
+                "penetration": 0,
+                "contacts": 4,
+                "centreOccupied": false,
+                "boundaryOverhang": 0,
+                "wheelContacts": 4,
+                "minimumChassisY": 0.33420664494792196
+              },
+              "traces": [
+                {
+                  "position": {
+                    "x": -308.862548828125,
+                    "y": 0.8098394870758057,
+                    "z": 271.68206787109375
+                  },
+                  "rotation": {
+                    "x": -0.00009739929373608902,
+                    "y": -0.8954327702522278,
+                    "z": -0.0001958995417226106,
+                    "w": 0.4451967477798462
+                  },
+                  "speed": 7.984022577258257,
+                  "penetration": 0,
+                  "contacts": 0,
+                  "centreOccupied": false,
+                  "boundaryOverhang": 0,
+                  "wheelContacts": 4,
+                  "minimumChassisY": 0.35887691123181475
+                },
+                {
+                  "position": {
+                    "x": -315.3204040527344,
+                    "y": 0.8135126233100891,
+                    "z": 266.79718017578125
+                  },
+                  "rotation": {
+                    "x": -0.00025506780366413295,
+                    "y": -0.8965228199958801,
+                    "z": -0.004113472998142242,
+                    "w": 0.44297850131988525
+                  },
+                  "speed": 0.5883561273680864,
+                  "penetration": 0.00007053627632558346,
+                  "contacts": 5,
+                  "centreOccupied": false,
+                  "boundaryOverhang": 0,
+                  "wheelContacts": 4,
+                  "minimumChassisY": 0.3436173258142361
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "corner",
+          "placement": "controlled mesh-derived clear test start; NOT generic runtime spawn",
+          "attempts": [
+            {
+              "candidate": {
+                "x": -377.98999095672235,
+                "z": 307.524578598898,
+                "yaw": 2.887359546716123,
+                "corner": {
+                  "x": -375.72646179491215,
+                  "z": 298.8138704914228
+                }
+              },
+              "initial": {
+                "x": -377.98999095672235,
+                "z": 307.524578598898,
+                "yaw": 2.887359546716123,
+                "speed": 8,
+                "steering": 0
+              },
+              "maximumPenetration": 0,
+              "contactFrames": 190,
+              "occupiedFrames": 0,
+              "minimumChassisY": 0.335316805991534,
+              "maximumBoundaryOverhang": 0,
+              "maximumSpeed": 7.984022632787093,
+              "recoveries": 0,
+              "final": {
+                "position": {
+                  "x": -376.2865905761719,
+                  "y": 0.7996869087219238,
+                  "z": 300.9468688964844
+                },
+                "rotation": {
+                  "x": 0.00010511425352888182,
+                  "y": 0.9917876720428467,
+                  "z": -0.0001335089618805796,
+                  "w": 0.1278952658176422
+                },
+                "speed": -0.01919936234659578,
+                "penetration": 0,
+                "contacts": 9,
+                "centreOccupied": false,
+                "boundaryOverhang": 0,
+                "wheelContacts": 4,
+                "minimumChassisY": 0.3488708159001882
+              },
+              "traces": [
+                {
+                  "position": {
+                    "x": -377.95654296875,
+                    "y": 0.8098394870758057,
+                    "z": 307.3954162597656
+                  },
+                  "rotation": {
+                    "x": -0.000027735441108234227,
+                    "y": 0.9919315576553345,
+                    "z": 0.00021701144578401,
+                    "w": 0.12677448987960815
+                  },
+                  "speed": 7.984022632787093,
+                  "penetration": 0,
+                  "contacts": 0,
+                  "centreOccupied": false,
+                  "boundaryOverhang": 0,
+                  "wheelContacts": 4,
+                  "minimumChassisY": 0.3588769126142668
+                },
+                {
+                  "position": {
+                    "x": -376.287109375,
+                    "y": 0.8107149600982666,
+                    "z": 300.94927978515625
+                  },
+                  "rotation": {
+                    "x": -0.000632993585895747,
+                    "y": 0.9919184446334839,
+                    "z": 0.005013568792492151,
+                    "w": 0.12677669525146484
+                  },
+                  "speed": -0.26876858574357404,
+                  "penetration": 0,
+                  "contacts": 9,
+                  "centreOccupied": false,
+                  "boundaryOverhang": 0,
+                  "wheelContacts": 4,
+                  "minimumChassisY": 0.33848797080435816
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "queries": [
+        {
+          "kind": "roof-centroid occupied point",
+          "triangle": 0,
+          "box": {
+            "minimumX": -387.1488123288761,
+            "maximumX": -387.1488123288761,
+            "minimumZ": 278.2043279905129,
+            "maximumZ": 278.2043279905129,
+            "minimumY": 0.1,
+            "maximumY": 1
+          },
+          "occupied": true
+        }
+      ],
+      "motion": {
+        "sequence": [
+          {
+            "steps": 120,
+            "command": {
+              "throttle": 1,
+              "steering": 0,
+              "brake": 0
+            }
+          },
+          {
+            "steps": 60,
+            "command": {
+              "throttle": 0,
+              "steering": 0,
+              "brake": 0
+            }
+          },
+          {
+            "steps": 120,
+            "command": {
+              "throttle": 0,
+              "steering": 0,
+              "brake": 1
+            }
+          },
+          {
+            "steps": 120,
+            "command": {
+              "throttle": -1,
+              "steering": 0,
+              "brake": 0
+            }
+          },
+          {
+            "steps": 120,
+            "command": {
+              "throttle": 0,
+              "steering": 0,
+              "brake": 1
+            }
+          }
+        ],
+        "frames": [
+          {
+            "position": {
+              "x": -443.5310974121094,
+              "y": 0.8089219331741333,
+              "z": 409.6763916015625
+            },
+            "rotation": {
+              "x": -0.002535320818424225,
+              "y": 0.8806915879249573,
+              "z": 0.0047147939912974834,
+              "w": 0.473659873008728
+            },
+            "speed": 5.813029662732028,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.3353930783505221,
+            "fullyPaved": true
+          },
+          {
+            "position": {
+              "x": -438.9551696777344,
+              "y": 0.8089643120765686,
+              "z": 406.6529541015625
+            },
+            "rotation": {
+              "x": -2.1548663298176507e-8,
+              "y": 0.8807040452957153,
+              "z": 2.0170942249819745e-8,
+              "w": 0.47366705536842346
+            },
+            "speed": 5.1572983588210874,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.35896417015450294,
+            "fullyPaved": true
+          },
+          {
+            "position": {
+              "x": -437.6075134277344,
+              "y": 0.8089643716812134,
+              "z": 405.7625732421875
+            },
+            "rotation": {
+              "x": 0.000019052467905567028,
+              "y": 0.8807041645050049,
+              "z": -0.00003483477848931216,
+              "w": 0.47366687655448914
+            },
+            "speed": 0.000005668767161758943,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.35878911799303986,
+            "fullyPaved": true
+          },
+          {
+            "position": {
+              "x": -441.4463806152344,
+              "y": 0.8089219927787781,
+              "z": 408.2974853515625
+            },
+            "rotation": {
+              "x": 0.0025353047531098127,
+              "y": 0.8806918859481812,
+              "z": -0.0047147939912974834,
+              "w": 0.47365936636924744
+            },
+            "speed": -2.9930764702999637,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.33539314882423177,
+            "fullyPaved": true
+          },
+          {
+            "position": {
+              "x": -441.9026794433594,
+              "y": 0.8089643716812134,
+              "z": 408.5985107421875
+            },
+            "rotation": {
+              "x": -0.00000619938828094746,
+              "y": 0.8807040452957153,
+              "z": 0.000010708366971812211,
+              "w": 0.47366708517074585
+            },
+            "speed": -0.000001765767122776296,
+            "penetration": 0,
+            "contacts": 0,
+            "centreOccupied": false,
+            "boundaryOverhang": 0,
+            "wheelContacts": 4,
+            "minimumChassisY": 0.3589091802358061,
+            "fullyPaved": true
+          }
+        ],
+        "offroadFrames": 0,
+        "fullyPavedFrames": 540,
+        "minimumWheelContacts": 4,
+        "maximumSpeed": 5.813029662732028,
+        "occupiedFrames": 0,
+        "recoveries": 0
+      },
+      "reset": {
+        "state": {
+          "status": "ready",
+          "message": "Vehicle reset to the revalidated start. Send neutral before driving.",
+          "resets": 1,
+          "recoveries": 0,
+          "inputReady": false
+        },
+        "pose": {
+          "position": {
+            "x": -448.6275329589844,
+            "y": 1.0199999809265137,
+            "z": 413.0413818359375
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0.880703866481781,
+            "z": 0,
+            "w": 0.47366735339164734
+          },
+          "wheels": [
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            },
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            },
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            },
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            }
+          ]
+        },
+        "linear": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "angular": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "heldAccepted": false
+      },
+      "stationaryContact": {
+        "steps": 600,
+        "maximumPenetration": 0,
+        "occupiedFrames": 0,
+        "final": {
+          "position": {
+            "x": -312.6558837890625,
+            "y": 0.8089643120765686,
+            "z": 265.0132141113281
+          },
+          "rotation": {
+            "x": -4.578602386118291e-9,
+            "y": -0.9660322070121765,
+            "z": 7.761029596764502e-10,
+            "w": 0.2584216594696045
+          },
+          "speed": -6.188979975633528e-11,
+          "penetration": 0,
+          "contacts": 5,
+          "centreOccupied": false,
+          "boundaryOverhang": 0,
+          "wheelContacts": 4,
+          "minimumChassisY": 0.3589643009220241
+        }
+      },
+      "stuckReset": {
+        "state": {
+          "status": "ready",
+          "message": "Vehicle reset to the revalidated start. Send neutral before driving.",
+          "resets": 3,
+          "recoveries": 0,
+          "inputReady": false
+        },
+        "pose": {
+          "position": {
+            "x": -448.6275329589844,
+            "y": 1.0199999809265137,
+            "z": 413.0413818359375
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0.880703866481781,
+            "z": 0,
+            "w": 0.47366735339164734
+          },
+          "wheels": [
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            },
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            },
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            },
+            {
+              "length": 0.5999999570846557,
+              "steering": 0,
+              "rotation": 0
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "controlled": [
+    {
+      "kind": "head",
+      "initial": {
+        "x": 0,
+        "z": -20,
+        "yaw": 0,
+        "speed": 8,
+        "steering": 0
+      },
+      "maximumPenetration": 0.004527099896222353,
+      "contactFrames": 182,
+      "occupiedFrames": 0,
+      "minimumChassisY": 0.3353175060424008,
+      "maximumBoundaryOverhang": 0,
+      "maximumSpeed": 7.984022146725887,
+      "recoveries": 0,
+      "final": {
+        "position": {
+          "x": 0.0004846644005738199,
+          "y": 0.8004962801933289,
+          "z": -12.205046653747559
+        },
+        "rotation": {
+          "x": -3.52296552819098e-7,
+          "y": 0.000003932521394744981,
+          "z": -0.00005407036951510236,
+          "w": 1
+        },
+        "speed": -0.0009493036493319091,
+        "penetration": 0,
+        "contacts": 4,
+        "centreOccupied": false,
+        "boundaryOverhang": 0,
+        "wheelContacts": 4,
+        "minimumChassisY": 0.3503865929136362
+      },
+      "traces": [
+        {
+          "position": {
+            "x": 0,
+            "y": 0.8098394870758057,
+            "z": -19.866668701171875
+          },
+          "rotation": {
+            "x": -0.00021877682593185455,
+            "y": 0,
+            "z": 0,
+            "w": 1
+          },
+          "speed": 7.984022146725887,
+          "penetration": 0,
+          "contacts": 0,
+          "centreOccupied": false,
+          "boundaryOverhang": 0,
+          "wheelContacts": 4,
+          "minimumChassisY": 0.3588769121186751
+        },
+        {
+          "position": {
+            "x": 0.0004199750255793333,
+            "y": 0.8115189671516418,
+            "z": -12.2024507522583
+          },
+          "rotation": {
+            "x": -0.0058692023158073425,
+            "y": -0.00038545660208910704,
+            "z": -0.000012143798812758178,
+            "w": 0.9999827146530151
+          },
+          "speed": -0.04453009195745789,
+          "penetration": 0.004527099896222353,
+          "contacts": 5,
+          "centreOccupied": false,
+          "boundaryOverhang": 0,
+          "wheelContacts": 4,
+          "minimumChassisY": 0.33570614313409397
+        }
+      ]
+    },
+    {
+      "kind": "glancing",
+      "initial": {
+        "x": 0,
+        "z": -20,
+        "yaw": 0.55,
+        "speed": 8,
+        "steering": 0
+      },
+      "maximumPenetration": 0,
+      "contactFrames": 121,
+      "occupiedFrames": 0,
+      "minimumChassisY": 0.3218449240380445,
+      "maximumBoundaryOverhang": 0,
+      "maximumSpeed": 7.984022332952563,
+      "recoveries": 0,
+      "final": {
+        "position": {
+          "x": 5.439785957336426,
+          "y": 0.8002023100852966,
+          "z": -12.345498085021973
+        },
+        "rotation": {
+          "x": -0.0008217970607802272,
+          "y": 0.0872349962592125,
+          "z": 0.010363859124481678,
+          "w": 0.99613356590271
+        },
+        "speed": 0.014454519253713004,
+        "penetration": 0,
+        "contacts": 4,
+        "centreOccupied": false,
+        "boundaryOverhang": 0,
+        "wheelContacts": 4,
+        "minimumChassisY": 0.32221546182004357
+      },
+      "traces": [
+        {
+          "position": {
+            "x": 0.06969165056943893,
+            "y": 0.8098394870758057,
+            "z": -19.886337280273438
+          },
+          "rotation": {
+            "x": -0.00021055657998658717,
+            "y": 0.2715469300746918,
+            "z": 0.00005940778646618128,
+            "w": 0.962425172328949
+          },
+          "speed": 7.984022332952563,
+          "penetration": 0,
+          "contacts": 0,
+          "centreOccupied": false,
+          "boundaryOverhang": 0,
+          "wheelContacts": 4,
+          "minimumChassisY": 0.3588769106640879
+        },
+        {
+          "position": {
+            "x": 4.664064884185791,
+            "y": 0.8122894763946533,
+            "z": -12.40632152557373
+          },
+          "rotation": {
+            "x": -0.004667497240006924,
+            "y": 0.27007314562797546,
+            "z": 0.001530350069515407,
+            "w": 0.9628273248672485
+          },
+          "speed": 0.179651705935717,
+          "penetration": 0,
+          "contacts": 4,
+          "centreOccupied": false,
+          "boundaryOverhang": 0,
+          "wheelContacts": 4,
+          "minimumChassisY": 0.3402932752529738
+        }
+      ]
+    },
+    {
+      "kind": "corner",
+      "initial": {
+        "x": -16,
+        "z": -16,
+        "yaw": 0.7853981633974483,
+        "speed": 8,
+        "steering": 0
+      },
+      "maximumPenetration": 0,
+      "contactFrames": 193,
+      "occupiedFrames": 0,
+      "minimumChassisY": 0.3353174102692422,
+      "maximumBoundaryOverhang": 0,
+      "maximumSpeed": 7.984021910666679,
+      "recoveries": 0,
+      "final": {
+        "position": {
+          "x": -11.559320449829102,
+          "y": 0.7998650074005127,
+          "z": -11.559321403503418
+        },
+        "rotation": {
+          "x": 0.00004325452755438164,
+          "y": 0.3826827108860016,
+          "z": -0.000017825030226958916,
+          "w": 0.923879861831665
+        },
+        "speed": -0.011869164721832194,
+        "penetration": 0,
+        "contacts": 9,
+        "centreOccupied": false,
+        "boundaryOverhang": 0,
+        "wheelContacts": 4,
+        "minimumChassisY": 0.34965899362508174
+      },
+      "traces": [
+        {
+          "position": {
+            "x": -15.905715942382812,
+            "y": 0.8098394870758057,
+            "z": -15.905715942382812
+          },
+          "rotation": {
+            "x": -0.00020212367235217243,
+            "y": 0.3826834261417389,
+            "z": 0.00008372309093829244,
+            "w": 0.9238795042037964
+          },
+          "speed": 7.984021910666679,
+          "penetration": 0,
+          "contacts": 0,
+          "centreOccupied": false,
+          "boundaryOverhang": 0,
+          "wheelContacts": 4,
+          "minimumChassisY": 0.35887690844342696
+        },
+        {
+          "position": {
+            "x": -11.563111305236816,
+            "y": 0.8269218802452087,
+            "z": -11.563111305236816
+          },
+          "rotation": {
+            "x": -0.0011540326522663236,
+            "y": 0.38268256187438965,
+            "z": 0.0004780887975357473,
+            "w": 0.923879086971283
+          },
+          "speed": -0.051415936337638385,
+          "penetration": 0,
+          "contacts": 9,
+          "centreOccupied": false,
+          "boundaryOverhang": 0,
+          "wheelContacts": 4,
+          "minimumChassisY": 0.37142691976223513
+        }
+      ]
+    },
+    {
+      "kind": "reverse",
+      "initial": {
+        "x": 0,
+        "z": -20,
+        "yaw": 3.141592653589793,
+        "speed": -3,
+        "steering": 0
+      },
+      "maximumPenetration": 0,
+      "contactFrames": 85,
+      "occupiedFrames": 0,
+      "minimumChassisY": 0.33531749377609626,
+      "maximumBoundaryOverhang": 0,
+      "maximumSpeed": 2.9940028743145883,
+      "recoveries": 0,
+      "final": {
+        "position": {
+          "x": -0.0008319817716255784,
+          "y": 0.8001769781112671,
+          "z": -12.205121994018555
+        },
+        "rotation": {
+          "x": 0.00007500496576540172,
+          "y": 1,
+          "z": 0.00009254497126676142,
+          "w": -0.000004284240276319906
+        },
+        "speed": 0.005458802034046122,
+        "penetration": 0,
+        "contacts": 4,
+        "centreOccupied": false,
+        "boundaryOverhang": 0,
+        "wheelContacts": 4,
+        "minimumChassisY": 0.34961978245652436
+      },
+      "traces": [
+        {
+          "position": {
+            "x": -6.1232346765161455e-18,
+            "y": 0.8098394870758057,
+            "z": -19.949996948242188
+          },
+          "rotation": {
+            "x": 1.3396248181433103e-20,
+            "y": 1,
+            "z": -0.00021877678227610886,
+            "w": 6.123234262925839e-17
+          },
+          "speed": -2.9940028743145883,
+          "penetration": 0,
+          "contacts": 0,
+          "centreOccupied": false,
+          "boundaryOverhang": 0,
+          "wheelContacts": 4,
+          "minimumChassisY": 0.35887691231074315
+        },
+        {
+          "position": {
+            "x": 0.00021658236801158637,
+            "y": 0.8103182911872864,
+            "z": -12.208430290222168
+          },
+          "rotation": {
+            "x": -3.2106123626363114e-7,
+            "y": 0.999987006187439,
+            "z": -0.005107660312205553,
+            "w": 0.00004678481855080463
+          },
+          "speed": 0.11127218896721115,
+          "penetration": 0,
+          "contacts": 4,
+          "centreOccupied": false,
+          "boundaryOverhang": 0,
+          "wheelContacts": 4,
+          "minimumChassisY": 0.33786723723730894
+        }
+      ]
+    },
+    {
+      "kind": "boundary-east",
+      "initial": {
+        "x": 90,
+        "z": -40,
+        "yaw": 1.5707963267948966,
+        "speed": 8,
+        "steering": 0
+      },
+      "maximumPenetration": 0,
+      "contactFrames": 190,
+      "occupiedFrames": 0,
+      "minimumChassisY": 0.3268712176988322,
+      "maximumBoundaryOverhang": 0.0023032976586421228,
+      "maximumSpeed": 7.984023601690269,
+      "recoveries": 0,
+      "final": {
+        "position": {
+          "x": 96.79469299316406,
+          "y": 0.8013526797294617,
+          "z": -40.04052734375
+        },
+        "rotation": {
+          "x": 0.005001069512218237,
+          "y": 0.7070614695549011,
+          "z": 0.004805149044841528,
+          "w": 0.7071180939674377
+        },
+        "speed": -0.0211863622396561,
+        "penetration": 0,
+        "contacts": 4,
+        "centreOccupied": false,
+        "boundaryOverhang": 0,
+        "wheelContacts": 4,
+        "minimumChassisY": 0.33691745869947304
+      },
+      "traces": [
+        {
+          "position": {
+            "x": 90.13336181640625,
+            "y": 0.8098394870758057,
+            "z": -40
+          },
+          "rotation": {
+            "x": -0.0001546988496556878,
+            "y": 0.7071068286895752,
+            "z": 0.00015469871868845075,
+            "w": 0.7071068286895752
+          },
+          "speed": 7.984023601690269,
+          "penetration": 0,
+          "contacts": 0,
+          "centreOccupied": false,
+          "boundaryOverhang": 0,
+          "wheelContacts": 4,
+          "minimumChassisY": 0.3588769105809081
+        },
+        {
+          "position": {
+            "x": 96.79188537597656,
+            "y": 0.8104015588760376,
+            "z": -39.99959182739258
+          },
+          "rotation": {
+            "x": -0.0036101527512073517,
+            "y": 0.7071402072906494,
+            "z": 0.0036078740376979113,
+            "w": 0.7070549726486206
+          },
+          "speed": -0.31611405487573707,
+          "penetration": 0,
+          "contacts": 4,
+          "centreOccupied": false,
+          "boundaryOverhang": 0.0023032976586421228,
+          "wheelContacts": 4,
+          "minimumChassisY": 0.3379642293681122
+        }
+      ]
+    },
+    {
+      "kind": "boundary-west",
+      "initial": {
+        "x": -90,
+        "z": -40,
+        "yaw": -1.5707963267948966,
+        "speed": 8,
+        "steering": 0
+      },
+      "maximumPenetration": 0,
+      "contactFrames": 190,
+      "occupiedFrames": 0,
+      "minimumChassisY": 0.32706480862914494,
+      "maximumBoundaryOverhang": 0.0023031904725456798,
+      "maximumSpeed": 7.984023601690269,
+      "recoveries": 0,
+      "final": {
+        "position": {
+          "x": -96.79464721679688,
+          "y": 0.8009034991264343,
+          "z": -39.96097183227539
+        },
+        "rotation": {
+          "x": -0.004633793141692877,
+          "y": -0.707120954990387,
+          "z": 0.004849765915423632,
+          "w": 0.7070608139038086
+        },
+        "speed": -0.024414467754368736,
+        "penetration": 0,
+        "contacts": 5,
+        "centreOccupied": false,
+        "boundaryOverhang": 0,
+        "wheelContacts": 4,
+        "minimumChassisY": 0.3368593395903344
+      },
+      "traces": [
+        {
+          "position": {
+            "x": -90.13336181640625,
+            "y": 0.8098394870758057,
+            "z": -40
+          },
+          "rotation": {
+            "x": -0.0001546988496556878,
+            "y": -0.7071068286895752,
+            "z": -0.00015469871868845075,
+            "w": 0.7071068286895752
+          },
+          "speed": 7.984023601690269,
+          "penetration": 0,
+          "contacts": 0,
+          "centreOccupied": false,
+          "boundaryOverhang": 0,
+          "wheelContacts": 4,
+          "minimumChassisY": 0.3588769105809081
+        },
+        {
+          "position": {
+            "x": -96.79188537597656,
+            "y": 0.8104015588760376,
+            "z": -40.00040817260742
+          },
+          "rotation": {
+            "x": -0.0036078777629882097,
+            "y": -0.7070549726486206,
+            "z": -0.00361015391536057,
+            "w": 0.7071402072906494
+          },
+          "speed": -0.31611388889881054,
+          "penetration": 0,
+          "contacts": 4,
+          "centreOccupied": false,
+          "boundaryOverhang": 0.0023031904725456798,
+          "wheelContacts": 4,
+          "minimumChassisY": 0.33796421780874014
+        }
+      ]
+    },
+    {
+      "kind": "boundary-north",
+      "initial": {
+        "x": 35,
+        "z": -50,
+        "yaw": 3.141592653589793,
+        "speed": 8,
+        "steering": 0
+      },
+      "maximumPenetration": 0,
+      "contactFrames": 179,
+      "occupiedFrames": 0,
+      "minimumChassisY": 0.32693583646981267,
+      "maximumBoundaryOverhang": 0.0022257768686984036,
+      "maximumSpeed": 7.984022911011976,
+      "recoveries": 0,
+      "final": {
+        "position": {
+          "x": 34.967796325683594,
+          "y": 0.8015245795249939,
+          "z": -56.794769287109375
+        },
+        "rotation": {
+          "x": 0.007996007800102234,
+          "y": 0.9999681115150452,
+          "z": -0.00007552078022854403,
+          "w": 0.00004496774636209011
+        },
+        "speed": -0.013541850783903013,
+        "penetration": 0,
+        "contacts": 5,
+        "centreOccupied": false,
+        "boundaryOverhang": 0,
+        "wheelContacts": 4,
+        "minimumChassisY": 0.33525676542613353
+      },
+      "traces": [
+        {
+          "position": {
+            "x": 35,
+            "y": 0.8098394870758057,
+            "z": -50.133331298828125
+          },
+          "rotation": {
+            "x": -1.3396215061896859e-20,
+            "y": 1,
+            "z": 0.00021877678227610886,
+            "w": 6.123234262925839e-17
+          },
+          "speed": 7.984022911011976,
+          "penetration": 0,
+          "contacts": 0,
+          "centreOccupied": false,
+          "boundaryOverhang": 0,
+          "wheelContacts": 4,
+          "minimumChassisY": 0.35887691231074315
+        },
+        {
+          "position": {
+            "x": 35.0003776550293,
+            "y": 0.8102007508277893,
+            "z": -56.79174041748047
+          },
+          "rotation": {
+            "x": -0.0000015894023590590223,
+            "y": 0.9999868273735046,
+            "z": 0.0051436517387628555,
+            "w": -0.00005419200169853866
+          },
+          "speed": -0.32156001398400025,
+          "penetration": 0,
+          "contacts": 5,
+          "centreOccupied": false,
+          "boundaryOverhang": 0.0022257768686984036,
+          "wheelContacts": 4,
+          "minimumChassisY": 0.33758905686774127
+        }
+      ]
+    },
+    {
+      "kind": "boundary-south",
+      "initial": {
+        "x": 35,
+        "z": 90,
+        "yaw": 0,
+        "speed": 8,
+        "steering": 0
+      },
+      "maximumPenetration": 0,
+      "contactFrames": 190,
+      "occupiedFrames": 0,
+      "minimumChassisY": 0.32693453749275997,
+      "maximumBoundaryOverhang": 0.002303403597409215,
+      "maximumSpeed": 7.984022146725887,
+      "recoveries": 0,
+      "final": {
+        "position": {
+          "x": 34.95838928222656,
+          "y": 0.8018890619277954,
+          "z": 96.79496002197266
+        },
+        "rotation": {
+          "x": -0.000032656211260473356,
+          "y": 0.000013435384971671738,
+          "z": -0.0071501703932881355,
+          "w": 0.9999744892120361
+        },
+        "speed": -0.012761167790997265,
+        "penetration": 0,
+        "contacts": 5,
+        "centreOccupied": false,
+        "boundaryOverhang": 0,
+        "wheelContacts": 4,
+        "minimumChassisY": 0.33749183750277134
+      },
+      "traces": [
+        {
+          "position": {
+            "x": 35,
+            "y": 0.8098394870758057,
+            "z": 90.13336181640625
+          },
+          "rotation": {
+            "x": -0.00021877682593185455,
+            "y": 0,
+            "z": 0,
+            "w": 1
+          },
+          "speed": 7.984022146725887,
+          "penetration": 0,
+          "contacts": 0,
+          "centreOccupied": false,
+          "boundaryOverhang": 0,
+          "wheelContacts": 4,
+          "minimumChassisY": 0.3588769121186751
+        },
+        {
+          "position": {
+            "x": 35.00040817260742,
+            "y": 0.8104016184806824,
+            "z": 96.79188537597656
+          },
+          "rotation": {
+            "x": -0.00510391453281045,
+            "y": -0.000060415441112127155,
+            "z": 0.0000016098928199426155,
+            "w": 0.999987006187439
+          },
+          "speed": -0.3161122822159976,
+          "penetration": 0,
+          "contacts": 5,
+          "centreOccupied": false,
+          "boundaryOverhang": 0.002303403597409215,
+          "wheelContacts": 4,
+          "minimumChassisY": 0.3379642952664661
+        }
+      ]
+    }
+  ],
+  "cadence": [
+    {
+      "hz": 30,
+      "steps": 240,
+      "pose": {
+        "position": {
+          "x": 6.106842041015625,
+          "y": 0.8089219331741333,
+          "z": -40
+        },
+        "rotation": {
+          "x": -0.003785431617870927,
+          "y": 0.7070966362953186,
+          "z": 0.003785431385040283,
+          "w": 0.7070966362953186
+        },
+        "wheels": [
+          {
+            "length": 0.40342312335968017,
+            "steering": 0,
+            "rotation": 19.087007522583008
+          },
+          {
+            "length": 0.40342312335968017,
+            "steering": 0,
+            "rotation": 19.087007522583008
+          },
+          {
+            "length": 0.37451355934143066,
+            "steering": 0,
+            "rotation": 19.087459564208984
+          },
+          {
+            "length": 0.37451355934143066,
+            "steering": 0,
+            "rotation": 19.087459564208984
+          }
+        ]
+      },
+      "speed": 5.813040621168022
+    },
+    {
+      "hz": 60,
+      "steps": 240,
+      "pose": {
+        "position": {
+          "x": 6.106842041015625,
+          "y": 0.8089219331741333,
+          "z": -40
+        },
+        "rotation": {
+          "x": -0.003785431617870927,
+          "y": 0.7070966362953186,
+          "z": 0.003785431385040283,
+          "w": 0.7070966362953186
+        },
+        "wheels": [
+          {
+            "length": 0.40342312335968017,
+            "steering": 0,
+            "rotation": 19.087007522583008
+          },
+          {
+            "length": 0.40342312335968017,
+            "steering": 0,
+            "rotation": 19.087007522583008
+          },
+          {
+            "length": 0.37451355934143066,
+            "steering": 0,
+            "rotation": 19.087459564208984
+          },
+          {
+            "length": 0.37451355934143066,
+            "steering": 0,
+            "rotation": 19.087459564208984
+          }
+        ]
+      },
+      "speed": 5.813040621168022
+    },
+    {
+      "hz": 120,
+      "steps": 240,
+      "pose": {
+        "position": {
+          "x": 6.106842041015625,
+          "y": 0.8089219331741333,
+          "z": -40
+        },
+        "rotation": {
+          "x": -0.003785431617870927,
+          "y": 0.7070966362953186,
+          "z": 0.003785431385040283,
+          "w": 0.7070966362953186
+        },
+        "wheels": [
+          {
+            "length": 0.40342312335968017,
+            "steering": 0,
+            "rotation": 19.087007522583008
+          },
+          {
+            "length": 0.40342312335968017,
+            "steering": 0,
+            "rotation": 19.087007522583008
+          },
+          {
+            "length": 0.37451355934143066,
+            "steering": 0,
+            "rotation": 19.087459564208984
+          },
+          {
+            "length": 0.37451355934143066,
+            "steering": 0,
+            "rotation": 19.087459564208984
+          }
+        ]
+      },
+      "speed": 5.813040621168022
+    },
+    {
+      "hz": 144,
+      "steps": 240,
+      "pose": {
+        "position": {
+          "x": 6.106842041015625,
+          "y": 0.8089219331741333,
+          "z": -40
+        },
+        "rotation": {
+          "x": -0.003785431617870927,
+          "y": 0.7070966362953186,
+          "z": 0.003785431385040283,
+          "w": 0.7070966362953186
+        },
+        "wheels": [
+          {
+            "length": 0.40342312335968017,
+            "steering": 0,
+            "rotation": 19.087007522583008
+          },
+          {
+            "length": 0.40342312335968017,
+            "steering": 0,
+            "rotation": 19.087007522583008
+          },
+          {
+            "length": 0.37451355934143066,
+            "steering": 0,
+            "rotation": 19.087459564208984
+          },
+          {
+            "length": 0.37451355934143066,
+            "steering": 0,
+            "rotation": 19.087459564208984
+          }
+        ]
+      },
+      "speed": 5.813040621168022
+    }
+  ],
+  "failures": [
+    "London Tower Bridge corner moving contact"
+  ],
+  "courtyard": {
+    "kind": "controlled closed extrusion with 8×8 m courtyard",
+    "open": {
+      "box": {
+        "minimumX": -0.25,
+        "maximumX": 0.25,
+        "minimumZ": -0.25,
+        "maximumZ": 0.25,
+        "minimumY": 0.1,
+        "maximumY": 1
+      },
+      "clearance": {
+        "clear": true,
+        "reasons": []
+      }
+    },
+    "occupied": {
+      "box": {
+        "minimumX": 6.75,
+        "maximumX": 7.25,
+        "minimumZ": -0.25,
+        "maximumZ": 0.25,
+        "minimumY": 0.1,
+        "maximumY": 1
+      },
+      "clearance": {
+        "clear": false,
+        "reasons": [
+          "building"
+        ]
+      }
+    },
+    "concavity": {
+      "box": {
+        "minimumX": 20.75,
+        "maximumX": 21.25,
+        "minimumZ": 11.75,
+        "maximumZ": 12.25,
+        "minimumY": 0.1,
+        "maximumY": 1
+      },
+      "clearance": {
+        "clear": true,
+        "reasons": []
+      }
+    }
+  },
+  "stopping": [
+    {
+      "direction": 1,
+      "initial": {
+        "position": {
+          "x": 21.17521858215332,
+          "y": 0.8089219331741333,
+          "z": -40
+        },
+        "rotation": {
+          "x": -0.003785433480516076,
+          "y": 0.7070966362953186,
+          "z": 0.0037854332476854324,
+          "w": 0.7070966362953186
+        },
+        "speed": 7.982809915986085,
+        "penetration": 0,
+        "contacts": 0,
+        "centreOccupied": false,
+        "boundaryOverhang": 0,
+        "wheelContacts": 4,
+        "minimumChassisY": 0.33539305460687674
+      },
+      "final": {
+        "position": {
+          "x": 24.974916458129883,
+          "y": 0.8087552189826965,
+          "z": -40
+        },
+        "rotation": {
+          "x": 0.003854345064610243,
+          "y": 0.70709627866745,
+          "z": -0.003854345064610243,
+          "w": 0.70709627866745
+        },
+        "speed": 0.0007649279106882272,
+        "penetration": 0,
+        "contacts": 0,
+        "centreOccupied": false,
+        "boundaryOverhang": 0,
+        "wheelContacts": 4,
+        "minimumChassisY": 0.3347985008826771
+      },
+      "stoppedAt": 60,
+      "seconds": 1,
+      "distance": 3.7996978759765625
+    },
+    {
+      "direction": -1,
+      "initial": {
+        "position": {
+          "x": -10.59814453125,
+          "y": 0.8089219331741333,
+          "z": -40
+        },
+        "rotation": {
+          "x": 0.0037854299880564213,
+          "y": 0.7070966362953186,
+          "z": -0.003785433480516076,
+          "w": 0.7070966362953186
+        },
+        "speed": -2.9930760713690585,
+        "penetration": 0,
+        "contacts": 0,
+        "centreOccupied": false,
+        "boundaryOverhang": 0,
+        "wheelContacts": 4,
+        "minimumChassisY": 0.33539306011636083
+      },
+      "final": {
+        "position": {
+          "x": -11.144439697265625,
+          "y": 0.808964729309082,
+          "z": -40
+        },
+        "rotation": {
+          "x": -0.00027952762320637703,
+          "y": 0.7071067094802856,
+          "z": 0.0002795304171741009,
+          "w": 0.7071067094802856
+        },
+        "speed": -0.00005644722670065998,
+        "penetration": 0,
+        "contacts": 0,
+        "centreOccupied": false,
+        "boundaryOverhang": 0,
+        "wheelContacts": 4,
+        "minimumChassisY": 0.3572254857615625
+      },
+      "stoppedAt": 24,
+      "seconds": 0.4,
+      "distance": 0.546295166015625
+    }
+  ],
+  "recovery": {
+    "overturned": {
+      "position": {
+        "x": 0.00022943431395106018,
+        "y": 0.4548895061016083,
+        "z": -39.99998092651367
+      },
+      "rotation": {
+        "x": 3.6342002740497037e-9,
+        "y": 6.748774872278318e-9,
+        "z": 1,
+        "w": -4.470058456718107e-8
+      },
+      "speed": 8.102460948747954e-8,
+      "penetration": 0,
+      "contacts": 4,
+      "centreOccupied": false,
+      "boundaryOverhang": 0,
+      "wheelContacts": 0,
+      "minimumChassisY": 0.004889387005829034
+    },
+    "manualReset": {
+      "position": {
+        "x": 0,
+        "y": 1.0199999809265137,
+        "z": -40
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0.7071067690849304,
+        "z": 0,
+        "w": 0.7071067690849304
+      },
+      "speed": 0,
+      "penetration": 0,
+      "contacts": 0,
+      "centreOccupied": false,
+      "boundaryOverhang": 0,
+      "wheelContacts": 0,
+      "minimumChassisY": 0.5699999809265137
+    },
+    "cases": [
+      {
+        "kind": "escaped",
+        "position": {
+          "x": 300,
+          "y": 1,
+          "z": 0
+        },
+        "state": {
+          "status": "ready",
+          "message": "Vehicle recovered from an escaped, fallen or invalid state. Send neutral before driving.",
+          "resets": 4,
+          "recoveries": 1,
+          "inputReady": false
+        },
+        "final": {
+          "position": {
+            "x": 0,
+            "y": 1.0184671878814697,
+            "z": -40
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0.7071068286895752,
+            "z": 0,
+            "w": 0.7071068286895752
+          },
+          "speed": 0,
+          "penetration": 0,
+          "contacts": 0,
+          "centreOccupied": false,
+          "boundaryOverhang": 0,
+          "wheelContacts": 0,
+          "minimumChassisY": 0.5684671878814698
+        }
+      },
+      {
+        "kind": "fallen",
+        "position": {
+          "x": 0,
+          "y": -5,
+          "z": 0
+        },
+        "state": {
+          "status": "ready",
+          "message": "Vehicle recovered from an escaped, fallen or invalid state. Send neutral before driving.",
+          "resets": 4,
+          "recoveries": 2,
+          "inputReady": false
+        },
+        "final": {
+          "position": {
+            "x": 0,
+            "y": 1.0184671878814697,
+            "z": -40
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0.7071068286895752,
+            "z": 0,
+            "w": 0.7071068286895752
+          },
+          "speed": 0,
+          "penetration": 0,
+          "contacts": 0,
+          "centreOccupied": false,
+          "boundaryOverhang": 0,
+          "wheelContacts": 0,
+          "minimumChassisY": 0.5684671878814698
+        }
+      },
+      {
+        "kind": "nonfinite",
+        "position": "NaN x",
+        "state": {
+          "status": "ready",
+          "message": "Vehicle recovered from an escaped, fallen or invalid state. Send neutral before driving.",
+          "resets": 4,
+          "recoveries": 3,
+          "inputReady": false
+        },
+        "final": {
+          "position": {
+            "x": 0,
+            "y": 1.0184671878814697,
+            "z": -40
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0.7071068286895752,
+            "z": 0,
+            "w": 0.7071068286895752
+          },
+          "speed": 0,
+          "penetration": 0,
+          "contacts": 0,
+          "centreOccupied": false,
+          "boundaryOverhang": 0,
+          "wheelContacts": 0,
+          "minimumChassisY": 0.5684671878814698
+        }
+      }
+    ]
+  },
+  "unavailable": {
+    "kind": "controlled graph hints outside envelope",
+    "state": {
+      "status": "unavailable",
+      "message": "Driving unavailable: no safe paved start in 3 candidates (boundary, pavement). Inspection remains available.",
+      "resets": 0,
+      "recoveries": 0,
+      "inputReady": true
+    },
+    "start": {
+      "attempts": 3,
+      "rejections": {
+        "boundary": 3,
+        "pavement": 3
+      }
+    }
+  }
+}

@@ -1,0 +1,481 @@
+
+> old-england-taxi@0.1.0 verify
+> npm run zone:verify && npm test && npm run check && npm run build
+
+
+> old-england-taxi@0.1.0 zone:verify
+> tsx tools/zone-compiler/src/run.ts verify
+
+[
+  {
+    "status": "ok",
+    "id": "cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410",
+    "deterministic": true,
+    "sourceSha256": "055d488fccf0a1dc1915d40982590f718200c5883a05ef8f9625027ee7de29b7",
+    "artifactSha256": "4a9037e4db68a6cd55cd3db90a0aa50988b550ca1f3cd7d68125d4a35f6473b6",
+    "statistics": {
+      "source": {
+        "nodes": 3346,
+        "ways": 964,
+        "relations": 3,
+        "highwayWays": 711,
+        "buildingWays": 247,
+        "buildingRelations": 3
+      },
+      "coordinates": {
+        "points": 3346,
+        "lines": 964,
+        "outsideNodes": 625
+      },
+      "roads": {
+        "roadFeatures": 271,
+        "centerlineSegments": 805,
+        "surfacePolygons": 2,
+        "vertices": 3225,
+        "triangles": 3407,
+        "skippedOutsideRoads": 0,
+        "skippedOutsideSegments": 108,
+        "bufferedSegments": 808,
+        "areaSquareMetres": 83403.659493,
+        "holes": 93,
+        "widthSources": {
+          "highway-default": 149,
+          "lanes": 112,
+          "width": 10
+        }
+      },
+      "buildings": {
+        "buildings": 226,
+        "wayFootprints": 226,
+        "relationFootprints": 0,
+        "holes": 0,
+        "vertices": 11436,
+        "triangles": 6720,
+        "heightSources": {
+          "building:levels": 162,
+          "fallback": 53,
+          "height": 11
+        }
+      },
+      "graph": {
+        "nodes": 722,
+        "edges": 805,
+        "connectedComponents": 2,
+        "totalLengthMetres": 15051.153588
+      },
+      "decisions": {
+        "excluded-highway-area": 8,
+        "excluded-highway-class": 432,
+        "excluded-invalid-relation-member": 2,
+        "included": 497,
+        "unsupported-building-part": 23,
+        "unsupported-geometry": 1
+      }
+    }
+  },
+  {
+    "status": "ok",
+    "id": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43",
+    "deterministic": true,
+    "sourceSha256": "fffc7bfa5a2f737baf7230fbd13905e99d5aa03e2206f2bc4785c9e378211647",
+    "artifactSha256": "6dea8e06c7a3f40ac306b07236dcbd3779ba8cf4e87caaa3e490069217760cd4",
+    "statistics": {
+      "source": {
+        "nodes": 8872,
+        "ways": 1698,
+        "relations": 14,
+        "highwayWays": 1066,
+        "buildingWays": 607,
+        "buildingRelations": 14
+      },
+      "coordinates": {
+        "points": 8872,
+        "lines": 1698,
+        "outsideNodes": 711
+      },
+      "roads": {
+        "roadFeatures": 122,
+        "centerlineSegments": 372,
+        "surfacePolygons": 15,
+        "vertices": 1762,
+        "triangles": 1744,
+        "skippedOutsideRoads": 0,
+        "skippedOutsideSegments": 72,
+        "bufferedSegments": 378,
+        "areaSquareMetres": 27084.036184,
+        "holes": 6,
+        "widthSources": {
+          "highway-default": 104,
+          "lanes": 10,
+          "width": 8
+        }
+      },
+      "buildings": {
+        "buildings": 614,
+        "wayFootprints": 600,
+        "relationFootprints": 14,
+        "holes": 8,
+        "vertices": 47370,
+        "triangles": 29156,
+        "heightSources": {
+          "building:levels": 142,
+          "fallback": 469,
+          "height": 3
+        }
+      },
+      "graph": {
+        "nodes": 381,
+        "edges": 372,
+        "connectedComponents": 16,
+        "totalLengthMetres": 6195.269264
+      },
+      "decisions": {
+        "excluded-highway-area": 110,
+        "excluded-highway-class": 834,
+        "included": 736,
+        "included-relation-member": 27,
+        "unsupported-building-part": 7
+      }
+    }
+  },
+  {
+    "status": "ok",
+    "id": "cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a",
+    "deterministic": true,
+    "sourceSha256": "13759df362152b8c74cafc199cadc22d731a63ca7466c81c3925f801de50da3d",
+    "artifactSha256": "5f4887e391bafe1ded5e82519e42ceaaed35998655810b61b1f4019571cfb00d",
+    "statistics": {
+      "source": {
+        "nodes": 5618,
+        "ways": 1309,
+        "relations": 5,
+        "highwayWays": 674,
+        "buildingWays": 626,
+        "buildingRelations": 5
+      },
+      "coordinates": {
+        "points": 5618,
+        "lines": 1309,
+        "outsideNodes": 610
+      },
+      "roads": {
+        "roadFeatures": 171,
+        "centerlineSegments": 457,
+        "surfacePolygons": 9,
+        "vertices": 2055,
+        "triangles": 2055,
+        "skippedOutsideRoads": 0,
+        "skippedOutsideSegments": 65,
+        "bufferedSegments": 463,
+        "areaSquareMetres": 31281.812813,
+        "holes": 9,
+        "widthSources": {
+          "highway-default": 100,
+          "lanes": 71
+        }
+      },
+      "buildings": {
+        "buildings": 262,
+        "wayFootprints": 259,
+        "relationFootprints": 3,
+        "holes": 0,
+        "vertices": 18822,
+        "triangles": 11500,
+        "heightSources": {
+          "building:levels": 76,
+          "fallback": 139,
+          "height": 47
+        }
+      },
+      "graph": {
+        "nodes": 456,
+        "edges": 457,
+        "connectedComponents": 8,
+        "totalLengthMetres": 6454.405674
+      },
+      "decisions": {
+        "excluded-highway-area": 8,
+        "excluded-highway-class": 495,
+        "excluded-invalid-relation-member": 5,
+        "included": 433,
+        "included-relation-member": 4,
+        "unsupported-building-part": 368,
+        "unsupported-geometry": 1
+      }
+    }
+  },
+  {
+    "status": "ok",
+    "id": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+    "deterministic": true,
+    "sourceSha256": "b53365cd47469391b4bc62e042bd8b7a88968048da3415df209d81a49f9eb5c3",
+    "artifactSha256": "8eff07f47eba43f30f5084232c0f4bfd086f6cc740660ad9435f6493c044e3cf",
+    "statistics": {
+      "source": {
+        "nodes": 7139,
+        "ways": 1829,
+        "relations": 23,
+        "highwayWays": 459,
+        "buildingWays": 1319,
+        "buildingRelations": 23
+      },
+      "coordinates": {
+        "points": 7139,
+        "lines": 1829,
+        "outsideNodes": 491
+      },
+      "roads": {
+        "roadFeatures": 147,
+        "centerlineSegments": 366,
+        "surfacePolygons": 7,
+        "vertices": 1746,
+        "triangles": 1800,
+        "skippedOutsideRoads": 0,
+        "skippedOutsideSegments": 32,
+        "bufferedSegments": 370,
+        "areaSquareMetres": 38316.388491,
+        "holes": 34,
+        "widthSources": {
+          "highway-default": 146,
+          "lanes": 1
+        }
+      },
+      "buildings": {
+        "buildings": 1325,
+        "wayFootprints": 1302,
+        "relationFootprints": 23,
+        "holes": 27,
+        "vertices": 57846,
+        "triangles": 33372,
+        "heightSources": {
+          "building:levels": 85,
+          "fallback": 1238,
+          "height": 2
+        }
+      },
+      "graph": {
+        "nodes": 342,
+        "edges": 366,
+        "connectedComponents": 10,
+        "totalLengthMetres": 8017.960517
+      },
+      "decisions": {
+        "excluded-highway-area": 16,
+        "excluded-highway-class": 296,
+        "included": 1472,
+        "included-relation-member": 51,
+        "unsupported-building-part": 17
+      }
+    }
+  },
+  {
+    "status": "ok",
+    "id": "trafalgar-square-london",
+    "deterministic": true,
+    "sourceSha256": "a56dce2329fdc5f1130d300839251119f6261bb08216c0b70363aa646b423484",
+    "artifactSha256": "3636dcb2c69face98dea581333c9309ed5c021364a0b953074b1a98c19e2fc6a",
+    "statistics": {
+      "source": {
+        "nodes": 17484,
+        "ways": 4111,
+        "relations": 23,
+        "highwayWays": 2417,
+        "buildingWays": 1608,
+        "buildingRelations": 23
+      },
+      "coordinates": {
+        "points": 17484,
+        "lines": 4111,
+        "outsideNodes": 1605
+      },
+      "roads": {
+        "roadFeatures": 475,
+        "centerlineSegments": 1582,
+        "surfacePolygons": 11,
+        "vertices": 6399,
+        "triangles": 6535,
+        "skippedOutsideRoads": 0,
+        "skippedOutsideSegments": 104,
+        "bufferedSegments": 1586,
+        "areaSquareMetres": 113933.847633,
+        "holes": 79,
+        "widthSources": {
+          "highway-default": 287,
+          "lanes": 183,
+          "width": 5
+        }
+      },
+      "buildings": {
+        "buildings": 1005,
+        "wayFootprints": 988,
+        "relationFootprints": 17,
+        "holes": 48,
+        "vertices": 63738,
+        "triangles": 38664,
+        "heightSources": {
+          "building:levels": 502,
+          "fallback": 492,
+          "height": 11
+        }
+      },
+      "graph": {
+        "nodes": 1513,
+        "edges": 1582,
+        "connectedComponents": 11,
+        "totalLengthMetres": 20418.613502
+      },
+      "decisions": {
+        "excluded-building-no": 8,
+        "excluded-highway-area": 35,
+        "excluded-highway-class": 1907,
+        "included": 1480,
+        "included-relation-member": 62,
+        "unsupported-building-part": 616,
+        "unsupported-relation-topology": 2
+      }
+    }
+  }
+]
+
+> old-england-taxi@0.1.0 test
+> vitest run
+
+
+ RUN  v3.2.7 /home/mabrax/.codex/worktrees/63c8/old-england-taxi
+
+stdout | tests/zone-server.test.ts > background generation lifecycle > deduplicates active requests, serializes work and cleans scratch directories
+{"event":"zone-generation","jobId":"c053aea7-cf13-434b-b58f-261bc303fd56","zoneId":"cell-26745bb5eab5ccbbf08f755dd1fe863d0807467abc957eff624a8f56f8ac8a99","state":"compiling","elapsedMs":3}
+
+stdout | tests/zone-server.test.ts > background generation lifecycle > deduplicates active requests, serializes work and cleans scratch directories
+{"event":"zone-generation","jobId":"c053aea7-cf13-434b-b58f-261bc303fd56","zoneId":"cell-26745bb5eab5ccbbf08f755dd1fe863d0807467abc957eff624a8f56f8ac8a99","state":"ready","elapsedMs":61}
+
+stdout | tests/zone-server.test.ts > background generation lifecycle > deduplicates active requests, serializes work and cleans scratch directories
+{"event":"zone-generation","jobId":"6f08596c-8849-4966-9653-839566bd0738","zoneId":"cell-25fc69bc1c1e4ddbc2648546617b9f016a5c76eea2ea56c1bc26ece35a8e2365","state":"compiling","elapsedMs":62}
+
+stdout | tests/zone-server.test.ts > background generation lifecycle > deduplicates active requests, serializes work and cleans scratch directories
+{"event":"zone-generation","jobId":"6f08596c-8849-4966-9653-839566bd0738","zoneId":"cell-25fc69bc1c1e4ddbc2648546617b9f016a5c76eea2ea56c1bc26ece35a8e2365","state":"ready","elapsedMs":110}
+
+stdout | tests/zone-server.test.ts > background generation lifecycle > cancels both active and queued work and caps pending jobs
+{"event":"zone-generation","jobId":"262c0420-c5ef-40da-9651-b5662ff2d278","zoneId":"cell-26745bb5eab5ccbbf08f755dd1fe863d0807467abc957eff624a8f56f8ac8a99","state":"acquiring","elapsedMs":2}
+
+stdout | tests/zone-server.test.ts > background generation lifecycle > cancels both active and queued work and caps pending jobs
+{"event":"zone-generation","jobId":"0a91bc65-cb39-4e17-977c-35108f48d7cd","zoneId":"cell-25fc69bc1c1e4ddbc2648546617b9f016a5c76eea2ea56c1bc26ece35a8e2365","state":"cancelled","elapsedMs":53}
+{"event":"zone-generation","jobId":"262c0420-c5ef-40da-9651-b5662ff2d278","zoneId":"cell-26745bb5eab5ccbbf08f755dd1fe863d0807467abc957eff624a8f56f8ac8a99","state":"cancelled","elapsedMs":53}
+
+stdout | tests/zone-server.test.ts > background generation lifecycle > cancels both active and queued work and caps pending jobs
+{"event":"zone-generation","jobId":"f59ed603-8eb6-440b-8e3f-248c4104e5e8","zoneId":"cell-2f5331e17b02048b0a4488a05e033ee63f67de8c31c37aea6e73a08b43740e07","state":"acquiring","elapsedMs":56}
+
+stdout | tests/zone-server.test.ts > background generation lifecycle > cancels both active and queued work and caps pending jobs
+{"event":"zone-generation","jobId":"f59ed603-8eb6-440b-8e3f-248c4104e5e8","zoneId":"cell-2f5331e17b02048b0a4488a05e033ee63f67de8c31c37aea6e73a08b43740e07","state":"cancelled","elapsedMs":104}
+{"event":"zone-generation","jobId":"3120bfd2-16c4-4f2b-97f3-466738891208","zoneId":"cell-15f34642b8833c9d8a2ae49dd54d423b727f465cd69186e084d4ee0e2753ee59","state":"cancelled","elapsedMs":105}
+{"event":"zone-generation","jobId":"222b3c1c-2ccc-40ea-8a01-827d4b40dd75","zoneId":"cell-846fa2c2773b56848c33ec6e1678034459283af12b4363cb9d895c8f184bc7ed","state":"cancelled","elapsedMs":105}
+
+stdout | tests/zone-server.test.ts > background generation lifecycle > reports timeout or compile failure and lets the queue continue
+{"event":"zone-generation","jobId":"faeb8d73-38d4-44be-9d1b-25967ff932c6","zoneId":"cell-26745bb5eab5ccbbf08f755dd1fe863d0807467abc957eff624a8f56f8ac8a99","state":"acquiring","elapsedMs":3}
+
+stdout | tests/zone-server.test.ts > background generation lifecycle > reports timeout or compile failure and lets the queue continue
+{"event":"zone-generation","jobId":"faeb8d73-38d4-44be-9d1b-25967ff932c6","zoneId":"cell-26745bb5eab5ccbbf08f755dd1fe863d0807467abc957eff624a8f56f8ac8a99","state":"failed","elapsedMs":31,"error":"Generation exceeded its 150-second deadline. Try a smaller cell."}
+
+stdout | tests/zone-server.test.ts > background generation lifecycle > reports timeout or compile failure and lets the queue continue
+{"event":"zone-generation","jobId":"6286df47-cebc-4ed8-8026-0d0606fa102c","zoneId":"cell-25fc69bc1c1e4ddbc2648546617b9f016a5c76eea2ea56c1bc26ece35a8e2365","state":"failed","elapsedMs":42,"error":"Unsupported source geometry"}
+
+ ✓ tests/chase-camera.test.ts (5 tests) 475ms
+   ✓ chase camera clearance and motion > sweeps actual near-wall/corner/courtyard geometry and stays clear after smoothing  313ms
+ ✓ tests/zone-selection.test.ts (12 tests) 706ms
+   ✓ prepared catalogue selection and QA > loads safe explicit artifact URLs and verifies QA matches the actual artifact bytes  343ms
+stdout | tests/zone-server.test.ts > background generation lifecycle > verifies a prepared zone in the real child process without acquiring new data
+{"event":"zone-generation","jobId":"bf640038-df01-4d70-8812-34bb89b64b6e","zoneId":"cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410","state":"verifying","elapsedMs":537}
+
+ ✓ tests/physics-scene-lifecycle.test.ts (5 tests) 915ms
+   ✓ scene and simulation share one lifetime > repeated mount/dispose leaves no frame, listener, observer, control or world active  386ms
+ ✓ tests/vehicle-session.test.ts (4 tests) 1127ms
+   ✓ vehicle session ownership and render cadence > renders equal fixed-step motion at 30, 60, 120 and 144 Hz, and bounds stalled frames  594ms
+ ✓ tests/local-coordinates.test.ts (6 tests) 1722ms
+   ✓ local zone coordinates > transforms every OSM node and way while preserving source topology  346ms
+   ✓ local zone coordinates > retains one explicit origin and right-handed axis convention in zone metadata  511ms
+   ✓ local zone coordinates > produces byte-stable coordinates when the same source is transformed repeatedly  340ms
+ ✓ tests/qualification.test.ts (2 tests) 1740ms
+   ✓ qualification contact oracle > checks Tower Bridge near-boundary corner approaches without accepting erroneous cuboid witnesses  1693ms
+ ✓ tests/zone-artifact-loader.test.ts (7 tests) 489ms
+ ✓ tests/road-surfaces.test.ts (13 tests) 1790ms
+ ✓ tests/physics-session.test.ts (11 tests) 532ms
+ ✓ tests/building-volumes.test.ts (26 tests) 1882ms
+   ✓ fixed-zone building volumes > retains every footprint node at its exact Phase 02 local coordinate  965ms
+ ✓ tests/vehicle-spawn.test.ts (4 tests) 529ms
+ ✓ tests/zone-qualification.test.ts (3 tests) 2106ms
+   ✓ real-cell qualification evidence > retains five provenanced real sources with materially different source features  1214ms
+   ✓ real-cell qualification evidence > keeps strict topology rejection and reports whole-feature exclusion in generation  590ms
+ ✓ tests/driving-input.test.ts (9 tests) 17ms
+ ✓ tests/page-lifetime.test.ts (3 tests) 9ms
+ ✓ tests/generation-client.test.ts (5 tests) 21ms
+ ✓ tests/zone-source.test.ts (13 tests) 2292ms
+   ✓ fixed OSM zone source > loads the same data without issuing a network request  550ms
+ ✓ tests/vehicle-view.test.ts (1 test) 13ms
+ ✓ tests/zone-generation.test.ts (36 tests) 327ms
+ ✓ tests/camera.test.ts (4 tests) 12ms
+stdout | tests/zone-server.test.ts > background generation lifecycle > verifies a prepared zone in the real child process without acquiring new data
+{"event":"zone-generation","jobId":"bf640038-df01-4d70-8812-34bb89b64b6e","zoneId":"cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410","state":"ready","elapsedMs":2067}
+
+stdout | tests/zone-server.test.ts > background generation lifecycle > stops a real worker on cancellation and removes its scratch directory
+{"event":"zone-generation","jobId":"3c2c7bda-a463-45c0-b022-bf23c89040a2","zoneId":"cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410","state":"verifying","elapsedMs":159}
+
+stdout | tests/zone-server.test.ts > background generation lifecycle > stops a real worker on cancellation and removes its scratch directory
+{"event":"zone-generation","jobId":"3c2c7bda-a463-45c0-b022-bf23c89040a2","zoneId":"cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410","state":"cancelled","elapsedMs":162}
+
+stdout | tests/zone-server.test.ts > local HTTP generation API and cache publication > supports submit, progress, cancellation and search with actionable validation errors
+{"event":"zone-generation","jobId":"1befb7e5-ca3c-4e3a-af19-4b4e479b7614","zoneId":"cell-26745bb5eab5ccbbf08f755dd1fe863d0807467abc957eff624a8f56f8ac8a99","state":"acquiring","elapsedMs":3}
+
+stdout | tests/zone-server.test.ts > local HTTP generation API and cache publication > supports submit, progress, cancellation and search with actionable validation errors
+{"event":"zone-generation","jobId":"1befb7e5-ca3c-4e3a-af19-4b4e479b7614","zoneId":"cell-26745bb5eab5ccbbf08f755dd1fe863d0807467abc957eff624a8f56f8ac8a99","state":"cancelled","elapsedMs":5}
+
+ ✓ tests/vehicle.test.ts (20 tests) 2742ms
+   ✓ ray-cast vehicle operating envelope > corner approach variation at 3 m/s stays blocked  471ms
+   ✓ ray-cast vehicle operating envelope > corner approach variation at 5 m/s stays blocked  300ms
+ ✓ tests/zone-server.test.ts (12 tests) 2711ms
+   ✓ background generation lifecycle > verifies a prepared zone in the real child process without acquiring new data  2110ms
+ ✓ tests/physical-world.test.ts (24 tests) 3117ms
+   ✓ focused 0.5 m cuboid probes at 60 Hz, CCD, 10 m/s per moving axis > keeps diagonal corner penetration below 2 cm across approach speeds and timestep offsets  655ms
+   ✓ real corpus and ownership > constructs and queries 'Cambridge centre' without reports or source QA  382ms
+ ✓ tests/zone-artifact.test.ts (16 tests) 3799ms
+   ✓ Phase 05 zone artifact > compiles reproducibly without network access  499ms
+ ✓ tests/vehicle-prepared.test.ts (7 tests) 8762ms
+   ✓ prepared bytes use the same vehicle and spawn rules > 'Chicago River North grid' starts deterministically, drives, brakes, reverses and resets  1627ms
+   ✓ prepared bytes use the same vehicle and spawn rules > 'Cambridge centre' starts deterministically, drives, brakes, reverses and resets  1967ms
+   ✓ prepared bytes use the same vehicle and spawn rules > 'London Tower Bridge' starts deterministically, drives, brakes, reverses and resets  525ms
+   ✓ prepared bytes use the same vehicle and spawn rules > 'Lucca historic centre' starts deterministically, drives, brakes, reverses and resets  1420ms
+   ✓ prepared bytes use the same vehicle and spawn rules > 'Trafalgar Square, London' starts deterministically, drives, brakes, reverses and resets  1767ms
+   ✓ prepared bytes use the same vehicle and spawn rules > 'Chicago River North grid' blocks prepared building faces/corners at 8 m/s and permits driven off-road return  318ms
+   ✓ prepared bytes use the same vehicle and spawn rules > 'Cambridge centre' blocks prepared building faces/corners at 8 m/s and permits driven off-road return  1078ms
+
+ Test Files  24 passed (24)
+      Tests  248 passed (248)
+   Start at  18:16:20
+   Duration  9.39s (transform 1.64s, setup 0ms, collect 5.16s, tests 37.84s, environment 10ms, prepare 2.79s)
+
+
+> old-england-taxi@0.1.0 check
+> svelte-check --tsconfig ./tsconfig.json
+
+Loading svelte-check in workspace: /home/mabrax/.codex/worktrees/63c8/old-england-taxi
+Getting Svelte diagnostics...
+
+svelte-check found 0 errors and 0 warnings
+
+> old-england-taxi@0.1.0 build
+> vite build
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 141 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                      0.49 kB │ gzip:     0.32 kB
+dist/assets/index-CdNYqW5q.css      17.29 kB │ gzip:     4.63 kB
+dist/assets/index-DMVfcGjF.js      607.50 kB │ gzip:   164.74 kB
+dist/assets/vehicle-BOrgGqf6.js  2,863.35 kB │ gzip: 1,082.39 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 1.99s

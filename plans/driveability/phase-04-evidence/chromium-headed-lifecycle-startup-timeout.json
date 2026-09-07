@@ -1,0 +1,49 @@
+{
+  "checkedAt": "2026-09-07T22:01:25.535Z",
+  "engine": "chromium",
+  "base": "http://127.0.0.1:4191",
+  "os": "Fedora Linux 44 / 7.1.13-200.fc44.x86_64",
+  "cpu": "AMD Ryzen 7 5700X3D 8-Core Processor",
+  "viewport": {
+    "width": 1440,
+    "height": 900,
+    "deviceScaleFactor": 1
+  },
+  "headless": false,
+  "budgetsCommit": "d6dd37f",
+  "artifacts": [
+    {
+      "id": "cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410",
+      "sha256": "4a9037e4db68a6cd55cd3db90a0aa50988b550ca1f3cd7d68125d4a35f6473b6"
+    },
+    {
+      "id": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43",
+      "sha256": "6dea8e06c7a3f40ac306b07236dcbd3779ba8cf4e87caaa3e490069217760cd4"
+    },
+    {
+      "id": "cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a",
+      "sha256": "5f4887e391bafe1ded5e82519e42ceaaed35998655810b61b1f4019571cfb00d"
+    },
+    {
+      "id": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+      "sha256": "8eff07f47eba43f30f5084232c0f4bfd086f6cc740660ad9435f6493c044e3cf"
+    },
+    {
+      "id": "trafalgar-square-london",
+      "sha256": "3636dcb2c69face98dea581333c9309ed5c021364a0b953074b1a98c19e2fc6a"
+    }
+  ],
+  "cold": [],
+  "functional": [],
+  "sustained": [],
+  "lifecycle": [],
+  "failures": [],
+  "build": {
+    "index-CdNYqW5q.css": "06f29bdd9fe5db477aa2ee64ba5fa1981eba2f8a290ca69fb8d9669a28ef6171",
+    "index-DMVfcGjF.js": "f5b2ee56bf0cc2523c311af00dea206d37372e8788e4192a7421946e34d0659d",
+    "vehicle-BOrgGqf6.js": "4e42fca70b2e5f81a22cc9aba9ef30131d77ea6877747f7253064eaf159dfeab"
+  },
+  "runnerSha256": "6b8807c8fb7510539247d5be1e501067e3417a7dbbe3be62989c398c71ab0e85",
+  "browser": "Chrome/153.0.8010.12",
+  "error": "TimeoutError: Waiting failed: 15000ms exceeded"
+}

@@ -5,6 +5,7 @@
   import type { ZoneStatus, ZoneSummary } from '../zone/types';
   import { createValidationScene, type SceneController, type DrivingMode, type DrivingState } from './validation-scene';
   import type { PhysicsState } from '../physics/physics-session';
+  import { onPageExit } from './page-lifetime';
 
   export let blocked = false;
   export let drivingMode: DrivingMode = 'inspect';
@@ -42,6 +43,17 @@
     vehicleHarness = new URLSearchParams(window.location.search).get('vehicle') === '1';
     let disposed = false;
     const loadController = new AbortController();
+    const cleanup = () => {
+      if (disposed) return;
+      disposed = true;
+      detachPageExit();
+      loadController.abort();
+      controller?.dispose();
+      controller = undefined;
+    };
+    // Navigation can cache this component without unmounting it. Release the
+    // loading owner and scene reference too, including navigation during loading.
+    const detachPageExit = onPageExit(cleanup);
 
     void loadSelectedZone(window.location.search, undefined, { signal: loadController.signal })
       .then((loaded) => {
@@ -71,12 +83,7 @@
         errorMessage = error instanceof Error ? error.message : 'The zone could not be loaded.';
       });
 
-    return () => {
-      disposed = true;
-      loadController.abort();
-      controller?.dispose();
-      controller = undefined;
-    };
+    return cleanup;
   });
 </script>
 
