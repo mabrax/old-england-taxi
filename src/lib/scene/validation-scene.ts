@@ -81,7 +81,11 @@ export function createValidationScene(
   const groundMargin = span * 0.08;
   const ground = new THREE.Mesh(
     new THREE.PlaneGeometry(width + groundMargin, depth + groundMargin),
-    new THREE.MeshStandardMaterial({ color: palette.ground, roughness: 0.94, metalness: 0 })
+    new THREE.MeshStandardMaterial({
+      color: palette.ground, roughness: 0.94, metalness: 0,
+      // Keep the base below the grid and roads in the depth buffer at distant angles.
+      polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1
+    })
   );
   ground.rotation.x = -Math.PI / 2;
   ground.position.set(centerX, 0, centerZ);
@@ -115,7 +119,12 @@ export function createValidationScene(
     new THREE.MeshStandardMaterial({
       color: palette.road,
       roughness: 0.92,
-      metalness: 0
+      metalness: 0,
+      // A 4 cm world-space lift alone loses depth precision when zoomed out.
+      // Bias the surface toward the camera while retaining building occlusion.
+      polygonOffset: true,
+      polygonOffsetFactor: -1,
+      polygonOffsetUnits: -1
     })
   );
   roads.name = 'phase-05-road-surfaces';

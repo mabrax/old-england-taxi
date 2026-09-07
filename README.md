@@ -36,6 +36,9 @@ npm run zone:verify   # verify the checked-in corpus offline
 npm run verify       # corpus verification, tests, static checks and production build
 npm run zone:browser # prepared-corpus browser checks against port 4175
 npm run zone:live-browser # opt-in live search/build and browser recovery checks
+npm run zone:rendering -- 'http://127.0.0.1:4175/?zone=YOUR_ZONE_ID' .zone-cache/rendering-qa
 ```
+
+The rendering check records orbit, low-angle, zoom, pan, overhead, far and reset views as PNG frames and a WebM camera sweep. It verifies that each camera input changes the captured frame and checks browser errors. Inspect the frames for visual artifacts; page readiness alone cannot establish rendering quality.
 
 See the [compiler documentation](./tools/zone-compiler/README.md) for CLI commands, immutable source snapshots, geometry policies, reports and provenance. The [on-demand generation notes](./plans/on-demand-generation.md) describe the local service, limits and verification evidence. Earlier compiler and parameterized-generation qualification records remain in [plans](./plans/README.md).

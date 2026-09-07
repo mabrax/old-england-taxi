@@ -26,6 +26,7 @@
     "zone:inspect": "tsx tools/zone-compiler/src/run.ts inspect",
     "zone:browser": "node tools/zone-compiler/verify-browser.mjs",
     "zone:live-browser": "node tools/zone-server/verify-browser.mjs",
+    "zone:rendering": "node tools/zone-server/verify-rendering.mjs",
     "preview:start": "node tools/zone-server/start-preview.mjs"
   },
   "dependencies": {

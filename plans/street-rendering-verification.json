@@ -1,0 +1,75 @@
+{
+  "url": "http://127.0.0.1:4175/?zone=cell-02354f144ad1bd98f7c42e3d1d4a9594d06c17e7c64019da0257e804565595e6",
+  "checkedAt": "2026-09-07T14:26:08.855Z",
+  "viewport": {
+    "width": 1280,
+    "height": 800
+  },
+  "frames": [
+    {
+      "name": "overview",
+      "file": "00-overview.png",
+      "sha256": "ad0e6b857f4e591b065ce69663a9b3211dc9613a0c1f65608521b41c3983075e",
+      "canvases": 1,
+      "status": "ready",
+      "zone": "cell-02354f144ad1bd98f7c42e3d1d4a9594d06c17e7c64019da0257e804565595e6"
+    },
+    {
+      "name": "orbit",
+      "file": "01-orbit.png",
+      "sha256": "854945d00285d18ec6b52c2ea5ea618464b672f15a3cbd34527e7137d7ded9a0",
+      "canvases": 1,
+      "status": "ready",
+      "zone": "cell-02354f144ad1bd98f7c42e3d1d4a9594d06c17e7c64019da0257e804565595e6"
+    },
+    {
+      "name": "low-angle",
+      "file": "02-low-angle.png",
+      "sha256": "674ae0ce0af00e5a576e96a42eea47e31da53dc4b3aeb4d0bffdef2a13387864",
+      "canvases": 1,
+      "status": "ready",
+      "zone": "cell-02354f144ad1bd98f7c42e3d1d4a9594d06c17e7c64019da0257e804565595e6"
+    },
+    {
+      "name": "close",
+      "file": "03-close.png",
+      "sha256": "ed80af030fbca950111933c29f034f9b8ae86ebd5061863fb3ab25410a07df15",
+      "canvases": 1,
+      "status": "ready",
+      "zone": "cell-02354f144ad1bd98f7c42e3d1d4a9594d06c17e7c64019da0257e804565595e6"
+    },
+    {
+      "name": "pan",
+      "file": "04-pan.png",
+      "sha256": "579b03ab7b75a0a890c19348eb7d4d456c0f68bc7f0894edbcdfb81bda7107fd",
+      "canvases": 1,
+      "status": "ready",
+      "zone": "cell-02354f144ad1bd98f7c42e3d1d4a9594d06c17e7c64019da0257e804565595e6"
+    },
+    {
+      "name": "overhead",
+      "file": "05-overhead.png",
+      "sha256": "3af71f4d945167e6c5a7cf75ad590f60546be3ac48a08f967da52019c6492db5",
+      "canvases": 1,
+      "status": "ready",
+      "zone": "cell-02354f144ad1bd98f7c42e3d1d4a9594d06c17e7c64019da0257e804565595e6"
+    },
+    {
+      "name": "far",
+      "file": "06-far.png",
+      "sha256": "7aadd74dffb9f008633c63e8f35cba17702ee319bfd2a942afa27607bb07962b",
+      "canvases": 1,
+      "status": "ready",
+      "zone": "cell-02354f144ad1bd98f7c42e3d1d4a9594d06c17e7c64019da0257e804565595e6"
+    },
+    {
+      "name": "reset",
+      "file": "07-reset.png",
+      "sha256": "ad0e6b857f4e591b065ce69663a9b3211dc9613a0c1f65608521b41c3983075e",
+      "canvases": 1,
+      "status": "ready",
+      "zone": "cell-02354f144ad1bd98f7c42e3d1d4a9594d06c17e7c64019da0257e804565595e6"
+    }
+  ],
+  "browserErrors": []
+}
