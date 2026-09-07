@@ -21,6 +21,7 @@
   let label = '';
   let physics: PhysicsState = { status: 'loading' };
   let collisionVisible = false;
+  let vehicleHarness = false;
   $: controller?.setQaVisibility(qaEnabled && sourceVisible, generatedVisible);
   $: controller?.setCollisionVisibility(collisionVisible);
 
@@ -29,6 +30,7 @@
   }
 
   onMount(() => {
+    vehicleHarness = new URLSearchParams(window.location.search).get('vehicle') === '1';
     let disposed = false;
     const loadController = new AbortController();
 
@@ -120,7 +122,24 @@
         <button type="button" on:click={() => controller?.setPhysicsPaused(physics.status === 'running')}>
           {physics.status === 'running' ? 'Pause physics' : 'Resume physics'}
         </button>
-        <span>Amber: simulation limit · No vehicle yet</span>
+        <span>Amber: simulation limit</span>
+        <span data-vehicle-state={physics.vehicle?.status}>{physics.vehicle?.message}</span>
+        {#if physics.vehicle?.status === 'ready'}
+          <button type="button" on:click={() => controller?.inspectVehicle()}>Inspect vehicle</button>
+          <button type="button" on:click={() => controller?.resetVehicle()}>Reset vehicle</button>
+          {#if vehicleHarness}
+            <details class="vehicle-harness">
+              <summary>Vehicle development exercises</summary>
+              <span>Each command runs 60 fixed steps, then pauses. Inspect vehicle to see it nearby.</span>
+              {#each [
+                ['Accelerate', 1, 0, 0], ['Coast', 0, 0, 0], ['Brake', 0, 0, 1],
+                ['Reverse', -1, 0, 0], ['Turn left', 1, 1, 0], ['Turn right', 1, -1, 0]
+              ] as exercise}
+                <button type="button" disabled={!generatedVisible} on:click={() => controller?.exerciseVehicle({ throttle: Number(exercise[1]), steering: Number(exercise[2]), brake: Number(exercise[3]) })}>{exercise[0]} · 1 s</button>
+              {/each}
+            </details>
+          {/if}
+        {/if}
       {/if}
     </div>
     {#if qaEnabled}

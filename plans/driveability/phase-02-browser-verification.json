@@ -1,0 +1,2152 @@
+{
+  "physics": {
+    "base": "http://127.0.0.1:4187",
+    "checkedAt": "2026-09-07T18:01:03.054Z",
+    "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36",
+    "observations": [
+      {
+        "mode": "desktop",
+        "label": "Chicago River North grid",
+        "initial": {
+          "boundaryHeight": "20",
+          "buildingTriangles": "6720",
+          "canvases": 1,
+          "collisionVisible": "false",
+          "engine": "three.js r179",
+          "focused": true,
+          "generatedVisible": "true",
+          "hidden": false,
+          "overflow": false,
+          "physicsColliders": "7",
+          "physicsInitializationMs": "690.1999999955297",
+          "physicsSetupMs": "34.900000005960464",
+          "physicsStatus": "paused",
+          "physicsSteps": "0",
+          "playEnvelope": "{\"minimumX\":-299.0121154785156,\"maximumX\":299.0121765136719,\"minimumZ\":-299.0060119628906,\"maximumZ\":298.9939880371094}",
+          "qaLines": "960",
+          "roadTriangles": "3407",
+          "sourceVisible": "true",
+          "vehiclePose": "{\"position\":{\"x\":-83.77054595947266,\"y\":1.0199999809265137,\"z\":217.4877166748047},\"rotation\":{\"x\":0,\"y\":0.7142094373703003,\"z\":0,\"w\":0.6999320387840271},\"wheels\":[{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0}]}",
+          "vehicleRecoveries": "0",
+          "vehicleResets": "0",
+          "vehicleSpeed": "0",
+          "vehicleStatus": "ready",
+          "zoneSlug": "cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410"
+        },
+        "stepsBeforePause": "178",
+        "qaCollisionIndependence": "pass",
+        "pauseResume": "pass",
+        "screenshot": "/home/mabrax/.codex/worktrees/6967/old-england-taxi/.zone-cache/phase-02/physics-browser/desktop-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410.png"
+      },
+      {
+        "mode": "desktop",
+        "label": "Cambridge centre",
+        "initial": {
+          "boundaryHeight": "20",
+          "buildingTriangles": "29156",
+          "canvases": 1,
+          "collisionVisible": "false",
+          "engine": "three.js r179",
+          "focused": true,
+          "generatedVisible": "true",
+          "hidden": false,
+          "overflow": false,
+          "physicsColliders": "7",
+          "physicsInitializationMs": "1201.6999999955297",
+          "physicsSetupMs": "209.5",
+          "physicsStatus": "paused",
+          "physicsSteps": "0",
+          "playEnvelope": "{\"minimumX\":-349.0244140625,\"maximumX\":349.0246887207031,\"minimumZ\":-349.0119934082031,\"maximumZ\":348.9880065917969}",
+          "qaLines": "1698",
+          "roadTriangles": "1744",
+          "sourceVisible": "true",
+          "vehiclePose": "{\"position\":{\"x\":152.4167022705078,\"y\":1.0199999809265137,\"z\":-318.10467529296875},\"rotation\":{\"x\":0,\"y\":-0.9995778799057007,\"z\":0,\"w\":0.02905355580151081},\"wheels\":[{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0}]}",
+          "vehicleRecoveries": "0",
+          "vehicleResets": "0",
+          "vehicleSpeed": "0",
+          "vehicleStatus": "ready",
+          "zoneSlug": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43"
+        },
+        "stepsBeforePause": "185",
+        "qaCollisionIndependence": "pass",
+        "pauseResume": "pass",
+        "screenshot": "/home/mabrax/.codex/worktrees/6967/old-england-taxi/.zone-cache/phase-02/physics-browser/desktop-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43.png"
+      },
+      {
+        "mode": "desktop",
+        "label": "London Tower Bridge",
+        "initial": {
+          "boundaryHeight": "20",
+          "buildingTriangles": "11500",
+          "canvases": 1,
+          "collisionVisible": "false",
+          "engine": "three.js r179",
+          "focused": true,
+          "generatedVisible": "true",
+          "hidden": false,
+          "overflow": false,
+          "physicsColliders": "7",
+          "physicsInitializationMs": "915.7999999970198",
+          "physicsSetupMs": "66.39999999850988",
+          "physicsStatus": "paused",
+          "physicsSteps": "0",
+          "playEnvelope": "{\"minimumX\":-374.02801513671875,\"maximumX\":374.0014953613281,\"minimumZ\":-374.0140075683594,\"maximumZ\":373.9859924316406}",
+          "qaLines": "1309",
+          "roadTriangles": "2055",
+          "sourceVisible": "true",
+          "vehiclePose": "{\"position\":{\"x\":85.47010803222656,\"y\":1.0199999809265137,\"z\":-255.52688598632812},\"rotation\":{\"x\":0,\"y\":-0.06553389132022858,\"z\":0,\"w\":0.9978503584861755},\"wheels\":[{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0}]}",
+          "vehicleRecoveries": "0",
+          "vehicleResets": "0",
+          "vehicleSpeed": "0",
+          "vehicleStatus": "ready",
+          "zoneSlug": "cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a"
+        },
+        "stepsBeforePause": "176",
+        "qaCollisionIndependence": "pass",
+        "pauseResume": "pass",
+        "screenshot": "/home/mabrax/.codex/worktrees/6967/old-england-taxi/.zone-cache/phase-02/physics-browser/desktop-cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a.png"
+      },
+      {
+        "mode": "desktop",
+        "label": "Lucca historic centre",
+        "initial": {
+          "boundaryHeight": "20",
+          "buildingTriangles": "33372",
+          "canvases": 1,
+          "collisionVisible": "false",
+          "engine": "three.js r179",
+          "focused": true,
+          "generatedVisible": "true",
+          "hidden": false,
+          "overflow": false,
+          "physicsColliders": "7",
+          "physicsInitializationMs": "1177.7999999970198",
+          "physicsSetupMs": "169.89999999850988",
+          "physicsStatus": "paused",
+          "physicsSteps": "0",
+          "playEnvelope": "{\"minimumX\":-349.0164489746094,\"maximumX\":349.0157165527344,\"minimumZ\":-349.0090026855469,\"maximumZ\":348.9909973144531}",
+          "qaLines": "1829",
+          "roadTriangles": "1800",
+          "sourceVisible": "true",
+          "vehiclePose": "{\"position\":{\"x\":-318.1946716308594,\"y\":1.0199999809265137,\"z\":319.0031433105469},\"rotation\":{\"x\":0,\"y\":-0.7310019135475159,\"z\":0,\"w\":0.682375431060791},\"wheels\":[{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0}]}",
+          "vehicleRecoveries": "0",
+          "vehicleResets": "0",
+          "vehicleSpeed": "0",
+          "vehicleStatus": "ready",
+          "zoneSlug": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87"
+        },
+        "stepsBeforePause": "139",
+        "qaCollisionIndependence": "pass",
+        "pauseResume": "pass",
+        "screenshot": "/home/mabrax/.codex/worktrees/6967/old-england-taxi/.zone-cache/phase-02/physics-browser/desktop-cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87.png"
+      },
+      {
+        "mode": "desktop",
+        "label": "Trafalgar Square, London",
+        "initial": {
+          "boundaryHeight": "20",
+          "buildingTriangles": "38664",
+          "canvases": 1,
+          "collisionVisible": "false",
+          "engine": "three.js r179",
+          "focused": true,
+          "generatedVisible": "true",
+          "hidden": false,
+          "overflow": false,
+          "physicsColliders": "7",
+          "physicsInitializationMs": "1681.2000000029802",
+          "physicsSetupMs": "244.69999999552965",
+          "physicsStatus": "paused",
+          "physicsSteps": "0",
+          "playEnvelope": "{\"minimumX\":-500.6645812988281,\"maximumX\":500.6169128417969,\"minimumZ\":-499.35198974609375,\"maximumZ\":499.302001953125}",
+          "qaLines": "4087",
+          "roadTriangles": "6535",
+          "sourceVisible": "true",
+          "vehiclePose": "{\"position\":{\"x\":-448.6275329589844,\"y\":1.0199999809265137,\"z\":413.0413818359375},\"rotation\":{\"x\":0,\"y\":0.880703866481781,\"z\":0,\"w\":0.47366735339164734},\"wheels\":[{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0}]}",
+          "vehicleRecoveries": "0",
+          "vehicleResets": "0",
+          "vehicleSpeed": "0",
+          "vehicleStatus": "ready",
+          "zoneSlug": "trafalgar-square-london"
+        },
+        "stepsBeforePause": "155",
+        "qaCollisionIndependence": "pass",
+        "pauseResume": "pass",
+        "screenshot": "/home/mabrax/.codex/worktrees/6967/old-england-taxi/.zone-cache/phase-02/physics-browser/desktop-trafalgar-square-london.png"
+      },
+      {
+        "mode": "mobile-viewport",
+        "label": "Chicago River North grid",
+        "initial": {
+          "boundaryHeight": "20",
+          "buildingTriangles": "6720",
+          "canvases": 1,
+          "collisionVisible": "false",
+          "engine": "three.js r179",
+          "focused": true,
+          "generatedVisible": "true",
+          "hidden": false,
+          "overflow": false,
+          "physicsColliders": "7",
+          "physicsInitializationMs": "823.8999999985099",
+          "physicsSetupMs": "89.60000000149012",
+          "physicsStatus": "paused",
+          "physicsSteps": "0",
+          "playEnvelope": "{\"minimumX\":-299.0121154785156,\"maximumX\":299.0121765136719,\"minimumZ\":-299.0060119628906,\"maximumZ\":298.9939880371094}",
+          "qaLines": "960",
+          "roadTriangles": "3407",
+          "sourceVisible": "true",
+          "vehiclePose": "{\"position\":{\"x\":-83.77054595947266,\"y\":1.0199999809265137,\"z\":217.4877166748047},\"rotation\":{\"x\":0,\"y\":0.7142094373703003,\"z\":0,\"w\":0.6999320387840271},\"wheels\":[{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0}]}",
+          "vehicleRecoveries": "0",
+          "vehicleResets": "0",
+          "vehicleSpeed": "0",
+          "vehicleStatus": "ready",
+          "zoneSlug": "cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410"
+        },
+        "stepsBeforePause": "187",
+        "qaCollisionIndependence": "pass",
+        "pauseResume": "pass",
+        "screenshot": "/home/mabrax/.codex/worktrees/6967/old-england-taxi/.zone-cache/phase-02/physics-browser/mobile-viewport-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410.png"
+      },
+      {
+        "mode": "mobile-viewport",
+        "label": "Cambridge centre",
+        "initial": {
+          "boundaryHeight": "20",
+          "buildingTriangles": "29156",
+          "canvases": 1,
+          "collisionVisible": "false",
+          "engine": "three.js r179",
+          "focused": true,
+          "generatedVisible": "true",
+          "hidden": false,
+          "overflow": false,
+          "physicsColliders": "7",
+          "physicsInitializationMs": "974.8999999985099",
+          "physicsSetupMs": "190",
+          "physicsStatus": "paused",
+          "physicsSteps": "0",
+          "playEnvelope": "{\"minimumX\":-349.0244140625,\"maximumX\":349.0246887207031,\"minimumZ\":-349.0119934082031,\"maximumZ\":348.9880065917969}",
+          "qaLines": "1698",
+          "roadTriangles": "1744",
+          "sourceVisible": "true",
+          "vehiclePose": "{\"position\":{\"x\":152.4167022705078,\"y\":1.0199999809265137,\"z\":-318.10467529296875},\"rotation\":{\"x\":0,\"y\":-0.9995778799057007,\"z\":0,\"w\":0.02905355580151081},\"wheels\":[{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0}]}",
+          "vehicleRecoveries": "0",
+          "vehicleResets": "0",
+          "vehicleSpeed": "0",
+          "vehicleStatus": "ready",
+          "zoneSlug": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43"
+        },
+        "stepsBeforePause": "180",
+        "qaCollisionIndependence": "pass",
+        "pauseResume": "pass",
+        "screenshot": "/home/mabrax/.codex/worktrees/6967/old-england-taxi/.zone-cache/phase-02/physics-browser/mobile-viewport-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43.png"
+      },
+      {
+        "mode": "mobile-viewport",
+        "label": "London Tower Bridge",
+        "initial": {
+          "boundaryHeight": "20",
+          "buildingTriangles": "11500",
+          "canvases": 1,
+          "collisionVisible": "false",
+          "engine": "three.js r179",
+          "focused": true,
+          "generatedVisible": "true",
+          "hidden": false,
+          "overflow": false,
+          "physicsColliders": "7",
+          "physicsInitializationMs": "659.2999999970198",
+          "physicsSetupMs": "51.69999999552965",
+          "physicsStatus": "paused",
+          "physicsSteps": "0",
+          "playEnvelope": "{\"minimumX\":-374.02801513671875,\"maximumX\":374.0014953613281,\"minimumZ\":-374.0140075683594,\"maximumZ\":373.9859924316406}",
+          "qaLines": "1309",
+          "roadTriangles": "2055",
+          "sourceVisible": "true",
+          "vehiclePose": "{\"position\":{\"x\":85.47010803222656,\"y\":1.0199999809265137,\"z\":-255.52688598632812},\"rotation\":{\"x\":0,\"y\":-0.06553389132022858,\"z\":0,\"w\":0.9978503584861755},\"wheels\":[{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0}]}",
+          "vehicleRecoveries": "0",
+          "vehicleResets": "0",
+          "vehicleSpeed": "0",
+          "vehicleStatus": "ready",
+          "zoneSlug": "cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a"
+        },
+        "stepsBeforePause": "167",
+        "qaCollisionIndependence": "pass",
+        "pauseResume": "pass",
+        "screenshot": "/home/mabrax/.codex/worktrees/6967/old-england-taxi/.zone-cache/phase-02/physics-browser/mobile-viewport-cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a.png"
+      },
+      {
+        "mode": "mobile-viewport",
+        "label": "Lucca historic centre",
+        "initial": {
+          "boundaryHeight": "20",
+          "buildingTriangles": "33372",
+          "canvases": 1,
+          "collisionVisible": "false",
+          "engine": "three.js r179",
+          "focused": true,
+          "generatedVisible": "true",
+          "hidden": false,
+          "overflow": false,
+          "physicsColliders": "7",
+          "physicsInitializationMs": "1095.9000000059605",
+          "physicsSetupMs": "189.60000000149012",
+          "physicsStatus": "paused",
+          "physicsSteps": "0",
+          "playEnvelope": "{\"minimumX\":-349.0164489746094,\"maximumX\":349.0157165527344,\"minimumZ\":-349.0090026855469,\"maximumZ\":348.9909973144531}",
+          "qaLines": "1829",
+          "roadTriangles": "1800",
+          "sourceVisible": "true",
+          "vehiclePose": "{\"position\":{\"x\":-318.1946716308594,\"y\":1.0199999809265137,\"z\":319.0031433105469},\"rotation\":{\"x\":0,\"y\":-0.7310019135475159,\"z\":0,\"w\":0.682375431060791},\"wheels\":[{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0}]}",
+          "vehicleRecoveries": "0",
+          "vehicleResets": "0",
+          "vehicleSpeed": "0",
+          "vehicleStatus": "ready",
+          "zoneSlug": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87"
+        },
+        "stepsBeforePause": "160",
+        "qaCollisionIndependence": "pass",
+        "pauseResume": "pass",
+        "screenshot": "/home/mabrax/.codex/worktrees/6967/old-england-taxi/.zone-cache/phase-02/physics-browser/mobile-viewport-cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87.png"
+      },
+      {
+        "mode": "mobile-viewport",
+        "label": "Trafalgar Square, London",
+        "initial": {
+          "boundaryHeight": "20",
+          "buildingTriangles": "38664",
+          "canvases": 1,
+          "collisionVisible": "false",
+          "engine": "three.js r179",
+          "focused": true,
+          "generatedVisible": "true",
+          "hidden": false,
+          "overflow": false,
+          "physicsColliders": "7",
+          "physicsInitializationMs": "765",
+          "physicsSetupMs": "186.19999999552965",
+          "physicsStatus": "paused",
+          "physicsSteps": "0",
+          "playEnvelope": "{\"minimumX\":-500.6645812988281,\"maximumX\":500.6169128417969,\"minimumZ\":-499.35198974609375,\"maximumZ\":499.302001953125}",
+          "qaLines": "4087",
+          "roadTriangles": "6535",
+          "sourceVisible": "true",
+          "vehiclePose": "{\"position\":{\"x\":-448.6275329589844,\"y\":1.0199999809265137,\"z\":413.0413818359375},\"rotation\":{\"x\":0,\"y\":0.880703866481781,\"z\":0,\"w\":0.47366735339164734},\"wheels\":[{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0}]}",
+          "vehicleRecoveries": "0",
+          "vehicleResets": "0",
+          "vehicleSpeed": "0",
+          "vehicleStatus": "ready",
+          "zoneSlug": "trafalgar-square-london"
+        },
+        "stepsBeforePause": "180",
+        "qaCollisionIndependence": "pass",
+        "pauseResume": "pass",
+        "screenshot": "/home/mabrax/.codex/worktrees/6967/old-england-taxi/.zone-cache/phase-02/physics-browser/mobile-viewport-trafalgar-square-london.png"
+      },
+      {
+        "check": "real browser tab departure/return pauses and requires explicit resume",
+        "result": "pass",
+        "afterTabReturn": {
+          "boundaryHeight": "20",
+          "buildingTriangles": "38664",
+          "canvases": 1,
+          "collisionVisible": "false",
+          "engine": "three.js r179",
+          "focused": true,
+          "generatedVisible": "true",
+          "hidden": false,
+          "overflow": false,
+          "physicsColliders": "7",
+          "physicsInitializationMs": "765",
+          "physicsSetupMs": "186.19999999552965",
+          "physicsStatus": "paused",
+          "physicsSteps": "218",
+          "playEnvelope": "{\"minimumX\":-500.6645812988281,\"maximumX\":500.6169128417969,\"minimumZ\":-499.35198974609375,\"maximumZ\":499.302001953125}",
+          "qaLines": "4087",
+          "roadTriangles": "6535",
+          "sourceVisible": "false",
+          "vehiclePose": "{\"position\":{\"x\":-448.6275329589844,\"y\":0.8089643120765686,\"z\":413.0413818359375},\"rotation\":{\"x\":2.1023421892252259e-10,\"y\":0.880703866481781,\"z\":-3.9529712836383624e-10,\"w\":0.47366735339164734},\"wheels\":[{\"length\":0.38896434783935546,\"steering\":0,\"rotation\":-2.7981975070368037e-10},{\"length\":0.38896434783935546,\"steering\":0,\"rotation\":-2.7981975070368037e-10},{\"length\":0.38896434783935546,\"steering\":0,\"rotation\":-2.7981975070368037e-10},{\"length\":0.38896434783935546,\"steering\":0,\"rotation\":-2.7981975070368037e-10}]}",
+          "vehicleRecoveries": "0",
+          "vehicleResets": "0",
+          "vehicleSpeed": "6.392482895706525e-11",
+          "vehicleStatus": "ready",
+          "zoneSlug": "trafalgar-square-london"
+        }
+      },
+      {
+        "check": "prepared world loads without generation service or source QA",
+        "result": "pass"
+      },
+      {
+        "check": "physics initialization failure retains renderer and camera reset",
+        "result": "pass",
+        "failed": {
+          "buildingTriangles": "29156",
+          "canvases": 1,
+          "collisionVisible": "false",
+          "engine": "three.js r179",
+          "focused": true,
+          "generatedVisible": "true",
+          "hidden": false,
+          "overflow": false,
+          "physicsColliders": "0",
+          "physicsInitializationMs": "0",
+          "physicsSetupMs": "0",
+          "physicsStatus": "error",
+          "physicsSteps": "0",
+          "qaLines": "0",
+          "roadTriangles": "1744",
+          "sourceVisible": "false",
+          "vehicleStatus": "loading",
+          "zoneSlug": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43"
+        }
+      },
+      {
+        "check": "fresh navigation recovers from physics failure",
+        "result": "pass"
+      }
+    ]
+  },
+  "vehicle": {
+    "base": "http://127.0.0.1:4187",
+    "checkedAt": "2026-09-07T18:01:38.787Z",
+    "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36",
+    "observations": [
+      {
+        "mode": "desktop",
+        "label": "Chicago River North grid",
+        "initial": {
+          "boundaryHeight": "20",
+          "buildingTriangles": "6720",
+          "canvases": 1,
+          "collisionVisible": "false",
+          "engine": "three.js r179",
+          "generatedVisible": "true",
+          "overflow": false,
+          "physicsColliders": "7",
+          "physicsInitializationMs": "181.39999999850988",
+          "physicsSetupMs": "50.79999999701977",
+          "physicsStatus": "paused",
+          "physicsSteps": "0",
+          "playEnvelope": "{\"minimumX\":-299.0121154785156,\"maximumX\":299.0121765136719,\"minimumZ\":-299.0060119628906,\"maximumZ\":298.9939880371094}",
+          "qaLines": "960",
+          "roadTriangles": "3407",
+          "sourceVisible": "true",
+          "vehiclePose": "{\"position\":{\"x\":-83.77054595947266,\"y\":1.0199999809265137,\"z\":217.4877166748047},\"rotation\":{\"x\":0,\"y\":0.7142094373703003,\"z\":0,\"w\":0.6999320387840271},\"wheels\":[{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0}]}",
+          "vehicleRecoveries": "0",
+          "vehicleResets": "0",
+          "vehicleSpeed": "0",
+          "vehicleStatus": "ready",
+          "zoneSlug": "cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410"
+        },
+        "commands": [
+          {
+            "name": "Accelerate",
+            "steps": 60,
+            "speed": 2.5426044261837495,
+            "pose": {
+              "position": {
+                "x": -82.69168853759766,
+                "y": 0.8089388012886047,
+                "z": 217.4658660888672
+              },
+              "rotation": {
+                "x": -0.003748012240976095,
+                "y": 0.7141993641853333,
+                "z": 0.003824227023869753,
+                "w": 0.6999219059944153
+              },
+              "wheels": [
+                {
+                  "length": 0.4034436273574829,
+                  "steering": 0,
+                  "rotation": 3.374655246734619
+                },
+                {
+                  "length": 0.4034431505203247,
+                  "steering": 0,
+                  "rotation": 3.37465500831604
+                },
+                {
+                  "length": 0.37452714920043945,
+                  "steering": 0,
+                  "rotation": 3.3751094341278076
+                },
+                {
+                  "length": 0.37452667236328124,
+                  "steering": 0,
+                  "rotation": 3.3751094341278076
+                }
+              ]
+            }
+          },
+          {
+            "name": "Coast",
+            "steps": 60,
+            "speed": 2.256172554550974,
+            "pose": {
+              "position": {
+                "x": -80.2927017211914,
+                "y": 0.8089643120765686,
+                "z": 217.4172821044922
+              },
+              "rotation": {
+                "x": -1.1913823705356208e-08,
+                "y": 0.7142094373703003,
+                "z": 1.745795330521105e-08,
+                "w": 0.6999320983886719
+              },
+              "wheels": [
+                {
+                  "length": 0.38896434783935546,
+                  "steering": 0,
+                  "rotation": 10.869601249694824
+                },
+                {
+                  "length": 0.38896434783935546,
+                  "steering": 0,
+                  "rotation": 10.869600296020508
+                },
+                {
+                  "length": 0.3889642286300659,
+                  "steering": 0,
+                  "rotation": 10.869540214538574
+                },
+                {
+                  "length": 0.38896434783935546,
+                  "steering": 0,
+                  "rotation": 10.869540214538574
+                }
+              ]
+            }
+          },
+          {
+            "name": "Brake",
+            "steps": 60,
+            "speed": 8.682343908885953e-05,
+            "pose": {
+              "position": {
+                "x": -79.9848403930664,
+                "y": 0.8089657425880432,
+                "z": 217.4109344482422
+              },
+              "rotation": {
+                "x": 0.000425502221332863,
+                "y": 0.7142091989517212,
+                "z": -0.00043420729343779385,
+                "w": 0.6999320387840271
+              },
+              "wheels": [
+                {
+                  "length": 0.38732486248016357,
+                  "steering": 0,
+                  "rotation": 11.788492202758789
+                },
+                {
+                  "length": 0.38732486248016357,
+                  "steering": 0,
+                  "rotation": 11.788491249084473
+                },
+                {
+                  "length": 0.3906078267097473,
+                  "steering": 0,
+                  "rotation": 11.788213729858398
+                },
+                {
+                  "length": 0.3906078267097473,
+                  "steering": 0,
+                  "rotation": 11.788213729858398
+                }
+              ]
+            }
+          },
+          {
+            "name": "Reverse",
+            "steps": 60,
+            "speed": -2.993076402007786,
+            "pose": {
+              "position": {
+                "x": -81.5827407836914,
+                "y": 0.8089219927787781,
+                "z": 217.4431610107422
+              },
+              "rotation": {
+                "x": 0.0037471347022801638,
+                "y": 0.7141995429992676,
+                "z": -0.0038233327213674784,
+                "w": 0.699921727180481
+              },
+              "wheels": [
+                {
+                  "length": 0.37451332092285156,
+                  "steering": 0,
+                  "rotation": 6.786753177642822
+                },
+                {
+                  "length": 0.37451379776000976,
+                  "steering": 0,
+                  "rotation": 6.786753177642822
+                },
+                {
+                  "length": 0.4034230041503906,
+                  "steering": 0,
+                  "rotation": 6.786929607391357
+                },
+                {
+                  "length": 0.4034234809875488,
+                  "steering": 0,
+                  "rotation": 6.786928653717041
+                }
+              ]
+            }
+          },
+          {
+            "name": "Brake",
+            "steps": 60,
+            "speed": -0.00013430383900417948,
+            "pose": {
+              "position": {
+                "x": -82.1288833618164,
+                "y": 0.8089683055877686,
+                "z": 217.4541473388672
+              },
+              "rotation": {
+                "x": -0.0006581674097105861,
+                "y": 0.7142090797424316,
+                "z": 0.0006715449271723628,
+                "w": 0.6999318599700928
+              },
+              "wheels": [
+                {
+                  "length": 0.391508572101593,
+                  "steering": 0,
+                  "rotation": 5.128273963928223
+                },
+                {
+                  "length": 0.391508572101593,
+                  "steering": 0,
+                  "rotation": 5.128273963928223
+                },
+                {
+                  "length": 0.38643097162246703,
+                  "steering": 0,
+                  "rotation": 5.12758207321167
+                },
+                {
+                  "length": 0.38643097162246703,
+                  "steering": 0,
+                  "rotation": 5.1275811195373535
+                }
+              ]
+            }
+          },
+          {
+            "name": "Turn left",
+            "steps": 60,
+            "speed": 2.846535835020223,
+            "pose": {
+              "position": {
+                "x": -80.6796646118164,
+                "y": 0.8088945150375366,
+                "z": 216.9713592529297
+              },
+              "rotation": {
+                "x": 0.0005125033785589039,
+                "y": 0.7853361368179321,
+                "z": 0.0068552508018910885,
+                "w": 0.6190314888954163
+              },
+              "wheels": [
+                {
+                  "length": 0.3959605622291565,
+                  "steering": 0,
+                  "rotation": 10.633668899536133
+                },
+                {
+                  "length": 0.40934263944625854,
+                  "steering": 0,
+                  "rotation": 9.737654685974121
+                },
+                {
+                  "length": 0.3685993480682373,
+                  "steering": 0,
+                  "rotation": 10.306455612182617
+                },
+                {
+                  "length": 0.3819813656806946,
+                  "steering": 0,
+                  "rotation": 9.336324691772461
+                }
+              ]
+            }
+          },
+          {
+            "name": "Turn right",
+            "steps": 60,
+            "speed": 4.9502422297629085,
+            "pose": {
+              "position": {
+                "x": -76.8423843383789,
+                "y": 0.8088834881782532,
+                "z": 217.4724578857422
+              },
+              "rotation": {
+                "x": -0.0072205825708806515,
+                "y": 0.6148244738578796,
+                "z": -0.001592520042322576,
+                "w": 0.7886292338371277
+              },
+              "wheels": [
+                {
+                  "length": 0.40990667819976806,
+                  "steering": 0,
+                  "rotation": 22.58123779296875
+                },
+                {
+                  "length": 0.3935024070739746,
+                  "steering": 0,
+                  "rotation": 23.689077377319336
+                },
+                {
+                  "length": 0.3844416069984436,
+                  "steering": 0,
+                  "rotation": 21.37506866455078
+                },
+                {
+                  "length": 0.36803733587265014,
+                  "steering": 0,
+                  "rotation": 22.574974060058594
+                }
+              ]
+            }
+          }
+        ],
+        "repeatedReset": "pass",
+        "qaPause": "pass",
+        "nearby": "/home/mabrax/.codex/worktrees/6967/old-england-taxi/.zone-cache/phase-02/vehicle-browser/desktop-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-vehicle.png",
+        "driven": "/home/mabrax/.codex/worktrees/6967/old-england-taxi/.zone-cache/phase-02/vehicle-browser/desktop-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-driven.png"
+      },
+      {
+        "mode": "desktop",
+        "label": "Cambridge centre",
+        "initial": {
+          "boundaryHeight": "20",
+          "buildingTriangles": "29156",
+          "canvases": 1,
+          "collisionVisible": "false",
+          "engine": "three.js r179",
+          "generatedVisible": "true",
+          "overflow": false,
+          "physicsColliders": "7",
+          "physicsInitializationMs": "1336.1000000014901",
+          "physicsSetupMs": "253.29999999701977",
+          "physicsStatus": "paused",
+          "physicsSteps": "0",
+          "playEnvelope": "{\"minimumX\":-349.0244140625,\"maximumX\":349.0246887207031,\"minimumZ\":-349.0119934082031,\"maximumZ\":348.9880065917969}",
+          "qaLines": "1698",
+          "roadTriangles": "1744",
+          "sourceVisible": "true",
+          "vehiclePose": "{\"position\":{\"x\":152.4167022705078,\"y\":1.0199999809265137,\"z\":-318.10467529296875},\"rotation\":{\"x\":0,\"y\":-0.9995778799057007,\"z\":0,\"w\":0.02905355580151081},\"wheels\":[{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0}]}",
+          "vehicleRecoveries": "0",
+          "vehicleResets": "0",
+          "vehicleSpeed": "0",
+          "vehicleStatus": "ready",
+          "zoneSlug": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43"
+        },
+        "commands": [
+          {
+            "name": "Accelerate",
+            "steps": 60,
+            "speed": 2.542612175035526,
+            "pose": {
+              "position": {
+                "x": 152.3542022705078,
+                "y": 0.8089388012886047,
+                "z": -319.18182373046875
+              },
+              "rotation": {
+                "x": -0.00015515892300754786,
+                "y": -0.9995636343955994,
+                "z": -0.0053522419184446335,
+                "w": 0.029053058475255966
+              },
+              "wheels": [
+                {
+                  "length": 0.40344350814819335,
+                  "steering": 0,
+                  "rotation": 3.374654531478882
+                },
+                {
+                  "length": 0.40344231605529784,
+                  "steering": 0,
+                  "rotation": 3.3746542930603027
+                },
+                {
+                  "length": 0.37452810287475585,
+                  "steering": 0,
+                  "rotation": 3.3751091957092285
+                },
+                {
+                  "length": 0.37452691078186034,
+                  "steering": 0,
+                  "rotation": 3.3751091957092285
+                }
+              ]
+            }
+          },
+          {
+            "name": "Coast",
+            "steps": 60,
+            "speed": 2.2561787362486334,
+            "pose": {
+              "position": {
+                "x": 152.2149200439453,
+                "y": 0.8089643120765686,
+                "z": -321.57757568359375
+              },
+              "rotation": {
+                "x": 1.1988612325097847e-09,
+                "y": -0.9995778799057007,
+                "z": -2.797820108924043e-08,
+                "w": 0.029053501784801483
+              },
+              "wheels": [
+                {
+                  "length": 0.38896434783935546,
+                  "steering": 0,
+                  "rotation": 10.869621276855469
+                },
+                {
+                  "length": 0.38896434783935546,
+                  "steering": 0,
+                  "rotation": 10.869620323181152
+                },
+                {
+                  "length": 0.3889642286300659,
+                  "steering": 0,
+                  "rotation": 10.869561195373535
+                },
+                {
+                  "length": 0.3889642286300659,
+                  "steering": 0,
+                  "rotation": 10.869561195373535
+                }
+              ]
+            }
+          },
+          {
+            "name": "Brake",
+            "steps": 60,
+            "speed": 8.682774213260652e-05,
+            "pose": {
+              "position": {
+                "x": 152.1967315673828,
+                "y": 0.808965802192688,
+                "z": -321.88470458984375
+              },
+              "rotation": {
+                "x": 1.7651849702815525e-05,
+                "y": -0.9995777010917664,
+                "z": 0.0006077069556340575,
+                "w": 0.029053522273898125
+              },
+              "wheels": [
+                {
+                  "length": 0.38732486248016357,
+                  "steering": 0,
+                  "rotation": 11.788517951965332
+                },
+                {
+                  "length": 0.38732486248016357,
+                  "steering": 0,
+                  "rotation": 11.788517951965332
+                },
+                {
+                  "length": 0.3906078267097473,
+                  "steering": 0,
+                  "rotation": 11.788240432739258
+                },
+                {
+                  "length": 0.39060794591903686,
+                  "steering": 0,
+                  "rotation": 11.788241386413574
+                }
+              ]
+            }
+          },
+          {
+            "name": "Reverse",
+            "steps": 60,
+            "speed": -2.9930764990463516,
+            "pose": {
+              "position": {
+                "x": 152.2895050048828,
+                "y": 0.8089219331741333,
+                "z": -320.28973388671875
+              },
+              "rotation": {
+                "x": 0.00015509294462390244,
+                "y": -0.9995635747909546,
+                "z": 0.00535096088424325,
+                "w": 0.029053080826997757
+              },
+              "wheels": [
+                {
+                  "length": 0.37451332092285156,
+                  "steering": 0,
+                  "rotation": 6.786776542663574
+                },
+                {
+                  "length": 0.3745146322250366,
+                  "steering": 0,
+                  "rotation": 6.786775588989258
+                },
+                {
+                  "length": 0.4034220504760742,
+                  "steering": 0,
+                  "rotation": 6.786952018737793
+                },
+                {
+                  "length": 0.4034232425689697,
+                  "steering": 0,
+                  "rotation": 6.786952972412109
+                }
+              ]
+            }
+          },
+          {
+            "name": "Brake",
+            "steps": 60,
+            "speed": -0.0001343037004701217,
+            "pose": {
+              "position": {
+                "x": 152.3209991455078,
+                "y": 0.8089683651924133,
+                "z": -319.74481201171875
+              },
+              "rotation": {
+                "x": -2.7252066502114758e-05,
+                "y": -0.9995774626731873,
+                "z": -0.0009398936526849866,
+                "w": 0.02905352972447872
+              },
+              "wheels": [
+                {
+                  "length": 0.39150869131088256,
+                  "steering": 0,
+                  "rotation": 5.128299236297607
+                },
+                {
+                  "length": 0.39150845289230346,
+                  "steering": 0,
+                  "rotation": 5.128298759460449
+                },
+                {
+                  "length": 0.3864310908317566,
+                  "steering": 0,
+                  "rotation": 5.127605438232422
+                },
+                {
+                  "length": 0.38643097162246703,
+                  "steering": 0,
+                  "rotation": 5.127606391906738
+                }
+              ]
+            }
+          },
+          {
+            "name": "Turn left",
+            "steps": 60,
+            "speed": 2.8465354416982223,
+            "pose": {
+              "position": {
+                "x": 151.7838897705078,
+                "y": 0.8088944554328918,
+                "z": -321.17401123046875
+              },
+              "rotation": {
+                "x": -0.005294025409966707,
+                "y": -0.9906297922134399,
+                "z": -0.004385413136333227,
+                "w": 0.1364012211561203
+              },
+              "wheels": [
+                {
+                  "length": 0.3959603238105774,
+                  "steering": 0,
+                  "rotation": 10.633696556091309
+                },
+                {
+                  "length": 0.4093427586555481,
+                  "steering": 0,
+                  "rotation": 9.737678527832031
+                },
+                {
+                  "length": 0.3685991096496582,
+                  "steering": 0,
+                  "rotation": 10.306477546691895
+                },
+                {
+                  "length": 0.3819814848899841,
+                  "steering": 0,
+                  "rotation": 9.336353302001953
+                }
+              ]
+            }
+          },
+          {
+            "name": "Turn right",
+            "steps": 60,
+            "speed": 4.950254393600995,
+            "pose": {
+              "position": {
+                "x": 152.1386260986328,
+                "y": 0.8088834881782532,
+                "z": -325.02777099609375
+              },
+              "rotation": {
+                "x": 0.006155182141810656,
+                "y": -0.9945439696311951,
+                "z": -0.004097094293683767,
+                "w": -0.10405562818050385
+              },
+              "wheels": [
+                {
+                  "length": 0.4099065589904785,
+                  "steering": 0,
+                  "rotation": 22.581275939941406
+                },
+                {
+                  "length": 0.3935024070739746,
+                  "steering": 0,
+                  "rotation": 23.689123153686523
+                },
+                {
+                  "length": 0.3844416069984436,
+                  "steering": 0,
+                  "rotation": 21.375099182128906
+                },
+                {
+                  "length": 0.36803733587265014,
+                  "steering": 0,
+                  "rotation": 22.57501983642578
+                }
+              ]
+            }
+          }
+        ],
+        "repeatedReset": "pass",
+        "qaPause": "pass",
+        "nearby": "/home/mabrax/.codex/worktrees/6967/old-england-taxi/.zone-cache/phase-02/vehicle-browser/desktop-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-vehicle.png",
+        "driven": "/home/mabrax/.codex/worktrees/6967/old-england-taxi/.zone-cache/phase-02/vehicle-browser/desktop-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-driven.png"
+      },
+      {
+        "mode": "mobile-viewport",
+        "label": "Chicago River North grid",
+        "initial": {
+          "boundaryHeight": "20",
+          "buildingTriangles": "6720",
+          "canvases": 1,
+          "collisionVisible": "false",
+          "engine": "three.js r179",
+          "generatedVisible": "true",
+          "overflow": false,
+          "physicsColliders": "7",
+          "physicsInitializationMs": "651.6000000014901",
+          "physicsSetupMs": "54.600000001490116",
+          "physicsStatus": "paused",
+          "physicsSteps": "0",
+          "playEnvelope": "{\"minimumX\":-299.0121154785156,\"maximumX\":299.0121765136719,\"minimumZ\":-299.0060119628906,\"maximumZ\":298.9939880371094}",
+          "qaLines": "960",
+          "roadTriangles": "3407",
+          "sourceVisible": "true",
+          "vehiclePose": "{\"position\":{\"x\":-83.77054595947266,\"y\":1.0199999809265137,\"z\":217.4877166748047},\"rotation\":{\"x\":0,\"y\":0.7142094373703003,\"z\":0,\"w\":0.6999320387840271},\"wheels\":[{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0}]}",
+          "vehicleRecoveries": "0",
+          "vehicleResets": "0",
+          "vehicleSpeed": "0",
+          "vehicleStatus": "ready",
+          "zoneSlug": "cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410"
+        },
+        "commands": [
+          {
+            "name": "Accelerate",
+            "steps": 60,
+            "speed": 2.5426044261837495,
+            "pose": {
+              "position": {
+                "x": -82.69168853759766,
+                "y": 0.8089388012886047,
+                "z": 217.4658660888672
+              },
+              "rotation": {
+                "x": -0.003748012240976095,
+                "y": 0.7141993641853333,
+                "z": 0.003824227023869753,
+                "w": 0.6999219059944153
+              },
+              "wheels": [
+                {
+                  "length": 0.4034436273574829,
+                  "steering": 0,
+                  "rotation": 3.374655246734619
+                },
+                {
+                  "length": 0.4034431505203247,
+                  "steering": 0,
+                  "rotation": 3.37465500831604
+                },
+                {
+                  "length": 0.37452714920043945,
+                  "steering": 0,
+                  "rotation": 3.3751094341278076
+                },
+                {
+                  "length": 0.37452667236328124,
+                  "steering": 0,
+                  "rotation": 3.3751094341278076
+                }
+              ]
+            }
+          },
+          {
+            "name": "Coast",
+            "steps": 60,
+            "speed": 2.256172554550974,
+            "pose": {
+              "position": {
+                "x": -80.2927017211914,
+                "y": 0.8089643120765686,
+                "z": 217.4172821044922
+              },
+              "rotation": {
+                "x": -1.1913823705356208e-08,
+                "y": 0.7142094373703003,
+                "z": 1.745795330521105e-08,
+                "w": 0.6999320983886719
+              },
+              "wheels": [
+                {
+                  "length": 0.38896434783935546,
+                  "steering": 0,
+                  "rotation": 10.869601249694824
+                },
+                {
+                  "length": 0.38896434783935546,
+                  "steering": 0,
+                  "rotation": 10.869600296020508
+                },
+                {
+                  "length": 0.3889642286300659,
+                  "steering": 0,
+                  "rotation": 10.869540214538574
+                },
+                {
+                  "length": 0.38896434783935546,
+                  "steering": 0,
+                  "rotation": 10.869540214538574
+                }
+              ]
+            }
+          },
+          {
+            "name": "Brake",
+            "steps": 60,
+            "speed": 8.682343908885953e-05,
+            "pose": {
+              "position": {
+                "x": -79.9848403930664,
+                "y": 0.8089657425880432,
+                "z": 217.4109344482422
+              },
+              "rotation": {
+                "x": 0.000425502221332863,
+                "y": 0.7142091989517212,
+                "z": -0.00043420729343779385,
+                "w": 0.6999320387840271
+              },
+              "wheels": [
+                {
+                  "length": 0.38732486248016357,
+                  "steering": 0,
+                  "rotation": 11.788492202758789
+                },
+                {
+                  "length": 0.38732486248016357,
+                  "steering": 0,
+                  "rotation": 11.788491249084473
+                },
+                {
+                  "length": 0.3906078267097473,
+                  "steering": 0,
+                  "rotation": 11.788213729858398
+                },
+                {
+                  "length": 0.3906078267097473,
+                  "steering": 0,
+                  "rotation": 11.788213729858398
+                }
+              ]
+            }
+          },
+          {
+            "name": "Reverse",
+            "steps": 60,
+            "speed": -2.993076402007786,
+            "pose": {
+              "position": {
+                "x": -81.5827407836914,
+                "y": 0.8089219927787781,
+                "z": 217.4431610107422
+              },
+              "rotation": {
+                "x": 0.0037471347022801638,
+                "y": 0.7141995429992676,
+                "z": -0.0038233327213674784,
+                "w": 0.699921727180481
+              },
+              "wheels": [
+                {
+                  "length": 0.37451332092285156,
+                  "steering": 0,
+                  "rotation": 6.786753177642822
+                },
+                {
+                  "length": 0.37451379776000976,
+                  "steering": 0,
+                  "rotation": 6.786753177642822
+                },
+                {
+                  "length": 0.4034230041503906,
+                  "steering": 0,
+                  "rotation": 6.786929607391357
+                },
+                {
+                  "length": 0.4034234809875488,
+                  "steering": 0,
+                  "rotation": 6.786928653717041
+                }
+              ]
+            }
+          },
+          {
+            "name": "Brake",
+            "steps": 60,
+            "speed": -0.00013430383900417948,
+            "pose": {
+              "position": {
+                "x": -82.1288833618164,
+                "y": 0.8089683055877686,
+                "z": 217.4541473388672
+              },
+              "rotation": {
+                "x": -0.0006581674097105861,
+                "y": 0.7142090797424316,
+                "z": 0.0006715449271723628,
+                "w": 0.6999318599700928
+              },
+              "wheels": [
+                {
+                  "length": 0.391508572101593,
+                  "steering": 0,
+                  "rotation": 5.128273963928223
+                },
+                {
+                  "length": 0.391508572101593,
+                  "steering": 0,
+                  "rotation": 5.128273963928223
+                },
+                {
+                  "length": 0.38643097162246703,
+                  "steering": 0,
+                  "rotation": 5.12758207321167
+                },
+                {
+                  "length": 0.38643097162246703,
+                  "steering": 0,
+                  "rotation": 5.1275811195373535
+                }
+              ]
+            }
+          },
+          {
+            "name": "Turn left",
+            "steps": 60,
+            "speed": 2.846535835020223,
+            "pose": {
+              "position": {
+                "x": -80.6796646118164,
+                "y": 0.8088945150375366,
+                "z": 216.9713592529297
+              },
+              "rotation": {
+                "x": 0.0005125033785589039,
+                "y": 0.7853361368179321,
+                "z": 0.0068552508018910885,
+                "w": 0.6190314888954163
+              },
+              "wheels": [
+                {
+                  "length": 0.3959605622291565,
+                  "steering": 0,
+                  "rotation": 10.633668899536133
+                },
+                {
+                  "length": 0.40934263944625854,
+                  "steering": 0,
+                  "rotation": 9.737654685974121
+                },
+                {
+                  "length": 0.3685993480682373,
+                  "steering": 0,
+                  "rotation": 10.306455612182617
+                },
+                {
+                  "length": 0.3819813656806946,
+                  "steering": 0,
+                  "rotation": 9.336324691772461
+                }
+              ]
+            }
+          },
+          {
+            "name": "Turn right",
+            "steps": 60,
+            "speed": 4.9502422297629085,
+            "pose": {
+              "position": {
+                "x": -76.8423843383789,
+                "y": 0.8088834881782532,
+                "z": 217.4724578857422
+              },
+              "rotation": {
+                "x": -0.0072205825708806515,
+                "y": 0.6148244738578796,
+                "z": -0.001592520042322576,
+                "w": 0.7886292338371277
+              },
+              "wheels": [
+                {
+                  "length": 0.40990667819976806,
+                  "steering": 0,
+                  "rotation": 22.58123779296875
+                },
+                {
+                  "length": 0.3935024070739746,
+                  "steering": 0,
+                  "rotation": 23.689077377319336
+                },
+                {
+                  "length": 0.3844416069984436,
+                  "steering": 0,
+                  "rotation": 21.37506866455078
+                },
+                {
+                  "length": 0.36803733587265014,
+                  "steering": 0,
+                  "rotation": 22.574974060058594
+                }
+              ]
+            }
+          }
+        ],
+        "repeatedReset": "pass",
+        "qaPause": "pass",
+        "nearby": "/home/mabrax/.codex/worktrees/6967/old-england-taxi/.zone-cache/phase-02/vehicle-browser/mobile-viewport-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-vehicle.png",
+        "driven": "/home/mabrax/.codex/worktrees/6967/old-england-taxi/.zone-cache/phase-02/vehicle-browser/mobile-viewport-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-driven.png"
+      },
+      {
+        "mode": "mobile-viewport",
+        "label": "Cambridge centre",
+        "initial": {
+          "boundaryHeight": "20",
+          "buildingTriangles": "29156",
+          "canvases": 1,
+          "collisionVisible": "false",
+          "engine": "three.js r179",
+          "generatedVisible": "true",
+          "overflow": false,
+          "physicsColliders": "7",
+          "physicsInitializationMs": "809.1000000014901",
+          "physicsSetupMs": "160.90000000596046",
+          "physicsStatus": "paused",
+          "physicsSteps": "0",
+          "playEnvelope": "{\"minimumX\":-349.0244140625,\"maximumX\":349.0246887207031,\"minimumZ\":-349.0119934082031,\"maximumZ\":348.9880065917969}",
+          "qaLines": "1698",
+          "roadTriangles": "1744",
+          "sourceVisible": "true",
+          "vehiclePose": "{\"position\":{\"x\":152.4167022705078,\"y\":1.0199999809265137,\"z\":-318.10467529296875},\"rotation\":{\"x\":0,\"y\":-0.9995778799057007,\"z\":0,\"w\":0.02905355580151081},\"wheels\":[{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0}]}",
+          "vehicleRecoveries": "0",
+          "vehicleResets": "0",
+          "vehicleSpeed": "0",
+          "vehicleStatus": "ready",
+          "zoneSlug": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43"
+        },
+        "commands": [
+          {
+            "name": "Accelerate",
+            "steps": 60,
+            "speed": 2.542612175035526,
+            "pose": {
+              "position": {
+                "x": 152.3542022705078,
+                "y": 0.8089388012886047,
+                "z": -319.18182373046875
+              },
+              "rotation": {
+                "x": -0.00015515892300754786,
+                "y": -0.9995636343955994,
+                "z": -0.0053522419184446335,
+                "w": 0.029053058475255966
+              },
+              "wheels": [
+                {
+                  "length": 0.40344350814819335,
+                  "steering": 0,
+                  "rotation": 3.374654531478882
+                },
+                {
+                  "length": 0.40344231605529784,
+                  "steering": 0,
+                  "rotation": 3.3746542930603027
+                },
+                {
+                  "length": 0.37452810287475585,
+                  "steering": 0,
+                  "rotation": 3.3751091957092285
+                },
+                {
+                  "length": 0.37452691078186034,
+                  "steering": 0,
+                  "rotation": 3.3751091957092285
+                }
+              ]
+            }
+          },
+          {
+            "name": "Coast",
+            "steps": 60,
+            "speed": 2.2561787362486334,
+            "pose": {
+              "position": {
+                "x": 152.2149200439453,
+                "y": 0.8089643120765686,
+                "z": -321.57757568359375
+              },
+              "rotation": {
+                "x": 1.1988612325097847e-09,
+                "y": -0.9995778799057007,
+                "z": -2.797820108924043e-08,
+                "w": 0.029053501784801483
+              },
+              "wheels": [
+                {
+                  "length": 0.38896434783935546,
+                  "steering": 0,
+                  "rotation": 10.869621276855469
+                },
+                {
+                  "length": 0.38896434783935546,
+                  "steering": 0,
+                  "rotation": 10.869620323181152
+                },
+                {
+                  "length": 0.3889642286300659,
+                  "steering": 0,
+                  "rotation": 10.869561195373535
+                },
+                {
+                  "length": 0.3889642286300659,
+                  "steering": 0,
+                  "rotation": 10.869561195373535
+                }
+              ]
+            }
+          },
+          {
+            "name": "Brake",
+            "steps": 60,
+            "speed": 8.682774213260652e-05,
+            "pose": {
+              "position": {
+                "x": 152.1967315673828,
+                "y": 0.808965802192688,
+                "z": -321.88470458984375
+              },
+              "rotation": {
+                "x": 1.7651849702815525e-05,
+                "y": -0.9995777010917664,
+                "z": 0.0006077069556340575,
+                "w": 0.029053522273898125
+              },
+              "wheels": [
+                {
+                  "length": 0.38732486248016357,
+                  "steering": 0,
+                  "rotation": 11.788517951965332
+                },
+                {
+                  "length": 0.38732486248016357,
+                  "steering": 0,
+                  "rotation": 11.788517951965332
+                },
+                {
+                  "length": 0.3906078267097473,
+                  "steering": 0,
+                  "rotation": 11.788240432739258
+                },
+                {
+                  "length": 0.39060794591903686,
+                  "steering": 0,
+                  "rotation": 11.788241386413574
+                }
+              ]
+            }
+          },
+          {
+            "name": "Reverse",
+            "steps": 60,
+            "speed": -2.9930764990463516,
+            "pose": {
+              "position": {
+                "x": 152.2895050048828,
+                "y": 0.8089219331741333,
+                "z": -320.28973388671875
+              },
+              "rotation": {
+                "x": 0.00015509294462390244,
+                "y": -0.9995635747909546,
+                "z": 0.00535096088424325,
+                "w": 0.029053080826997757
+              },
+              "wheels": [
+                {
+                  "length": 0.37451332092285156,
+                  "steering": 0,
+                  "rotation": 6.786776542663574
+                },
+                {
+                  "length": 0.3745146322250366,
+                  "steering": 0,
+                  "rotation": 6.786775588989258
+                },
+                {
+                  "length": 0.4034220504760742,
+                  "steering": 0,
+                  "rotation": 6.786952018737793
+                },
+                {
+                  "length": 0.4034232425689697,
+                  "steering": 0,
+                  "rotation": 6.786952972412109
+                }
+              ]
+            }
+          },
+          {
+            "name": "Brake",
+            "steps": 60,
+            "speed": -0.0001343037004701217,
+            "pose": {
+              "position": {
+                "x": 152.3209991455078,
+                "y": 0.8089683651924133,
+                "z": -319.74481201171875
+              },
+              "rotation": {
+                "x": -2.7252066502114758e-05,
+                "y": -0.9995774626731873,
+                "z": -0.0009398936526849866,
+                "w": 0.02905352972447872
+              },
+              "wheels": [
+                {
+                  "length": 0.39150869131088256,
+                  "steering": 0,
+                  "rotation": 5.128299236297607
+                },
+                {
+                  "length": 0.39150845289230346,
+                  "steering": 0,
+                  "rotation": 5.128298759460449
+                },
+                {
+                  "length": 0.3864310908317566,
+                  "steering": 0,
+                  "rotation": 5.127605438232422
+                },
+                {
+                  "length": 0.38643097162246703,
+                  "steering": 0,
+                  "rotation": 5.127606391906738
+                }
+              ]
+            }
+          },
+          {
+            "name": "Turn left",
+            "steps": 60,
+            "speed": 2.8465354416982223,
+            "pose": {
+              "position": {
+                "x": 151.7838897705078,
+                "y": 0.8088944554328918,
+                "z": -321.17401123046875
+              },
+              "rotation": {
+                "x": -0.005294025409966707,
+                "y": -0.9906297922134399,
+                "z": -0.004385413136333227,
+                "w": 0.1364012211561203
+              },
+              "wheels": [
+                {
+                  "length": 0.3959603238105774,
+                  "steering": 0,
+                  "rotation": 10.633696556091309
+                },
+                {
+                  "length": 0.4093427586555481,
+                  "steering": 0,
+                  "rotation": 9.737678527832031
+                },
+                {
+                  "length": 0.3685991096496582,
+                  "steering": 0,
+                  "rotation": 10.306477546691895
+                },
+                {
+                  "length": 0.3819814848899841,
+                  "steering": 0,
+                  "rotation": 9.336353302001953
+                }
+              ]
+            }
+          },
+          {
+            "name": "Turn right",
+            "steps": 60,
+            "speed": 4.950254393600995,
+            "pose": {
+              "position": {
+                "x": 152.1386260986328,
+                "y": 0.8088834881782532,
+                "z": -325.02777099609375
+              },
+              "rotation": {
+                "x": 0.006155182141810656,
+                "y": -0.9945439696311951,
+                "z": -0.004097094293683767,
+                "w": -0.10405562818050385
+              },
+              "wheels": [
+                {
+                  "length": 0.4099065589904785,
+                  "steering": 0,
+                  "rotation": 22.581275939941406
+                },
+                {
+                  "length": 0.3935024070739746,
+                  "steering": 0,
+                  "rotation": 23.689123153686523
+                },
+                {
+                  "length": 0.3844416069984436,
+                  "steering": 0,
+                  "rotation": 21.375099182128906
+                },
+                {
+                  "length": 0.36803733587265014,
+                  "steering": 0,
+                  "rotation": 22.57501983642578
+                }
+              ]
+            }
+          }
+        ],
+        "repeatedReset": "pass",
+        "qaPause": "pass",
+        "nearby": "/home/mabrax/.codex/worktrees/6967/old-england-taxi/.zone-cache/phase-02/vehicle-browser/mobile-viewport-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-vehicle.png",
+        "driven": "/home/mabrax/.codex/worktrees/6967/old-england-taxi/.zone-cache/phase-02/vehicle-browser/mobile-viewport-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-driven.png"
+      },
+      {
+        "check": "translated graph-hint safety fixture: no spawn, valid inspection",
+        "state": {
+          "boundaryHeight": "20",
+          "buildingTriangles": "6720",
+          "canvases": 1,
+          "collisionVisible": "false",
+          "engine": "three.js r179",
+          "generatedVisible": "true",
+          "overflow": false,
+          "physicsColliders": "6",
+          "physicsInitializationMs": "479.20000000298023",
+          "physicsSetupMs": "31.600000001490116",
+          "physicsStatus": "paused",
+          "physicsSteps": "0",
+          "playEnvelope": "{\"minimumX\":-299.0121154785156,\"maximumX\":299.0121765136719,\"minimumZ\":-299.0060119628906,\"maximumZ\":298.9939880371094}",
+          "qaLines": "0",
+          "roadTriangles": "3407",
+          "sourceVisible": "false",
+          "vehicleStatus": "unavailable",
+          "zoneSlug": "cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410"
+        },
+        "message": "Driving unavailable: no safe paved start in 256 candidates (boundary, pavement). Inspection remains available."
+      },
+      {
+        "check": "actual tab departure/return pauses vehicle, no hidden catch-up",
+        "result": "pass",
+        "returned": {
+          "boundaryHeight": "20",
+          "buildingTriangles": "6720",
+          "canvases": 1,
+          "collisionVisible": "false",
+          "engine": "three.js r179",
+          "generatedVisible": "true",
+          "overflow": false,
+          "physicsColliders": "7",
+          "physicsInitializationMs": "446.70000000298023",
+          "physicsSetupMs": "32.79999999701977",
+          "physicsStatus": "paused",
+          "physicsSteps": "45",
+          "playEnvelope": "{\"minimumX\":-299.0121154785156,\"maximumX\":299.0121765136719,\"minimumZ\":-299.0060119628906,\"maximumZ\":298.9939880371094}",
+          "qaLines": "0",
+          "roadTriangles": "3407",
+          "sourceVisible": "false",
+          "vehiclePose": "{\"position\":{\"x\":-83.77054595947266,\"y\":0.8091954588890076,\"z\":217.4877166748047},\"rotation\":{\"x\":-8.279466556793125e-10,\"y\":0.7142094373703003,\"z\":1.3062742554303952e-10,\"w\":0.6999320387840271},\"wheels\":[{\"length\":0.3891953754425049,\"steering\":0,\"rotation\":4.2050160575790585e-10},{\"length\":0.3891953754425049,\"steering\":0,\"rotation\":4.2050143922445216e-10},{\"length\":0.3891953754425049,\"steering\":0,\"rotation\":4.2050157800233023e-10},{\"length\":0.3891953754425049,\"steering\":0,\"rotation\":4.2050143922445216e-10}]}",
+          "vehicleRecoveries": "0",
+          "vehicleResets": "0",
+          "vehicleSpeed": "-9.566469481494766e-11",
+          "vehicleStatus": "ready",
+          "zoneSlug": "cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410"
+        }
+      }
+    ]
+  },
+  "preparedCorpus": {
+    "base": "http://127.0.0.1:4187",
+    "observations": [
+      {
+        "mode": "desktop",
+        "label": "Chicago River North grid",
+        "buildingTriangles": 6720,
+        "canvases": 1,
+        "dpr": 1,
+        "height": 900,
+        "id": "cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410",
+        "overflow": false,
+        "qaColor": "rgb(35, 61, 58)",
+        "qaLines": 960,
+        "roadTriangles": 3407,
+        "status": "ready",
+        "width": 1440,
+        "toggles": "pass",
+        "reset": "pass",
+        "screenshot": "/tmp/zone-browser-24w7Aj/desktop-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410.png"
+      },
+      {
+        "mode": "desktop",
+        "label": "Cambridge centre",
+        "buildingTriangles": 29156,
+        "canvases": 1,
+        "dpr": 1,
+        "height": 900,
+        "id": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43",
+        "overflow": false,
+        "qaColor": "rgb(35, 61, 58)",
+        "qaLines": 1698,
+        "roadTriangles": 1744,
+        "status": "ready",
+        "width": 1440,
+        "toggles": "pass",
+        "reset": "pass",
+        "screenshot": "/tmp/zone-browser-24w7Aj/desktop-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43.png"
+      },
+      {
+        "mode": "desktop",
+        "label": "London Tower Bridge",
+        "buildingTriangles": 11500,
+        "canvases": 1,
+        "dpr": 1,
+        "height": 900,
+        "id": "cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a",
+        "overflow": false,
+        "qaColor": "rgb(35, 61, 58)",
+        "qaLines": 1309,
+        "roadTriangles": 2055,
+        "status": "ready",
+        "width": 1440,
+        "toggles": "pass",
+        "reset": "pass",
+        "screenshot": "/tmp/zone-browser-24w7Aj/desktop-cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a.png"
+      },
+      {
+        "mode": "desktop",
+        "label": "Lucca historic centre",
+        "buildingTriangles": 33372,
+        "canvases": 1,
+        "dpr": 1,
+        "height": 900,
+        "id": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+        "overflow": false,
+        "qaColor": "rgb(35, 61, 58)",
+        "qaLines": 1829,
+        "roadTriangles": 1800,
+        "status": "ready",
+        "width": 1440,
+        "toggles": "pass",
+        "reset": "pass",
+        "screenshot": "/tmp/zone-browser-24w7Aj/desktop-cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87.png"
+      },
+      {
+        "mode": "desktop",
+        "label": "Trafalgar Square, London",
+        "buildingTriangles": 38664,
+        "canvases": 1,
+        "dpr": 1,
+        "height": 900,
+        "id": "trafalgar-square-london",
+        "overflow": false,
+        "qaColor": "rgb(35, 61, 58)",
+        "qaLines": 4087,
+        "roadTriangles": 6535,
+        "status": "ready",
+        "width": 1440,
+        "toggles": "pass",
+        "reset": "pass",
+        "screenshot": "/tmp/zone-browser-24w7Aj/desktop-trafalgar-square-london.png"
+      },
+      {
+        "mode": "mobile",
+        "label": "Chicago River North grid",
+        "buildingTriangles": 6720,
+        "canvases": 1,
+        "dpr": 3,
+        "height": 844,
+        "id": "cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410",
+        "overflow": false,
+        "qaColor": "rgb(35, 61, 58)",
+        "qaLines": 960,
+        "roadTriangles": 3407,
+        "status": "ready",
+        "width": 390,
+        "toggles": "pass",
+        "reset": "pass",
+        "screenshot": "/tmp/zone-browser-24w7Aj/mobile-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410.png"
+      },
+      {
+        "mode": "mobile",
+        "label": "Cambridge centre",
+        "buildingTriangles": 29156,
+        "canvases": 1,
+        "dpr": 3,
+        "height": 844,
+        "id": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43",
+        "overflow": false,
+        "qaColor": "rgb(35, 61, 58)",
+        "qaLines": 1698,
+        "roadTriangles": 1744,
+        "status": "ready",
+        "width": 390,
+        "toggles": "pass",
+        "reset": "pass",
+        "screenshot": "/tmp/zone-browser-24w7Aj/mobile-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43.png"
+      },
+      {
+        "mode": "mobile",
+        "label": "London Tower Bridge",
+        "buildingTriangles": 11500,
+        "canvases": 1,
+        "dpr": 3,
+        "height": 844,
+        "id": "cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a",
+        "overflow": false,
+        "qaColor": "rgb(35, 61, 58)",
+        "qaLines": 1309,
+        "roadTriangles": 2055,
+        "status": "ready",
+        "width": 390,
+        "toggles": "pass",
+        "reset": "pass",
+        "screenshot": "/tmp/zone-browser-24w7Aj/mobile-cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a.png"
+      },
+      {
+        "mode": "mobile",
+        "label": "Lucca historic centre",
+        "buildingTriangles": 33372,
+        "canvases": 1,
+        "dpr": 3,
+        "height": 844,
+        "id": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+        "overflow": false,
+        "qaColor": "rgb(35, 61, 58)",
+        "qaLines": 1829,
+        "roadTriangles": 1800,
+        "status": "ready",
+        "width": 390,
+        "toggles": "pass",
+        "reset": "pass",
+        "screenshot": "/tmp/zone-browser-24w7Aj/mobile-cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87.png"
+      },
+      {
+        "mode": "mobile",
+        "label": "Trafalgar Square, London",
+        "buildingTriangles": 38664,
+        "canvases": 1,
+        "dpr": 3,
+        "height": 844,
+        "id": "trafalgar-square-london",
+        "overflow": false,
+        "qaColor": "rgb(35, 61, 58)",
+        "qaLines": 4087,
+        "roadTriangles": 6535,
+        "status": "ready",
+        "width": 390,
+        "toggles": "pass",
+        "reset": "pass",
+        "screenshot": "/tmp/zone-browser-24w7Aj/mobile-trafalgar-square-london.png"
+      },
+      {
+        "failure": "missing-id",
+        "canvases": 0,
+        "error": "! Zone unavailable Zone missing is not in the prepared catalogue",
+        "overflow": false,
+        "resetDisabled": true
+      },
+      {
+        "failure": "artifact-schema",
+        "canvases": 0,
+        "error": "! Zone unavailable Prepared zone artifact is invalid: Zone artifact schemaVersion must be 1",
+        "overflow": false,
+        "resetDisabled": true
+      },
+      {
+        "failure": "qa-hash",
+        "canvases": 0,
+        "error": "! Zone unavailable Prepared asset hash mismatch; rebuild or reload the catalogue.",
+        "overflow": false,
+        "resetDisabled": true
+      }
+    ],
+    "selector": "pass",
+    "explicitUrlRecovery": "pass"
+  },
+  "camera": {
+    "url": "http://127.0.0.1:4187/?zone=cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43",
+    "checkedAt": "2026-09-07T18:07:21.767Z",
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "frames": [
+      {
+        "name": "overview",
+        "file": "00-overview.png",
+        "sha256": "ab409facfeeab8253b25c428e23fb0f6fe2689ca8356a8b15b0c93f81bd507f0",
+        "canvases": 1,
+        "status": "ready",
+        "zone": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43"
+      },
+      {
+        "name": "orbit",
+        "file": "01-orbit.png",
+        "sha256": "2aee1516b8f9e9fe9ba12d828bc9083483c2a883340d9756d38b598013543b9f",
+        "canvases": 1,
+        "status": "ready",
+        "zone": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43"
+      },
+      {
+        "name": "low-angle",
+        "file": "02-low-angle.png",
+        "sha256": "5283bacc81b2bc42f2834422ad38647b78e1bea3944347143d6725df0db403ec",
+        "canvases": 1,
+        "status": "ready",
+        "zone": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43"
+      },
+      {
+        "name": "close",
+        "file": "03-close.png",
+        "sha256": "e0d514d38529f5bbdd0f90d17cc56a4538cb47c71a3482c20ad3c61c0de8b24b",
+        "canvases": 1,
+        "status": "ready",
+        "zone": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43"
+      },
+      {
+        "name": "pan",
+        "file": "04-pan.png",
+        "sha256": "a42dead0a3007988c6c7e88e2cb3d1c8948930de35af8146158cb8d049535bcf",
+        "canvases": 1,
+        "status": "ready",
+        "zone": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43"
+      },
+      {
+        "name": "overhead",
+        "file": "05-overhead.png",
+        "sha256": "f3d7490effa0178b8fb7784e6962ddbced9f843f2f3542f8f041493bf5d15a12",
+        "canvases": 1,
+        "status": "ready",
+        "zone": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43"
+      },
+      {
+        "name": "far",
+        "file": "06-far.png",
+        "sha256": "ee5308ce7808065650275eae7726d18931099d2d76fe774dc6a5d9542c6a574e",
+        "canvases": 1,
+        "status": "ready",
+        "zone": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43"
+      },
+      {
+        "name": "reset",
+        "file": "07-reset.png",
+        "sha256": "ab409facfeeab8253b25c428e23fb0f6fe2689ca8356a8b15b0c93f81bd507f0",
+        "canvases": 1,
+        "status": "ready",
+        "zone": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43"
+      }
+    ],
+    "browserErrors": []
+  },
+  "finalBuildSmoke": {
+    "checkedAt": "2026-09-07T18:05:38.967Z",
+    "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36",
+    "initial": {
+      "boundaryHeight": "20",
+      "buildingTriangles": "29156",
+      "collisionVisible": "false",
+      "engine": "three.js r179",
+      "generatedVisible": "true",
+      "physicsColliders": "7",
+      "physicsInitializationMs": "862.7000000029802",
+      "physicsSetupMs": "205.30000000447035",
+      "physicsStatus": "paused",
+      "physicsSteps": "0",
+      "playEnvelope": "{\"minimumX\":-349.0244140625,\"maximumX\":349.0246887207031,\"minimumZ\":-349.0119934082031,\"maximumZ\":348.9880065917969}",
+      "qaLines": "1698",
+      "roadTriangles": "1744",
+      "sourceVisible": "true",
+      "vehiclePose": "{\"position\":{\"x\":152.4167022705078,\"y\":1.0199999809265137,\"z\":-318.10467529296875},\"rotation\":{\"x\":0,\"y\":-0.9995778799057007,\"z\":0,\"w\":0.02905355580151081},\"wheels\":[{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0}]}",
+      "vehicleRecoveries": "0",
+      "vehicleResets": "0",
+      "vehicleSpeed": "0",
+      "vehicleStatus": "ready",
+      "zoneSlug": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43"
+    },
+    "hidden": {
+      "boundaryHeight": "20",
+      "buildingTriangles": "29156",
+      "collisionVisible": "false",
+      "engine": "three.js r179",
+      "generatedVisible": "false",
+      "physicsColliders": "7",
+      "physicsInitializationMs": "862.7000000029802",
+      "physicsSetupMs": "205.30000000447035",
+      "physicsStatus": "paused",
+      "physicsSteps": "0",
+      "playEnvelope": "{\"minimumX\":-349.0244140625,\"maximumX\":349.0246887207031,\"minimumZ\":-349.0119934082031,\"maximumZ\":348.9880065917969}",
+      "qaLines": "1698",
+      "roadTriangles": "1744",
+      "sourceVisible": "true",
+      "vehiclePose": "{\"position\":{\"x\":152.4167022705078,\"y\":1.0199999809265137,\"z\":-318.10467529296875},\"rotation\":{\"x\":0,\"y\":-0.9995778799057007,\"z\":0,\"w\":0.02905355580151081},\"wheels\":[{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0}]}",
+      "vehicleRecoveries": "0",
+      "vehicleResets": "0",
+      "vehicleSpeed": "0",
+      "vehicleStatus": "ready",
+      "zoneSlug": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43"
+    },
+    "commands": [
+      {
+        "name": "Accelerate",
+        "boundaryHeight": "20",
+        "buildingTriangles": "29156",
+        "collisionVisible": "false",
+        "engine": "three.js r179",
+        "generatedVisible": "true",
+        "physicsColliders": "7",
+        "physicsInitializationMs": "862.7000000029802",
+        "physicsSetupMs": "205.30000000447035",
+        "physicsStatus": "paused",
+        "physicsSteps": "60",
+        "playEnvelope": "{\"minimumX\":-349.0244140625,\"maximumX\":349.0246887207031,\"minimumZ\":-349.0119934082031,\"maximumZ\":348.9880065917969}",
+        "qaLines": "1698",
+        "roadTriangles": "1744",
+        "sourceVisible": "true",
+        "vehiclePose": "{\"position\":{\"x\":152.3542022705078,\"y\":0.8089388012886047,\"z\":-319.18182373046875},\"rotation\":{\"x\":-0.00015515892300754786,\"y\":-0.9995636343955994,\"z\":-0.0053522419184446335,\"w\":0.029053058475255966},\"wheels\":[{\"length\":0.40344350814819335,\"steering\":0,\"rotation\":3.374654531478882},{\"length\":0.40344231605529784,\"steering\":0,\"rotation\":3.3746542930603027},{\"length\":0.37452810287475585,\"steering\":0,\"rotation\":3.3751091957092285},{\"length\":0.37452691078186034,\"steering\":0,\"rotation\":3.3751091957092285}]}",
+        "vehicleRecoveries": "0",
+        "vehicleResets": "0",
+        "vehicleSpeed": "2.542612175035526",
+        "vehicleStatus": "ready",
+        "zoneSlug": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43"
+      },
+      {
+        "name": "Brake",
+        "boundaryHeight": "20",
+        "buildingTriangles": "29156",
+        "collisionVisible": "false",
+        "engine": "three.js r179",
+        "generatedVisible": "true",
+        "physicsColliders": "7",
+        "physicsInitializationMs": "862.7000000029802",
+        "physicsSetupMs": "205.30000000447035",
+        "physicsStatus": "paused",
+        "physicsSteps": "120",
+        "playEnvelope": "{\"minimumX\":-349.0244140625,\"maximumX\":349.0246887207031,\"minimumZ\":-349.0119934082031,\"maximumZ\":348.9880065917969}",
+        "qaLines": "1698",
+        "roadTriangles": "1744",
+        "sourceVisible": "true",
+        "vehiclePose": "{\"position\":{\"x\":152.3310089111328,\"y\":0.8089668154716492,\"z\":-319.57440185546875},\"rotation\":{\"x\":0.000020622421288862824,\"y\":-0.9995776414871216,\"z\":0.000711996341124177,\"w\":0.029053499922156334},\"wheels\":[{\"length\":0.38704442262649535,\"steering\":0,\"rotation\":4.55618953704834},{\"length\":0.38704466104507446,\"steering\":0,\"rotation\":4.556189060211182},{\"length\":0.39089082956314086,\"steering\":0,\"rotation\":4.5557756423950195},{\"length\":0.39089106798171996,\"steering\":0,\"rotation\":4.5557756423950195}]}",
+        "vehicleRecoveries": "0",
+        "vehicleResets": "0",
+        "vehicleSpeed": "0.00010173974785598402",
+        "vehicleStatus": "ready",
+        "zoneSlug": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43"
+      },
+      {
+        "name": "Reverse",
+        "boundaryHeight": "20",
+        "buildingTriangles": "29156",
+        "collisionVisible": "false",
+        "engine": "three.js r179",
+        "generatedVisible": "true",
+        "physicsColliders": "7",
+        "physicsInitializationMs": "862.7000000029802",
+        "physicsSetupMs": "205.30000000447035",
+        "physicsStatus": "paused",
+        "physicsSteps": "180",
+        "playEnvelope": "{\"minimumX\":-349.0244140625,\"maximumX\":349.0246887207031,\"minimumZ\":-349.0119934082031,\"maximumZ\":348.9880065917969}",
+        "qaLines": "1698",
+        "roadTriangles": "1744",
+        "sourceVisible": "true",
+        "vehiclePose": "{\"position\":{\"x\":152.4237823486328,\"y\":0.8089219927787781,\"z\":-317.97943115234375},\"rotation\":{\"x\":0.000155097441165708,\"y\":-0.9995635747909546,\"z\":0.005350968800485134,\"w\":0.02905306965112686},\"wheels\":[{\"length\":0.3745134401321411,\"steering\":0,\"rotation\":-0.4454886317253113},{\"length\":0.37451475143432617,\"steering\":0,\"rotation\":-0.4454895853996277},{\"length\":0.4034220504760742,\"steering\":0,\"rotation\":-0.4454492926597595},{\"length\":0.4034232425689697,\"steering\":0,\"rotation\":-0.4454496502876282}]}",
+        "vehicleRecoveries": "0",
+        "vehicleResets": "0",
+        "vehicleSpeed": "-2.9930764841374824",
+        "vehicleStatus": "ready",
+        "zoneSlug": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43"
+      }
+    ],
+    "reset": {
+      "boundaryHeight": "20",
+      "buildingTriangles": "29156",
+      "collisionVisible": "false",
+      "engine": "three.js r179",
+      "generatedVisible": "true",
+      "physicsColliders": "7",
+      "physicsInitializationMs": "862.7000000029802",
+      "physicsSetupMs": "205.30000000447035",
+      "physicsStatus": "paused",
+      "physicsSteps": "180",
+      "playEnvelope": "{\"minimumX\":-349.0244140625,\"maximumX\":349.0246887207031,\"minimumZ\":-349.0119934082031,\"maximumZ\":348.9880065917969}",
+      "qaLines": "1698",
+      "roadTriangles": "1744",
+      "sourceVisible": "true",
+      "vehiclePose": "{\"position\":{\"x\":152.4167022705078,\"y\":1.0199999809265137,\"z\":-318.10467529296875},\"rotation\":{\"x\":0,\"y\":-0.9995778799057007,\"z\":0,\"w\":0.02905355580151081},\"wheels\":[{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0}]}",
+      "vehicleRecoveries": "0",
+      "vehicleResets": "1",
+      "vehicleSpeed": "0",
+      "vehicleStatus": "ready",
+      "zoneSlug": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43"
+    },
+    "result": "pass"
+  },
+  "mediaNote": "Screenshots and camera-motion.webm remain at the recorded local paths in the isolated worktree. Viewport emulation is not phone performance or final touch-driving proof."
+}

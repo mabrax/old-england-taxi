@@ -1,4 +1,6 @@
 import * as THREE from 'three';
+import { createVehicleView } from './vehicle-view';
+import type { VehicleCommand } from '../physics/vehicle-config';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import type { ZoneQa } from '../zone/catalogue';
 import type { ZoneArtifact } from '../zone/types';
@@ -14,6 +16,9 @@ import {
 
 export interface SceneController {
   resetCamera: () => void;
+  inspectVehicle: () => void;
+  resetVehicle: () => void;
+  exerciseVehicle: (command: VehicleCommand) => void;
   resize: () => void;
   dispose: () => void;
   setQaVisibility: (source: boolean, generated: boolean) => void;
@@ -180,6 +185,7 @@ export function createValidationScene(
   scene.add(overlays);
   renderer.domElement.dataset.qaLines = String(qa?.lines.length ?? 0);
   const setQaVisibility = (source: boolean, generated: boolean) => {
+    if (!generated) physics.pause();
     overlays.visible = source;
     roads.visible = buildings.visible = generated;
     renderer.domElement.dataset.sourceVisible = String(source);
@@ -196,13 +202,17 @@ export function createValidationScene(
   scene.add(collisionInspection);
   const simulationLimit = new THREE.Group();
   scene.add(simulationLimit);
+  const vehicleView = createVehicleView();
+  vehicleView.root.visible = false;
+  scene.add(vehicleView.root);
   const physics = createPhysicsSession(artifact, state => {
     renderer.domElement.dataset.physicsStatus = state.status;
+    renderer.domElement.dataset.vehicleStatus = state.vehicle?.status ?? 'loading';
     renderer.domElement.dataset.physicsColliders = String(state.metrics?.colliders ?? 0);
     renderer.domElement.dataset.physicsSetupMs = String(state.metrics?.setupMs ?? 0);
     renderer.domElement.dataset.physicsInitializationMs = String(state.initializationMs ?? 0);
     if (state.status === 'error') {
-      collisionInspection.visible = simulationLimit.visible = false;
+      collisionInspection.visible = simulationLimit.visible = vehicleView.root.visible = false;
     }
     onPhysicsState(state);
   });
@@ -243,6 +253,15 @@ export function createValidationScene(
   const render = (now = performance.now()) => {
     if (disposed) return;
     physics.advance(now);
+    const frames = physics.vehicle?.frames;
+    vehicleView.root.visible = !!frames?.current;
+    if (frames?.current && frames.previous) {
+      vehicleView.update(frames.previous, frames.current, physics.alpha);
+      renderer.domElement.dataset.vehiclePose = JSON.stringify(frames.current);
+      renderer.domElement.dataset.vehicleSpeed = String(physics.vehicle?.speed);
+      renderer.domElement.dataset.vehicleResets = String(physics.vehicle?.state.resets);
+      renderer.domElement.dataset.vehicleRecoveries = String(physics.vehicle?.state.recoveries);
+    }
     renderer.domElement.dataset.physicsSteps = String(physics.timing.steps);
     controls.update();
     renderer.render(scene, camera);
@@ -272,6 +291,7 @@ export function createValidationScene(
 
   const resetCamera = () => {
     if (disposed) return;
+    controls.minDistance = span * 0.18;
     camera.position.copy(defaultPosition);
     controls.target.copy(defaultTarget);
     controls.update();
@@ -305,6 +325,18 @@ export function createValidationScene(
 
   return {
     resetCamera,
+    inspectVehicle: () => {
+      const pose = physics.vehicle?.frames.current;
+      if (disposed || !pose) return;
+      physics.pause(); controls.minDistance = 3;
+      controls.target.set(pose.position.x, pose.position.y, pose.position.z);
+      camera.position.set(pose.position.x + 10, pose.position.y + 9, pose.position.z + 12);
+      controls.update();
+    },
+    resetVehicle: () => { if (!disposed) physics.resetVehicle(); },
+    exerciseVehicle: command => {
+      if (!disposed && !document.hidden && document.hasFocus() && roads.visible && buildings.visible) physics.exercise(command);
+    },
     resize,
     setQaVisibility,
     setCollisionVisibility: (visible: boolean) => {
@@ -313,7 +345,7 @@ export function createValidationScene(
       renderer.domElement.dataset.collisionVisible = String(collisionInspection.visible);
     },
     setPhysicsPaused: (paused: boolean) => {
-      if (paused || document.hidden || !document.hasFocus()) physics.pause(); else physics.resume();
+      if (paused || document.hidden || !document.hasFocus() || !roads.visible || !buildings.visible) physics.pause(); else physics.resume();
     },
     dispose
   };

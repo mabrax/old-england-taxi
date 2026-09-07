@@ -48,7 +48,7 @@
 
   <div class="rail-note">
     <span class="note-marker" aria-hidden="true"></span>
-    <p>Inspect flat ground and building collision inside a marked simulation area. Vehicle driving and routing remain deferred.</p>
+    <p>Inspect the vehicle, flat ground and building collision inside the marked simulation area. Keyboard/touch driving and routes are not available yet.</p>
   </div>
 
   <div class="rail-footer">

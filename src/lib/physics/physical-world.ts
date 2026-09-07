@@ -28,8 +28,7 @@ export function createPhysicalWorld(artifact: ZoneArtifact) {
   let disposed = false;
   try {
     world.timestep = FIXED_STEP_SECONDS;
-    // Eight CCD substeps bound the tested diagonal corner impact at 60 Hz.
-    // Phase 02 must enable CCD on its chassis and requalify its own speed/size envelope.
+    // Eight CCD substeps support the probe and 8 m/s rotating-chassis contact checks at 60 Hz.
     world.integrationParameters.maxCcdSubsteps = 8;
     const cx = (envelope.minimumX + envelope.maximumX) / 2;
     const cz = (envelope.minimumZ + envelope.maximumZ) / 2;
@@ -57,10 +56,10 @@ export function createPhysicalWorld(artifact: ZoneArtifact) {
     const assertLive = () => { if (disposed) throw new Error('Physical world is disposed.'); };
     return {
       envelope, metrics,
-      // Phase 02 may add its chassis/controller here, within this world's lifetime.
+      // The session may add its chassis/controller within this world's lifetime.
       world,
       step() { assertLive(); world.step(); },
-      debugRender() { assertLive(); return world.debugRender(); },
+      debugRender() { assertLive(); return world.debugRender(RAPIER.QueryFilterFlags.EXCLUDE_DYNAMIC); },
       occupied(box: ZoneBounds3d) { assertLive(); return geometry.occupied(box); },
       clearance(box: ZoneBounds3d, boundaryMargin = 0) {
         assertLive();

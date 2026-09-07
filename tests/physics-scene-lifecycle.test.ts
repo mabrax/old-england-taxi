@@ -2,10 +2,10 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { physicalFixture } from './helpers/physical-fixture';
 
 const mocks = vi.hoisted(() => ({
-  initialize: vi.fn(async () => {}), create: vi.fn(), renderers: [] as any[], observers: [] as any[], controls: [] as any[]
+  initialize: vi.fn(async () => {}), create: vi.fn(), vehicle: vi.fn(), renderers: [] as any[], observers: [] as any[], controls: [] as any[]
 }));
-vi.mock('../src/lib/physics/physical-world', () => ({
-  initializeRapier: mocks.initialize, createPhysicalWorld: mocks.create
+vi.mock('../src/lib/physics/vehicle', () => ({
+  initializeRapier: mocks.initialize, createPhysicalWorld: mocks.create, createVehicle: mocks.vehicle
 }));
 vi.mock('three', async importOriginal => {
   const actual = await importOriginal<typeof import('three')>();
@@ -48,6 +48,7 @@ beforeEach(() => {
   vi.clearAllMocks();
   mocks.renderers.length = mocks.observers.length = mocks.controls.length = 0;
   mocks.initialize.mockImplementation(async () => {});
+  mocks.vehicle.mockReturnValue(undefined);
   mocks.create.mockImplementation(() => ({
     metrics: { colliders: 6 }, envelope: { minimumX: -29, maximumX: 29, minimumZ: -29, maximumZ: 29 },
     dispose: vi.fn(), step: vi.fn(), debugRender: () => ({ vertices: new Float32Array() })
@@ -100,6 +101,19 @@ describe('scene and simulation share one lifetime', () => {
     expect(frames.size).toBe(1); expect(callback.mock.lastCall?.[0].status).toBe('paused');
     win.dispatchEvent(new Event('pagehide'));
     expect(world.dispose).toHaveBeenCalledTimes(1); expect(frames.size).toBe(0);
+  });
+
+  it('blur and visibility clear vehicle input through the existing session, and disposal releases it', async () => {
+    const vehicle = { clearInput: vi.fn(), dispose: vi.fn(), state: { status: 'ready', recoveries: 0 }, frames: {} };
+    mocks.vehicle.mockReturnValue(vehicle);
+    const original = mocks.create.getMockImplementation()!;
+    mocks.create.mockImplementation(() => ({ ...original(), world: { colliders: { len: () => 7 }, bodies: { len: () => 1 } } }));
+    const { controller } = create(); await settle();
+    controller.setPhysicsPaused(false); win.dispatchEvent(new Event('blur'));
+    expect(vehicle.clearInput).toHaveBeenCalledTimes(1);
+    controller.setPhysicsPaused(false); doc.hidden = true; doc.dispatchEvent(new Event('visibilitychange'));
+    expect(vehicle.clearInput).toHaveBeenCalledTimes(2);
+    controller.dispose(); controller.dispose(); expect(vehicle.dispose).toHaveBeenCalledTimes(1);
   });
 
   it('suppresses late initialization after unmount and reports failure while retaining rendering', async () => {

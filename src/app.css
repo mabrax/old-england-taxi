@@ -692,3 +692,9 @@ button {
   padding: 0.35rem 0.6rem;
   cursor: pointer;
 }
+
+.vehicle-harness { width: 100%; }
+.vehicle-harness summary { cursor: pointer; }
+.vehicle-harness > span { display: block; margin-block: 6px; }
+.vehicle-harness button { margin: 3px; }
+.qa-controls { max-height: calc(100% - 90px); overflow-y: auto; }
