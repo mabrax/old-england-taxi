@@ -13,27 +13,38 @@ import {
   compileBuildingVolumes
 } from './building-volumes';
 import { compileLocalCoordinates } from './local-coordinates';
-import { DEFAULT_ZONE_SLUG, loadZoneSource } from './load-zone-source';
+import { loadZoneSource, type LoadZoneSourceOptions } from './load-zone-source';
 import { compileRoadSurfaces } from './road-surfaces';
 import {
   BUILDING_VOLUME_SCHEMA_VERSION,
   LOCAL_COORDINATE_SCHEMA_VERSION,
   ROAD_SURFACE_SCHEMA_VERSION,
   ZONE_SOURCE_SCHEMA_VERSION,
+  type LoadedZoneSource,
+  type LocalCoordinateZone,
+  type BuildingVolumeZone,
   type LocalPosition,
   type RoadSurfaceZone
 } from './types';
-export { DEFAULT_ZONE_ARTIFACT_PATH } from './zone-artifact-path';
+
 
 const OUTPUT_PRECISION_DECIMALS = 6;
 
 export async function compileZoneArtifact(
-  slug = DEFAULT_ZONE_SLUG
+  slug: string, options: LoadZoneSourceOptions = {}
 ): Promise<ZoneArtifact> {
-  const source = await loadZoneSource(slug);
+  const source = await loadZoneSource(slug, options);
+  return compileLoadedZone(source);
+}
+
+export function compileLoadedZone(source: LoadedZoneSource): ZoneArtifact {
   const local = compileLocalCoordinates(source);
   const roads = compileRoadSurfaces(local);
   const buildingZone = compileBuildingVolumes(source, local);
+  return packageZoneArtifact(source, local, roads, buildingZone);
+}
+
+export function packageZoneArtifact(source: LoadedZoneSource, local: LocalCoordinateZone, roads: RoadSurfaceZone, buildingZone: BuildingVolumeZone): ZoneArtifact {
   const buildingMesh = combineBuildingMeshes(buildingZone.buildings);
   const roadBounds = calculateBounds(roads.mesh.positions);
   const buildingBounds = calculateBounds(buildingMesh.positions);

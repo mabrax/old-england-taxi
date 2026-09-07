@@ -1,17 +1,17 @@
+const DEFAULT_ZONE_SLUG = 'trafalgar-square-london';
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { describe, expect, it, vi } from 'vitest';
 import {
-  DEFAULT_ZONE_SLUG,
   loadZoneSource
 } from '../tools/zone-compiler/src/load-zone-source';
 import type { OsmSnapshot } from '../tools/zone-compiler/src/types';
 
 describe.sequential('fixed OSM zone source', () => {
   it('loads and validates the checked-in manifest and snapshot', async () => {
-    const loaded = await loadZoneSource();
+    const loaded = await loadZoneSource('trafalgar-square-london');
 
     expect(loaded.manifest).toMatchObject({
       schemaVersion: 1,
@@ -56,7 +56,7 @@ describe.sequential('fixed OSM zone source', () => {
   });
 
   it('defines an approximately one-square-kilometre bounded source request', async () => {
-    const { manifest } = await loadZoneSource();
+    const { manifest } = await loadZoneSource('trafalgar-square-london');
     const { bounds } = manifest;
     const radiusKilometres = 6371.0088;
     const radians = (degrees: number) => (degrees * Math.PI) / 180;
@@ -81,8 +81,8 @@ describe.sequential('fixed OSM zone source', () => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch').mockRejectedValue(new Error('network disabled'));
 
     try {
-      const first = await loadZoneSource();
-      const second = await loadZoneSource();
+      const first = await loadZoneSource('trafalgar-square-london');
+      const second = await loadZoneSource('trafalgar-square-london');
 
       expect(fetchSpy).not.toHaveBeenCalled();
       expect(second.manifest).toEqual(first.manifest);
@@ -98,7 +98,7 @@ describe.sequential('fixed OSM zone source', () => {
 
     try {
       process.chdir(tmpdir());
-      const loaded = await loadZoneSource();
+      const loaded = await loadZoneSource('trafalgar-square-london');
       expect(loaded.manifest.slug).toBe(DEFAULT_ZONE_SLUG);
     } finally {
       process.chdir(initialDirectory);
@@ -112,7 +112,7 @@ describe.sequential('fixed OSM zone source', () => {
   });
 
   it('rejects a snapshot whose checked-in bytes have changed', async () => {
-    const loaded = await loadZoneSource();
+    const loaded = await loadZoneSource('trafalgar-square-london');
     const temporarySources = await mkdtemp(join(tmpdir(), 'zone-source-test-'));
     const temporaryZone = join(temporarySources, DEFAULT_ZONE_SLUG);
 
@@ -178,7 +178,7 @@ async function withSourceFixture(
   mutate: (snapshot: OsmSnapshot) => void,
   check: (sourcesDirectory: string) => Promise<void>
 ): Promise<void> {
-  const reference = await loadZoneSource();
+  const reference = await loadZoneSource('trafalgar-square-london');
   const snapshot: OsmSnapshot = { ...reference.osm, osm3s: { ...reference.osm.osm3s },
     elements: [{ type: 'node', id: 1, lat: 51.5, lon: -0.12 }] };
   mutate(snapshot);

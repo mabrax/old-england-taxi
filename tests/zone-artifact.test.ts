@@ -1,3 +1,4 @@
+const DEFAULT_ZONE_ARTIFACT_PATH = new URL('../public/zones/trafalgar-square-london.zone.json', import.meta.url);
 import { readFile } from 'node:fs/promises';
 import { beforeAll, describe, expect, it, vi } from 'vitest';
 import type { ZoneArtifact } from '../src/lib/zone/types';
@@ -14,7 +15,6 @@ import { loadZoneSource } from '../tools/zone-compiler/src/load-zone-source';
 import { compileRoadSurfaces } from '../tools/zone-compiler/src/road-surfaces';
 import {
   compileZoneArtifact,
-  DEFAULT_ZONE_ARTIFACT_PATH,
   serializeZoneArtifact
 } from '../tools/zone-compiler/src/zone-artifact';
 import type { BuildingVolumeZone, RoadSurfaceZone } from '../tools/zone-compiler/src/types';
@@ -26,11 +26,11 @@ describe.sequential('Phase 05 zone artifact', () => {
   let preparedBytes: string;
 
   beforeAll(async () => {
-    const source = await loadZoneSource();
+    const source = await loadZoneSource('trafalgar-square-london');
     const local = compileLocalCoordinates(source);
     roads = compileRoadSurfaces(local);
     buildings = compileBuildingVolumes(source, local);
-    artifact = await compileZoneArtifact();
+    artifact = await compileZoneArtifact('trafalgar-square-london');
     preparedBytes = await readFile(DEFAULT_ZONE_ARTIFACT_PATH, 'utf8');
   });
 
@@ -284,7 +284,7 @@ describe.sequential('Phase 05 zone artifact', () => {
   it('compiles reproducibly without network access', async () => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch').mockRejectedValue(new Error('offline'));
     try {
-      const offline = await compileZoneArtifact();
+      const offline = await compileZoneArtifact('trafalgar-square-london');
       expect(fetchSpy).not.toHaveBeenCalled();
       expect(serializeZoneArtifact(offline)).toBe(preparedBytes);
     } finally {

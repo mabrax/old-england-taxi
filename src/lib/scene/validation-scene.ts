@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import type { ZoneQa } from '../zone/catalogue';
 import type { ZoneArtifact } from '../zone/types';
 import {
   clampPixelRatio,
@@ -13,6 +14,7 @@ export interface SceneController {
   resetCamera: () => void;
   resize: () => void;
   dispose: () => void;
+  setQaVisibility: (source: boolean, generated: boolean) => void;
 }
 
 const palette = {
@@ -26,7 +28,8 @@ const palette = {
 
 export function createValidationScene(
   container: HTMLElement,
-  artifact: ZoneArtifact
+  artifact: ZoneArtifact,
+  qa?: ZoneQa
 ): SceneController {
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(palette.background);
@@ -139,6 +142,37 @@ export function createValidationScene(
   buildings.name = 'phase-05-building-volumes';
   scene.add(buildings);
 
+  const overlays = new THREE.Group();
+  overlays.name = 'source-qa-overlays';
+  if (qa) {
+    // Batch line segments by kind and inclusion, rather than one draw call per OSM way.
+    for (const kind of ['road', 'building'] as const) for (const included of [true, false]) {
+      const positions: number[] = [];
+      for (const line of qa.lines.filter(line => line.kind === kind && line.included === included)) {
+        for (let i = 3; i < line.positions.length; i += 3) {
+          for (let j = i - 3; j < i + 3; j++) positions.push(line.positions[j]);
+        }
+      }
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+      const lines = new THREE.LineSegments(geometry, new THREE.LineBasicMaterial({
+        color: included ? kind === 'road' ? 0x007fa3 : 0xb62980 : 0xe47b13,
+        depthTest: false, transparent: true, opacity: 0.85
+      }));
+      lines.renderOrder = 10;
+      overlays.add(lines);
+    }
+  }
+  scene.add(overlays);
+  renderer.domElement.dataset.qaLines = String(qa?.lines.length ?? 0);
+  const setQaVisibility = (source: boolean, generated: boolean) => {
+    overlays.visible = source;
+    roads.visible = buildings.visible = generated;
+    renderer.domElement.dataset.sourceVisible = String(source);
+    renderer.domElement.dataset.generatedVisible = String(generated);
+  };
+  setQaVisibility(!!qa, true);
+
   const defaultPosition = camera.position.clone();
   const defaultTarget = new THREE.Vector3(centerX, 0, centerZ);
   let disposed = false;
@@ -174,6 +208,7 @@ export function createValidationScene(
   return {
     resetCamera,
     resize,
+    setQaVisibility,
     dispose: () => {
       if (disposed) return;
       disposed = true;
@@ -189,7 +224,7 @@ export function createValidationScene(
 
 function disposeObject(object: THREE.Object3D): void {
   object.traverse((child) => {
-    if (!(child instanceof THREE.Mesh)) return;
+    if (!(child instanceof THREE.Mesh) && !(child instanceof THREE.LineSegments)) return;
     child.geometry.dispose();
 
     const materials = Array.isArray(child.material) ? child.material : [child.material];

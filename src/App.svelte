@@ -17,7 +17,7 @@
 <svelte:head>
   <meta
     name="description"
-    content="The Route Simulator's deterministic Trafalgar Square compiled zone artifact."
+    content="Inspect deterministic prepared zones and compare source road and building outlines."
   />
 </svelte:head>
 

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { loadZoneArtifact } from '../zone/load-zone-artifact';
+  import { loadSelectedZone } from '../zone/load-selected-zone';
+  import type { ZoneCatalogue } from '../zone/catalogue';
   import type { ZoneStatus, ZoneSummary } from '../zone/types';
   import { createValidationScene, type SceneController } from './validation-scene';
 
@@ -10,6 +11,14 @@
   export let status: ZoneStatus = 'loading';
   export let summary: ZoneSummary | undefined = undefined;
   let errorMessage = '';
+  let catalogue: ZoneCatalogue | undefined;
+  let qaEnabled = false;
+  let sourceVisible = true;
+  let generatedVisible = true;
+  let reportUrl = '';
+  let comparisonUrl = '';
+  let label = '';
+  $: controller?.setQaVisibility(qaEnabled && sourceVisible, generatedVisible);
 
   export function resetCamera(): void {
     controller?.resetCamera();
@@ -19,12 +28,21 @@
     let disposed = false;
     const loadController = new AbortController();
 
-    void loadZoneArtifact(undefined, undefined, { signal: loadController.signal })
-      .then((loadedArtifact) => {
+    void loadSelectedZone(window.location.search, undefined, { signal: loadController.signal })
+      .then((loaded) => {
+        const loadedArtifact = loaded.artifact;
         if (disposed) return;
         artifactSlug = loadedArtifact.slug;
-        controller = createValidationScene(container, loadedArtifact);
+        controller = createValidationScene(container, loadedArtifact, loaded.qa);
+        catalogue = loaded.catalogue;
+        qaEnabled = !!loaded.qa;
+        reportUrl = loaded.reportUrl;
+        const comparisonParams = new URLSearchParams(window.location.search);
+        comparisonParams.set('qa', '1');
+        comparisonUrl = `${window.location.pathname}?${comparisonParams}`;
+        label = loadedArtifact.label;
         summary = {
+          label: loadedArtifact.label,
           graphEdges: loadedArtifact.streetGraph.statistics.edges,
           buildings: loadedArtifact.geometry.buildings.statistics.buildings,
           triangles: loadedArtifact.geometry.roads.statistics.triangles +
@@ -72,3 +90,26 @@
     </div>
   {/if}
 </div>
+
+{#if status === 'ready'}
+  <div class="qa-controls" aria-label="Zone inspection controls">
+    {#if catalogue}
+      <label>Prepared zone
+        <select aria-label="Prepared zone" value={artifactSlug} on:change={(event) => {
+          const params = new URLSearchParams(window.location.search);
+          params.set('zone', event.currentTarget.value);
+          window.location.search = params.toString();
+        }}>
+          {#each catalogue.zones as zone}<option value={zone.id}>{zone.label}</option>{/each}
+        </select>
+      </label>
+    {:else}<strong>{label}</strong>{/if}
+    {#if qaEnabled}
+      <label><input type="checkbox" bind:checked={sourceVisible} /> Source outlines</label>
+      <label><input type="checkbox" bind:checked={generatedVisible} /> Generated geometry</label>
+      <span>Cyan: roads · Magenta: footprints · Orange: excluded</span>
+      <a href={reportUrl} target="_blank" rel="noreferrer">Validation report</a>
+    {:else}<a href={comparisonUrl}>Open source comparison</a>{/if}
+    <span>Flat geometry · © OpenStreetMap contributors · <a href="https://www.openstreetmap.org/copyright">ODbL</a></span>
+  </div>
+{/if}

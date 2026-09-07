@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "slug": "cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410",
+  "label": "Chicago River North grid",
+  "generation": {
+    "version": 1,
+    "latitude": 41.891,
+    "longitude": -87.634,
+    "widthMetres": 600,
+    "heightMetres": 600,
+    "label": "Chicago River North grid",
+    "id": "cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410",
+    "bounds": {
+      "south": 41.88829902902069,
+      "west": -87.63761480613165,
+      "north": 41.8937009709793,
+      "east": -87.63038519386835
+    }
+  },
+  "bounds": {
+    "south": 41.88829902902069,
+    "west": -87.63761480613165,
+    "north": 41.8937009709793,
+    "east": -87.63038519386835
+  },
+  "approximateAreaSquareKilometres": 0.36,
+  "snapshot": {
+    "file": "source.osm.json",
+    "format": "overpass-json",
+    "byteLength": 718984,
+    "sha256": "055d488fccf0a1dc1915d40982590f718200c5883a05ef8f9625027ee7de29b7"
+  },
+  "source": {
+    "dataset": "OpenStreetMap",
+    "api": "Overpass API",
+    "endpoint": "https://overpass-api.de/api/interpreter",
+    "acquiredAt": "2026-09-07T01:47:10.175Z",
+    "osmBaseTimestamp": "2026-09-07T01:45:36Z",
+    "request": {
+      "method": "POST",
+      "parameter": "data",
+      "query": "[out:json][timeout:60][maxsize:67108864];\n(\n  way[\"highway\"](41.88829902902069,-87.63761480613165,41.8937009709793,-87.63038519386835);\n  way[\"building\"](41.88829902902069,-87.63761480613165,41.8937009709793,-87.63038519386835);\n  relation[\"building\"](41.88829902902069,-87.63761480613165,41.8937009709793,-87.63038519386835);\n  way[\"building:part\"](41.88829902902069,-87.63761480613165,41.8937009709793,-87.63038519386835);\n  relation[\"building:part\"](41.88829902902069,-87.63761480613165,41.8937009709793,-87.63038519386835);\n);\n(._;>>;);\nout body qt;"
+    },
+    "attribution": "© OpenStreetMap contributors",
+    "attributionUrl": "https://www.openstreetmap.org/copyright",
+    "licence": {
+      "id": "ODbL-1.0",
+      "url": "https://opendatacommons.org/licenses/odbl/1-0/"
+    }
+  }
+}

@@ -1,7 +1,8 @@
 import { createHash } from 'node:crypto';
-import { readFile } from 'node:fs/promises';
+import { lstat, readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { createZoneRequest, overpassQuery } from './generation-request';
+import { SOURCES_DIRECTORY } from './zone-artifact-path';
 import { isUtcTimestamp } from '../../../src/lib/zone/timestamp';
 import {
   OSM_VERSION,
@@ -16,9 +17,6 @@ import {
   type ZoneSourceManifest
 } from './types';
 
-export const DEFAULT_ZONE_SLUG = 'trafalgar-square-london';
-
-const DEFAULT_SOURCES_DIRECTORY = fileURLToPath(new URL('../sources/', import.meta.url));
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const SHA256_PATTERN = /^[a-f0-9]{64}$/;
 
@@ -27,27 +25,30 @@ export interface LoadZoneSourceOptions {
 }
 
 export async function loadZoneSource(
-  slug = DEFAULT_ZONE_SLUG,
+  slug: string,
   options: LoadZoneSourceOptions = {}
 ): Promise<LoadedZoneSource> {
-  if (!SLUG_PATTERN.test(slug)) {
+  if (typeof slug !== 'string' || slug.length > 100 || !SLUG_PATTERN.test(slug)) {
     throw new Error(`Invalid zone slug: ${slug}`);
   }
 
-  const sourcesDirectory = options.sourcesDirectory ?? DEFAULT_SOURCES_DIRECTORY;
+  const sourcesDirectory = options.sourcesDirectory ?? SOURCES_DIRECTORY;
   const zoneDirectory = resolve(sourcesDirectory, slug);
+  await rejectSymlink(zoneDirectory);
   const manifestPath = resolve(zoneDirectory, 'manifest.json');
+  await rejectSymlink(manifestPath);
   const manifest = parseManifest(await readUtf8File(manifestPath, `manifest for ${slug}`));
 
   if (manifest.slug !== slug) {
     throw new Error(`Manifest slug ${manifest.slug} does not match requested zone ${slug}`);
   }
 
-  if (basename(manifest.snapshot.file) !== manifest.snapshot.file) {
+  if (!/^[a-zA-Z0-9][a-zA-Z0-9._-]*$/.test(manifest.snapshot.file) || basename(manifest.snapshot.file) !== manifest.snapshot.file) {
     throw new Error('Snapshot file must be a filename inside the zone source directory');
   }
 
   const snapshotPath = resolve(zoneDirectory, manifest.snapshot.file);
+  await rejectSymlink(snapshotPath);
   const snapshotBytes = await readBinaryFile(snapshotPath, `snapshot for ${slug}`);
 
   if (snapshotBytes.byteLength !== manifest.snapshot.byteLength) {
@@ -135,7 +136,18 @@ function parseManifest(raw: string): ZoneSourceManifest {
   }
   const licence = expectRecord(source.licence, 'Zone manifest source licence');
 
+  const generation = manifest.generation === undefined ? undefined : createZoneRequest(manifest.generation as Parameters<typeof createZoneRequest>[0]);
+  const recordedGeneration = manifest.generation as Record<string, unknown> | undefined;
+  if (generation && (recordedGeneration?.version !== 1 || recordedGeneration.id !== generation.id ||
+      generation.label !== manifest.label || generation.id !== manifest.slug ||
+      JSON.stringify(generation.bounds) !== JSON.stringify(bounds) ||
+      request.query !== overpassQuery(generation) || source.acquiredAt === undefined)) {
+    throw new Error('Generation request does not match manifest ID or bounds');
+  }
+  if (source.acquiredAt !== undefined) expectIsoTimestamp(source.acquiredAt, 'Acquisition timestamp');
+
   return {
+    ...(generation ? { generation } : {}),
     schemaVersion: ZONE_SOURCE_SCHEMA_VERSION,
     slug: manifest.slug as string,
     label: manifest.label as string,
@@ -148,6 +160,7 @@ function parseManifest(raw: string): ZoneSourceManifest {
       sha256
     },
     source: {
+      ...(source.acquiredAt === undefined ? {} : { acquiredAt: source.acquiredAt as string }),
       dataset: expectString(source.dataset, 'Zone manifest source dataset'),
       api: expectString(source.api, 'Zone manifest source API'),
       endpoint: expectUrl(source.endpoint, 'Zone manifest source endpoint'),
@@ -189,7 +202,7 @@ function parseBounds(value: unknown): GeographicBounds {
   return parsed;
 }
 
-function parseOsmSnapshot(raw: string): OsmSnapshot {
+export function parseOsmSnapshot(raw: string): OsmSnapshot {
   const value = parseJson(raw, 'OSM snapshot');
   const snapshot = expectRecord(value, 'OSM snapshot');
   if (snapshot.remark !== undefined) {
@@ -280,7 +293,7 @@ function parseTags(value: unknown, context: string): OsmTags | undefined {
   return parsed;
 }
 
-function validateReferences(elements: OsmElement[]): void {
+export function validateReferences(elements: OsmElement[]): void {
   const ids = new Set<string>();
   for (const element of elements) {
     const key = elementKey(element.type, element.id);
@@ -408,7 +421,7 @@ function expectString(value: unknown, description: string, allowEmpty = false): 
 
 function expectSlug(value: unknown, description: string): string {
   const slug = expectString(value, description);
-  if (!SLUG_PATTERN.test(slug)) {
+  if (typeof slug !== 'string' || slug.length > 100 || !SLUG_PATTERN.test(slug)) {
     throw new Error(`${description} must contain lowercase words separated by hyphens`);
   }
   return slug;
@@ -431,4 +444,8 @@ function expectUrl(value: unknown, description: string): string {
     throw new Error(`${description} must be a valid HTTPS URL`);
   }
   return url;
+}
+
+async function rejectSymlink(path: string): Promise<void> {
+  if ((await lstat(path)).isSymbolicLink()) throw new Error('Zone paths must not be symbolic links');
 }

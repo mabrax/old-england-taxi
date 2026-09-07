@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "slug": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+  "label": "Lucca historic centre",
+  "generation": {
+    "version": 1,
+    "latitude": 43.843,
+    "longitude": 10.504,
+    "widthMetres": 700,
+    "heightMetres": 700,
+    "label": "Lucca historic centre",
+    "id": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+    "bounds": {
+      "south": 43.839849945169014,
+      "west": 10.499647707529794,
+      "north": 43.84615005483099,
+      "east": 10.508352292470205
+    }
+  },
+  "bounds": {
+    "south": 43.839849945169014,
+    "west": 10.499647707529794,
+    "north": 43.84615005483099,
+    "east": 10.508352292470205
+  },
+  "approximateAreaSquareKilometres": 0.49,
+  "snapshot": {
+    "file": "source.osm.json",
+    "format": "overpass-json",
+    "byteLength": 1075188,
+    "sha256": "b53365cd47469391b4bc62e042bd8b7a88968048da3415df209d81a49f9eb5c3"
+  },
+  "source": {
+    "dataset": "OpenStreetMap",
+    "api": "Overpass API",
+    "endpoint": "https://overpass-api.de/api/interpreter",
+    "acquiredAt": "2026-09-07T01:49:33.908Z",
+    "osmBaseTimestamp": "2026-09-07T01:47:39Z",
+    "request": {
+      "method": "POST",
+      "parameter": "data",
+      "query": "[out:json][timeout:60][maxsize:67108864];\n(\n  way[\"highway\"](43.839849945169014,10.499647707529794,43.84615005483099,10.508352292470205);\n  way[\"building\"](43.839849945169014,10.499647707529794,43.84615005483099,10.508352292470205);\n  relation[\"building\"](43.839849945169014,10.499647707529794,43.84615005483099,10.508352292470205);\n  way[\"building:part\"](43.839849945169014,10.499647707529794,43.84615005483099,10.508352292470205);\n  relation[\"building:part\"](43.839849945169014,10.499647707529794,43.84615005483099,10.508352292470205);\n);\n(._;>>;);\nout body qt;"
+    },
+    "attribution": "© OpenStreetMap contributors",
+    "attributionUrl": "https://www.openstreetmap.org/copyright",
+    "licence": {
+      "id": "ODbL-1.0",
+      "url": "https://opendatacommons.org/licenses/odbl/1-0/"
+    }
+  }
+}

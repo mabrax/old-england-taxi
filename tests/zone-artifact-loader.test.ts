@@ -1,7 +1,7 @@
+const DEFAULT_ZONE_ARTIFACT_URL = '/zones/trafalgar-square-london.zone.json';
 import { readFile } from 'node:fs/promises';
 import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import {
-  DEFAULT_ZONE_ARTIFACT_URL,
   loadZoneArtifact,
   ZoneArtifactLoadError
 } from '../src/lib/zone/load-zone-artifact';
@@ -25,7 +25,7 @@ describe('browser zone artifact loader', () => {
       })
     );
 
-    const artifact = await loadZoneArtifact(undefined, fetcher);
+    const artifact = await loadZoneArtifact(DEFAULT_ZONE_ARTIFACT_URL, fetcher);
 
     expect(DEFAULT_ZONE_ARTIFACT_URL).toBe('/zones/trafalgar-square-london.zone.json');
     expect(fetcher).toHaveBeenCalledWith(DEFAULT_ZONE_ARTIFACT_URL, {

@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "slug": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43",
+  "label": "Cambridge centre",
+  "generation": {
+    "version": 1,
+    "latitude": 52.2053,
+    "longitude": 0.1198,
+    "widthMetres": 700,
+    "heightMetres": 700,
+    "label": "Cambridge centre",
+    "id": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43",
+    "bounds": {
+      "south": 52.20215453342198,
+      "west": 0.11468030147716149,
+      "north": 52.20844546657802,
+      "east": 0.12491969852283852
+    }
+  },
+  "bounds": {
+    "south": 52.20215453342198,
+    "west": 0.11468030147716149,
+    "north": 52.20844546657802,
+    "east": 0.12491969852283852
+  },
+  "approximateAreaSquareKilometres": 0.49,
+  "snapshot": {
+    "file": "source.osm.json",
+    "format": "overpass-json",
+    "byteLength": 1488077,
+    "sha256": "fffc7bfa5a2f737baf7230fbd13905e99d5aa03e2206f2bc4785c9e378211647"
+  },
+  "source": {
+    "dataset": "OpenStreetMap",
+    "api": "Overpass API",
+    "endpoint": "https://overpass-api.de/api/interpreter",
+    "acquiredAt": "2026-09-07T01:47:06.713Z",
+    "osmBaseTimestamp": "2026-09-07T01:45:36Z",
+    "request": {
+      "method": "POST",
+      "parameter": "data",
+      "query": "[out:json][timeout:60][maxsize:67108864];\n(\n  way[\"highway\"](52.20215453342198,0.11468030147716149,52.20844546657802,0.12491969852283852);\n  way[\"building\"](52.20215453342198,0.11468030147716149,52.20844546657802,0.12491969852283852);\n  relation[\"building\"](52.20215453342198,0.11468030147716149,52.20844546657802,0.12491969852283852);\n  way[\"building:part\"](52.20215453342198,0.11468030147716149,52.20844546657802,0.12491969852283852);\n  relation[\"building:part\"](52.20215453342198,0.11468030147716149,52.20844546657802,0.12491969852283852);\n);\n(._;>>;);\nout body qt;"
+    },
+    "attribution": "© OpenStreetMap contributors",
+    "attributionUrl": "https://www.openstreetmap.org/copyright",
+    "licence": {
+      "id": "ODbL-1.0",
+      "url": "https://opendatacommons.org/licenses/odbl/1-0/"
+    }
+  }
+}

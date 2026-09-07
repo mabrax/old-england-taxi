@@ -12,15 +12,15 @@
   <div class="rail-heading">
     <span class="eyebrow">Current workspace</span>
     <h1>Compiled zone</h1>
-    <p>Inspect the prepared fixed-zone artifact with continuous roads and aligned building volumes.</p>
+    <p>Inspect the selected prepared artifact with continuous roads and aligned building volumes.</p>
   </div>
 
   <div class="rail-card">
     <div class="card-heading">
       <span class="card-icon" aria-hidden="true">05</span>
       <div>
-        <span class="eyebrow">Fixed zone</span>
-        <h2>Trafalgar Square</h2>
+        <span class="eyebrow">Prepared zone</span>
+        <h2>{summary?.label ?? 'No zone loaded'}</h2>
       </div>
     </div>
 

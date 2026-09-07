@@ -12,6 +12,7 @@ export interface GeographicBounds {
 }
 
 export interface ZoneSourceManifest {
+  generation?: import('./generation-request').ZoneRequest;
   schemaVersion: typeof ZONE_SOURCE_SCHEMA_VERSION;
   slug: string;
   label: string;
@@ -24,6 +25,7 @@ export interface ZoneSourceManifest {
     sha256: string;
   };
   source: {
+    acquiredAt?: string;
     dataset: string;
     api: string;
     endpoint: string;
@@ -292,6 +294,7 @@ export interface CompiledBuildingVolume {
 }
 
 export interface BuildingVolumeZone {
+  excludedFeatures: { type: 'way' | 'relation'; id: number; reason: string }[];
   metadata: {
     schemaVersion: typeof BUILDING_VOLUME_SCHEMA_VERSION;
     slug: string;

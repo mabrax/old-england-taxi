@@ -1,3 +1,4 @@
+import { UnsupportedBuildingGeometryError } from './building-geometry-error';
 import type { BuildingFootprintPoint as Point } from './types';
 
 const TOLERANCE = 1e-9;
@@ -22,16 +23,16 @@ export function validateSimpleRing(points: Point[], description: string): void {
       throw new Error(`${description} has non-finite coordinates`);
     }
     if (Math.hypot(next.x - point.x, next.z - point.z) <= TOLERANCE) {
-      throw new Error(`${description} contains a zero-length edge at ${index}`);
+      throw new UnsupportedBuildingGeometryError(`${description} contains a zero-length edge at ${index}`);
     }
     const key = `${point.x}:${point.z}`;
-    if (seen.has(key)) throw new Error(`${description} repeats a boundary point at ${index}`);
+    if (seen.has(key)) throw new UnsupportedBuildingGeometryError(`${description} repeats a boundary point at ${index}`);
     seen.add(key);
     const previous = points[(index + points.length - 1) % points.length];
     if (Math.abs(orientation(previous, point, next)) <= TOLERANCE &&
         (previous.x - point.x) * (next.x - point.x) +
         (previous.z - point.z) * (next.z - point.z) > 0) {
-      throw new Error(`${description} backtracks at boundary point ${index}`);
+      throw new UnsupportedBuildingGeometryError(`${description} backtracks at boundary point ${index}`);
     }
   }
   const edges = ringEdges(points);
@@ -43,7 +44,7 @@ export function validateSimpleRing(points: Point[], description: string): void {
       const distance = Math.abs(a.index - b.index);
       if (distance === 1 || distance === points.length - 1) continue;
       if (edgesIntersect(a, b)) {
-        throw new Error(`${description} self-intersects at edges ${a.index} and ${b.index}`);
+        throw new UnsupportedBuildingGeometryError(`${description} self-intersects at edges ${a.index} and ${b.index}`);
       }
     }
   }

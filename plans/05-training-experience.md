@@ -1,4 +1,4 @@
-# 05 — Training Experience
+# 06 — Training Experience
 
 ## Goal
 

@@ -1,4 +1,4 @@
-# 02 — Driveability
+# 03 — Driveability
 
 ## Goal
 
@@ -13,7 +13,7 @@ Make the generated zone physically driveable.
 
 ## Exit condition
 
-The vehicle can traverse every connected street in the fixed zone, responds consistently, stays on the ground, and cannot pass through buildings.
+The vehicle can traverse every connected street in the qualified prepared zones, responds consistently, stays on the ground, and cannot pass through buildings.
 
 ## Deferred
 

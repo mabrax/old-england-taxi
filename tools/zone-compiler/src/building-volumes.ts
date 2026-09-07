@@ -1,3 +1,4 @@
+import { UnsupportedBuildingGeometryError } from './building-geometry-error';
 import earcut, { deviation } from 'earcut';
 import { compileLocalCoordinates } from './local-coordinates';
 import { pointInRing, ringsIntersect, validateSimpleRing } from './footprint-topology';
@@ -107,7 +108,8 @@ export function isSupportedBuildingRelation(
 
 export function compileBuildingVolumes(
   source: LoadedZoneSource,
-  local: LocalCoordinateZone = compileLocalCoordinates(source)
+  local: LocalCoordinateZone = compileLocalCoordinates(source),
+  options: { invalidFeaturePolicy?: 'reject' | 'report' } = {}
 ): BuildingVolumeZone {
   validateLocalSourcePair(source, local);
 
@@ -119,6 +121,11 @@ export function compileBuildingVolumes(
     .filter((element): element is OsmRelation => element.type === 'relation')
     .sort((first, second) => first.id - second.id);
   const wayById = new Map(ways.map((way) => [way.id, way]));
+  const excludedFeatures: { type: 'way' | 'relation'; id: number; reason: string }[] = [];
+  const exclude = (type: 'way' | 'relation', id: number, error: unknown) => {
+    if (options.invalidFeaturePolicy !== 'report' || !(error instanceof UnsupportedBuildingGeometryError)) throw error;
+    excludedFeatures.push({ type, id, reason: error.message });
+  };
   const relationExtractions = new Map<number, RelationFootprintExtraction>();
   const relationMemberWayIds = new Set<number>();
 
@@ -126,9 +133,12 @@ export function compileBuildingVolumes(
     if (!isSupportedBuildingRelation(element)) {
       continue;
     }
-    const extraction = extractRelationFootprints(element, lineById, wayById);
-    relationExtractions.set(element.id, extraction);
-    extraction.memberWayIds.forEach((wayId) => relationMemberWayIds.add(wayId));
+    // Even an excluded relation owns its member outlines; do not emit partial duplicate buildings.
+    element.members.forEach(member => { if (member.type === 'way') relationMemberWayIds.add(member.ref); });
+    try {
+      const extraction = extractRelationFootprints(element, lineById, wayById);
+      relationExtractions.set(element.id, extraction);
+    } catch (error) { exclude('relation', element.id, error); }
   }
 
   const buildings: CompiledBuildingVolume[] = [];
@@ -151,25 +161,27 @@ export function compileBuildingVolumes(
       if (!isSupportedBuildingWay(line)) {
         throw new Error(`Local line way/${element.id} does not preserve its building tags`);
       }
-      buildings.push(
-        compileBuilding(
-          'way',
-          element.id,
-          0,
-          element.tags,
-          createFootprint([
-            createClosedRing(line.nodeIds, line.positions, `Building way/${element.id}`)
-          ])
-        )
-      );
+      try {
+        buildings.push(
+          compileBuilding(
+            'way',
+            element.id,
+            0,
+            element.tags,
+            createFootprint([
+              createClosedRing(line.nodeIds, line.positions, `Building way/${element.id}`)
+            ])
+          )
+        );
+      } catch (error) { exclude('way', element.id, error); }
       continue;
     }
 
     if (element.type === 'relation') {
       const extraction = relationExtractions.get(element.id);
       if (extraction === undefined || extraction.relation.tags === undefined) continue;
-      extraction.footprints.forEach((footprint, footprintIndex) => {
-        buildings.push(
+      try {
+        const volumes = extraction.footprints.map((footprint, footprintIndex) =>
           compileBuilding(
             'relation',
             element.id,
@@ -178,15 +190,17 @@ export function compileBuildingVolumes(
             footprint
           )
         );
-      });
+        for (const volume of volumes) buildings.push(volume);
+      } catch (error) { exclude('relation', element.id, error); }
     }
   }
 
   if (buildings.length === 0) {
-    throw new Error('The fixed source contains no supported building footprints');
+    throw new Error('The source contains no supported building footprints; inspect source topology or choose a cell containing supported buildings');
   }
 
   return {
+    excludedFeatures,
     metadata: {
       schemaVersion: BUILDING_VOLUME_SCHEMA_VERSION,
       slug: local.metadata.slug,
@@ -403,7 +417,8 @@ function compileBuilding(
       mesh: extrudeBuildingFootprint(footprint, height.metres)
     };
   } catch (error) {
-    throw new Error(
+    const Failure = error instanceof UnsupportedBuildingGeometryError ? UnsupportedBuildingGeometryError : Error;
+    throw new Failure(
       `Building ${sourceType}/${sourceId} footprint ${footprintIndex}: ${error instanceof Error ? error.message : String(error)}`,
       { cause: error }
     );
@@ -418,7 +433,7 @@ function extractRelationFootprints(
   const memberIds = new Set<number>();
   for (const member of relation.members) {
     if (memberIds.has(member.ref)) {
-      throw new Error(`Building relation/${relation.id} repeats member way/${member.ref}`);
+      throw new UnsupportedBuildingGeometryError(`Building relation/${relation.id} repeats member way/${member.ref}`);
     }
     memberIds.add(member.ref);
   }
@@ -449,7 +464,7 @@ function extractRelationFootprints(
     validateSimpleRing(allRings[index].points, `Building relation/${relation.id} ring ${index}`);
     for (let other = 0; other < index; other += 1) {
       if (ringsIntersect(allRings[index].points, allRings[other].points)) {
-        throw new Error(`Building relation/${relation.id} rings ${other} and ${index} intersect or touch`);
+        throw new UnsupportedBuildingGeometryError(`Building relation/${relation.id} rings ${other} and ${index} intersect or touch`);
       }
     }
   }
@@ -460,7 +475,7 @@ function extractRelationFootprints(
       pointInRing(sample, outer.points) ? [index] : []
     );
     if (containingOuterIndices.length === 0) {
-      throw new Error(
+      throw new UnsupportedBuildingGeometryError(
         `Building relation/${relation.id} inner ring is outside every outer ring`
       );
     }
@@ -482,7 +497,7 @@ function extractRelationFootprints(
         pointInRing(sample, outerRings[outer].points) &&
         !holesByOuter[outer].some((hole) => pointInRing(sample, hole.points))
       ) {
-        throw new Error(`Building relation/${relation.id} has overlapping outer footprints`);
+        throw new UnsupportedBuildingGeometryError(`Building relation/${relation.id} has overlapping outer footprints`);
       }
     }
   }
@@ -528,7 +543,7 @@ function assembleMemberRings(
   }
   for (const [nodeId, connected] of byEndpoint) {
     if (connected.length !== 2) {
-      throw new Error(`Building relation/${relationId} ${role} members do not form unambiguous closed rings at node/${nodeId} (${connected.length} incident ways)`);
+      throw new UnsupportedBuildingGeometryError(`Building relation/${relationId} ${role} members do not form unambiguous closed rings at node/${nodeId} (${connected.length} incident ways)`);
     }
   }
   const unused = new Set(segments);
@@ -541,7 +556,7 @@ function assembleMemberRings(
       const currentNodeId = nodeIds.at(-1) as number;
       const next = byEndpoint.get(currentNodeId)?.find((segment) => unused.has(segment));
       if (next === undefined) {
-        throw new Error(`Building relation/${relationId} ${role} members do not form closed rings at node/${currentNodeId}`);
+        throw new UnsupportedBuildingGeometryError(`Building relation/${relationId} ${role} members do not form closed rings at node/${currentNodeId}`);
       }
       unused.delete(next);
       const reversed = next.nodeIds.at(-1) === currentNodeId;
@@ -571,7 +586,7 @@ function createClosedRing(
     sourceNodeIds.length < 4 ||
     sourceNodeIds[0] !== sourceNodeIds.at(-1)
   ) {
-    throw new Error(`${description} is not a closed footprint ring`);
+    throw new UnsupportedBuildingGeometryError(`${description} is not a closed footprint ring`);
   }
 
   const nodeIds = sourceNodeIds.slice(0, -1);
@@ -580,18 +595,18 @@ function createClosedRing(
     return { x: position.x, z: position.z };
   });
   if (new Set(nodeIds).size < 3) {
-    throw new Error(`${description} contains fewer than three unique nodes`);
+    throw new UnsupportedBuildingGeometryError(`${description} contains fewer than three unique nodes`);
   }
   for (let index = 0; index < points.length; index += 1) {
     const current = points[index] as BuildingFootprintPoint;
     const next = points[(index + 1) % points.length] as BuildingFootprintPoint;
     if (horizontalDistance(current, next) <= POSITION_TOLERANCE_METRES) {
-      throw new Error(`${description} contains a zero-length edge`);
+      throw new UnsupportedBuildingGeometryError(`${description} contains a zero-length edge`);
     }
   }
   const area = Math.abs(calculateRingSignedArea(points));
   if (!Number.isFinite(area) || area <= TRIANGLE_AREA_TOLERANCE) {
-    throw new Error(`${description} has invalid area`);
+    throw new UnsupportedBuildingGeometryError(`${description} has invalid area`);
   }
   return { nodeIds, points };
 }
@@ -602,7 +617,7 @@ function createFootprint(rings: BuildingFootprintRing[]): BuildingFootprint {
   }
   const areaSquareMetres = calculateFootprintArea(rings);
   if (!Number.isFinite(areaSquareMetres) || areaSquareMetres <= TRIANGLE_AREA_TOLERANCE) {
-    throw new Error('Building footprint has invalid area');
+    throw new UnsupportedBuildingGeometryError('Building footprint has invalid area');
   }
   return { rings, areaSquareMetres: roundOutput(areaSquareMetres) };
 }
@@ -626,7 +641,7 @@ function validateFootprint(footprint: BuildingFootprint): void {
     const hole = footprint.rings[index].points;
     const outer = footprint.rings[0].points;
     if (ringsIntersect(hole, outer) || !pointInRing(hole[0], outer)) {
-      throw new Error(`Building footprint hole ${index} must be strictly inside its outer ring`);
+      throw new UnsupportedBuildingGeometryError(`Building footprint hole ${index} must be strictly inside its outer ring`);
     }
     for (let other = 1; other < index; other += 1) {
       const previous = footprint.rings[other].points;
@@ -635,7 +650,7 @@ function validateFootprint(footprint: BuildingFootprint): void {
         pointInRing(hole[0], previous) ||
         pointInRing(previous[0], hole)
       ) {
-        throw new Error(`Building footprint holes ${other} and ${index} overlap, nest, or touch`);
+        throw new UnsupportedBuildingGeometryError(`Building footprint holes ${other} and ${index} overlap, nest, or touch`);
       }
     }
   }
@@ -644,7 +659,7 @@ function validateFootprint(footprint: BuildingFootprint): void {
   }
   const calculatedArea = calculateFootprintArea(footprint.rings);
   if (!Number.isFinite(calculatedArea) || calculatedArea <= TRIANGLE_AREA_TOLERANCE) {
-    throw new Error('Building footprint has invalid area');
+    throw new UnsupportedBuildingGeometryError('Building footprint has invalid area');
   }
   const areaError = Math.abs(calculatedArea - footprint.areaSquareMetres);
   if (areaError > Math.max(1e-6, calculatedArea * 1e-8)) {

@@ -4,12 +4,13 @@ import {
   ZoneArtifactValidationError
 } from './zone-artifact';
 
-export const DEFAULT_ZONE_ARTIFACT_URL = `${import.meta.env.BASE_URL}zones/trafalgar-square-london.zone.json`;
 export const DEFAULT_ZONE_LOAD_TIMEOUT_MS = 30_000;
 
 export interface ZoneArtifactLoadOptions {
   signal?: AbortSignal;
   timeoutMs?: number;
+  sha256?: string;
+  onHash?: (hash: string) => void;
 }
 
 export class ZoneArtifactLoadError extends Error {
@@ -20,10 +21,16 @@ export class ZoneArtifactLoadError extends Error {
 }
 
 export async function loadZoneArtifact(
-  url = DEFAULT_ZONE_ARTIFACT_URL,
+  url: string,
   fetcher: typeof fetch = fetch,
   options: ZoneArtifactLoadOptions = {}
 ): Promise<ZoneArtifact> {
+  return loadPreparedJson(url, fetcher, options, parseZoneArtifact);
+}
+
+export async function loadPreparedJson<T>(
+  url: string, fetcher: typeof fetch, options: ZoneArtifactLoadOptions, parse: (value: unknown) => T
+): Promise<T> {
   const timeoutMs = options.timeoutMs ?? DEFAULT_ZONE_LOAD_TIMEOUT_MS;
   if (!Number.isFinite(timeoutMs) || timeoutMs <= 0 || timeoutMs > 2_147_483_647) {
     throw new ZoneArtifactLoadError('Zone artifact load timeout must be a positive finite timer duration.');
@@ -39,7 +46,7 @@ export async function loadZoneArtifact(
   try {
     if (options.signal?.aborted) abort();
     controller.signal.throwIfAborted();
-    return await fetchArtifact(url, fetcher, controller.signal);
+    return await fetchArtifact(url, fetcher, controller.signal, parse, options.sha256, options.onHash);
   } catch (error) {
     if (controller.signal.aborted) {
       throw new ZoneArtifactLoadError(
@@ -55,7 +62,7 @@ export async function loadZoneArtifact(
   }
 }
 
-async function fetchArtifact(url: string, fetcher: typeof fetch, signal: AbortSignal): Promise<ZoneArtifact> {
+async function fetchArtifact<T>(url: string, fetcher: typeof fetch, signal: AbortSignal, parse: (value: unknown) => T, expectedHash?: string, onHash?: (hash: string) => void): Promise<T> {
   let response: Response;
   try {
     response = await fetcher(url, {
@@ -77,16 +84,23 @@ async function fetchArtifact(url: string, fetcher: typeof fetch, signal: AbortSi
 
   let payload: unknown;
   try {
-    payload = await response.json();
+    const bytes = await response.arrayBuffer();
+    if (expectedHash || onHash) {
+      const hash = [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))].map(b => b.toString(16).padStart(2, '0')).join('');
+      onHash?.(hash);
+      if (expectedHash && hash !== expectedHash) throw new ZoneArtifactLoadError('Prepared asset hash mismatch; rebuild or reload the catalogue.');
+    }
+    payload = JSON.parse(new TextDecoder().decode(bytes));
     signal.throwIfAborted();
   } catch (error) {
+    if (error instanceof ZoneArtifactLoadError) throw error;
     throw new ZoneArtifactLoadError('Prepared zone artifact is not valid JSON.', {
       cause: error
     });
   }
 
   try {
-    return parseZoneArtifact(payload);
+    return parse(payload);
   } catch (error) {
     if (error instanceof ZoneArtifactValidationError) {
       throw new ZoneArtifactLoadError(`Prepared zone artifact is invalid: ${error.message}`, {

@@ -200,7 +200,7 @@ describe.sequential('fixed-zone road surfaces', () => {
   let surface: RoadSurfaceZone;
 
   beforeAll(async () => {
-    const source = await loadZoneSource();
+    const source = await loadZoneSource('trafalgar-square-london');
     surface = compileRoadSurfaces(compileLocalCoordinates(source));
   });
 

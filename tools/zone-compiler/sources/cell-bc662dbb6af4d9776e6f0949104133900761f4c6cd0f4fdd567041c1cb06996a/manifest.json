@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "slug": "cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a",
+  "label": "London Tower Bridge",
+  "generation": {
+    "version": 1,
+    "latitude": 51.5055,
+    "longitude": -0.0754,
+    "widthMetres": 750,
+    "heightMetres": 750,
+    "label": "London Tower Bridge",
+    "id": "cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a",
+    "bounds": {
+      "south": 51.50212945399828,
+      "west": -0.08080095555729926,
+      "north": 51.50887054600172,
+      "east": -0.06999904444270073
+    }
+  },
+  "bounds": {
+    "south": 51.50212945399828,
+    "west": -0.08080095555729926,
+    "north": 51.50887054600172,
+    "east": -0.06999904444270073
+  },
+  "approximateAreaSquareKilometres": 0.5625,
+  "snapshot": {
+    "file": "source.osm.json",
+    "format": "overpass-json",
+    "byteLength": 996276,
+    "sha256": "13759df362152b8c74cafc199cadc22d731a63ca7466c81c3925f801de50da3d"
+  },
+  "source": {
+    "dataset": "OpenStreetMap",
+    "api": "Overpass API",
+    "endpoint": "https://overpass-api.de/api/interpreter",
+    "acquiredAt": "2026-09-07T01:49:37.167Z",
+    "osmBaseTimestamp": "2026-09-07T01:47:39Z",
+    "request": {
+      "method": "POST",
+      "parameter": "data",
+      "query": "[out:json][timeout:60][maxsize:67108864];\n(\n  way[\"highway\"](51.50212945399828,-0.08080095555729926,51.50887054600172,-0.06999904444270073);\n  way[\"building\"](51.50212945399828,-0.08080095555729926,51.50887054600172,-0.06999904444270073);\n  relation[\"building\"](51.50212945399828,-0.08080095555729926,51.50887054600172,-0.06999904444270073);\n  way[\"building:part\"](51.50212945399828,-0.08080095555729926,51.50887054600172,-0.06999904444270073);\n  relation[\"building:part\"](51.50212945399828,-0.08080095555729926,51.50887054600172,-0.06999904444270073);\n);\n(._;>>;);\nout body qt;"
+    },
+    "attribution": "© OpenStreetMap contributors",
+    "attributionUrl": "https://www.openstreetmap.org/copyright",
+    "licence": {
+      "id": "ODbL-1.0",
+      "url": "https://opendatacommons.org/licenses/odbl/1-0/"
+    }
+  }
+}

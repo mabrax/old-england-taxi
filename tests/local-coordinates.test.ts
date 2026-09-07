@@ -15,7 +15,7 @@ const DISTANCE_TOLERANCE_METRES = 0.05;
 
 describe.sequential('local zone coordinates', () => {
   it('transforms every OSM node and way while preserving source topology', async () => {
-    const source = await loadZoneSource();
+    const source = await loadZoneSource('trafalgar-square-london');
     const local = compileLocalCoordinates(source);
     const sourceNodes = source.osm.elements.filter(
       (element): element is OsmNode => element.type === 'node'
@@ -58,7 +58,7 @@ describe.sequential('local zone coordinates', () => {
   });
 
   it('retains one explicit origin and right-handed axis convention in zone metadata', async () => {
-    const source = await loadZoneSource();
+    const source = await loadZoneSource('trafalgar-square-london');
     const local = compileLocalCoordinates(source);
 
     expect(local.metadata).toEqual({
@@ -87,7 +87,7 @@ describe.sequential('local zone coordinates', () => {
   });
 
   it('maps east and south to positive local axes and keeps the source on the ground plane', async () => {
-    const { manifest } = await loadZoneSource();
+    const { manifest } = await loadZoneSource('trafalgar-square-london');
     const transform = createLocalCoordinateTransform(manifest.bounds);
     const { latitude, longitude } = transform.metadata.origin;
     const origin = transform.project({ latitude, longitude });
@@ -107,7 +107,7 @@ describe.sequential('local zone coordinates', () => {
   });
 
   it('produces byte-stable coordinates when the same source is transformed repeatedly', async () => {
-    const source = await loadZoneSource();
+    const source = await loadZoneSource('trafalgar-square-london');
     const first = JSON.stringify(compileLocalCoordinates(source));
     const second = JSON.stringify(compileLocalCoordinates(source));
 
@@ -115,7 +115,7 @@ describe.sequential('local zone coordinates', () => {
   });
 
   it('preserves WGS84 distances across every source line within five centimetres', async () => {
-    const source = await loadZoneSource();
+    const source = await loadZoneSource('trafalgar-square-london');
     const local = compileLocalCoordinates(source);
     const sourceNodeById = new Map(
       source.osm.elements
@@ -155,7 +155,7 @@ describe.sequential('local zone coordinates', () => {
   });
 
   it('rejects coordinates that could produce ambiguous or non-finite output', async () => {
-    const { manifest } = await loadZoneSource();
+    const { manifest } = await loadZoneSource('trafalgar-square-london');
     const transform = createLocalCoordinateTransform(manifest.bounds);
 
     expect(() =>

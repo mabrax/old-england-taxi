@@ -210,7 +210,7 @@ describe('building extrusion geometry', () => {
 
 describe.sequential('building multipolygon robustness', () => {
   let reference: LoadedZoneSource;
-  beforeAll(async () => { reference = await loadZoneSource(); });
+  beforeAll(async () => { reference = await loadZoneSource('trafalgar-square-london'); });
 
   it('assembles shuffled and reversed fragments without duplicating tagged member ways', () => {
     const lines = [
@@ -299,7 +299,7 @@ describe.sequential('fixed-zone building volumes', () => {
   let combined: TriangulatedBuildingMesh;
 
   beforeAll(async () => {
-    source = await loadZoneSource();
+    source = await loadZoneSource('trafalgar-square-london');
     local = compileLocalCoordinates(source);
     zone = compileBuildingVolumes(source, local);
     combined = combineBuildingMeshes(zone.buildings);
