@@ -6,6 +6,12 @@ See the [rollout roadmap](../README.md) for stage order and dependencies.
 
 Drive one vehicle inside one bounded, flat generated cell, with reliable ground and building collision, understandable controls, and recovery from mistakes.
 
+## Platform scope
+
+The application is web-only, including use in an iPad browser. Desktop, touch, tablet, and mobile checks in this stage refer to the browser application; native iOS/iPadOS or other native apps are excluded. Phase 03 will name the intended browser/device targets for interaction, and Phase 04 will record their browser versions, operating systems, hardware, and measured performance. Viewport emulation alone does not establish iPad browser compatibility or performance.
+
+This platform requirement leaves the existing localhost generation architecture in place. Prepared-zone driving remains independent of the generation service; exposing or hosting that service is a separate decision.
+
 ## Starting point
 
 This proposal is based on `712fe6f`, matching local `main` on 2026-09-07 and including its 11 commits beyond `origin/main`. The [Zone Compiler](../zone-compiler/README.md), [Parameterized Zone Generation](../parameterized-zone-generation/README.md), and [local on-demand extension](../on-demand-generation.md) are delivered. Their qualification records establish deterministic schema-v1 geometry, five prepared cells, acquisition/catalogue/report/QA, and browser place/coordinate generation through a bounded localhost service and separate worker. They do not establish physical driveability.
@@ -59,7 +65,7 @@ The flat ground also does not represent water, real barriers, or the suitability
 - Keyboard and touch complete the same driving/recovery actions. The chase camera keeps driving understandable around buildings and after reversing/reset; inspection remains usable.
 - Off-road departures inside the boundary allow a driven return. Collision, stuck/overturned states, escaped/fallen states, and unavailable spawn have safe, explained outcomes.
 - The five checked-in cells are assessed individually with the same runtime and parameters. At least two contrasting cells demonstrate normal driving; every remaining case has passing applicable physical checks or an explicit source/eligibility limitation. Unexpected physics failures block qualification and cannot be relabeled as map limitations.
-- Phase 04 records correctness, lifecycle, desktop/mobile interaction, and measured performance against targets agreed before qualification. Existing compiler/loader/generation behavior remains verified. Compiler byte determinism is not a claim of bit-identical physics across browsers.
+- Phase 04 records correctness, lifecycle, desktop and iPad browser interaction, and measured performance against targets agreed before qualification. Existing compiler/loader/generation behavior remains verified. Compiler byte determinism is not a claim of bit-identical physics across browsers.
 
 ## Exit condition
 
@@ -74,10 +80,10 @@ All four phase deliverables and local exit conditions are verified. A recorded s
 
 ## Decisions for phase discussions
 
-- **Phase 01:** accept the proposed conservative play envelope and marked stop/reset behavior, or require exact acquisition-cell edges and resolve the artifact dependency. Agree the inspection/driving transition and target desktop/mobile devices so world-cost measurements start early.
+- **Phase 01:** accept the proposed conservative play envelope and marked stop/reset behavior, or require exact acquisition-cell edges and resolve the artifact dependency. Agree the inspection/driving transition and target browser/device combinations so world-cost measurements start early.
 - **Phase 02:** agree vehicle dimensions and handling intent, maximum forward/reverse speeds, braking/reverse behavior, spawn-clearance and collision tolerances, and repeatable acceptance maneuvers. The proposal favors forgiving urban exploration rather than calibrated vehicle dynamics.
-- **Phase 03:** agree touch layout, chase-camera behavior near walls and in reverse, and explicit resume/reset feedback. Manual reset to the starting pose is the default; automatic recovery is reserved for an invalid/escaped physical state, not ordinary off-road travel.
-- **Before Phase 04:** finalize the representative driving areas and numeric setup/frame/physics/memory budgets on the agreed devices, informed by earlier measurements. Mobile viewport emulation alone is not evidence of phone performance. Broader hardware or arbitrary-cell guarantees need separate evidence.
+- **Phase 03:** agree desktop and iPad browser targets, touch layout and orientation behavior, chase-camera behavior near walls and in reverse, and explicit resume/reset feedback. Manual reset to the starting pose is the default; automatic recovery is reserved for an invalid/escaped physical state, not ordinary off-road travel.
+- **Before Phase 04:** finalize the representative driving areas and numeric setup/frame/physics/memory budgets on the agreed browser/device combinations, informed by earlier measurements. iPad compatibility, touch usability, and performance require checks in the intended browser on representative iPad hardware. Broader hardware or arbitrary-cell guarantees need separate evidence.
 
 ## Exclusions
 

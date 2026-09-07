@@ -2,7 +2,7 @@
 
 ## Goal
 
-Make the vehicle understandable and controllable on desktop and touch screens while retaining zone inspection.
+Make the vehicle understandable and controllable in desktop and iPad browsers while retaining zone inspection. The application is web-only; tablet support means using the web app in a browser.
 
 ## Deliverable
 
@@ -11,7 +11,7 @@ Keyboard and touch controls feeding the Phase 02 input contract, a chase camera,
 ## Success criteria
 
 - Both input methods support simultaneous steering and acceleration/braking, an agreed brake-to-reverse interaction, and an accessible vehicle reset. Releasing/cancelling a pointer, losing capture/focus, switching modes, or hiding the page clears input and pauses as appropriate.
-- Search fields, coordinate entry, selectors, and other UI controls never steer or accelerate the vehicle while focused. Touch controls fit the agreed small-screen layout without unwanted page scroll or interference with overlays.
+- Search fields, coordinate entry, selectors, and other UI controls never steer or accelerate the vehicle while focused. Touch controls fit the agreed small-screen and iPad browser layouts and orientations without unwanted page scroll or interference with overlays or browser controls. Record the browser/device targets and distinguish viewport emulation from checks on an actual iPad.
 - Driving starts explicitly only after world and spawn readiness. Inspection pauses the vehicle and retains orbit/QA; chase and orbit do not compete for input. Hiding generated geometry for inspection cannot enable invisible-obstacle driving.
 - The chase camera follows turns, braking, reverse, and reset with a clear view of the vehicle and nearby road. Near-wall and ground-occlusion cases have tested behavior; camera reset and vehicle reset remain separate actions.
 - Pause/resume neither applies stale throttle nor catches up hidden-tab time. Recovery feedback distinguishes ordinary off-road movement, a manually reset stuck/overturned vehicle, an automatic invalid-state recovery, and a cell with no safe spawn.
@@ -19,11 +19,11 @@ Keyboard and touch controls feeding the Phase 02 input contract, a chase camera,
 
 ## Exit condition
 
-A user can enter driving, steer a representative street area, stop/reverse, leave and return to pavement, recover, inspect, and change cells on desktop and touch without stuck inputs, competing cameras, or hidden simulation activity.
+A user can enter driving, steer a representative street area, stop/reverse, leave and return to pavement, recover, inspect, and change cells in the agreed desktop and iPad browsers without stuck inputs, competing cameras, or hidden simulation activity.
 
 ## Out of scope
 
-Map-based selection, seamless zone handover, cache-management features, route guidance, scoring/training UI, gamepad support, and detailed vehicle art.
+Native apps, map-based selection, seamless zone handover, cache-management features, route guidance, scoring/training UI, gamepad support, and detailed vehicle art.
 
 ## Dependency and planning agreement
 

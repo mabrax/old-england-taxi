@@ -2,6 +2,8 @@
 
 Each stage brief defines one bounded stage. Stages that benefit from incremental delivery keep their overview and phase briefs in a slugged subfolder. Each phase's implementation plan is discussed with the user and detailed only when that phase is ready to begin; writing a brief does not authorize implementation.
 
+The application runs only on the web. Intended use includes desktop and iPad browsers; touch/tablet requirements refer to the web app on those devices. Native apps are outside the rollout scope. Browser/device support must be established by the relevant qualification evidence.
+
 1. [00 — Project setup](./00-project-setup.md)
 2. [01 — Zone compiler](./zone-compiler/README.md)
 3. [02 — Parameterized Zone Generation](./parameterized-zone-generation/README.md)
