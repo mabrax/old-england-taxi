@@ -166,10 +166,7 @@ export function compileRoadSurfaces(
   if (bufferPolygons.length === 0) {
     throw new Error('Road buffering produced no surface inside the source bounds');
   }
-  let unioned = polygonClipping.union(bufferPolygons);
-  if (sourceBoundsRing !== undefined) {
-    unioned = polygonClipping.intersection(unioned, [sourceBoundsRing]);
-  }
+  const unioned = combineRoadBuffers(bufferPolygons, sourceBoundsRing);
   if (unioned.length === 0) {
     throw new Error('Road buffering produced no surface inside the source bounds');
   }
@@ -203,6 +200,26 @@ export function compileRoadSurfaces(
     polygons,
     mesh
   };
+}
+
+/** Retry known sweep-line precision failures with canonical millimetre inputs.
+ * Existing successful results remain byte-for-byte stable. Math.round(x / .001)
+ * * .001 can encode the same grid coordinate as -373.35200000000003 instead of
+ * -373.352, breaking sweep-line ordering at overlapping capsule endpoints.
+ * The retry changes only this binary rounding residue; it never removes roads,
+ * changes cell bounds or relaxes triangulation/area validation. */
+export function combineRoadBuffers(buffers: MultiPolygon, bounds?: Ring): MultiPolygon {
+  const combine = (input: MultiPolygon, clip?: Ring) => {
+    const unioned = polygonClipping.union(input);
+    return clip === undefined ? unioned : polygonClipping.intersection(unioned, [clip]);
+  };
+  try {
+    return combine(buffers, bounds);
+  } catch (error) {
+    if (!(error instanceof Error) || !/^Unable to (find segment #.* in SweepLine tree\.|complete output ring)/.test(error.message)) throw error;
+    const canonicalRing = (ring: Ring): Ring => ring.map(([x, z]) => [Number(x.toFixed(3)), Number(z.toFixed(3))]);
+    return combine(buffers.map(polygon => polygon.map(canonicalRing)), bounds === undefined ? undefined : canonicalRing(bounds));
+  }
 }
 
 export function triangulateRoadPolygons(

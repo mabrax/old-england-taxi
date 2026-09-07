@@ -1,6 +1,13 @@
 import { parseCatalogue } from './catalogue';
 import type { GenerationJob, LocationChoice } from './generation-types';
 
+export function generationFailureMessage(message: string): string {
+  if (/SweepLine|output ring|triangulat|Road polygon|zero-length segment/i.test(message)) {
+    return 'The map geometry could not be processed. Try a smaller cell or a nearby point.';
+  }
+  return message;
+}
+
 export class GenerationApiError extends Error {
   constructor(message: string, public status: number) { super(message); }
 }

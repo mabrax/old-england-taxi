@@ -1,9 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { GenerationApiError, generationApi, parseGenerationJob, parseLocationChoices } from '../zone/generation-client';
+  import { GenerationApiError, generationApi, generationFailureMessage, parseGenerationJob, parseLocationChoices } from '../zone/generation-client';
   import { isFinished, type GenerationJob, type LocationChoice } from '../zone/generation-types';
 
-  let { onReady }: { onReady: (id: string) => void } = $props();
+  let { onReady, onProgress }: { onReady: (id: string) => void; onProgress: (job: GenerationJob | undefined) => void } = $props();
   let mode = $state<'place' | 'coordinates'>('place');
   let query = $state('');
   let latitude = $state<number | undefined>();
@@ -57,6 +57,7 @@
   function accept(next: GenerationJob) {
     connectionError = false; error = ''; available = true;
     job = next;
+    onProgress(next);
     if (next.state === 'ready') {
       pendingId = undefined;
       sessionStorage.removeItem(storageKey);
@@ -93,6 +94,7 @@
     error = message(reason); connectionError = true;
     if (reason instanceof GenerationApiError && reason.status === 404) {
       pendingId = undefined; job = undefined; connectionError = false;
+      onProgress(undefined);
       sessionStorage.removeItem(storageKey);
     }
   }
@@ -146,12 +148,15 @@
   </button>
   <p class="generation-hint">Downloads OpenStreetMap data and builds the area around your point. Coverage and generation time vary.</p>
   {#if job}
-    <div class="generation-progress" data-generation-state={job.state} role="status" aria-live="polite">
+    <div class="generation-progress" data-generation-state={job.state} role={job.state === 'failed' ? 'alert' : 'status'} aria-live={job.state === 'failed' ? 'assertive' : 'polite'}>
       <div class="generation-steps" aria-hidden="true">
         {#each ['Queue', 'Download', 'Build', 'Check'] as stage, index}<span class:done={currentStage > index} class:current={currentStage === index}>{stage}</span>{/each}
       </div>
-      <strong>{job.message}</strong>
-      {#if job.state === 'failed'}<p>Try a smaller cell or a nearby location. If the map provider is unavailable, try again later.</p>{/if}
+      <strong>{job.state === 'failed' ? 'Build failed' : job.message}</strong>
+      {#if job.state === 'failed'}
+        <p>{generationFailureMessage(job.message)}</p>
+        <details><summary>Technical details</summary><p>{job.message}</p></details>
+      {/if}
       {#if !isFinished(job.state)}
         <div class="generation-progress-actions"><span>{elapsed}s elapsed</span><button type="button" onclick={cancel}>Cancel</button></div>
       {/if}

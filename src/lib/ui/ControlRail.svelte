@@ -1,11 +1,13 @@
 <script lang="ts">
   import GenerationPanel from './GenerationPanel.svelte';
   import type { ZoneSummary } from '../zone/types';
+  import type { GenerationJob } from '../zone/generation-types';
 
-  let { onReset, resetEnabled, summary }: {
+  let { onReset, resetEnabled, summary, onProgress }: {
     onReset: () => void;
     resetEnabled: boolean;
     summary: ZoneSummary | undefined;
+    onProgress: (job: GenerationJob | undefined) => void;
   } = $props();
 </script>
 
@@ -16,7 +18,7 @@
     <p>Search the world, choose a point, and build its roads and buildings.</p>
   </div>
 
-  <GenerationPanel onReady={(id) => {
+  <GenerationPanel {onProgress} onReady={(id) => {
     const url = new URL(window.location.href);
     url.searchParams.delete('artifact');
     url.searchParams.set('zone', id);

@@ -1,0 +1,107 @@
+{
+  "attribution": "© OpenStreetMap contributors, ODbL-1.0",
+  "sourceUrl": "https://www.openstreetmap.org/way/1025065810",
+  "sourceSha256": "92b974b3b5e435d011567c6438be773002d0214710d87a36176b8f81d4505d8a",
+  "description": "Three contiguous road segments reduced from the Angelmó 1 km acquisition on 2026-09-07. Binary residue after millimetre rounding caused polygon-clipping SweepLine ordering to fail.",
+  "local": {
+    "metadata": {
+      "slug": "angelmo-road-junction",
+      "label": "Pasaje Frei / Avenida Pacheco Altamirano, Angelmó",
+      "sourceBounds": {
+        "south": -41.49005423699278,
+        "west": -72.96923246829603,
+        "north": -41.48105036300722,
+        "east": -72.95725853170397
+      },
+      "coordinateSystem": {
+        "schemaVersion": 1,
+        "sourceCrs": "EPSG:4326",
+        "method": "wgs84-local-tangent-plane",
+        "units": "metres",
+        "origin": {
+          "latitude": -41.4855523,
+          "longitude": -72.9632455,
+          "ellipsoidHeightMetres": 0
+        },
+        "axes": {
+          "handedness": "right",
+          "x": "east",
+          "y": "up",
+          "z": "south"
+        },
+        "groundPlaneY": 0
+      }
+    },
+    "points": [],
+    "lines": [
+      {
+        "type": "line",
+        "id": 957128800,
+        "nodeIds": [
+          8856823562,
+          8856823561
+        ],
+        "positions": [
+          {
+            "x": -288.83452932393993,
+            "y": 0,
+            "z": 237.38142015671994
+          },
+          {
+            "x": -371.15690518847885,
+            "y": 0,
+            "z": 147.50162134550374
+          }
+        ],
+        "closed": false,
+        "tags": {
+          "highway": "residential",
+          "lanes": "2",
+          "maxspeed": "50",
+          "name": "Pasaje Frei",
+          "sidewalk": "no",
+          "surface": "compacted"
+        }
+      },
+      {
+        "type": "line",
+        "id": 1025065810,
+        "nodeIds": [
+          269445550,
+          8856823561,
+          269445558
+        ],
+        "positions": [
+          {
+            "x": -397.87970777561804,
+            "y": 0,
+            "z": 172.24795441203202
+          },
+          {
+            "x": -371.15690518847885,
+            "y": 0,
+            "z": 147.50162134550374
+          },
+          {
+            "x": -364.5346378938486,
+            "y": 0,
+            "z": 141.25952496062223
+          }
+        ],
+        "closed": false,
+        "tags": {
+          "highway": "primary",
+          "lanes": "2",
+          "lit": "yes",
+          "maxspeed": "50",
+          "name": "Avenida Pacheco Altamirano",
+          "noref": "yes",
+          "official_name": "Conexión Urbana Ruta 5 (Trapén) - Ruta 7",
+          "oneway": "no",
+          "sidewalk": "both",
+          "surface": "paved"
+        }
+      }
+    ]
+  }
+}

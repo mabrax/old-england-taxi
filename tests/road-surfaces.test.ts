@@ -1,4 +1,5 @@
 import { beforeAll, describe, expect, it } from 'vitest';
+import { readFile } from 'node:fs/promises';
 import { compileLocalCoordinates, createLocalCoordinateTransform } from '../tools/zone-compiler/src/local-coordinates';
 import { compileStreetGraph } from '../tools/zone-compiler/src/zone-artifact';
 import { loadZoneSource } from '../tools/zone-compiler/src/load-zone-source';
@@ -55,6 +56,24 @@ describe('road width inference', () => {
 });
 
 describe('road surface geometry', () => {
+  it('builds the Angelmó junction without losing road branches or changing connectivity', async () => {
+    const fixture = JSON.parse(await readFile(new URL('./fixtures/angelmo-road-junction.json', import.meta.url), 'utf8'));
+    const local = fixture.local as LocalCoordinateZone;
+    const surface = compileRoadSurfaces(local);
+    expect(surface.roads.map(road => road.id)).toEqual([957128800, 1025065810]);
+    expect(surface.polygons).toHaveLength(1);
+    expect(surface.mesh.positions.every(Number.isFinite)).toBe(true);
+    expect(allTrianglesFaceUp(Array.from(new Float32Array(surface.mesh.positions)), surface.mesh.indices)).toBe(true);
+    expect(surface.mesh.areaSquareMetres).toBeCloseTo(1097.0525, 2);
+    expect(surface.mesh.maximumDeviation).toBeLessThanOrEqual(1e-8);
+    for (const road of local.lines) for (const point of road.positions) expect(pointIsInSurface(point, surface)).toBe(true);
+    const graph = compileStreetGraph(surface);
+    expect(graph.edges).toHaveLength(3);
+    expect(graph.statistics.connectedComponents).toBe(1);
+    expect(compileRoadSurfaces(local)).toEqual(surface);
+    expect(compileRoadSurfaces({ ...local, lines: [...local.lines].reverse() })).toEqual(surface);
+  });
+
   it('buffers a centerline to its inferred full width with round caps', () => {
     const surface = compileRoadSurfaces(
       createZone([

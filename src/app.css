@@ -657,3 +657,15 @@ button {
   .generation-panel .location-results { max-height: 130px; }
   .qa-controls { max-width: min(340px, calc(100% - 32px)); }
 }
+
+.generation-notice { position: absolute; z-index: 4; top: 16px; left: 16px; right: 16px; width: min(460px, calc(100% - 32px)); max-height: calc(100% - 90px); overflow-y: auto; padding: 16px; border: 1px solid #8ea966; border-radius: 10px; background: #f6faeff5; box-shadow: 0 6px 24px #152d2526; color: #21372a; font-size: 13px; line-height: 1.5; overflow-wrap: anywhere; }
+.generation-notice.failed { background: #fff4ebf7; border-color: #d88f63; color: #682e17; }
+.generation-notice-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.generation-notice-heading strong { font-size: 15px; }
+.generation-notice-heading button { border: 0; background: transparent; color: inherit; padding: 0 6px; font-size: 24px; line-height: 1; }
+.generation-notice p { margin: 8px 0 0; }
+.generation-notice-location { font-weight: 700; }
+.generation-notice-current { padding-top: 8px; border-top: 1px solid #53665b40; font-size: 11px; }
+.has-generation-notice .qa-controls, .has-generation-notice .scene-badge { visibility: hidden; }
+.generation-progress details { margin-top: 8px; overflow-wrap: anywhere; }
+@media (max-width: 740px) { .generation-notice { top: 8px; left: 8px; right: 8px; width: calc(100% - 16px); padding: 12px; max-height: calc(56dvh - 90px); font-size: 12px; } }

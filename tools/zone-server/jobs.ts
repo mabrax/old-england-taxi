@@ -52,6 +52,8 @@ export class GenerationQueue {
   }
   private update(job: GenerationJob, state: GenerationState, message: string) {
     job.state = state; job.message = message; job.updatedAt = Date.now();
+    console.info(JSON.stringify({ event: 'zone-generation', jobId: job.jobId, zoneId: job.zoneId,
+      state, elapsedMs: job.updatedAt - job.createdAt, ...(state === 'failed' ? { error: message } : {}) }));
   }
   private pump() {
     if (this.active || this.closed) return;

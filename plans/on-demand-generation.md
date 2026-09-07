@@ -31,3 +31,5 @@ Existing supported latitude, cell-size, antimeridian and geometry constraints ar
 - All 146 tests pass; static checks report zero errors/warnings; offline corpus verification and production build pass. The existing bundle-size advisory remains (576.43 kB JavaScript / 153.58 kB gzip).
 
 - `npm run zone:live-browser` passed against production preview: live place-search submission, cached generation and automatic navigation, desktop/mobile rendering and QA/reset controls, invalid-coordinate recovery, real job reconnection after blocked progress requests and reload, and missing-job recovery after restart. [Machine-readable evidence](./on-demand-browser-verification.json) records the run.
+
+The subsequent [Angelmó fix](./angelmo-generation-fix.md) records a real road-union precision failure, its reduced regression fixture, and prominent viewport status/error feedback.
