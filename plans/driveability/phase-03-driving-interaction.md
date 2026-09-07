@@ -1,6 +1,6 @@
 # Phase 03 — Driving interaction
 
-**Status: implementation complete and verified in the available environment; parent review pending (2026-09-07).** The user said “Proceed with phase three”; this includes reasonable decisions within this phase and does not require another implementation approval. Work starts from reviewed local `0e60304` on isolated `codex/driveability-driving-interaction` in worktree `9db0`. Phase 04 remains unstarted.
+**Status: implementation complete, verified in the available environment, and independently reviewed (2026-09-07); full device exit remains open.** The user said “Proceed with phase three”; this includes reasonable decisions within this phase and does not require another implementation approval. Work starts from reviewed local `0e60304` on isolated `codex/driveability-driving-interaction` in worktree `9db0`. Phase 04 remains unstarted.
 
 ## Goal
 
@@ -43,4 +43,4 @@ Depends on the independently reviewed [First vehicle](./phase-02-first-vehicle.m
 
 ## Implementation outcome and evidence boundary
 
-[Verification and limitations](./phase-03-verification.md) records the delivered input, interaction, camera and generation-lifecycle changes and links reproducible browser evidence. The complete device-level exit condition above is **not yet established**: actual iPad Safari, desktop Firefox/Safari and device performance have not been measured here. The implementable work and available Chromium checks are delivered for independent review; Phase 04 has not begun.
+[Verification and limitations](./phase-03-verification.md) records the delivered input, interaction, camera and generation-lifecycle changes and links reproducible browser evidence. The complete device-level exit condition above is **not yet established**: actual iPad Safari, desktop Firefox/Safari and device performance have not been measured here. Independent review found no blocking implementation issues within the available evidence; Phase 04 has not begun.
