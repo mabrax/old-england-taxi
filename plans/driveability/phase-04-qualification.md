@@ -1,6 +1,6 @@
 # Phase 04 — Qualification
 
-**Status: available-environment qualification recorded; independent review and full stage exit pending (2026-09-07).** User instruction “proceed with phase 04” permits this plan and reasonable choices within scope. Prior implementation review passed; outstanding device requirements are carried forward.
+**Status: available-environment evidence independently reviewed; full qualification and stage exit remain open (2026-09-07).** User instruction “proceed with phase 04” permits this plan and reasonable choices within scope. Prior implementation review passed; outstanding device requirements are carried forward.
 
 The [qualification record](./phase-04-verification.md) and [remaining-device procedure](./phase-04-device-procedure.md) retain the completed results, failed attempts and open acceptance gates.
 
