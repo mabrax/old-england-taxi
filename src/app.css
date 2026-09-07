@@ -672,3 +672,23 @@ button {
 
 .generation-connection { padding: 12px; border: 1px solid #c48d69; border-radius: 7px; background: #38291f; color: #ffd5ba; font-size: 12px; line-height: 1.5; }
 .generation-connection p { margin: 6px 0 10px; }
+/* Physics inspection remains separate from source QA and generation controls. */
+.physics-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem 1rem;
+  flex-basis: 100%;
+  padding-block: 0.45rem;
+  border-block: 1px solid #cbd5d0;
+}
+
+.physics-controls button {
+  font: inherit;
+  color: inherit;
+  background: #f4f7f4;
+  border: 1px solid #9bafa4;
+  border-radius: 4px;
+  padding: 0.35rem 0.6rem;
+  cursor: pointer;
+}

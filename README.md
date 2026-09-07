@@ -28,6 +28,19 @@ Open `http://127.0.0.1:4175`. This launcher returns once the generation API is r
 
 If the server becomes unreachable, the loaded map stays visible and the generation form offers **Reconnect**. Restore the server, then reconnect to resume a known job or retry your search with the entered location preserved. Reconnecting does not submit a new search or build automatically.
 
+## Physical world inspection
+
+Each validated zone also initializes a paused Rapier world. **Collision surfaces** shows the ground, complete building mesh and four boundary walls independently of source outlines or generated-geometry visibility. **Resume physics** runs the fixed-step static world; **Pause physics** stops it. Leaving the tab/window pauses it and returning requires an explicit resume. There is no vehicle yet, and READY still refers to artifact/render readiness. A physics failure leaves geometry inspection available.
+
+Amber lines mark a simulation rectangle inset 1 m from the clipped-road mesh's X/Z bounds. It is not an exact acquisition-cell boundary, a legal route, or a claim that off-road land/water is traversable. Flat ground is at y=0; the road's 4 cm rendering lift adds no collider or kerb. Building occupancy checks preserve courtyards. See [Physical world decisions and evidence](./plans/driveability/phase-01-physical-world.md) for the boundary, clearance contract, measured costs and later vehicle requirements.
+
+```sh
+npm run physics:measure -- /tmp/physical-world-measurements.json
+npm run physics:browser -- http://127.0.0.1:4186
+```
+
+The browser check expects a production preview on the supplied port. For an isolated check, build and run `npm run preview -- --host 127.0.0.1 --port 4186 --strictPort` in another terminal. Measurements use a small test probe, not a vehicle or phone performance test.
+
 ## Compiler and verification
 
 ```sh

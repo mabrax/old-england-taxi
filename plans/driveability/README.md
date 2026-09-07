@@ -10,13 +10,13 @@ Drive one vehicle inside one bounded, flat generated cell, with reliable ground 
 
 This proposal is based on `712fe6f`, matching local `main` on 2026-09-07 and including its 11 commits beyond `origin/main`. The [Zone Compiler](../zone-compiler/README.md), [Parameterized Zone Generation](../parameterized-zone-generation/README.md), and [local on-demand extension](../on-demand-generation.md) are delivered. Their qualification records establish deterministic schema-v1 geometry, five prepared cells, acquisition/catalogue/report/QA, and browser place/coordinate generation through a bounded localhost service and separate worker. They do not establish physical driveability.
 
-The [current scene](../../src/lib/scene/validation-scene.ts) renders geometry with OrbitControls and owns its animation loop and disposal. The [viewport](../../src/lib/scene/SceneViewport.svelte) loads a validated artifact, handles cancellation/errors, and selects another zone through navigation. There is no vehicle, simulation, or Rapier dependency yet.
+At that baseline, the [scene](../../src/lib/scene/validation-scene.ts) rendered geometry with OrbitControls and owned its animation loop and disposal. The [viewport](../../src/lib/scene/SceneViewport.svelte) loaded a validated artifact, handled cancellation/errors, and selected another zone through navigation. There was no vehicle, simulation, or Rapier dependency. Phase 01 now adds the runtime-owned physical world; its brief records implementation decisions and verification. There is still no vehicle.
 
 ## Phases
 
 Four sequential phases follow the [Zone Compiler working agreement](../zone-compiler/README.md#working-agreement). Each delivers a verifiable boundary; later briefs remain lean until their phase is ready.
 
-1. [Phase 01 — Physical world](./phase-01-physical-world.md)
+1. [Phase 01 — Physical world](./phase-01-physical-world.md) — complete; [verification](./phase-01-verification.md)
 2. [Phase 02 — First vehicle](./phase-02-first-vehicle.md)
 3. [Phase 03 — Driving interaction](./phase-03-driving-interaction.md)
 4. [Phase 04 — Qualification](./phase-04-qualification.md)
@@ -85,4 +85,4 @@ Routing and legal-driving qualification; traffic, pedestrians, multiple vehicles
 
 ## Working agreement
 
-This is a planning proposal only; no implementation phase has started or is authorized by writing it. When each phase is ready, its implementation plan is discussed and agreed with the user, then detailed in that phase brief. Complete and verify its success criteria and exit condition before beginning the next phase. Changes to stage scope or artifact dependencies return to that discussion.
+The original proposal did not authorize implementation. The user subsequently authorized Phase 01 on 2026-09-07, including reasonable decisions within its scope. Its detailed plan and implementation evidence live in its brief. Phases 02–04 remain planning briefs only. When each later phase is ready, its implementation plan is discussed and agreed with the user, then detailed in that phase brief. Complete and verify each phase's success criteria and exit condition before beginning the next. Changes to stage scope or artifact dependencies return to that discussion.

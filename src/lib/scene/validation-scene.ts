@@ -2,6 +2,8 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import type { ZoneQa } from '../zone/catalogue';
 import type { ZoneArtifact } from '../zone/types';
+import { createPhysicsSession, type PhysicsState } from '../physics/physics-session';
+import { BOUNDARY_HEIGHT_METRES } from '../physics/world-geometry';
 import {
   clampPixelRatio,
   createValidationCamera,
@@ -15,6 +17,8 @@ export interface SceneController {
   resize: () => void;
   dispose: () => void;
   setQaVisibility: (source: boolean, generated: boolean) => void;
+  setCollisionVisibility: (visible: boolean) => void;
+  setPhysicsPaused: (paused: boolean) => void;
 }
 
 const palette = {
@@ -29,7 +33,8 @@ const palette = {
 export function createValidationScene(
   container: HTMLElement,
   artifact: ZoneArtifact,
-  qa?: ZoneQa
+  qa?: ZoneQa,
+  onPhysicsState: (state: PhysicsState) => void = () => {}
 ): SceneController {
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(palette.background);
@@ -186,13 +191,73 @@ export function createValidationScene(
   const defaultTarget = new THREE.Vector3(centerX, 0, centerZ);
   let disposed = false;
   let frame = 0;
+  let collisionVisible = false;
+  const collisionInspection = new THREE.Group();
+  scene.add(collisionInspection);
+  const simulationLimit = new THREE.Group();
+  scene.add(simulationLimit);
+  const physics = createPhysicsSession(artifact, state => {
+    renderer.domElement.dataset.physicsStatus = state.status;
+    renderer.domElement.dataset.physicsColliders = String(state.metrics?.colliders ?? 0);
+    renderer.domElement.dataset.physicsSetupMs = String(state.metrics?.setupMs ?? 0);
+    renderer.domElement.dataset.physicsInitializationMs = String(state.initializationMs ?? 0);
+    if (state.status === 'error') {
+      collisionInspection.visible = simulationLimit.visible = false;
+    }
+    onPhysicsState(state);
+  });
+  renderer.domElement.dataset.physicsStatus = 'loading';
+  void physics.ready.then(() => {
+    if (disposed || !physics.physical) return;
+    try {
+      const physical = physics.physical;
+      const debug = physical.debugRender();
+      const geometry = new THREE.BufferGeometry();
+      // Static world: take one copy, never rebuild/upload every frame.
+      geometry.setAttribute('position', new THREE.BufferAttribute(debug.vertices.slice(), 3));
+      const lines = new THREE.LineSegments(geometry, new THREE.LineBasicMaterial({
+        color: 0x087c83, depthTest: false, transparent: true, opacity: 0.65
+      }));
+      lines.renderOrder = 11;
+      collisionInspection.add(lines);
+      collisionInspection.visible = collisionVisible;
+      const e = physical.envelope;
+      const points: number[] = [];
+      const corners = [[e.minimumX, e.minimumZ], [e.maximumX, e.minimumZ],
+        [e.maximumX, e.maximumZ], [e.minimumX, e.maximumZ]];
+      // Ground perimeter plus short uprights identify the artificial limit without obscuring the map.
+      for (let i = 0; i < 4; i++) {
+        const [x, z] = corners[i], [nx, nz] = corners[(i + 1) % 4];
+        points.push(x, 0.08, z, nx, 0.08, nz, x, 0.08, z, x, 3, z);
+      }
+      const boundaryGeometry = new THREE.BufferGeometry();
+      boundaryGeometry.setAttribute('position', new THREE.Float32BufferAttribute(points, 3));
+      const boundaryLines = new THREE.LineSegments(boundaryGeometry, new THREE.LineBasicMaterial({ color: 0x995200, depthTest: false }));
+      boundaryLines.renderOrder = 12;
+      simulationLimit.add(boundaryLines);
+      renderer.domElement.dataset.playEnvelope = JSON.stringify(e);
+      renderer.domElement.dataset.boundaryHeight = String(BOUNDARY_HEIGHT_METRES);
+    } catch (error) { physics.fail(error); }
+  });
 
-  const render = () => {
+  const render = (now = performance.now()) => {
     if (disposed) return;
+    physics.advance(now);
+    renderer.domElement.dataset.physicsSteps = String(physics.timing.steps);
     controls.update();
     renderer.render(scene, camera);
-    frame = window.requestAnimationFrame(render);
+    frame = document.hidden ? 0 : window.requestAnimationFrame(render);
   };
+
+  const pause = () => physics.pause();
+  const visibilityChanged = () => {
+    physics.pause();
+    if (frame) window.cancelAnimationFrame(frame);
+    frame = 0;
+    if (!document.hidden && !disposed) render();
+  };
+  document.addEventListener('visibilitychange', visibilityChanged);
+  window.addEventListener('blur', pause);
 
   const resize = () => {
     if (disposed) return;
@@ -206,6 +271,7 @@ export function createValidationScene(
   observer.observe(container);
 
   const resetCamera = () => {
+    if (disposed) return;
     camera.position.copy(defaultPosition);
     controls.target.copy(defaultTarget);
     controls.update();
@@ -214,20 +280,42 @@ export function createValidationScene(
 
   render();
 
+  const dispose = () => {
+    if (disposed) return;
+    disposed = true;
+    physics.dispose();
+    window.cancelAnimationFrame(frame);
+    document.removeEventListener('visibilitychange', visibilityChanged);
+    window.removeEventListener('blur', pause);
+    window.removeEventListener('pagehide', pageHidden);
+    window.removeEventListener('pageshow', pageShown);
+    observer.disconnect();
+    controls.dispose();
+    disposeObject(scene);
+    renderer.dispose();
+    renderer.domElement.remove();
+  };
+  // Release the world on navigation too. A bfcache return reloads the disposed page.
+  const pageShown = (event: PageTransitionEvent) => { if (event.persisted) window.location.reload(); };
+  const pageHidden = (event: PageTransitionEvent) => {
+    dispose();
+    if (event.persisted) window.addEventListener('pageshow', pageShown, { once: true });
+  };
+  window.addEventListener('pagehide', pageHidden);
+
   return {
     resetCamera,
     resize,
     setQaVisibility,
-    dispose: () => {
-      if (disposed) return;
-      disposed = true;
-      window.cancelAnimationFrame(frame);
-      observer.disconnect();
-      controls.dispose();
-      disposeObject(scene);
-      renderer.dispose();
-      renderer.domElement.remove();
-    }
+    setCollisionVisibility: (visible: boolean) => {
+      collisionVisible = visible;
+      collisionInspection.visible = visible && !!physics.physical;
+      renderer.domElement.dataset.collisionVisible = String(collisionInspection.visible);
+    },
+    setPhysicsPaused: (paused: boolean) => {
+      if (paused || document.hidden || !document.hasFocus()) physics.pause(); else physics.resume();
+    },
+    dispose
   };
 }
 

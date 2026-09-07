@@ -48,7 +48,7 @@
 
   <div class="rail-note">
     <span class="note-marker" aria-hidden="true"></span>
-    <p>Geometry, graph, coordinates, and OSM provenance load from one deterministic artifact. Routing and driveability remain deferred.</p>
+    <p>Inspect flat ground and building collision inside a marked simulation area. Vehicle driving and routing remain deferred.</p>
   </div>
 
   <div class="rail-footer">

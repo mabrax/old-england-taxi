@@ -1,0 +1,253 @@
+{
+  "checkedAt": "2026-09-07T16:56:52.726Z",
+  "runtime": "v26.8.1",
+  "rapier": "0.20.0",
+  "platform": "linux 7.1.13-200.fc44.x86_64",
+  "cpu": "AMD Ryzen 7 5700X3D 8-Core Processor",
+  "initializationMs": 77.43714899999998,
+  "measurements": [
+    {
+      "label": "Chicago River North grid",
+      "id": "cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410",
+      "sha256": "4a9037e4db68a6cd55cd3db90a0aa50988b550ca1f3cd7d68125d4a35f6473b6",
+      "envelope": {
+        "minimumX": -299.0121154785156,
+        "maximumX": 299.0121765136719,
+        "minimumZ": -299.0060119628906,
+        "maximumZ": 298.9939880371094
+      },
+      "setupMs": 99.39355799999998,
+      "colliders": 6,
+      "rigidBodies": 0,
+      "buildingTriangles": 6720,
+      "buildingBaseTriangles": 1454,
+      "roofTriangles": 1454,
+      "geometryBytes": 299296,
+      "debugPositionBytes": 485640,
+      "queries": {
+        "count": 1,
+        "maximumMs": 0.7435769999999593
+      },
+      "probe": {
+        "initial": {
+          "x": -261.6355972290039,
+          "y": 2,
+          "z": -261.6310119628906
+        },
+        "finalY": 0.24993082880973816,
+        "steps": 600,
+        "hz": 60,
+        "halfExtentMetres": 0.25
+      },
+      "stepMs": {
+        "mean": 0.02661533666666647,
+        "p95": 0.05096000000003187,
+        "maximum": 3.3958900000000085
+      }
+    },
+    {
+      "label": "Cambridge centre",
+      "id": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43",
+      "sha256": "6dea8e06c7a3f40ac306b07236dcbd3779ba8cf4e87caaa3e490069217760cd4",
+      "envelope": {
+        "minimumX": -349.0244140625,
+        "maximumX": 349.0246887207031,
+        "minimumZ": -349.0119934082031,
+        "maximumZ": 348.9880065917969
+      },
+      "setupMs": 144.04032099999995,
+      "colliders": 6,
+      "rigidBodies": 0,
+      "buildingTriangles": 29156,
+      "buildingBaseTriangles": 6683,
+      "roofTriangles": 6683,
+      "geometryBytes": 1292560,
+      "debugPositionBytes": 2101032,
+      "queries": {
+        "count": 1,
+        "maximumMs": 1.2336910000000216
+      },
+      "probe": {
+        "initial": {
+          "x": -305.3963451385498,
+          "y": 2,
+          "z": -305.3869934082031
+        },
+        "finalY": 0.24993084371089935,
+        "steps": 600,
+        "hz": 60,
+        "halfExtentMetres": 0.25
+      },
+      "stepMs": {
+        "mean": 0.005872603333335936,
+        "p95": 0.019019999999954962,
+        "maximum": 0.32196299999998246
+      }
+    },
+    {
+      "label": "London Tower Bridge",
+      "id": "cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a",
+      "sha256": "5f4887e391bafe1ded5e82519e42ceaaed35998655810b61b1f4019571cfb00d",
+      "envelope": {
+        "minimumX": -374.02801513671875,
+        "maximumX": 374.0014953613281,
+        "minimumZ": -374.0140075683594,
+        "maximumZ": 373.9859924316406
+      },
+      "setupMs": 51.585046000000034,
+      "colliders": 6,
+      "rigidBodies": 0,
+      "buildingTriangles": 11500,
+      "buildingBaseTriangles": 2613,
+      "roofTriangles": 2613,
+      "geometryBytes": 510192,
+      "debugPositionBytes": 829800,
+      "queries": {
+        "count": 2,
+        "maximumMs": 3.9920660000000225
+      },
+      "probe": {
+        "initial": {
+          "x": -327.2761707305908,
+          "y": 2,
+          "z": -280.5140075683594
+        },
+        "finalY": 0.24993079900741577,
+        "steps": 600,
+        "hz": 60,
+        "halfExtentMetres": 0.25
+      },
+      "stepMs": {
+        "mean": 0.012781311666665829,
+        "p95": 0.03336100000001352,
+        "maximum": 3.3699000000000296
+      }
+    },
+    {
+      "label": "Lucca historic centre",
+      "id": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+      "sha256": "8eff07f47eba43f30f5084232c0f4bfd086f6cc740660ad9435f6493c044e3cf",
+      "envelope": {
+        "minimumX": -349.0164489746094,
+        "maximumX": 349.0157165527344,
+        "minimumZ": -349.0090026855469,
+        "maximumZ": 348.9909973144531
+      },
+      "setupMs": 140.61422000000005,
+      "colliders": 6,
+      "rigidBodies": 0,
+      "buildingTriangles": 33372,
+      "buildingBaseTriangles": 7045,
+      "roofTriangles": 7045,
+      "geometryBytes": 1489136,
+      "debugPositionBytes": 2404584,
+      "queries": {
+        "count": 1,
+        "maximumMs": 0.6089460000000599
+      },
+      "probe": {
+        "initial": {
+          "x": -305.3894386291504,
+          "y": 2,
+          "z": -305.3840026855469
+        },
+        "finalY": 0.24993084371089935,
+        "steps": 600,
+        "hz": 60,
+        "halfExtentMetres": 0.25
+      },
+      "stepMs": {
+        "mean": 0.006105438333333003,
+        "p95": 0.025949999999966167,
+        "maximum": 0.06076100000007045
+      }
+    },
+    {
+      "label": "Trafalgar Square, London",
+      "id": "trafalgar-square-london",
+      "sha256": "3636dcb2c69face98dea581333c9309ed5c021364a0b953074b1a98c19e2fc6a",
+      "envelope": {
+        "minimumX": -500.6645812988281,
+        "maximumX": 500.6169128417969,
+        "minimumZ": -499.35198974609375,
+        "maximumZ": 499.302001953125
+      },
+      "setupMs": 170.36511999999993,
+      "colliders": 6,
+      "rigidBodies": 0,
+      "buildingTriangles": 38664,
+      "buildingBaseTriangles": 8709,
+      "roofTriangles": 8709,
+      "geometryBytes": 1716528,
+      "debugPositionBytes": 2785608,
+      "queries": {
+        "count": 4,
+        "maximumMs": 0.6840259999999034
+      },
+      "probe": {
+        "initial": {
+          "x": -438.08448791503906,
+          "y": 2,
+          "z": -249.68849182128906
+        },
+        "finalY": 0.24993078410625458,
+        "steps": 600,
+        "hz": 60,
+        "halfExtentMetres": 0.25
+      },
+      "stepMs": {
+        "mean": 0.007688638333334363,
+        "p95": 0.025511000000051354,
+        "maximum": 1.0199299999999312
+      }
+    }
+  ],
+  "repeatedDisposal": {
+    "cell": "Trafalgar Square, London",
+    "cycles": 20,
+    "gcExposed": true,
+    "processMemoryBytes": [
+      {
+        "cycle": 0,
+        "rss": 298754048,
+        "heapTotal": 56643584,
+        "heapUsed": 22233824,
+        "external": 23502232,
+        "arrayBuffers": 12340758
+      },
+      {
+        "cycle": 5,
+        "rss": 321925120,
+        "heapTotal": 94130176,
+        "heapUsed": 22273064,
+        "external": 28107460,
+        "arrayBuffers": 14057286
+      },
+      {
+        "cycle": 10,
+        "rss": 322260992,
+        "heapTotal": 94916608,
+        "heapUsed": 22272672,
+        "external": 29823988,
+        "arrayBuffers": 14057286
+      },
+      {
+        "cycle": 15,
+        "rss": 322158592,
+        "heapTotal": 96227328,
+        "heapUsed": 22275216,
+        "external": 29823988,
+        "arrayBuffers": 14057286
+      },
+      {
+        "cycle": 20,
+        "rss": 322416640,
+        "heapTotal": 97013760,
+        "heapUsed": 22273120,
+        "external": 29823988,
+        "arrayBuffers": 14057286
+      }
+    ]
+  },
+  "limitations": "Node x86_64 observations, one small falling/sleeping probe. Not sustained driving, browser frame cost, exact live WASM allocations, phone performance or a memory-leak proof. Shared WASM linear memory retains its high-water allocation after World.free()."
+}

@@ -4,6 +4,7 @@
   import type { ZoneCatalogue } from '../zone/catalogue';
   import type { ZoneStatus, ZoneSummary } from '../zone/types';
   import { createValidationScene, type SceneController } from './validation-scene';
+  import type { PhysicsState } from '../physics/physics-session';
 
   let container: HTMLDivElement;
   let controller: SceneController | undefined;
@@ -18,7 +19,10 @@
   let reportUrl = '';
   let comparisonUrl = '';
   let label = '';
+  let physics: PhysicsState = { status: 'loading' };
+  let collisionVisible = false;
   $: controller?.setQaVisibility(qaEnabled && sourceVisible, generatedVisible);
+  $: controller?.setCollisionVisibility(collisionVisible);
 
   export function resetCamera(): void {
     controller?.resetCamera();
@@ -33,7 +37,7 @@
         const loadedArtifact = loaded.artifact;
         if (disposed) return;
         artifactSlug = loadedArtifact.slug;
-        controller = createValidationScene(container, loadedArtifact, loaded.qa);
+        controller = createValidationScene(container, loadedArtifact, loaded.qa, state => { physics = state; });
         catalogue = loaded.catalogue;
         qaEnabled = !!loaded.qa;
         reportUrl = loaded.reportUrl;
@@ -104,6 +108,21 @@
         </select>
       </label>
     {:else}<strong>{label}</strong>{/if}
+    <div class="physics-controls" data-physics-state={physics.status} aria-label="Physical world inspection">
+      {#if physics.status === 'error'}
+        <span role="alert">Physics unavailable: {physics.message} Geometry inspection is still available.</span>
+      {:else if physics.status === 'loading'}
+        <span role="status">Preparing physical world…</span>
+      {:else}
+        <strong>Physics {physics.status}</strong>
+        <span>{physics.metrics?.colliders} colliders · Flat ground at 0 m</span>
+        <label><input type="checkbox" bind:checked={collisionVisible} /> Collision surfaces</label>
+        <button type="button" on:click={() => controller?.setPhysicsPaused(physics.status === 'running')}>
+          {physics.status === 'running' ? 'Pause physics' : 'Resume physics'}
+        </button>
+        <span>Amber: simulation limit · No vehicle yet</span>
+      {/if}
+    </div>
     {#if qaEnabled}
       <label><input type="checkbox" bind:checked={sourceVisible} /> Source outlines</label>
       <label><input type="checkbox" bind:checked={generatedVisible} /> Generated geometry</label>
