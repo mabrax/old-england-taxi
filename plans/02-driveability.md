@@ -1,20 +1,5 @@
 # 03 — Driveability
 
-## Goal
+The active stage plan and sequential phase briefs now live in [driveability/README.md](./driveability/README.md). This file preserves existing links; implementation has not begun.
 
-Make the generated zone physically driveable.
-
-## Scope
-
-- Add Rapier ground, terrain-ready, building, and barrier colliders.
-- Add one vehicle using the ray-cast vehicle controller.
-- Support keyboard and touch input, chase camera, braking, reverse, and reset.
-- Allow free movement off the intended road without restarting the session.
-
-## Exit condition
-
-The vehicle can traverse every connected street in the qualified prepared zones, responds consistently, stays on the ground, and cannot pass through buildings.
-
-## Deferred
-
-Routes, scoring, traffic, pedestrians, and realistic vehicle damage.
+The plan proposes one vehicle in one bounded flat cell, retaining Rapier's ray-cast vehicle direction. It replaces the former all-connected-streets promise with explicit physical driving qualification. Ground/building collision, controls, chase camera, and recovery are in scope; terrain, real-world barriers, routing/legal-driving qualification, and adjacent-cell continuity have separate owners in the [roadmap](./README.md).
