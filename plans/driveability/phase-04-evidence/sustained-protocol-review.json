@@ -1,0 +1,708 @@
+{
+  "checkedAt": "2026-09-07T22:25:41.524911+00:00",
+  "reviewedCommit": "b4ee19597de18706bac654b23e3d38b5bfc102e8",
+  "scope": "Qualification evidence/runner correction only; no runtime, targets or application benchmark rerun.",
+  "supersedes": "Legacy sustained acceptance booleans and all-four-sustained-pass wording, including checks-and-media.json. Numeric values, cold/functional/physical/lifecycle results and original files are unchanged.",
+  "method": "Inspect every pre-reset action endpoint for mode != driving, physics != running, or hidden != false. Retain non-driving pose samples separately: original records have no reset-phase intervals, so these cannot all be classified as unexpected pauses.",
+  "legacyManifestSha256": "b4fb71f377a139bfaf4524a8ffb63413e43b10d1a0b95f27c127eb6e5979907b",
+  "runs": [
+    {
+      "source": "chromium-headed.json",
+      "sha256": "ad25bb6b7163a5b2bac9edd357f9efdb4fa90e03371455338f98a9240cf6b273",
+      "browser": "Chrome/153.0.8010.12",
+      "cells": [
+        {
+          "id": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43",
+          "requestedSeconds": 60,
+          "elapsedMs": 61044.84763699999,
+          "numericBudgets": {
+            "step": true,
+            "frame": true,
+            "raf": true,
+            "dropped": true
+          },
+          "numericBudgetsMet": true,
+          "actionCount": 14,
+          "unexpectedPreResetEndpoints": [],
+          "unclassifiedNonDrivingPoses": [
+            {
+              "path": "sustained[0].poses[13]",
+              "at": 15613,
+              "mode": "paused",
+              "steps": "892",
+              "speed": "0",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            }
+          ],
+          "lastPose": {
+            "at": 63535.5,
+            "mode": "driving",
+            "steps": "3723",
+            "speed": "-0.0005207749016467479",
+            "recoveries": "0"
+          },
+          "foregroundProtocol": "not established by legacy interval logging; no invalid pre-reset endpoint observed",
+          "overallSustainedAcceptance": "indeterminate"
+        },
+        {
+          "id": "cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410",
+          "requestedSeconds": 60,
+          "elapsedMs": 61028.517647999994,
+          "numericBudgets": {
+            "step": true,
+            "frame": true,
+            "raf": true,
+            "dropped": true
+          },
+          "numericBudgetsMet": true,
+          "actionCount": 14,
+          "unexpectedPreResetEndpoints": [],
+          "unclassifiedNonDrivingPoses": [],
+          "lastPose": {
+            "at": 63198.9,
+            "mode": "driving",
+            "steps": "3710",
+            "speed": "-0.0010732689693844252",
+            "recoveries": "0"
+          },
+          "foregroundProtocol": "not established by legacy interval logging; no invalid pre-reset endpoint observed",
+          "overallSustainedAcceptance": "indeterminate"
+        },
+        {
+          "id": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+          "requestedSeconds": 120,
+          "elapsedMs": 122122.90009399998,
+          "numericBudgets": {
+            "step": true,
+            "frame": true,
+            "raf": true,
+            "dropped": true
+          },
+          "numericBudgetsMet": true,
+          "actionCount": 28,
+          "unexpectedPreResetEndpoints": [],
+          "unclassifiedNonDrivingPoses": [
+            {
+              "path": "sustained[2].poses[35]",
+              "at": 37495.1,
+              "mode": "paused",
+              "steps": "2182",
+              "speed": "0",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            }
+          ],
+          "lastPose": {
+            "at": 124452.4,
+            "mode": "driving",
+            "steps": "7318",
+            "speed": "-0.0012280100980172958",
+            "recoveries": "0"
+          },
+          "foregroundProtocol": "not established by legacy interval logging; no invalid pre-reset endpoint observed",
+          "overallSustainedAcceptance": "indeterminate"
+        },
+        {
+          "id": "trafalgar-square-london",
+          "requestedSeconds": 120,
+          "elapsedMs": 122039.66130799998,
+          "numericBudgets": {
+            "step": true,
+            "frame": true,
+            "raf": true,
+            "dropped": true
+          },
+          "numericBudgetsMet": true,
+          "actionCount": 28,
+          "unexpectedPreResetEndpoints": [
+            {
+              "path": "sustained[3].actions[27]",
+              "cycle": 28,
+              "atMs": 121945.770028,
+              "timebase": "Node elapsed ms from sustained start; exact pause onset not recorded",
+              "state": {
+                "drivingMode": "paused",
+                "physicsStatus": "paused",
+                "physicsSteps": "7295",
+                "vehicleResets": "27",
+                "vehicleRecoveries": "0",
+                "vehicleSpeed": "-1.5466121565493562",
+                "hidden": false,
+                "focus": "CANVAS"
+              }
+            }
+          ],
+          "unclassifiedNonDrivingPoses": [
+            {
+              "path": "sustained[3].poses[13]",
+              "at": 15673.2,
+              "mode": "paused",
+              "steps": "893",
+              "speed": "-0.0003950514527800467",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            },
+            {
+              "path": "sustained[3].poses[122]",
+              "at": 124590.7,
+              "mode": "paused",
+              "steps": "7295",
+              "speed": "-1.5466121565493562",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            }
+          ],
+          "lastPose": {
+            "at": 124590.7,
+            "mode": "paused",
+            "steps": "7295",
+            "speed": "-1.5466121565493562",
+            "recoveries": "0"
+          },
+          "foregroundProtocol": "indeterminate: unexpected pre-reset pause; cause/onset/duration unresolved",
+          "overallSustainedAcceptance": "indeterminate"
+        }
+      ]
+    },
+    {
+      "source": "firefox.json",
+      "sha256": "fb62265dbb1a88fc0fb7fb698d361fb5d198ef34c4a8f2f56d81bc24d4c9739d",
+      "browser": "firefox/155.0",
+      "cells": [
+        {
+          "id": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43",
+          "requestedSeconds": 60,
+          "elapsedMs": 60665.14680999999,
+          "numericBudgets": {
+            "step": true,
+            "frame": true,
+            "raf": true,
+            "dropped": true
+          },
+          "numericBudgetsMet": true,
+          "actionCount": 14,
+          "unexpectedPreResetEndpoints": [],
+          "unclassifiedNonDrivingPoses": [
+            {
+              "path": "sustained[0].poses[26]",
+              "at": 28683.02,
+              "mode": "paused",
+              "steps": "1658",
+              "speed": "0",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            },
+            {
+              "path": "sustained[0].poses[39]",
+              "at": 41682.58,
+              "mode": "paused",
+              "steps": "2427",
+              "speed": "-0.00044214972990153057",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            },
+            {
+              "path": "sustained[0].poses[52]",
+              "at": 54682.62,
+              "mode": "paused",
+              "steps": "3197",
+              "speed": "-0.000442149260013788",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            }
+          ],
+          "lastPose": {
+            "at": 62682.7,
+            "mode": "driving",
+            "steps": "3671",
+            "speed": "-2.5954990869110266",
+            "recoveries": "0"
+          },
+          "foregroundProtocol": "not established by legacy interval logging; no invalid pre-reset endpoint observed",
+          "overallSustainedAcceptance": "indeterminate"
+        },
+        {
+          "id": "cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410",
+          "requestedSeconds": 60,
+          "elapsedMs": 60665.21095099999,
+          "numericBudgets": {
+            "step": true,
+            "frame": true,
+            "raf": true,
+            "dropped": true
+          },
+          "numericBudgetsMet": true,
+          "actionCount": 14,
+          "unexpectedPreResetEndpoints": [],
+          "unclassifiedNonDrivingPoses": [],
+          "lastPose": {
+            "at": 62560.5,
+            "mode": "driving",
+            "steps": "3676",
+            "speed": "-2.4635441929198283",
+            "recoveries": "0"
+          },
+          "foregroundProtocol": "not established by legacy interval logging; no invalid pre-reset endpoint observed",
+          "overallSustainedAcceptance": "indeterminate"
+        },
+        {
+          "id": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+          "requestedSeconds": 120,
+          "elapsedMs": 121348.98269499998,
+          "numericBudgets": {
+            "step": true,
+            "frame": true,
+            "raf": true,
+            "dropped": true
+          },
+          "numericBudgetsMet": true,
+          "actionCount": 28,
+          "unexpectedPreResetEndpoints": [],
+          "unclassifiedNonDrivingPoses": [],
+          "lastPose": {
+            "at": 123868.4,
+            "mode": "driving",
+            "steps": "7280",
+            "speed": "-0.0015288805576892392",
+            "recoveries": "0"
+          },
+          "foregroundProtocol": "not established by legacy interval logging; no invalid pre-reset endpoint observed",
+          "overallSustainedAcceptance": "indeterminate"
+        },
+        {
+          "id": "trafalgar-square-london",
+          "requestedSeconds": 120,
+          "elapsedMs": 121332.47186000005,
+          "numericBudgets": {
+            "step": true,
+            "frame": true,
+            "raf": true,
+            "dropped": true
+          },
+          "numericBudgetsMet": true,
+          "actionCount": 28,
+          "unexpectedPreResetEndpoints": [],
+          "unclassifiedNonDrivingPoses": [
+            {
+              "path": "sustained[3].poses[52]",
+              "at": 54842.24,
+              "mode": "paused",
+              "steps": "3198",
+              "speed": "0",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            },
+            {
+              "path": "sustained[3].poses[65]",
+              "at": 67842.02,
+              "mode": "paused",
+              "steps": "3968",
+              "speed": "-0.0004525750178544369",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            },
+            {
+              "path": "sustained[3].poses[78]",
+              "at": 80841.78,
+              "mode": "paused",
+              "steps": "4739",
+              "speed": "-0.0004421554395089767",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            }
+          ],
+          "lastPose": {
+            "at": 123808.32,
+            "mode": "driving",
+            "steps": "7283",
+            "speed": "-0.2576936750694337",
+            "recoveries": "0"
+          },
+          "foregroundProtocol": "not established by legacy interval logging; no invalid pre-reset endpoint observed",
+          "overallSustainedAcceptance": "indeterminate"
+        }
+      ]
+    },
+    {
+      "source": "chromium-software-initial.json",
+      "sha256": "4eb6929d3e2500ebddc40297dbbfacdbe01ef75f0d1aeab6d894c5dbd7e42dd0",
+      "browser": "Chrome/153.0.8010.12",
+      "cells": [
+        {
+          "id": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43",
+          "requestedSeconds": 60,
+          "elapsedMs": 60351.495553000015,
+          "numericBudgets": {
+            "step": true,
+            "frame": true,
+            "raf": false,
+            "dropped": true
+          },
+          "numericBudgetsMet": false,
+          "actionCount": 9,
+          "unexpectedPreResetEndpoints": [],
+          "unclassifiedNonDrivingPoses": [
+            {
+              "path": "sustained[0].poses[3]",
+              "at": 10258.3,
+              "mode": "paused",
+              "steps": "468",
+              "speed": "0",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            },
+            {
+              "path": "sustained[0].poses[16]",
+              "at": 37507.2,
+              "mode": "paused",
+              "steps": "1821",
+              "speed": "0",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            },
+            {
+              "path": "sustained[0].poses[19]",
+              "at": 43723.7,
+              "mode": "paused",
+              "steps": "2156",
+              "speed": "0",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            },
+            {
+              "path": "sustained[0].poses[29]",
+              "at": 64139.5,
+              "mode": "paused",
+              "steps": "3167",
+              "speed": "0",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            }
+          ],
+          "lastPose": {
+            "at": 64139.5,
+            "mode": "paused",
+            "steps": "3167",
+            "speed": "0",
+            "recoveries": "0"
+          },
+          "foregroundProtocol": "not established by legacy interval logging; no invalid pre-reset endpoint observed",
+          "overallSustainedAcceptance": "numeric budget failed; interval validity also not established"
+        },
+        {
+          "id": "cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410",
+          "requestedSeconds": 60,
+          "elapsedMs": 61997.140449,
+          "numericBudgets": {
+            "step": true,
+            "frame": true,
+            "raf": false,
+            "dropped": true
+          },
+          "numericBudgetsMet": false,
+          "actionCount": 10,
+          "unexpectedPreResetEndpoints": [],
+          "unclassifiedNonDrivingPoses": [
+            {
+              "path": "sustained[1].poses[11]",
+              "at": 21181.7,
+              "mode": "paused",
+              "steps": "1079",
+              "speed": "0",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            },
+            {
+              "path": "sustained[1].poses[15]",
+              "at": 27848.1,
+              "mode": "paused",
+              "steps": "1400",
+              "speed": "0",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            },
+            {
+              "path": "sustained[1].poses[30]",
+              "at": 52247.2,
+              "mode": "paused",
+              "steps": "2698",
+              "speed": "0",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            },
+            {
+              "path": "sustained[1].poses[34]",
+              "at": 59030.2,
+              "mode": "paused",
+              "steps": "3018",
+              "speed": "0",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            }
+          ],
+          "lastPose": {
+            "at": 65529.9,
+            "mode": "driving",
+            "steps": "3337",
+            "speed": "0",
+            "recoveries": "0"
+          },
+          "foregroundProtocol": "not established by legacy interval logging; no invalid pre-reset endpoint observed",
+          "overallSustainedAcceptance": "numeric budget failed; interval validity also not established"
+        },
+        {
+          "id": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+          "requestedSeconds": 120,
+          "elapsedMs": 124237.96568300002,
+          "numericBudgets": {
+            "step": true,
+            "frame": true,
+            "raf": false,
+            "dropped": true
+          },
+          "numericBudgetsMet": false,
+          "actionCount": 19,
+          "unexpectedPreResetEndpoints": [],
+          "unclassifiedNonDrivingPoses": [
+            {
+              "path": "sustained[2].poses[3]",
+              "at": 10012.6,
+              "mode": "paused",
+              "steps": "459",
+              "speed": "0",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            },
+            {
+              "path": "sustained[2].poses[10]",
+              "at": 23461.9,
+              "mode": "paused",
+              "steps": "1129",
+              "speed": "0",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            },
+            {
+              "path": "sustained[2].poses[13]",
+              "at": 29645.1,
+              "mode": "paused",
+              "steps": "1469",
+              "speed": "0",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            },
+            {
+              "path": "sustained[2].poses[20]",
+              "at": 43011.2,
+              "mode": "paused",
+              "steps": "2136",
+              "speed": "0",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            },
+            {
+              "path": "sustained[2].poses[30]",
+              "at": 62610.5,
+              "mode": "paused",
+              "steps": "3138",
+              "speed": "0",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            },
+            {
+              "path": "sustained[2].poses[40]",
+              "at": 82109.6,
+              "mode": "paused",
+              "steps": "4142",
+              "speed": "0",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            },
+            {
+              "path": "sustained[2].poses[50]",
+              "at": 101592.2,
+              "mode": "paused",
+              "steps": "5139",
+              "speed": "0",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            },
+            {
+              "path": "sustained[2].poses[57]",
+              "at": 114941.6,
+              "mode": "paused",
+              "steps": "5801",
+              "speed": "0",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            },
+            {
+              "path": "sustained[2].poses[60]",
+              "at": 120824.7,
+              "mode": "paused",
+              "steps": "6136",
+              "speed": "0",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            }
+          ],
+          "lastPose": {
+            "at": 126674.6,
+            "mode": "driving",
+            "steps": "6436",
+            "speed": "2.7288818365451853e-7",
+            "recoveries": "0"
+          },
+          "foregroundProtocol": "not established by legacy interval logging; no invalid pre-reset endpoint observed",
+          "overallSustainedAcceptance": "numeric budget failed; interval validity also not established"
+        },
+        {
+          "id": "trafalgar-square-london",
+          "requestedSeconds": 120,
+          "elapsedMs": 124104.34304299997,
+          "numericBudgets": {
+            "step": true,
+            "frame": true,
+            "raf": false,
+            "dropped": true
+          },
+          "numericBudgetsMet": false,
+          "actionCount": 19,
+          "unexpectedPreResetEndpoints": [],
+          "unclassifiedNonDrivingPoses": [
+            {
+              "path": "sustained[3].poses[3]",
+              "at": 10092.2,
+              "mode": "paused",
+              "steps": "461",
+              "speed": "0",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            },
+            {
+              "path": "sustained[3].poses[10]",
+              "at": 23525,
+              "mode": "paused",
+              "steps": "1127",
+              "speed": "0",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            },
+            {
+              "path": "sustained[3].poses[17]",
+              "at": 36857.8,
+              "mode": "paused",
+              "steps": "1794",
+              "speed": "0",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            },
+            {
+              "path": "sustained[3].poses[20]",
+              "at": 43057.5,
+              "mode": "paused",
+              "steps": "2130",
+              "speed": "0",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            },
+            {
+              "path": "sustained[3].poses[30]",
+              "at": 62240.1,
+              "mode": "paused",
+              "steps": "3126",
+              "speed": "0",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            },
+            {
+              "path": "sustained[3].poses[37]",
+              "at": 75506.3,
+              "mode": "paused",
+              "steps": "3790",
+              "speed": "0",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            },
+            {
+              "path": "sustained[3].poses[44]",
+              "at": 88755.7,
+              "mode": "paused",
+              "steps": "4457",
+              "speed": "0",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            },
+            {
+              "path": "sustained[3].poses[47]",
+              "at": 94705.5,
+              "mode": "paused",
+              "steps": "4794",
+              "speed": "0",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            },
+            {
+              "path": "sustained[3].poses[54]",
+              "at": 108704.9,
+              "mode": "paused",
+              "steps": "5467",
+              "speed": "0",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            },
+            {
+              "path": "sustained[3].poses[57]",
+              "at": 114704.7,
+              "mode": "paused",
+              "steps": "5800",
+              "speed": "0",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            },
+            {
+              "path": "sustained[3].poses[64]",
+              "at": 128220.8,
+              "mode": "paused",
+              "steps": "6467",
+              "speed": "0",
+              "recoveries": "0",
+              "timebase": "page performance.now, not directly aligned with Node action timestamps"
+            }
+          ],
+          "lastPose": {
+            "at": 128220.8,
+            "mode": "paused",
+            "steps": "6467",
+            "speed": "0",
+            "recoveries": "0"
+          },
+          "foregroundProtocol": "not established by legacy interval logging; no invalid pre-reset endpoint observed",
+          "overallSustainedAcceptance": "numeric budget failed; interval validity also not established"
+        }
+      ]
+    }
+  ],
+  "conclusion": "Displayed Chromium Trafalgar cycle 28 is paused before its scripted reset at 121945.770028 ms, steps 7295 and speed -1.5466121565493562. Its last pose is paused at the same step/speed. The observation occurs after 120 s, but the onset is not established, so the required interval cannot be recovered by truncation or excluding the sample. Numeric percentiles meet targets; foreground sustained acceptance is incomplete/indeterminate. Other legacy rows have no invalid pre-reset endpoint, but no complete phase/visibility interval proof. No application defect or cause is established.",
+  "validation": {
+    "originalEvidenceFilesUnchanged": 24,
+    "runtimeProductsDependenciesCompilerUnchanged": true,
+    "syntaxChecks": "pass",
+    "guardUnitCommand": "node --test tools/physics/qualification-protocol.test.mjs",
+    "guardUnitTests": 8,
+    "guardUnitResult": "pass",
+    "guardBrowserCommand": "node tools/physics/verify-qualification-protocol.mjs <output-json>",
+    "guardBrowserFixtures": 4,
+    "guardBrowserResult": "pass",
+    "guardBrowserEvidence": "protocol-guard-browser.json",
+    "runtimeSuite": "Not repeated: no runtime changes; parent independently reported all 248 tests, offline corpus, static and build pass.",
+    "applicationPerformanceRerun": false,
+    "newFileHashes": {
+      "tools/physics/qualify-browser.mjs": "0f3a49073aefde67719fa3c5ac3a7d5f130eca37593bda8de5bfd8af83a65c3d",
+      "tools/physics/qualification-protocol.mjs": "83ee4aa527670751833da067127b67ddddc8a07e19a5d7b7774fc87f7a09ce1c",
+      "tools/physics/qualification-protocol.test.mjs": "018dcf93f8616b5f4fdf18ba11100138771ef3e9f80bdaf5448c2ea6e02b7267",
+      "tools/physics/verify-qualification-protocol.mjs": "04084ac0750056c3aa7c2842a31f03f6bf6d1db4df7d2d97974e519ea005ad01"
+    }
+  }
+}

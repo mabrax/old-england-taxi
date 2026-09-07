@@ -5,13 +5,20 @@ import {readFileSync,writeFileSync,mkdirSync,readdirSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {cpus,release} from 'node:os';
 import {createHash} from 'node:crypto';
+import {installQualificationProtocol} from './qualification-protocol.mjs';
 const {default:puppeteer}=await import(process.env.PUPPETEER_MODULE ?? 'puppeteer');
 const engine=process.argv[2]??'chromium',base=process.argv[3]??'http://127.0.0.1:4191';
 const output=resolve(process.argv[4]??`.zone-cache/phase-04/${engine}`);mkdirSync(output,{recursive:true});
 const catalogue=JSON.parse(readFileSync('public/zones/index.json')).zones;
+const sustainedZone=process.env.SUSTAINED_ZONE;
+const sustainedIndices=[1,0,3,4].filter(index=>!sustainedZone||catalogue[index].id===sustainedZone);
+if(!sustainedIndices.length)throw Error('SUSTAINED_ZONE must name one of the four planned sustained cells');
+if(sustainedZone&&(process.env.FUNCTIONAL_ONLY||process.env.LIFECYCLE_ONLY))throw Error('SUSTAINED_ZONE cannot be combined with FUNCTIONAL_ONLY or LIFECYCLE_ONLY');
 const report={checkedAt:new Date().toISOString(),engine,base,os:`Fedora Linux 44 / ${release()}`,cpu:cpus()[0].model,viewport:{width:1440,height:900,deviceScaleFactor:1},headless:process.env.HEADED!=='1',budgetsCommit:'d6dd37f',artifacts:catalogue.map(z=>({id:z.id,sha256:createHash('sha256').update(readFileSync(`public/zones/${z.id}.zone.json`)).digest('hex')})),cold:[],functional:[],sustained:[],lifecycle:[],failures:[]};
 report.build=Object.fromEntries(readdirSync('dist/assets').map(name=>[name,createHash('sha256').update(readFileSync('dist/assets/'+name)).digest('hex')]));
 report.runnerSha256=createHash('sha256').update(readFileSync(new URL(import.meta.url))).digest('hex');
+report.protocolObserverSha256=createHash('sha256').update(readFileSync(new URL('./qualification-protocol.mjs',import.meta.url))).digest('hex');
+report.sustainedSelection=sustainedZone??null;
 const save=()=>writeFileSync(`${output}/results.json`,JSON.stringify(report,null,2)+'\n');
 const browser=await puppeteer.launch({browser:engine==='firefox'?'firefox':'chrome',executablePath:process.env.BROWSER_PATH,headless:report.headless,args:engine==='firefox'?[]:['--no-sandbox','--enable-precise-memory-info'],defaultViewport:report.viewport});
 report.browser=await browser.version();
@@ -28,7 +35,7 @@ async function contextPage(){const context=await browser.createBrowserContext(),
   const q=window.__qualification;
   for(const name of ['blur','focus','focusin','visibilitychange','pagehide','pageshow'])window.addEventListener(name,e=>{if(q.focusEvents.length<100)q.focusEvents.push({name,at:performance.now(),hidden:document.hidden,hasFocus:document.hasFocus(),target:e.target?.tagName??null});},true);
   new PerformanceObserver(list=>{if(q.active)for(const e of list.getEntries()){const k=e.name==='driveability:step'?'step':e.name==='driveability:frame'?'frame':null;if(k&&q[k].length<50000)q[k].push(e.duration);}}).observe({entryTypes:['measure']});
-  let last;const tick=now=>{if(q.active){if(last!==undefined&&q.raf.length<50000)q.raf.push(now-last);if(q.raf.length%60===0){const d=document.querySelector('canvas')?.dataset;if(d)q.poses.push({at:now,steps:d.physicsSteps,speed:d.vehicleSpeed,pose:JSON.parse(d.vehiclePose??'null'),recoveries:d.vehicleRecoveries,mode:d.drivingMode});}}last=q.active?now:undefined;requestAnimationFrame(tick);};requestAnimationFrame(tick);
+  let last;const tick=now=>{if(q.active){if(last!==undefined&&q.raf.length<50000)q.raf.push(now-last);if(q.raf.length%60===0){const d=document.querySelector('canvas')?.dataset;if(d)q.poses.push({at:now,steps:d.physicsSteps,speed:d.vehicleSpeed,pose:JSON.parse(d.vehiclePose??'null'),recoveries:d.vehicleRecoveries,mode:d.drivingMode,hidden:document.hidden,hasFocus:document.hasFocus(),phase:window.__qualificationProtocol.phase});}}last=q.active?now:undefined;requestAnimationFrame(tick);};requestAnimationFrame(tick);
   window.addEventListener('error',e=>q.errors.push(e.message));
   const nativeFetch=window.fetch;window.fetch=(input,...rest)=>String(input instanceof Request?input.url:input).includes('/api/zone-generation')?Promise.reject(new TypeError('Qualification: generation service intentionally unavailable')):nativeFetch(input,...rest);
  });return {context,page};}
@@ -38,7 +45,7 @@ async function frames(page,n){await page.evaluate(n=>new Promise((resolve,reject
 function check(ok,message){if(!ok){report.failures.push(message);save();throw Error(message);}}
 function stats(xs){xs.sort((a,b)=>a-b);return {count:xs.length,p50:xs[Math.ceil(xs.length*.5)-1]??null,p95:xs[Math.ceil(xs.length*.95)-1]??null,p99:xs[Math.ceil(xs.length*.99)-1]??null,max:xs.at(-1)??null};}
 try{
- if(!process.env.PERF_ONLY&&!process.env.LIFECYCLE_ONLY)for(const zone of catalogue){
+ if(!process.env.PERF_ONLY&&!process.env.LIFECYCLE_ONLY&&!sustainedZone)for(const zone of catalogue){
   for(let attempt=1;attempt<=3;attempt++){
    const {context,page}=await contextPage();try{const cold=await load(page,zone);report.cold.push({id:zone.id,attempt,...cold,pass:cold.elapsedMs<=5000&&+cold.state.physicsSetupMs<=1000&&+cold.state.physicsInitializationMs<=3000});report.renderer??=await renderer(page);save();}finally{await context.close();}
   }
@@ -53,24 +60,68 @@ try{
    check(!(await page.evaluate(()=>window.__qualification.errors.length)),'unexpected browser errors');report.functional.push({id:zone.id,initial,moving,stopped,reverse,reset,paused,result:'pass'});save();console.log(engine,zone.label,'cold and keyboard functional pass');
   }finally{await context.close();}
  }
- if(!process.env.FUNCTIONAL_ONLY&&!process.env.LIFECYCLE_ONLY)for(const index of [1,0,3,4]){
-  const zone=catalogue[index],seconds=index<2?60:120;const {context,page}=await contextPage();try{
+ if(!process.env.FUNCTIONAL_ONLY&&!process.env.LIFECYCLE_ONLY)for(const index of sustainedIndices){
+  const zone=catalogue[index],seconds=index<2?60:120;
+  const {context,page}=await contextPage();
+  const actions=[];
+  let start,attemptError,result;
+  try{
    await load(page,zone);report.renderer??=await renderer(page);await click(page,'Drive');await frames(page,120);
-   await page.evaluate(()=>window.__qualification.active=true);const start=performance.now(),actions=[];
-   // Small bounded maneuvers repeated from the generic validated start; durations are wall time.
-   let cycle=0;while(performance.now()-start<seconds*1000){cycle++;
+   await page.evaluate(installQualificationProtocol);
+   await page.evaluate(()=>{window.__qualification.active=true;window.__qualificationProtocol.start();});
+   start=performance.now();
+   // Keep the original wall-duration protocol and explicit resets. All driving
+   // intervals must remain foreground/running; reset windows are marked exactly.
+   let cycle=0;
+   while(performance.now()-start<seconds*1000){
+    cycle++;
+    let commandIndex=0;
     for(const [keys,ms] of [[['w'],1200],[['w','a'],350],[[' '],700],[['s'],1300],[[' '],700]]){
-     for(const k of keys)await page.keyboard.down(k);await sleep(ms);for(const k of keys)await page.keyboard.up(k);
+     const label=`cycle ${cycle} command ${++commandIndex}`;
+     const before=await page.evaluate(label=>window.__qualificationProtocol.checkpoint(label+' before'),label);
+     try{for(const k of keys)await page.keyboard.down(k);await sleep(ms);}
+     finally{for(const k of keys)await page.keyboard.up(k);}
+     await page.evaluate(({label,steps})=>{
+      const after=window.__qualificationProtocol.checkpoint(label+' after');
+      if(after.steps<=steps)window.__qualificationProtocol.noProgress(label);
+     },{label,steps:before.steps});
     }
-    actions.push({cycle,atMs:performance.now()-start,state:await state(page)});await click(page,'Reset vehicle');await click(page,'Resume driving');
+    await page.evaluate(cycle=>window.__qualificationProtocol.checkpoint(`cycle ${cycle} endpoint`),cycle);
+    actions.push({cycle,atMs:performance.now()-start,state:await state(page)});
+    await page.evaluate(cycle=>window.__qualificationProtocol.beginReset(cycle),cycle);
+    await click(page,'Reset vehicle');await click(page,'Resume driving');
+    await page.evaluate(cycle=>window.__qualificationProtocol.endReset(cycle),cycle);
     if(cycle%5===0)console.log(engine,zone.label,Math.round((performance.now()-start)/1000),'s');
    }
-   await page.evaluate(()=>window.__qualification.active=false);const elapsedMs=performance.now()-start,final=await state(page),raw=await page.evaluate(()=>window.__qualification);const resources=JSON.parse(final.qualificationResources);const result={id:zone.id,seconds,elapsedMs,step:stats(raw.step),frame:stats(raw.frame),raf:stats(raw.raf),resources,actions,poses:raw.poses,errors:raw.errors};
-   result.acceptance={step:result.step.count>0&&result.step.p95<=2&&result.step.p99<=4,frame:result.frame.count>0&&result.frame.p95<=16.7,raf:result.raf.count>0&&result.raf.p95<=33.4&&result.raf.p99<=50,dropped:resources.droppedMs/elapsedMs<=.01,noRecovery:+final.vehicleRecoveries===0,resources:final.canvases===1&&resources.bodies===1&&resources.controllers===1&&resources.colliders===7};
-   report.sustained.push(result);save();await page.screenshot({path:`${output}/${zone.id}-sustained.png`});console.log(engine,zone.label,JSON.stringify(result.acceptance));
-  }finally{await context.close();}
+  }catch(error){attemptError=String(error);}
+  finally{
+   // Save the partial interval/command evidence before closing the context, even
+   // when a checkpoint rejects an interruption. Percentiles alone never pass it.
+   try{
+    const protocol=await page.evaluate(completed=>{
+     window.__qualification.active=false;
+     return window.__qualificationProtocol?.finish(completed)??{accepted:false,complete:false,notStarted:true};
+    },!attemptError);
+    const elapsedMs=start===undefined?0:performance.now()-start;
+    const final=await state(page),raw=await page.evaluate(()=>window.__qualification);
+    const resources=JSON.parse(final.qualificationResources??'{}');
+    result={id:zone.id,seconds,elapsedMs,step:stats(raw.step),frame:stats(raw.frame),raf:stats(raw.raf),resources,actions,poses:raw.poses,errors:raw.errors,focusEvents:raw.focusEvents,final,protocol,error:attemptError};
+    result.numericBudgets={step:result.step.count>0&&result.step.p95<=2&&result.step.p99<=4,frame:result.frame.count>0&&result.frame.p95<=16.7,raf:result.raf.count>0&&result.raf.p95<=33.4&&result.raf.p99<=50,dropped:Number.isFinite(resources.droppedMs)&&elapsedMs>0&&resources.droppedMs/elapsedMs<=.01};
+    result.correctness={noRecovery:+final.vehicleRecoveries===0,resources:final.canvases===1&&resources.bodies===1&&resources.controllers===1&&resources.colliders===7,noPageErrors:raw.errors.length===0};
+    result.acceptance={numericBudgets:Object.values(result.numericBudgets).every(Boolean),foregroundProtocol:protocol.accepted&&elapsedMs>=seconds*1000,correctness:Object.values(result.correctness).every(Boolean)};
+    result.acceptance.overall=!attemptError&&Object.values(result.acceptance).every(Boolean);
+    report.sustained.push(result);save();
+    await page.screenshot({path:`${output}/${zone.id}-sustained.png`});
+    console.log(engine,zone.label,JSON.stringify(result.acceptance));
+   }catch(error){
+    attemptError??=String(error);
+    if(!result){report.sustained.push({id:zone.id,seconds,actions,error:attemptError,acceptance:{overall:false},evidenceError:String(error)});save();}
+    else{result.evidenceError=String(error);result.acceptance.overall=false;save();}
+   }finally{await context.close();}
+  }
+  check(!attemptError&&result?.acceptance.overall,`${zone.label}: sustained qualification incomplete or failed; ${attemptError??'see numeric/protocol/correctness results'}`);
  }
- if(!process.env.FUNCTIONAL_ONLY){const {context,page}=await contextPage();try{
+ if(!process.env.FUNCTIONAL_ONLY&&!sustainedZone){const {context,page}=await contextPage();try{
   const cdp=engine==='firefox'?null:await page.createCDPSession();
   for(let cycle=1;cycle<=20;cycle++){
    const zone=catalogue[cycle%2===1?3:4];const loaded=await load(page,zone);report.renderer??=await renderer(page);
