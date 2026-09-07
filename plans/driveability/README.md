@@ -1,5 +1,7 @@
 # 03 — Driveability
 
+See the [rollout roadmap](../README.md) for stage order and dependencies.
+
 ## Goal
 
 Drive one vehicle inside one bounded, flat generated cell, with reliable ground and building collision, understandable controls, and recovery from mistakes.

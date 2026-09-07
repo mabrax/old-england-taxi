@@ -12,7 +12,7 @@ Each stage brief defines one bounded stage. Stages that benefit from incremental
 
 Stages are tackled in order. A stage starts only after the previous exit condition is met, and its phases are tackled in order unless the stage brief explicitly says otherwise.
 
-Existing later-stage filenames remain stable for links; their headings and ordering reflect the promoted stage. The earlier [Driveability brief](./02-driveability.md) remains a compatibility link to its stage directory.
+Zone Compiler and Driveability keep their complete stage briefs in their subfolders. Remaining later-stage filenames stay stable for links; their headings and ordering reflect the promoted stage.
 
 Stages 01–02 and the user-requested [on-demand location generation extension](./on-demand-generation.md) are complete. The extension adds delivered browser place-name/coordinate input, bounded localhost generation through a separate worker, and persistent verified cache/catalogue reuse. Earlier completion records retain their original scope and verification evidence; their geocoding/on-demand exclusions describe those stages, not missing current capabilities.
 
