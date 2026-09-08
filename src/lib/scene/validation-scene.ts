@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { createBenchmarkReplay, type BenchmarkFixture, type BenchmarkReplay } from '../benchmark/replay';
+import { createBenchmarkReplay, matchesBenchmarkViewport, type BenchmarkFixture, type BenchmarkReplay } from '../benchmark/replay';
 import { createDrivingInput, type DrivingAction } from './driving-input';
 import { createChaseCamera } from './chase-camera';
 import { onPageExit } from './page-lifetime';
@@ -388,7 +388,7 @@ export function createValidationScene(
 
   const resize = () => {
     if (disposed) return;
-    if (benchmark?.active && benchmarkFixture && (window.innerWidth !== benchmarkFixture.viewport.width || window.innerHeight !== benchmarkFixture.viewport.height || window.devicePixelRatio !== benchmarkFixture.viewport.deviceScaleFactor)) {
+    if (benchmark?.active && benchmarkFixture && !matchesBenchmarkViewport(benchmarkFixture.viewport, window.innerWidth, window.innerHeight, window.devicePixelRatio)) {
       pauseDriving('Benchmark viewport changed');
     }
     const size = getViewportSize(container);
@@ -460,7 +460,7 @@ export function createValidationScene(
       start() {
         const v = benchmarkFixture.viewport;
         if (disposed || blocked || document.hidden || !document.hasFocus() || benchmark.snapshot().phase !== 'ready' || physics.vehicle?.state.status !== 'ready' || physics.timing.steps !== 0 ||
-            window.innerWidth !== v.width || window.innerHeight !== v.height || window.devicePixelRatio !== v.deviceScaleFactor || qa || collisionVisible || !roads.visible || !buildings.visible) throw new Error('Benchmark needs a fresh ready foreground scene at 1440×900 / DPR 1 with QA off');
+            !matchesBenchmarkViewport(v, window.innerWidth, window.innerHeight, window.devicePixelRatio) || qa || collisionVisible || !roads.visible || !buildings.visible) throw new Error('Benchmark needs a fresh ready foreground scene at 1440×900 / DPR 1 with QA off');
         drive(); benchmark.start();
         message = 'Benchmark running. Keep this window in the foreground; inspect the trace after completion.'; notify();
       }

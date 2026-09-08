@@ -11,6 +11,11 @@ export interface BenchmarkFixture {
   tolerances: { positionMetres: number; rotationRadians: number; speedMetresPerSecond: number };
 }
 export type BenchmarkPhase = 'ready' | 'warmup' | 'measuring' | 'complete' | 'invalid';
+export function matchesBenchmarkViewport(expected: BenchmarkFixture['viewport'], width: number, height: number, dpr: number) {
+  // Displayed Chrome on a scaled desktop can report DPR 1.0000000298 for 1.
+  // Allow representation noise only; CSS dimensions and meaningful scale changes remain strict.
+  return width === expected.width && height === expected.height && Math.abs(dpr - expected.deviceScaleFactor) <= 1e-6;
+}
 export function validateFixture(f: BenchmarkFixture) {
   if (f.version !== 1 || f.stepMs !== 1000 / 60 || f.maxCatchUpSteps !== 5 ||
       f.warmupSteps !== 300 || f.measuredSteps !== 7200 || f.commands.length !== f.measuredSteps ||

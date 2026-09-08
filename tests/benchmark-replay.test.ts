@@ -1,7 +1,7 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { createBenchmarkReplay, validateFixture, type BenchmarkFixture } from '../src/lib/benchmark/replay';
+import { createBenchmarkReplay, matchesBenchmarkViewport, validateFixture, type BenchmarkFixture } from '../src/lib/benchmark/replay';
 import { createPhysicsSession } from '../src/lib/physics/physics-session';
 import * as physics from '../src/lib/physics/vehicle';
 import type { ZoneArtifact } from '../src/lib/zone/types';
@@ -19,6 +19,12 @@ async function session(f = fixture) {
   return { replay, s, tick: (at: number) => { now = at; s.advance(at); replay.afterFrame(); } };
 }
 describe('frozen performance workload', () => {
+  it('accepts only display-scale representation noise, not different viewports', () => {
+    expect(matchesBenchmarkViewport(fixture.viewport, 1440, 900, 1.0000000298023224)).toBe(true);
+    for (const args of [[1441, 900, 1], [1440, 901, 1], [1440, 900, 1.001], [1440, 900, NaN]]) {
+      expect(matchesBenchmarkViewport(fixture.viewport, args[0], args[1], args[2])).toBe(false);
+    }
+  });
   it('pins the checked-in tape and original map bytes', () => {
     expect(createHash('sha256').update(bytes).digest('hex')).toBe(BENCHMARK.sha256);
     expect(createHash('sha256').update(artifactBytes).digest('hex')).toBe(fixture.artifact.sha256);

@@ -59,7 +59,7 @@ try {
   await page.waitForFunction(() => window.__drivingBenchmark && document.querySelector('canvas')?.dataset.vehicleStatus === 'ready', { polling: 100, timeout: 15000 });
   report.renderer = await page.evaluate(() => {
     const gl = document.querySelector('canvas').getContext('webgl2'), ext = gl.getExtension('WEBGL_debug_renderer_info');
-    return { userAgent: navigator.userAgent, renderer: gl.getParameter(ext?.UNMASKED_RENDERER_WEBGL ?? gl.RENDERER), vendor: gl.getParameter(ext?.UNMASKED_VENDOR_WEBGL ?? gl.VENDOR), hidden: document.hidden, hasFocus: document.hasFocus() };
+    return { userAgent: navigator.userAgent, renderer: gl.getParameter(ext?.UNMASKED_RENDERER_WEBGL ?? gl.RENDERER), vendor: gl.getParameter(ext?.UNMASKED_VENDOR_WEBGL ?? gl.VENDOR), hidden: document.hidden, hasFocus: document.hasFocus(), actualViewport: { width: innerWidth, height: innerHeight, deviceScaleFactor: devicePixelRatio } };
   });
   cdp = await page.createCDPSession();
   for (const [name, hash] of Object.entries(report.build)) {
