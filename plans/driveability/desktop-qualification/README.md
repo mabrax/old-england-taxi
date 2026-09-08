@@ -27,3 +27,9 @@ Run `npm ci`, `npm run verify`, and `npm run preview -- --host 127.0.0.1 --port 
 Set `PUPPETEER_MODULE`, `BROWSER_PATH`, `HEADED=1` and `QUALIFICATION_WORKLOAD`. Run `node tools/physics/qualify-browser.mjs chromium http://127.0.0.1:4196 <new-output-directory>`. `FUNCTIONAL_ONLY=1`, `SUSTAINED_ZONE=<original-cell-id>` and `LIFECYCLE_ONLY=1` provide independently recorded subsets; run them sequentially. Substitute `firefox` and its executable for the second engine. Do not reuse output directories or modify original Phase 04/benchmark records.
 
 Results and acceptance will be appended after measurement. Further hardware/browser or memory-method decisions remain explicit; no Stage 04 implementation, merge, push or deployment follows from this work.
+
+## Bounded display diagnostic amendment
+
+The first new default-platform Chrome lifecycle attempt stopped independent RAF delivery after 39 callbacks while the 100 ms timer continued. Its 12-second external deadline retained physics at 25 steps, visible/focused/running state and no errors. It remains incomplete. Do not infer a Wayland cause solely from the host's session type.
+
+Before further Chrome acceptance attempts, compare fresh default, explicit X11 and explicit Wayland launches with `diagnose-chrome-raf.mjs`. Each configuration gets a minimal document without app/WebGL plus a 15-second Lucca drive, with one-second timer/RAF/state observations. This diagnostic is not a sustained performance acceptance run. Chromium documents the explicit selector in its [Ozone overview](https://chromium.googlesource.com/chromium/src/+/main/docs/ozone_overview.md). If a separately named platform completes, the existing qualification runner can test it using `CHROME_OZONE_PLATFORM=x11` or `wayland`; every original budget remains unchanged. No system/browser preference is modified, and a passing alternative cannot retroactively pass the default launch or establish its root cause.

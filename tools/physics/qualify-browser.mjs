@@ -10,6 +10,8 @@ import {createHash} from 'node:crypto';
 import {installQualificationProtocol} from './qualification-protocol.mjs';
 const {default:puppeteer}=await import(process.env.PUPPETEER_MODULE ?? 'puppeteer');
 const engine=process.argv[2]??'chromium',base=process.argv[3]??'http://127.0.0.1:4191';
+const ozonePlatform=process.env.CHROME_OZONE_PLATFORM;
+if(ozonePlatform&&(!['x11','wayland'].includes(ozonePlatform)||engine==='firefox'))throw Error('CHROME_OZONE_PLATFORM must be x11 or wayland for Chromium');
 const output=resolve(process.argv[4]??`.zone-cache/phase-04/${engine}`);mkdirSync(output,{recursive:false});
 const catalogue=JSON.parse(readFileSync('public/zones/index.json')).zones;
 const sustainedZone=process.env.SUSTAINED_ZONE;
@@ -25,6 +27,7 @@ report.commit=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
 report.diffSha256=createHash('sha256').update(execFileSync('git',['diff','HEAD'])).digest('hex');
 report.supportSha256=createHash('sha256').update(readFileSync(new URL('./qualification-support.mjs',import.meta.url))).digest('hex');
 report.workload=process.env.QUALIFICATION_WORKLOAD??'Unspecified; no idle-host claim';
+report.ozonePlatform=ozonePlatform??'browser default';
 report.loadBefore=loadavg();
 const save=()=>writeFileSync(`${output}/results.json`,JSON.stringify(report,null,2)+'\n');
 save();
@@ -57,7 +60,7 @@ async function closeContext(context,page){
 function check(ok,message){if(!ok){report.failures.push(message);save();throw Error(message);}}
 function stats(xs){xs.sort((a,b)=>a-b);return {count:xs.length,p50:xs[Math.ceil(xs.length*.5)-1]??null,p95:xs[Math.ceil(xs.length*.95)-1]??null,p99:xs[Math.ceil(xs.length*.99)-1]??null,max:xs.at(-1)??null};}
 try{
- browser=await puppeteer.launch({browser:engine==='firefox'?'firefox':'chrome',executablePath:process.env.BROWSER_PATH,headless:report.headless,args:engine==='firefox'?[]:['--enable-precise-memory-info',...(report.headless?[]:['--window-size=1460,1020'])],defaultViewport:report.viewport,protocolTimeout:20000});
+ browser=await puppeteer.launch({browser:engine==='firefox'?'firefox':'chrome',executablePath:process.env.BROWSER_PATH,headless:report.headless,args:engine==='firefox'?[]:['--enable-precise-memory-info',...(report.headless?[]:['--window-size=1460,1020']),...(ozonePlatform?[`--ozone-platform=${ozonePlatform}`]:[])],defaultViewport:report.viewport,protocolTimeout:20000});
 report.browser=await browser.version();
 report.launchArgs=browser.process().spawnargs;
 for(const [name,hash] of Object.entries(report.build)){const response=await fetch(new URL('/assets/'+name,base),{signal:AbortSignal.timeout(10000)});if(!response.ok||createHash('sha256').update(Buffer.from(await response.arrayBuffer())).digest('hex')!==hash)throw Error('Served build mismatch: '+name);}
