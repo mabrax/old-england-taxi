@@ -5,7 +5,7 @@ import {readFileSync,writeFileSync,mkdirSync,readdirSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {cpus,release,loadavg,platform} from 'node:os';
 import {execFileSync} from 'node:child_process';
-import {bounded,memoryAcceptance,processMemory} from './qualification-support.mjs';
+import {bounded,memoryAcceptance,stableProcessMemory} from './qualification-support.mjs';
 import {createHash} from 'node:crypto';
 import {installQualificationProtocol} from './qualification-protocol.mjs';
 const {default:puppeteer}=await import(process.env.PUPPETEER_MODULE ?? 'puppeteer');
@@ -161,7 +161,7 @@ report.servedBuildVerified=true;
    const previous=report.lifecycle.find(c=>c.id===zone.id)?.resources;
    check(s.canvases===1&&resources.bodies===1&&resources.controllers===1&&resources.colliders===7&&+s.vehicleRecoveries===0&&+s.physicsSteps>=135,'Lifecycle resources/recovery/progress failed');
    if(previous)check(['geometries','textures','programs'].every(k=>resources[k]===previous[k]),'Renderer counts changed for same cell');
-   const processMemorySample=processMemory(browser.process().pid);
+   const processMemorySample=stableProcessMemory(browser.process().pid);
    report.lifecycle.push({cycle,id:zone.id,loadedMs:loaded.elapsedMs,state:s,heap,dom,drives,resources,processMemory:processMemorySample,focusEvents:await page.evaluate(()=>window.__qualification.focusEvents)});save();console.log(engine,'lifecycle',cycle,heap?.used??'memory API unavailable');
   }
   await page.goBack({waitUntil:'load'});

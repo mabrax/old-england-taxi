@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { bounded, memoryAcceptance } from './qualification-support.mjs';
+import { bounded, memoryAcceptance, stableProcessMemory } from './qualification-support.mjs';
 
 test('external deadline rejects when the page never resolves', async () => {
   await assert.rejects(bounded(new Promise(() => {}), 10, 'renderer stalled'), /renderer stalled/);
@@ -23,4 +23,21 @@ test('cycle 5 to 20 growth retains the original exact limit', () => {
   assert.equal(memoryAcceptance(samples).growthPass, true);
   samples[19].heap.used++;
   assert.equal(memoryAcceptance(samples).growthPass, false);
+});
+test('process exit during enumeration retains the failed sample and takes the first complete retry', () => {
+  const samples = [{ pssBytes: null, errors: [{ error: 'ENOENT: child exited' }] }, { pssBytes: 900 }, { pssBytes: 100 }];
+  let calls = 0;
+  const result = stableProcessMemory(42, () => samples[calls++]);
+  assert.equal(calls, 2); assert.equal(result.pssBytes, 900);
+  assert.deepEqual(result.attempts, samples.slice(0, 2));
+});
+test('unreadable process memory stays unmeasured after three attempts', () => {
+  let calls = 0;
+  const result = stableProcessMemory(42, () => { calls++; return { pssBytes: null, errors: [{ error: 'unreadable' }] }; });
+  assert.equal(calls, 3); assert.equal(result.pssBytes, null); assert.equal(result.attempts.length, 3);
+});
+test('unsupported OS does not retry or fabricate process memory', () => {
+  let calls = 0;
+  const result = stableProcessMemory(42, () => { calls++; return { pssBytes: null, reason: 'unsupported OS' }; });
+  assert.equal(calls, 1); assert.equal(result.pssBytes, null);
 });

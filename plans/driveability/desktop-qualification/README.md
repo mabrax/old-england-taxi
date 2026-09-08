@@ -28,6 +28,8 @@ Set `PUPPETEER_MODULE`, `BROWSER_PATH`, `HEADED=1` and `QUALIFICATION_WORKLOAD`.
 
 Results and acceptance will be appended after measurement. Further hardware/browser or memory-method decisions remain explicit; no Stage 04 implementation, merge, push or deployment follows from this work.
 
+The coordinated Chrome lifecycle completed, but its cycle-20 PSS snapshot retained an `ENOENT` after a child exited during enumeration. That original record remains incomplete for PSS. Before a separate memory repeat, the sampler now permits up to three whole-tree attempts for incomplete reads, retains every attempt, and takes the first complete sample. It never retries a high value to obtain a lower one. Unsupported platforms stay unmeasured immediately. Budgets and active driving are unchanged.
+
 ## Bounded display diagnostic amendment
 
 The first new default-platform Chrome lifecycle attempt stopped independent RAF delivery after 39 callbacks while the 100 ms timer continued. Its 12-second external deadline retained physics at 25 steps, visible/focused/running state and no errors. It remains incomplete. Do not infer a Wayland cause solely from the host's session type.

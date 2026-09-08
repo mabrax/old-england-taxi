@@ -54,3 +54,14 @@ export function processMemory(rootPid) {
     pssBytes: errors.length ? null : processes.reduce((a, p) => a + p.Pss, 0), gpu,
     scope: 'Fresh browser process tree; PSS includes resident JS/WASM/native/shared mappings. NVIDIA driver process allocations reported separately. Non-atomic samples; no combined total or acceptance threshold.' };
 }
+
+// Retry only an incomplete process snapshot, never a large measured value.
+// Keep every failed read; choose the first complete observation, not the lowest.
+export function stableProcessMemory(rootPid, collect = processMemory) {
+  const attempts = [];
+  for (let index = 0; index < 3; index++) {
+    const sample = collect(rootPid); attempts.push(sample);
+    if (Number.isFinite(sample.pssBytes) || sample.reason) return { ...sample, attempts };
+  }
+  return { ...attempts.at(-1), attempts };
+}
