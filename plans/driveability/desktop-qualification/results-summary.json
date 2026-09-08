@@ -148,6 +148,29 @@
       "memoryAcceptance": null
     },
     {
+      "run": "chrome-coordinated-memory-02",
+      "path": "plans/driveability/desktop-qualification/evidence/chrome-coordinated-memory-02.json",
+      "originalPath": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/chrome-coordinated-memory-02/results.json",
+      "bytes": 629186,
+      "sha256": "3ee10ab2381f0e03735f676504ed2b5de5dfad6189aadd94de0f46ebc6bc6860",
+      "commit": "01fe3a840c0e5cfe9792835c264674e132987f65",
+      "browser": "Chrome/152.0.7977.82",
+      "headless": false,
+      "error": null,
+      "coldVisits": 0,
+      "coldPass": null,
+      "functionalCases": 0,
+      "sustained": [],
+      "lifecycleCycles": 20,
+      "memoryAcceptance": {
+        "postGcHeap": true,
+        "growth": 10136705,
+        "allowedGrowth": 20971520,
+        "growthPass": true,
+        "scope": "JS heap only; excludes native/WASM/GPU allocations"
+      }
+    },
+    {
       "run": "chrome-coordinated-trafalgar-01",
       "path": "plans/driveability/desktop-qualification/evidence/chrome-coordinated-trafalgar-01.json",
       "originalPath": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/chrome-coordinated-trafalgar-01/results.json",

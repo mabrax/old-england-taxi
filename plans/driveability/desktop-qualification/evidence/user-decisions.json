@@ -1,0 +1,29 @@
+{
+  "date": "2026-09-08",
+  "desktopTargets": [
+    "Linux Chrome",
+    "Linux Firefox",
+    "macOS Edge"
+  ],
+  "currentTaskTargets": [
+    "Linux Chrome",
+    "Linux Firefox"
+  ],
+  "removedTarget": "desktop Safari",
+  "deferredTargets": [
+    "macOS Edge",
+    "iPad Safari"
+  ],
+  "userCoordinatedRuns": [
+    "chrome-coordinated-chicago-01",
+    "chrome-coordinated-lucca-01",
+    "chrome-coordinated-trafalgar-01",
+    "chrome-coordinated-lifecycle-01",
+    "chrome-coordinated-memory-02"
+  ],
+  "memoryMethod": {
+    "decision": "User explicitly accepted documented method",
+    "scope": "Unchanged post-GC JS limits where API is reliable; stable ownership counts; resident browser-process PSS including native/WASM; separate GPU allocations over 20 cycles.",
+    "notImplied": "No invented combined total, no new numeric native-memory budget, and no automatic approval of observed growth."
+  }
+}
