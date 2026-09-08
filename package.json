@@ -19,7 +19,7 @@
     "zone:artifact:inspect": "tsx tools/zone-compiler/src/run.ts inspect",
     "zone:verify": "tsx tools/zone-compiler/src/run.ts verify",
     "verify": "npm run zone:verify && npm test && npm run check && npm run build",
-    "test": "vitest run tests && node --test tools/physics/qualification-protocol.test.mjs",
+    "test": "vitest run tests && node --test tools/physics/qualification-*.test.mjs",
     "test:watch": "vitest tests",
     "zone:request": "tsx tools/zone-compiler/src/run.ts request",
     "zone:acquire": "tsx tools/zone-compiler/src/run.ts acquire",
