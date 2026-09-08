@@ -26,7 +26,7 @@
   <main>
     <section class="overview" aria-label="Project at a glance">
       <div><div class="hero-label"><span class="live-dot" aria-hidden="true"></span><span id="current-stage-label"></span></div><h1 id="headline"></h1><p id="summary"></p></div>
-      <button class="next-card" id="next-stage"><span class="eyebrow">Next conversation</span><span class="arrow" aria-hidden="true">↗</span><div class="next-title" id="next-title"></div><div class="next-tags" id="next-topics"></div><div class="next-note" id="next-note"></div></button>
+      <button class="next-card" id="next-stage"><span class="eyebrow" id="next-label">Next conversation</span><span class="arrow" aria-hidden="true">↗</span><div class="next-title" id="next-title"></div><div class="next-tags" id="next-topics"></div><div class="next-note" id="next-note"></div></button>
     </section>
     <div class="workspace">
       <nav aria-label="Project rollout"><div class="rail-title eyebrow">The rollout</div><div class="stage-list" id="stage-list"></div><div class="rail-foot">One stage at a time.<br>Plans evolve with the evidence.</div></nav>
@@ -60,7 +60,7 @@
   $('integration-heading').textContent=data.integration.title;$('integration-note').textContent=data.integration.note;
   $('more-decisions-disclosure').hidden=data.decisions.length<=3;
   $('more-decisions-label').textContent=`${Math.max(0,data.decisions.length-3)} more decisions & agreements`;
-  $('next-title').textContent=data.next.title;$('next-topics').textContent=data.next.topics.join(' · ');$('next-note').textContent=data.next.note;
+  $('next-label').textContent=data.next.label??'Next conversation';$('next-title').textContent=data.next.title;$('next-topics').textContent=data.next.topics.join(' · ');$('next-note').textContent=data.next.note;
   $('footer-note').textContent=`Synced ${date} · Maintained after champion syncs. A project snapshot, not live monitoring.`;
   let selected=data.currentStage;
   function selectStage(id,moveFocus=false){
@@ -77,7 +77,7 @@
     if(moveFocus){title.focus({preventScroll:true});$('stage-panel').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'nearest'});}
   }
   data.stages.forEach(stage=>{const button=el('button',`stage-button ${stage.state}`);button.dataset.stage=stage.id;button.type='button';button.setAttribute('aria-pressed',String(stage.id===selected));button.setAttribute('aria-controls','stage-panel');const label=el('span');label.append(el('span','stage-name',stage.title),el('span','stage-status',stage.status));button.append(el('span','stage-number',stage.id),label);button.addEventListener('click',()=>selectStage(stage.id));$('stage-list').append(button);});
-  $('next-stage').addEventListener('click',()=>selectStage(data.nextStage,true));
+  $('next-stage').addEventListener('click',()=>selectStage(data.next.targetStage??data.nextStage,true));
   data.gates.forEach(gate=>{const detail=el('details');detail.append(el('summary','',gate.title),el('p','',gate.detail));$('gates').append(detail);});
   data.decisions.forEach((decision,index)=>{const detail=el('details','decision'),summary=el('summary'),head=el('div','decision-title');head.append(el('span','',decision.title),el('span','decision-kind',decision.kind));summary.append(head,el('div','decision-summary',decision.summary));const body=el('div','decision-detail',decision.detail);if(decision.href){const p=el('p'),a=el('a','','Open follow-up issue ↗');a.href=decision.href;a.target='_blank';a.rel='noopener noreferrer';p.style.marginTop='8px';p.append(a);body.append(p);}detail.append(summary,body);$(index<3?'decisions':'more-decisions').append(detail);});
   data.milestones.forEach(m=>{const button=el('button',`milestone ${m.state}`);button.type='button';button.append(el('span','milestone-title',m.title),el('span','milestone-text',m.text),badge(m.status,m.state));button.addEventListener('click',()=>selectStage(m.stage,true));$('milestones').append(button);});

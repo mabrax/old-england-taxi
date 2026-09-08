@@ -5,6 +5,7 @@ const data = JSON.parse(readFileSync(source, 'utf8'));
 const ids = data.stages.map(stage => stage.id);
 assert.equal(new Set(ids).size, ids.length, 'Stage IDs must be unique');
 assert(ids.includes(data.currentStage) && ids.includes(data.nextStage), 'Current and next stages must exist');
+if (data.next.targetStage) assert(ids.includes(data.next.targetStage), 'The active-task card must target an existing stage');
 assert(/^\d{4}-\d{2}-\d{2}$/.test(data.synced), 'Use an explicit snapshot date');
 for (const stage of data.stages) {
   assert(['complete', 'reviewed', 'open', 'next', 'planned'].includes(stage.state));

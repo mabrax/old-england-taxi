@@ -2,7 +2,7 @@
   "project": "Old England Taxi",
   "description": "A driving and route-learning simulator built from real places.",
   "synced": "2026-09-08",
-  "syncNote": "After the desktop benchmark handoff",
+  "syncNote": "Desktop qualification task launched",
   "currentStage": "03",
   "nextStage": "04",
   "headline": "Driving is built.\nQualification is open.",
@@ -12,7 +12,7 @@
   "reviewed": {"branch": "codex/desktop-driving-benchmark", "commit": "179814c", "reviewCommit": "84cedae", "label": "Driveability + desktop benchmark"},
   "gatesHeading": "Acceptance still open",
   "integration": {"title": "Integration is a separate step", "note": "Reviewed driving work remains on its branch. Canonical main holds the generation foundation."},
-  "next": {"title": "Plan selection & continuity", "topics": ["Map selection", "Cache policy", "Adjacent cells"], "note": "Planning can proceed. Implementation follows Driveability acceptance."},
+  "next": {"label": "Active task", "targetStage": "03", "title": "Finish desktop qualification", "topics": ["Sustained runs", "Chromium lifecycle", "Coverage & memory"], "note": "Phase 04 is assigned to Astra · XHigh. Stage 04 planning can proceed; implementation follows acceptance."},
   "stages": [
     {"id":"00","title":"Project setup","short":"Foundation","state":"complete","status":"Complete","summary":"An application shell with a working 3D viewport and clear module boundaries.","outcome":"A stable starting point for the simulator.","source":"plans/00-project-setup.md","phases":[{"title":"Application shell","state":"complete","status":"Delivered"},{"title":"3D viewport","state":"complete","status":"Delivered"}],"dimensions":["Delivered","Reviewed","Complete","In main"]},
     {"id":"01","title":"Zone compiler","short":"OSM → 3D","state":"complete","status":"Complete","summary":"One immutable OpenStreetMap snapshot becomes deterministic roads, buildings and a street graph.","outcome":"Validated geometry, provenance and reproducible artifacts.","source":"plans/zone-compiler/README.md","phases":[{"title":"Fixed OSM source","state":"complete","status":"Complete"},{"title":"Local coordinates","state":"complete","status":"Complete"},{"title":"Road surfaces","state":"complete","status":"Complete"},{"title":"Building volumes","state":"complete","status":"Complete"},{"title":"Zone artifact","state":"complete","status":"Complete"}],"dimensions":["Delivered","Reviewed","Complete","In main"]},
