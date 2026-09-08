@@ -17,9 +17,24 @@ describe('saved Chrome trace validation', () => {
     input.traceEvents.push(event('driveability:step', 'e', 135), event('driveability:step', 'b', 120));
     expect(summarizeTrace(input, 3).valid).toBe(true);
   });
-  it('matches the final span despite rounded timestamps across the completion marker', () => {
-    const input = trace(); input.traceEvents[5].ts = 141;
+  it.each([
+    { name: 'step', index: 2, offset: 0 }, { name: 'step', index: 2, offset: 1 },
+    { name: 'frame', index: 5, offset: 0 }, { name: 'frame', index: 5, offset: 1 }
+  ])('accepts $name end $offset microseconds after completion', ({ index, offset }) => {
+    const input = trace(); input.traceEvents[index].ts = 140 + offset;
     expect(summarizeTrace(input, 2).valid).toBe(true);
+  });
+  it.each([
+    { name: 'step', index: 2, offset: 2 }, { name: 'step', index: 2, offset: 1000000 },
+    { name: 'frame', index: 5, offset: 2 }, { name: 'frame', index: 5, offset: 1000000 }
+  ])('rejects $name end $offset microseconds after completion', ({ index, offset }) => {
+    const input = trace(); input.traceEvents[index].ts = 140 + offset;
+    expect(summarizeTrace(input, 2)).toMatchObject({ valid: false, measuresComplete: false });
+  });
+  it('excludes frames that begin after measurement has completed', () => {
+    const input = trace();
+    input.traceEvents.push(event('driveability:frame', 'b', 142), event('driveability:frame', 'e', 1000140));
+    expect(summarizeTrace(input, 2)).toMatchObject({ valid: true, measuredFrameSpans: 1 });
   });
   it('rejects a missing end even when the number of starts matches', () => {
     const input = trace(); input.traceEvents.splice(2, 1);

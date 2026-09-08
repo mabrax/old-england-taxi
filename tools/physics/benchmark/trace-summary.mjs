@@ -1,4 +1,7 @@
 /** Read a completed Chrome trace. No browser or live-capture interaction. */
+// One microsecond covers the observed final-frame timestamp conversion error.
+// This is an evidence-parsing allowance, not extra workload or frame budget.
+const MEASURE_END_ROUNDING_TOLERANCE_US = 1;
 export function summarizeTrace(trace, expectedSteps = 7200) {
   const events = trace.traceEvents ?? [];
   const start = events.find(e => e.name === 'benchmark:measure-start');
@@ -23,10 +26,11 @@ export function summarizeTrace(trace, expectedSteps = 7200) {
       } else if (event.ph === 'e') {
         // Chrome can reuse async IDs after a measure closes. Match in time
         // order, including a warm-up frame crossing measure-start. Match ends
-        // from the whole saved trace: rounded measure timestamps can put the
-        // final end just after the higher-resolution completion mark.
+        // from the whole saved trace, but bound the observed rounding error
+        // at the completion mark so a materially late end cannot validate it.
         const began = open.get(key)?.pop();
         if (measured && began === undefined) complete = false;
+        if (began >= start.ts && began <= end.ts && event.ts > end.ts + MEASURE_END_ROUNDING_TOLERANCE_US) complete = false;
       }
     }
     for (const stack of open.values()) if (stack.some(ts => ts >= start.ts && ts <= end.ts)) complete = false;
@@ -37,6 +41,7 @@ export function summarizeTrace(trace, expectedSteps = 7200) {
   const longMainTasks = within.filter(e => e.tid === start?.tid && e.ph === 'X' && /RunTask|ProcessTaskFromWorkQueue/.test(e.name ?? '') && e.dur >= 50000)
     .map(e => ({ atMs: (e.ts - start.ts) / 1000, durationMs: e.dur / 1000, name: e.name })).sort((a, b) => b.durationMs - a.durationMs);
   return { events: events.length, measuredStartUs: start?.ts ?? null, measuredEndUs: end?.ts ?? null,
+    measureEndRoundingToleranceUs: MEASURE_END_ROUNDING_TOLERANCE_US,
     measuredStepSpans: steps.count, measuredFrameSpans: frames.count, measuresComplete: steps.complete && frames.complete, screenshotEvents: screenshots,
     longestMainTasks: longMainTasks.slice(0, 20), longMainTaskCount: longMainTasks.length,
     valid: !!start && !!end && steps.complete && frames.complete && steps.count === expectedSteps && frames.count > 0 && screenshots === 0 };

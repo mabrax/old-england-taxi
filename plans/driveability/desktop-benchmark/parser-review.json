@@ -1,0 +1,188 @@
+{
+  "scope": "Offline review correction only; no browser run or original evidence mutation.",
+  "priorEvidenceCommit": "41d223054efbc6cd9d462cc758c0a74dc20016ea",
+  "analyzerSha256": "c76196051f02768b392467cc3f46b6d08827577923fe01f5bdb39302a3feb948",
+  "tolerance": {
+    "microseconds": 1,
+    "rationale": "Bounds the observed +1 microsecond final-frame discrepancy; larger overruns are invalid."
+  },
+  "regressionChecks": {
+    "tests": 14,
+    "before": "4 overrun cases failed; 9 passed before adding the post-measurement-frame test",
+    "after": "14 passed",
+    "acceptedOffsetsUs": [
+      0,
+      1
+    ],
+    "rejectedOffsetsUs": [
+      2,
+      1000000
+    ],
+    "measureKinds": [
+      "step",
+      "frame"
+    ]
+  },
+  "runs": [
+    {
+      "name": "trace-03",
+      "originalFilesSha256": {
+        "trace.json": "798c9cb73b6c857bd2a97ec8cc7e38a94f3c1d60d394de3845b8304430f9d3ae",
+        "results.json": "07b34ebadcf2e91225037a18cf2affeed542662bdcf2e1d81562b29e887e87b6",
+        "reanalysis.json": "cffde62d735fe8c76a9ae2f324015160ba1cf700f4de1b524396b599649fd8df",
+        "samples.json": "7ceac8a7a3784bb85caa118c156b83befcda6cc258c1033def75b42015200f13"
+      },
+      "originalEvidenceMatchedCommittedSummary": true,
+      "originalFilesUnchanged": true,
+      "originalAnalyzerSha256": "e16f5f68479a9af0152f57a9433e7e7a0d9a4a5d2934d7d7d3cefacd224a94ea",
+      "summary": {
+        "events": 942964,
+        "measuredStartUs": 137775885354,
+        "measuredEndUs": 137895877922,
+        "measureEndRoundingToleranceUs": 1,
+        "measuredStepSpans": 7200,
+        "measuredFrameSpans": 4102,
+        "measuresComplete": true,
+        "screenshotEvents": 0,
+        "longestMainTasks": [
+          {
+            "atMs": 117919.325,
+            "durationMs": 98.11,
+            "name": "RunTask"
+          },
+          {
+            "atMs": 117919.326,
+            "durationMs": 98.08,
+            "name": "ThreadControllerImpl::RunTask"
+          },
+          {
+            "atMs": 117217.533,
+            "durationMs": 77.668,
+            "name": "RunTask"
+          },
+          {
+            "atMs": 117295.976,
+            "durationMs": 77.639,
+            "name": "RunTask"
+          },
+          {
+            "atMs": 117217.536,
+            "durationMs": 77.633,
+            "name": "ThreadControllerImpl::RunTask"
+          },
+          {
+            "atMs": 117295.978,
+            "durationMs": 77.599,
+            "name": "ThreadControllerImpl::RunTask"
+          },
+          {
+            "atMs": 118854.587,
+            "durationMs": 77.469,
+            "name": "RunTask"
+          },
+          {
+            "atMs": 118854.589,
+            "durationMs": 77.44,
+            "name": "ThreadControllerImpl::RunTask"
+          },
+          {
+            "atMs": 118975.028,
+            "durationMs": 73.761,
+            "name": "RunTask"
+          },
+          {
+            "atMs": 118975.029,
+            "durationMs": 73.726,
+            "name": "ThreadControllerImpl::RunTask"
+          },
+          {
+            "atMs": 117373.909,
+            "durationMs": 73.691,
+            "name": "RunTask"
+          },
+          {
+            "atMs": 117373.91,
+            "durationMs": 73.661,
+            "name": "ThreadControllerImpl::RunTask"
+          },
+          {
+            "atMs": 118426.088,
+            "durationMs": 68.189,
+            "name": "RunTask"
+          },
+          {
+            "atMs": 118426.091,
+            "durationMs": 68.155,
+            "name": "ThreadControllerImpl::RunTask"
+          },
+          {
+            "atMs": 116930.845,
+            "durationMs": 64.068,
+            "name": "RunTask"
+          },
+          {
+            "atMs": 117804.464,
+            "durationMs": 64.058,
+            "name": "RunTask"
+          },
+          {
+            "atMs": 116930.846,
+            "durationMs": 64.031,
+            "name": "ThreadControllerImpl::RunTask"
+          },
+          {
+            "atMs": 117804.465,
+            "durationMs": 64.028,
+            "name": "ThreadControllerImpl::RunTask"
+          },
+          {
+            "atMs": 116866.791,
+            "durationMs": 63.482,
+            "name": "RunTask"
+          },
+          {
+            "atMs": 116866.792,
+            "durationMs": 63.442,
+            "name": "ThreadControllerImpl::RunTask"
+          }
+        ],
+        "longMainTaskCount": 52,
+        "valid": true
+      },
+      "measuredSpanEndsAfterCompletion": [],
+      "originalNumericBudgetsMet": false
+    },
+    {
+      "name": "headed-trace-02",
+      "originalFilesSha256": {
+        "trace.json": "08d415d54d72603fad5490910a9eccb768eb60d54b6ee03891d69bd26dbb4098",
+        "results.json": "f0a267567765cfbee533de46e1dee6ef76caad37c9a5ab31e75023385cb3cd85",
+        "reanalysis.json": "5d4b450d9a0a5db5f7a7843514545773cedebd93a61c9dde231fc673bc8116e5",
+        "samples.json": "fa2df46b4346d06a2e0c3d281e74c271d1243a123e964a54b53ccc6505183f60"
+      },
+      "originalEvidenceMatchedCommittedSummary": true,
+      "originalFilesUnchanged": true,
+      "originalAnalyzerSha256": "e16f5f68479a9af0152f57a9433e7e7a0d9a4a5d2934d7d7d3cefacd224a94ea",
+      "summary": {
+        "events": 1479473,
+        "measuredStartUs": 138533195141,
+        "measuredEndUs": 138653168151,
+        "measureEndRoundingToleranceUs": 1,
+        "measuredStepSpans": 7200,
+        "measuredFrameSpans": 7196,
+        "measuresComplete": true,
+        "screenshotEvents": 0,
+        "longestMainTasks": [],
+        "longMainTaskCount": 0,
+        "valid": true
+      },
+      "measuredSpanEndsAfterCompletion": [
+        {
+          "name": "driveability:frame",
+          "offsetUs": 1
+        }
+      ],
+      "originalNumericBudgetsMet": true
+    }
+  ]
+}
