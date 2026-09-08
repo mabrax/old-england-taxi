@@ -12,6 +12,11 @@ describe('saved Chrome trace validation', () => {
   it('counts zero-duration measures alongside completed spans', () => {
     expect(summarizeTrace(trace(), 2)).toMatchObject({ valid: true, measuredStepSpans: 2, measuredFrameSpans: 1, screenshotEvents: 0 });
   });
+  it('pairs reused async identifiers in timestamp order', () => {
+    const input = trace();
+    input.traceEvents.push(event('driveability:step', 'e', 135), event('driveability:step', 'b', 120));
+    expect(summarizeTrace(input, 3).valid).toBe(true);
+  });
   it('rejects a missing end even when the number of starts matches', () => {
     const input = trace(); input.traceEvents.splice(2, 1);
     expect(summarizeTrace(input, 2).valid).toBe(false);

@@ -7,16 +7,27 @@ export function summarizeTrace(trace, expectedSteps = 7200) {
   // Chrome encodes zero-duration User Timing measures as nestable async
   // instants (n). Count those too, but reject unclosed or unmatched spans.
   const measures = name => {
-    const selected = within.filter(e => e.name === name);
-    const begins = selected.filter(e => e.ph === 'b'), ends = selected.filter(e => e.ph === 'e');
-    const key = e => JSON.stringify([e.pid, e.tid, e.id2, e.id]);
-    const closed = new Map(ends.map(e => [key(e), e.ts]));
-    const opened = new Map(events.filter(e => e.name === name && e.ph === 'b').map(e => [key(e), e.ts]));
-    return { count: begins.length + selected.filter(e => e.ph === 'n').length,
-      // The frame containing measure-start began during warm-up; its end is
-      // allowed here without counting that partial frame as a measured frame.
-      complete: begins.every(e => closed.has(key(e)) && closed.get(key(e)) >= e.ts) &&
-        ends.every(e => opened.has(key(e)) && opened.get(key(e)) <= e.ts) };
+    const selected = events.filter(e => e.name === name && e.pid === start?.pid && e.ts <= end?.ts)
+      .sort((a, b) => a.ts - b.ts || (a.ph === 'e' ? -1 : b.ph === 'e' ? 1 : 0));
+    const open = new Map();
+    let count = 0, complete = true;
+    for (const event of selected) {
+      const key = JSON.stringify([event.pid, event.tid, event.id2, event.id]);
+      const measured = event.ts >= start.ts;
+      if (event.ph === 'n' && measured) count++;
+      if (event.ph === 'b') {
+        const stack = open.get(key) ?? [];
+        stack.push(event.ts); open.set(key, stack);
+        if (measured) count++;
+      } else if (event.ph === 'e') {
+        // Chrome can reuse async IDs after a measure closes. Match in time
+        // order, including a warm-up frame whose end crosses measure-start.
+        const began = open.get(key)?.pop();
+        if (measured && began === undefined) complete = false;
+      }
+    }
+    for (const stack of open.values()) if (stack.some(ts => ts >= start.ts)) complete = false;
+    return { count, complete };
   };
   const steps = measures('driveability:step'), frames = measures('driveability:frame');
   const screenshots = events.filter(e => /screenshot/i.test(e.name ?? '')).length;
