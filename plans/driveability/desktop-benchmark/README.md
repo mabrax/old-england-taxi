@@ -1,5 +1,7 @@
 # Desktop driving benchmark
 
+See [verification and saved results](verification.md) for the coordinated displayed Chrome run and post-capture trace inspection.
+
 ## Goal and authorization
 
 The user approved implementation on 2026-09-08 after discussing a repeatable taxi drive on one downloaded map, scripted controls through real physics, and Chrome trace inspection after capture. This work extends reviewed Driveability `e9743e0`; it does not replace its historical qualification results.
@@ -56,6 +58,8 @@ A manual benchmark page uses the Chicago zone ID with `benchmark=chicago-loop-v1
 `results.json` records identities, served-build verification, Chrome/OS/CPU/renderer, viewport, declared workload/load, trajectory checks, full foreground guard, timing summaries and separate workload-validity/numeric outcomes. `samples.json` retains bounded, timestamped step/frame/RAF records and lifecycle events on the page's monotonic clock. `off` disables those performance samples but retains identical replay validation/foreground checks and Chrome counters; it is the control for added sampling overhead. Chrome TaskDuration comparisons cover warm-up plus the route, while page percentiles cover complete measured-interval samples. A single paired observation is noisy; repeat and interleave modes before claiming a general overhead number.
 
 Trace mode additionally writes `trace.json` with script, rendering, compositor/GPU, User Timing and CPU profile categories. It uses a 128 MiB browser buffer and a 512 MiB export bound; data loss or export failure invalidates the capture. No screenshot category, filmstrip, video, forced GC, live trace viewer or external upload is used. Open the saved trace in Chrome DevTools **Performance → Load profile** afterward, then zoom to `benchmark:measure-start` / `benchmark:measure-end` and the `driveability:step` / `driveability:frame` tracks. Screenshots of that saved view are taken after capture.
+
+Export permits up to 60 seconds for Chrome to flush after the workload ends. The offline parser validates paired spans and zero-duration measures, including Chrome's reused async IDs and timestamp rounding. Nominal DPR 1 permits only ±0.000001 representation error on scaled desktops; actual viewport values are recorded. Timing budgets are unchanged.
 
 Measurement mode compares the existing fixed desktop frame/physics/RAF/dropped-time budgets. Off mode leaves numeric budgets unmeasured. A process exits nonzero for an invalid workload or a measured numeric failure, while retaining evidence. Neither this single route nor headless runs close the historical five-cell, displayed Chromium lifecycle, desktop Safari or complete-memory gates. Trace and untraced values are labelled separately.
 
