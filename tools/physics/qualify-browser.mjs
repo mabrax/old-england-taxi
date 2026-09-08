@@ -3,7 +3,7 @@
  */
 import {readFileSync,writeFileSync,mkdirSync,readdirSync} from 'node:fs';
 import {resolve} from 'node:path';
-import {cpus,release,loadavg} from 'node:os';
+import {cpus,release,loadavg,platform} from 'node:os';
 import {execFileSync} from 'node:child_process';
 import {bounded,memoryAcceptance,processMemory} from './qualification-support.mjs';
 import {createHash} from 'node:crypto';
@@ -18,7 +18,7 @@ const sustainedZone=process.env.SUSTAINED_ZONE;
 const sustainedIndices=[1,0,3,4].filter(index=>!sustainedZone||catalogue[index].id===sustainedZone);
 if(!sustainedIndices.length)throw Error('SUSTAINED_ZONE must name one of the four planned sustained cells');
 if(sustainedZone&&(process.env.FUNCTIONAL_ONLY||process.env.LIFECYCLE_ONLY))throw Error('SUSTAINED_ZONE cannot be combined with FUNCTIONAL_ONLY or LIFECYCLE_ONLY');
-const report={checkedAt:new Date().toISOString(),engine,base,os:`Fedora Linux 44 / ${release()}`,cpu:cpus()[0].model,viewport:{width:1440,height:900,deviceScaleFactor:1},headless:process.env.HEADED!=='1',budgetsCommit:'d6dd37f',artifacts:catalogue.map(z=>({id:z.id,sha256:createHash('sha256').update(readFileSync(`public/zones/${z.id}.zone.json`)).digest('hex')})),cold:[],functional:[],sustained:[],lifecycle:[],failures:[]};
+const report={checkedAt:new Date().toISOString(),engine,base,os:{platform:platform(),release:release()},cpu:cpus()[0].model,viewport:{width:1440,height:900,deviceScaleFactor:1},headless:process.env.HEADED!=='1',budgetsCommit:'d6dd37f',artifacts:catalogue.map(z=>({id:z.id,sha256:createHash('sha256').update(readFileSync(`public/zones/${z.id}.zone.json`)).digest('hex')})),cold:[],functional:[],sustained:[],lifecycle:[],failures:[]};
 report.build=Object.fromEntries(readdirSync('dist/assets').map(name=>[name,createHash('sha256').update(readFileSync('dist/assets/'+name)).digest('hex')]));
 report.runnerSha256=createHash('sha256').update(readFileSync(new URL(import.meta.url))).digest('hex');
 report.protocolObserverSha256=createHash('sha256').update(readFileSync(new URL('./qualification-protocol.mjs',import.meta.url))).digest('hex');

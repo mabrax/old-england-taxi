@@ -18,6 +18,7 @@ export function memoryAcceptance(cycles) {
 // Supplementary Linux measurements, outside timed driving. No new acceptance
 // threshold: PSS and driver GPU allocations overlap and MUST NOT be added.
 export function processMemory(rootPid) {
+  if (process.platform !== 'linux') return { pssBytes: null, gpu: { bytes: null }, reason: 'Supplementary process-memory method is Linux/NVIDIA-only; use a separately agreed method on this OS.' };
   const startedAt = new Date().toISOString(), parents = new Map(), errors = [];
   for (const name of readdirSync('/proc').filter(n => /^\d+$/.test(n))) {
     try {

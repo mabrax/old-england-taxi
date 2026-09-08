@@ -1,6 +1,6 @@
 # Desktop qualification continuation — 2026-09-08
 
-Isolated branch `codex/desktop-qualification-astra`, starting at reviewed `179814c`. Canonical main `712fe6f` and the reviewed benchmark worktree remain unchanged. No runtime, vehicle, compiler, prepared artifact or schema change is planned. Desktop Safari remains required; iPad acceptance is deferred. The desktop OS matrix is pending the user's answer.
+Isolated branch `codex/desktop-qualification-astra`, starting at reviewed `179814c`. Canonical main `712fe6f` and the reviewed benchmark worktree remain unchanged. No runtime, vehicle, compiler, prepared artifact or schema change is planned. The user explicitly selected **Linux Chrome, Linux Firefox, and macOS Microsoft Edge** during this task. Desktop Safari is removed from acceptance scope, superseding its historical gate. iPad acceptance remains deferred. The user has a Mac but explicitly deferred its testing and limited this task to Linux Chrome/Firefox. macOS Edge is not passed and is not a required execution step in this task.
 
 ## Protocol recorded before new acceptance runs
 
@@ -33,3 +33,9 @@ Results and acceptance will be appended after measurement. Further hardware/brow
 The first new default-platform Chrome lifecycle attempt stopped independent RAF delivery after 39 callbacks while the 100 ms timer continued. Its 12-second external deadline retained physics at 25 steps, visible/focused/running state and no errors. It remains incomplete. Do not infer a Wayland cause solely from the host's session type.
 
 Before further Chrome acceptance attempts, compare fresh default, explicit X11 and explicit Wayland launches with `diagnose-chrome-raf.mjs`. Each configuration gets a minimal document without app/WebGL plus a 15-second Lucca drive, with one-second timer/RAF/state observations. This diagnostic is not a sustained performance acceptance run. Chromium documents the explicit selector in its [Ozone overview](https://chromium.googlesource.com/chromium/src/+/main/docs/ozone_overview.md). If a separately named platform completes, the existing qualification runner can test it using `CHROME_OZONE_PLATFORM=x11` or `wayland`; every original budget remains unchanged. No system/browser preference is modified, and a passing alternative cannot retroactively pass the default launch or establish its root cause.
+
+## Deferred macOS Edge handoff
+
+When the user resumes the explicitly deferred macOS checks, use the same committed production build and prospective budgets on a representative Mac with Microsoft Edge. Record the Mac model/chip/RAM, macOS version, Edge version, display refresh rate, viewport/DPR, power state and renderer. The current runner records the actual OS instead of assuming Fedora, and explicitly leaves the Linux/NVIDIA process-memory method unmeasured on macOS.
+
+Run the existing Chromium protocol with `BROWSER_PATH='/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge'`, external Puppeteer 25.10.0, `HEADED=1`, and a fresh output directory. Use a local secure loopback preview of the static build; do not expose the generation service. Run all five cold/functional cases, all four sustained durations, and the 20-cycle lifecycle/Back restoration sequence. CDP post-GC JS heap retains the original limits. A separately agreed macOS native/GPU-memory method is still required. Desktop Safari is not part of this handoff.
