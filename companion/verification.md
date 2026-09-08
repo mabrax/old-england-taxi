@@ -11,3 +11,5 @@ The standalone `index.html` was opened directly from disk in Chromium. No extern
 - A separate UX review checked the glance view and disclosure affordances; its two findings were corrected before delivery.
 
 This verifies the companion artifact. It adds no simulator acceptance evidence or cross-browser qualification claim. Project facts are a dated snapshot of the reviewed plans and handoffs, with canonical integration tracked separately.
+
+After the Linux qualification handoff, the companion was checked again at 1440 px and 720 px. The snapshot date stays visible in the narrow header, the next-decision card selects Driveability, the sources dialog resolves the absolute champion-review path, all 12 unique source references exist, and no horizontal overflow or browser error was observed. The independent simulator evidence review is recorded separately in `reviews/2026-09-08-linux-qualification.md`.
