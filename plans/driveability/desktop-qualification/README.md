@@ -26,7 +26,7 @@ Run `npm ci`, `npm run verify`, and `npm run preview -- --host 127.0.0.1 --port 
 
 Set `PUPPETEER_MODULE`, `BROWSER_PATH`, `HEADED=1` and `QUALIFICATION_WORKLOAD`. Run `node tools/physics/qualify-browser.mjs chromium http://127.0.0.1:4196 <new-output-directory>`. `FUNCTIONAL_ONLY=1`, `SUSTAINED_ZONE=<original-cell-id>` and `LIFECYCLE_ONLY=1` provide independently recorded subsets; run them sequentially. Substitute `firefox` and its executable for the second engine. Do not reuse output directories or modify original Phase 04/benchmark records.
 
-Results and acceptance will be appended after measurement. Further hardware/browser or memory-method decisions remain explicit; no Stage 04 implementation, merge, push or deployment follows from this work.
+**Results:** the [qualification record](verification.md) and [immutable-evidence manifest](results-summary.json) now retain Linux Chrome/Firefox cold, functional, sustained, lifecycle, interruption and memory observations. Full acceptance remains open for the recorded RAF/memory gates; no Stage 04 implementation, merge, push or deployment follows from these sessions.
 
 The coordinated Chrome lifecycle completed, but its cycle-20 PSS snapshot retained an `ENOENT` after a child exited during enumeration. That original record remains incomplete for PSS. Before a separate memory repeat, the sampler now permits up to three whole-tree attempts for incomplete reads, retains every attempt, and takes the first complete sample. It never retries a high value to obtain a lower one. Unsupported platforms stay unmeasured immediately. Budgets and active driving are unchanged.
 

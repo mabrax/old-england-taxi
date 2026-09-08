@@ -27,7 +27,7 @@ Four sequential phases follow the [Zone Compiler working agreement](../zone-comp
 1. [Phase 01 — Physical world](./phase-01-physical-world.md) — complete; [verification](./phase-01-verification.md)
 2. [Phase 02 — First vehicle](./phase-02-first-vehicle.md) — complete; [verification](./phase-02-verification.md)
 3. [Phase 03 — Driving interaction](./phase-03-driving-interaction.md) — implemented and independently reviewed; [verification and remaining device evidence](./phase-03-verification.md)
-4. [Phase 04 — Qualification](./phase-04-qualification.md) — evidence independently reviewed; full acceptance open; [record](./phase-04-verification.md), [remaining-device procedure](./phase-04-device-procedure.md)
+4. [Phase 04 — Qualification](./phase-04-qualification.md) — original evidence independently reviewed; [new Linux continuation](./desktop-qualification/verification.md) awaits review; full acceptance open; [record](./phase-04-verification.md), [remaining-device procedure](./phase-04-device-procedure.md)
 
 ## Bounded scope
 

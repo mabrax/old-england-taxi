@@ -1,0 +1,897 @@
+{
+  "diagnosticOnly": true,
+  "platform": "default",
+  "kind": "app",
+  "checkedAt": "2026-09-08T19:18:54.232Z",
+  "commit": "3f27aba4b79dedfd8d572811b09c6ecf1d73aa47",
+  "runnerSha256": "b3ed82168026d139ec66d2736a55b242bc2f33130c6f8d4bf35e64088625c85d",
+  "hostSession": "wayland",
+  "samples": [
+    {
+      "at": 1487.800000011921,
+      "raf": 7,
+      "timer": 4,
+      "lastRaf": 1480.3,
+      "lastTimer": 1470.6000000238419,
+      "events": [
+        {
+          "type": "focus",
+          "at": 8.900000005960464,
+          "hidden": false,
+          "focus": true
+        }
+      ],
+      "hidden": false,
+      "focus": true,
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000298023224
+      },
+      "state": {
+        "engine": "three.js r179",
+        "zoneSlug": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+        "roadTriangles": "1800",
+        "buildingTriangles": "33372",
+        "qaLines": "0",
+        "sourceVisible": "false",
+        "generatedVisible": "true",
+        "physicsStatus": "running",
+        "physicsSteps": "0",
+        "drivingMode": "driving",
+        "cameraOwner": "chase",
+        "qualificationResources": "{\"geometries\":20,\"textures\":0,\"programs\":4,\"colliders\":7,\"bodies\":1,\"controllers\":1,\"droppedMs\":0}",
+        "collisionVisible": "false",
+        "vehicleStatus": "ready",
+        "physicsColliders": "7",
+        "physicsSetupMs": "155.69999998807907",
+        "physicsInitializationMs": "522.8000000119209",
+        "playEnvelope": "{\"minimumX\":-349.0164489746094,\"maximumX\":349.0157165527344,\"minimumZ\":-349.0090026855469,\"maximumZ\":348.9909973144531}",
+        "boundaryHeight": "20",
+        "vehiclePose": "{\"position\":{\"x\":-318.1946716308594,\"y\":1.0199999809265137,\"z\":319.0031433105469},\"rotation\":{\"x\":0,\"y\":-0.7310019135475159,\"z\":0,\"w\":0.682375431060791},\"wheels\":[{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0},{\"length\":0.5999999570846557,\"steering\":0,\"rotation\":0}]}",
+        "vehicleSpeed": "0",
+        "vehicleResets": "0",
+        "vehicleRecoveries": "0",
+        "chaseCamera": "{\"target\":[-318.1946716308594,1.3699999809265138,319.0031433105469],\"position\":[-309.2159524598547,6.869999980926513,319.62169164999426],\"occluded\":false,\"overhead\":false}"
+      }
+    },
+    {
+      "at": 2489.9000000059605,
+      "raf": 69,
+      "timer": 14,
+      "lastRaf": 2485.6,
+      "lastTimer": 2408.5,
+      "events": [
+        {
+          "type": "focus",
+          "at": 8.900000005960464,
+          "hidden": false,
+          "focus": true
+        }
+      ],
+      "hidden": false,
+      "focus": true,
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000298023224
+      },
+      "state": {
+        "engine": "three.js r179",
+        "zoneSlug": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+        "roadTriangles": "1800",
+        "buildingTriangles": "33372",
+        "qaLines": "0",
+        "sourceVisible": "false",
+        "generatedVisible": "true",
+        "physicsStatus": "running",
+        "physicsSteps": "60",
+        "drivingMode": "driving",
+        "cameraOwner": "chase",
+        "qualificationResources": "{\"geometries\":20,\"textures\":0,\"programs\":4,\"colliders\":7,\"bodies\":1,\"controllers\":1,\"droppedMs\":0}",
+        "collisionVisible": "false",
+        "vehicleStatus": "ready",
+        "physicsColliders": "7",
+        "physicsSetupMs": "155.69999998807907",
+        "physicsInitializationMs": "522.8000000119209",
+        "playEnvelope": "{\"minimumX\":-349.0164489746094,\"maximumX\":349.0157165527344,\"minimumZ\":-349.0090026855469,\"maximumZ\":348.9909973144531}",
+        "boundaryHeight": "20",
+        "vehiclePose": "{\"position\":{\"x\":-319.2713317871094,\"y\":0.8089388012886047,\"z\":318.9286804199219},\"rotation\":{\"x\":-0.0036541104782372713,\"y\":-0.7309920191764832,\"z\":-0.003913958091288805,\"w\":0.6823650002479553},\"wheels\":[{\"length\":0.4034426736831665,\"steering\":0,\"rotation\":3.37465763092041},{\"length\":0.40344374656677245,\"steering\":0,\"rotation\":3.3746581077575684},{\"length\":0.37452667236328124,\"steering\":0,\"rotation\":3.375112533569336},{\"length\":0.3745277452468872,\"steering\":0,\"rotation\":3.375112533569336}]}",
+        "vehicleSpeed": "2.5426119080633525",
+        "vehicleResets": "0",
+        "vehicleRecoveries": "0",
+        "chaseCamera": "{\"target\":[-319.24236010742186,1.1589431915283201,318.93067846679685],\"position\":[-310.0110734515367,6.658970938405873,319.56660913925094],\"occluded\":false,\"overhead\":false}"
+      }
+    },
+    {
+      "at": 3492,
+      "raf": 132,
+      "timer": 24,
+      "lastRaf": 3490.2,
+      "lastTimer": 3408.600000023842,
+      "events": [
+        {
+          "type": "focus",
+          "at": 8.900000005960464,
+          "hidden": false,
+          "focus": true
+        }
+      ],
+      "hidden": false,
+      "focus": true,
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000298023224
+      },
+      "state": {
+        "engine": "three.js r179",
+        "zoneSlug": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+        "roadTriangles": "1800",
+        "buildingTriangles": "33372",
+        "qaLines": "0",
+        "sourceVisible": "false",
+        "generatedVisible": "true",
+        "physicsStatus": "running",
+        "physicsSteps": "120",
+        "drivingMode": "driving",
+        "cameraOwner": "chase",
+        "qualificationResources": "{\"geometries\":20,\"textures\":0,\"programs\":4,\"colliders\":7,\"bodies\":1,\"controllers\":1,\"droppedMs\":0}",
+        "collisionVisible": "false",
+        "vehicleStatus": "ready",
+        "physicsColliders": "7",
+        "physicsSetupMs": "155.69999998807907",
+        "physicsInitializationMs": "522.8000000119209",
+        "playEnvelope": "{\"minimumX\":-349.0164489746094,\"maximumX\":349.0157165527344,\"minimumZ\":-349.0090026855469,\"maximumZ\":348.9909973144531}",
+        "boundaryHeight": "20",
+        "vehiclePose": "{\"position\":{\"x\":-323.2613220214844,\"y\":0.8089219331741333,\"z\":318.6537780761719},\"rotation\":{\"x\":-0.003653268562629819,\"y\":-0.7309920191764832,\"z\":-0.0039130342192947865,\"w\":0.6823650002479553},\"wheels\":[{\"length\":0.40342240810394286,\"steering\":0,\"rotation\":15.873291015625},{\"length\":0.4034234809875488,\"steering\":0,\"rotation\":15.873291969299316},{\"length\":0.37451308250427245,\"steering\":0,\"rotation\":15.873745918273926},{\"length\":0.37451427459716796,\"steering\":0,\"rotation\":15.873745918273926}]}",
+        "vehicleSpeed": "5.336211270833797",
+        "vehicleResets": "0",
+        "vehicleRecoveries": "0",
+        "chaseCamera": "{\"target\":[-323.2252419433594,1.1589219331741334,318.6562561035156],\"position\":[-313.66135221285157,6.658921941890668,319.3151199074582],\"occluded\":false,\"overhead\":false}"
+      }
+    },
+    {
+      "at": 4493.800000011921,
+      "raf": 193,
+      "timer": 34,
+      "lastRaf": 4491.8,
+      "lastTimer": 4408.5,
+      "events": [
+        {
+          "type": "focus",
+          "at": 8.900000005960464,
+          "hidden": false,
+          "focus": true
+        }
+      ],
+      "hidden": false,
+      "focus": true,
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000298023224
+      },
+      "state": {
+        "engine": "three.js r179",
+        "zoneSlug": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+        "roadTriangles": "1800",
+        "buildingTriangles": "33372",
+        "qaLines": "0",
+        "sourceVisible": "false",
+        "generatedVisible": "true",
+        "physicsStatus": "running",
+        "physicsSteps": "180",
+        "drivingMode": "driving",
+        "cameraOwner": "chase",
+        "qualificationResources": "{\"geometries\":20,\"textures\":0,\"programs\":4,\"colliders\":7,\"bodies\":1,\"controllers\":1,\"droppedMs\":0}",
+        "collisionVisible": "false",
+        "vehicleStatus": "ready",
+        "physicsColliders": "7",
+        "physicsSetupMs": "155.69999998807907",
+        "physicsInitializationMs": "522.8000000119209",
+        "playEnvelope": "{\"minimumX\":-349.0164489746094,\"maximumX\":349.0157165527344,\"minimumZ\":-349.0090026855469,\"maximumZ\":348.9909973144531}",
+        "boundaryHeight": "20",
+        "vehiclePose": "{\"position\":{\"x\":-329.8804626464844,\"y\":0.8089219331741333,\"z\":318.1972351074219},\"rotation\":{\"x\":-0.003653268562629819,\"y\":-0.7309920191764832,\"z\":-0.0039130342192947865,\"w\":0.6823650002479553},\"wheels\":[{\"length\":0.40342240810394286,\"steering\":0,\"rotation\":36.60763931274414},{\"length\":0.4034234809875488,\"steering\":0,\"rotation\":36.60763931274414},{\"length\":0.37451308250427245,\"steering\":0,\"rotation\":36.60809326171875},{\"length\":0.37451427459716796,\"steering\":0,\"rotation\":36.60809326171875}]}",
+        "vehicleSpeed": "7.8142096319208605",
+        "vehicleResets": "0",
+        "vehicleRecoveries": "0",
+        "chaseCamera": "{\"target\":[-329.84012329101563,1.1589219331741334,318.2000354003906],\"position\":[-319.9796133360553,6.658921933177016,318.879398403419],\"occluded\":false,\"overhead\":false}"
+      }
+    },
+    {
+      "at": 5496,
+      "raf": 254,
+      "timer": 44,
+      "lastRaf": 5491.1,
+      "lastTimer": 5408.5,
+      "events": [
+        {
+          "type": "focus",
+          "at": 8.900000005960464,
+          "hidden": false,
+          "focus": true
+        }
+      ],
+      "hidden": false,
+      "focus": true,
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000298023224
+      },
+      "state": {
+        "engine": "three.js r179",
+        "zoneSlug": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+        "roadTriangles": "1800",
+        "buildingTriangles": "33372",
+        "qaLines": "0",
+        "sourceVisible": "false",
+        "generatedVisible": "true",
+        "physicsStatus": "running",
+        "physicsSteps": "240",
+        "drivingMode": "driving",
+        "cameraOwner": "chase",
+        "qualificationResources": "{\"geometries\":20,\"textures\":0,\"programs\":4,\"colliders\":7,\"bodies\":1,\"controllers\":1,\"droppedMs\":0}",
+        "collisionVisible": "false",
+        "vehicleStatus": "ready",
+        "physicsColliders": "7",
+        "physicsSetupMs": "155.69999998807907",
+        "physicsInitializationMs": "522.8000000119209",
+        "playEnvelope": "{\"minimumX\":-349.0164489746094,\"maximumX\":349.0157165527344,\"minimumZ\":-349.0090026855469,\"maximumZ\":348.9909973144531}",
+        "boundaryHeight": "20",
+        "vehiclePose": "{\"position\":{\"x\":-337.8589782714844,\"y\":0.8089219331741333,\"z\":317.6415710449219},\"rotation\":{\"x\":-0.003653268562629819,\"y\":-0.7309920191764832,\"z\":-0.0039130342192947865,\"w\":0.6823650002479553},\"wheels\":[{\"length\":0.40342240810394286,\"steering\":0,\"rotation\":61.70439529418945},{\"length\":0.4034234809875488,\"steering\":0,\"rotation\":61.70439529418945},{\"length\":0.37451308250427245,\"steering\":0,\"rotation\":61.70484924316406},{\"length\":0.37451427459716796,\"steering\":0,\"rotation\":61.70484924316406}]}",
+        "vehicleSpeed": "7.982810133517982",
+        "vehicleResets": "0",
+        "vehicleRecoveries": "0",
+        "chaseCamera": "{\"target\":[-337.81214233398435,1.1589219331741334,317.64483666992186],\"position\":[-327.90061317504126,6.658921933174135,318.3284399242118],\"occluded\":false,\"overhead\":false}"
+      }
+    },
+    {
+      "at": 6497.100000023842,
+      "raf": 314,
+      "timer": 54,
+      "lastRaf": 6491.5,
+      "lastTimer": 6408.800000011921,
+      "events": [
+        {
+          "type": "focus",
+          "at": 8.900000005960464,
+          "hidden": false,
+          "focus": true
+        }
+      ],
+      "hidden": false,
+      "focus": true,
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000298023224
+      },
+      "state": {
+        "engine": "three.js r179",
+        "zoneSlug": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+        "roadTriangles": "1800",
+        "buildingTriangles": "33372",
+        "qaLines": "0",
+        "sourceVisible": "false",
+        "generatedVisible": "true",
+        "physicsStatus": "running",
+        "physicsSteps": "300",
+        "drivingMode": "driving",
+        "cameraOwner": "chase",
+        "qualificationResources": "{\"geometries\":20,\"textures\":0,\"programs\":4,\"colliders\":7,\"bodies\":1,\"controllers\":1,\"droppedMs\":0}",
+        "collisionVisible": "false",
+        "vehicleStatus": "ready",
+        "physicsColliders": "7",
+        "physicsSetupMs": "155.69999998807907",
+        "physicsInitializationMs": "522.8000000119209",
+        "playEnvelope": "{\"minimumX\":-349.0164489746094,\"maximumX\":349.0157165527344,\"minimumZ\":-349.0090026855469,\"maximumZ\":348.9909973144531}",
+        "boundaryHeight": "20",
+        "vehiclePose": "{\"position\":{\"x\":-345.8423767089844,\"y\":0.8089219331741333,\"z\":317.0849304199219},\"rotation\":{\"x\":-0.003653268562629819,\"y\":-0.7309920191764832,\"z\":-0.0039130342192947865,\"w\":0.6823650002479553},\"wheels\":[{\"length\":0.40342240810394286,\"steering\":0,\"rotation\":86.8250732421875},{\"length\":0.4034234809875488,\"steering\":0,\"rotation\":86.8250732421875},{\"length\":0.37451308250427245,\"steering\":0,\"rotation\":86.82552337646484},{\"length\":0.37451427459716796,\"steering\":0,\"rotation\":86.82552337646484}]}",
+        "vehicleSpeed": "7.982810133517982",
+        "vehicleResets": "0",
+        "vehicleRecoveries": "0",
+        "chaseCamera": "{\"target\":[-345.7987341308594,1.1589219331741334,317.08797338867186],\"position\":[-335.8871629336817,6.658921933174135,317.7715800973111],\"occluded\":false,\"overhead\":false}"
+      }
+    },
+    {
+      "at": 7498.9000000059605,
+      "raf": 374,
+      "timer": 64,
+      "lastRaf": 7492.7,
+      "lastTimer": 7408.5,
+      "events": [
+        {
+          "type": "focus",
+          "at": 8.900000005960464,
+          "hidden": false,
+          "focus": true
+        }
+      ],
+      "hidden": false,
+      "focus": true,
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000298023224
+      },
+      "state": {
+        "engine": "three.js r179",
+        "zoneSlug": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+        "roadTriangles": "1800",
+        "buildingTriangles": "33372",
+        "qaLines": "0",
+        "sourceVisible": "false",
+        "generatedVisible": "true",
+        "physicsStatus": "running",
+        "physicsSteps": "360",
+        "drivingMode": "driving",
+        "cameraOwner": "chase",
+        "qualificationResources": "{\"geometries\":20,\"textures\":0,\"programs\":4,\"colliders\":7,\"bodies\":1,\"controllers\":1,\"droppedMs\":0}",
+        "collisionVisible": "false",
+        "vehicleStatus": "ready",
+        "physicsColliders": "7",
+        "physicsSetupMs": "155.69999998807907",
+        "physicsInitializationMs": "522.8000000119209",
+        "playEnvelope": "{\"minimumX\":-349.0164489746094,\"maximumX\":349.0157165527344,\"minimumZ\":-349.0090026855469,\"maximumZ\":348.9909973144531}",
+        "boundaryHeight": "20",
+        "vehiclePose": "{\"position\":{\"x\":-346.6512756347656,\"y\":0.8093997240066528,\"z\":316.5988464355469},\"rotation\":{\"x\":-0.0023409060668200254,\"y\":-0.6304659247398376,\"z\":-0.0008951810887083411,\"w\":0.7762129306793213},\"wheels\":[{\"length\":0.39471524238586425,\"steering\":0,\"rotation\":90.13861083984375},{\"length\":0.3969644832611084,\"steering\":0,\"rotation\":88.87578582763672},{\"length\":0.3818553614616394,\"steering\":0,\"rotation\":90.70730590820312},{\"length\":0.3841047215461731,\"steering\":0,\"rotation\":89.57677459716797}]}",
+        "vehicleSpeed": "0.017655600142684857",
+        "vehicleResets": "0",
+        "vehicleRecoveries": "0",
+        "chaseCamera": "{\"target\":[-346.6512131347656,1.1594758501052858,316.5987292480469],\"position\":[-337.83212771972,6.660493640793568,314.7754758515727],\"occluded\":false,\"overhead\":false}"
+      }
+    },
+    {
+      "at": 8500.90000000596,
+      "raf": 437,
+      "timer": 74,
+      "lastRaf": 8498.3,
+      "lastTimer": 8408.90000000596,
+      "events": [
+        {
+          "type": "focus",
+          "at": 8.900000005960464,
+          "hidden": false,
+          "focus": true
+        }
+      ],
+      "hidden": false,
+      "focus": true,
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000298023224
+      },
+      "state": {
+        "engine": "three.js r179",
+        "zoneSlug": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+        "roadTriangles": "1800",
+        "buildingTriangles": "33372",
+        "qaLines": "0",
+        "sourceVisible": "false",
+        "generatedVisible": "true",
+        "physicsStatus": "running",
+        "physicsSteps": "421",
+        "drivingMode": "driving",
+        "cameraOwner": "chase",
+        "qualificationResources": "{\"geometries\":20,\"textures\":0,\"programs\":4,\"colliders\":7,\"bodies\":1,\"controllers\":1,\"droppedMs\":0}",
+        "collisionVisible": "false",
+        "vehicleStatus": "ready",
+        "physicsColliders": "7",
+        "physicsSetupMs": "155.69999998807907",
+        "physicsInitializationMs": "522.8000000119209",
+        "playEnvelope": "{\"minimumX\":-349.0164489746094,\"maximumX\":349.0157165527344,\"minimumZ\":-349.0090026855469,\"maximumZ\":348.9909973144531}",
+        "boundaryHeight": "20",
+        "vehiclePose": "{\"position\":{\"x\":-346.660400390625,\"y\":0.7999244332313538,\"z\":316.6330871582031},\"rotation\":{\"x\":-0.007239310536533594,\"y\":-0.6357869505882263,\"z\":0.006170222535729408,\"w\":0.7718060612678528},\"wheels\":[{\"length\":0.37107604026794433,\"steering\":0,\"rotation\":90.33818054199219},{\"length\":0.3980516719818115,\"steering\":0,\"rotation\":89.09258270263672},{\"length\":0.36208658695220947,\"steering\":0,\"rotation\":90.9072265625},{\"length\":0.3890623378753662,\"steering\":0,\"rotation\":89.79396057128906}]}",
+        "vehicleSpeed": "0.015250575918001318",
+        "vehicleResets": "0",
+        "vehicleRecoveries": "0",
+        "chaseCamera": "{\"target\":[-346.6603161621094,1.1499997782707214,316.6324133300781],\"position\":[-337.83366753109726,6.650750623752202,314.86341665835795],\"occluded\":false,\"overhead\":false}"
+      }
+    },
+    {
+      "at": 9504.90000000596,
+      "raf": 499,
+      "timer": 84,
+      "lastRaf": 9499.5,
+      "lastTimer": 9408.600000023842,
+      "events": [
+        {
+          "type": "focus",
+          "at": 8.900000005960464,
+          "hidden": false,
+          "focus": true
+        }
+      ],
+      "hidden": false,
+      "focus": true,
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000298023224
+      },
+      "state": {
+        "engine": "three.js r179",
+        "zoneSlug": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+        "roadTriangles": "1800",
+        "buildingTriangles": "33372",
+        "qaLines": "0",
+        "sourceVisible": "false",
+        "generatedVisible": "true",
+        "physicsStatus": "running",
+        "physicsSteps": "481",
+        "drivingMode": "driving",
+        "cameraOwner": "chase",
+        "qualificationResources": "{\"geometries\":20,\"textures\":0,\"programs\":4,\"colliders\":7,\"bodies\":1,\"controllers\":1,\"droppedMs\":0}",
+        "collisionVisible": "false",
+        "vehicleStatus": "ready",
+        "physicsColliders": "7",
+        "physicsSetupMs": "155.69999998807907",
+        "physicsInitializationMs": "522.8000000119209",
+        "playEnvelope": "{\"minimumX\":-349.0164489746094,\"maximumX\":349.0157165527344,\"minimumZ\":-349.0090026855469,\"maximumZ\":348.9909973144531}",
+        "boundaryHeight": "20",
+        "vehiclePose": "{\"position\":{\"x\":-346.67425537109375,\"y\":0.7996259331703186,\"z\":316.6883544921875},\"rotation\":{\"x\":-0.00782861839979887,\"y\":-0.6446926593780518,\"z\":0.006747147534042597,\"w\":0.7643721103668213},\"wheels\":[{\"length\":0.3695124316215515,\"steering\":0,\"rotation\":90.55472564697266},{\"length\":0.398907356262207,\"steering\":0,\"rotation\":89.3372802734375},{\"length\":0.36068617582321166,\"steering\":0,\"rotation\":91.1242446899414},{\"length\":0.3900811004638672,\"steering\":0,\"rotation\":90.03914642333984}]}",
+        "vehicleSpeed": "0.016644413095987146",
+        "vehicleResets": "0",
+        "vehicleRecoveries": "0",
+        "chaseCamera": "{\"target\":[-346.67404833984375,1.149652216434479,316.6875263671875],\"position\":[-337.8105654419844,6.649707289570054,315.1093250359354],\"occluded\":false,\"overhead\":false}"
+      }
+    },
+    {
+      "at": 10511.100000023842,
+      "raf": 561,
+      "timer": 94,
+      "lastRaf": 10506.7,
+      "lastTimer": 10408.5,
+      "events": [
+        {
+          "type": "focus",
+          "at": 8.900000005960464,
+          "hidden": false,
+          "focus": true
+        }
+      ],
+      "hidden": false,
+      "focus": true,
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000298023224
+      },
+      "state": {
+        "engine": "three.js r179",
+        "zoneSlug": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+        "roadTriangles": "1800",
+        "buildingTriangles": "33372",
+        "qaLines": "0",
+        "sourceVisible": "false",
+        "generatedVisible": "true",
+        "physicsStatus": "running",
+        "physicsSteps": "541",
+        "drivingMode": "driving",
+        "cameraOwner": "chase",
+        "qualificationResources": "{\"geometries\":20,\"textures\":0,\"programs\":4,\"colliders\":7,\"bodies\":1,\"controllers\":1,\"droppedMs\":0}",
+        "collisionVisible": "false",
+        "vehicleStatus": "ready",
+        "physicsColliders": "7",
+        "physicsSetupMs": "155.69999998807907",
+        "physicsInitializationMs": "522.8000000119209",
+        "playEnvelope": "{\"minimumX\":-349.0164489746094,\"maximumX\":349.0157165527344,\"minimumZ\":-349.0090026855469,\"maximumZ\":348.9909973144531}",
+        "boundaryHeight": "20",
+        "vehiclePose": "{\"position\":{\"x\":-346.6898193359375,\"y\":0.8000994920730591,\"z\":316.7453308105469},\"rotation\":{\"x\":-0.007977932691574097,\"y\":-0.6539196372032166,\"z\":0.007036617491394281,\"w\":0.7564891576766968},\"wheels\":[{\"length\":0.36897175788879394,\"steering\":0,\"rotation\":90.77350616455078},{\"length\":0.3993339467048645,\"steering\":0,\"rotation\":89.58550262451172},{\"length\":0.36122726678848266,\"steering\":0,\"rotation\":91.34349060058594},{\"length\":0.3915894556045532,\"steering\":0,\"rotation\":90.28780364990234}]}",
+        "vehicleSpeed": "0.020183448818035032",
+        "vehicleResets": "0",
+        "vehicleRecoveries": "0",
+        "chaseCamera": "{\"target\":[-346.689705078125,1.1501254777908325,316.74492456054685],\"position\":[-337.79053605895496,6.650218196403893,315.3824158543585],\"occluded\":false,\"overhead\":false}"
+      }
+    },
+    {
+      "at": 11514.40000000596,
+      "raf": 623,
+      "timer": 105,
+      "lastRaf": 11504.8,
+      "lastTimer": 11508.5,
+      "events": [
+        {
+          "type": "focus",
+          "at": 8.900000005960464,
+          "hidden": false,
+          "focus": true
+        }
+      ],
+      "hidden": false,
+      "focus": true,
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000298023224
+      },
+      "state": {
+        "engine": "three.js r179",
+        "zoneSlug": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+        "roadTriangles": "1800",
+        "buildingTriangles": "33372",
+        "qaLines": "0",
+        "sourceVisible": "false",
+        "generatedVisible": "true",
+        "physicsStatus": "running",
+        "physicsSteps": "601",
+        "drivingMode": "driving",
+        "cameraOwner": "chase",
+        "qualificationResources": "{\"geometries\":20,\"textures\":0,\"programs\":4,\"colliders\":7,\"bodies\":1,\"controllers\":1,\"droppedMs\":0}",
+        "collisionVisible": "false",
+        "vehicleStatus": "ready",
+        "physicsColliders": "7",
+        "physicsSetupMs": "155.69999998807907",
+        "physicsInitializationMs": "522.8000000119209",
+        "playEnvelope": "{\"minimumX\":-349.0164489746094,\"maximumX\":349.0157165527344,\"minimumZ\":-349.0090026855469,\"maximumZ\":348.9909973144531}",
+        "boundaryHeight": "20",
+        "vehiclePose": "{\"position\":{\"x\":-346.70733642578125,\"y\":0.7997654676437378,\"z\":316.80340576171875},\"rotation\":{\"x\":-0.008213120512664318,\"y\":-0.6633396744728088,\"z\":0.00748737808316946,\"w\":0.7482360005378723},\"wheels\":[{\"length\":0.36722981214523315,\"steering\":0,\"rotation\":90.99633026123047},{\"length\":0.39906280517578124,\"steering\":0,\"rotation\":89.8388671875},{\"length\":0.36086326122283935,\"steering\":0,\"rotation\":91.56673431396484},{\"length\":0.39269643306732177,\"steering\":0,\"rotation\":90.54161071777344}]}",
+        "vehicleSpeed": "0.015749555136168682",
+        "vehicleResets": "0",
+        "vehicleRecoveries": "0",
+        "chaseCamera": "{\"target\":[-346.7071423339844,1.1497784197330474,316.8028881835937],\"position\":[-337.77687989293435,6.649722500466629,315.6614282019742],\"occluded\":false,\"overhead\":false}"
+      }
+    },
+    {
+      "at": 12517.100000023842,
+      "raf": 685,
+      "timer": 115,
+      "lastRaf": 12502.1,
+      "lastTimer": 12508.5,
+      "events": [
+        {
+          "type": "focus",
+          "at": 8.900000005960464,
+          "hidden": false,
+          "focus": true
+        }
+      ],
+      "hidden": false,
+      "focus": true,
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000298023224
+      },
+      "state": {
+        "engine": "three.js r179",
+        "zoneSlug": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+        "roadTriangles": "1800",
+        "buildingTriangles": "33372",
+        "qaLines": "0",
+        "sourceVisible": "false",
+        "generatedVisible": "true",
+        "physicsStatus": "running",
+        "physicsSteps": "661",
+        "drivingMode": "driving",
+        "cameraOwner": "chase",
+        "qualificationResources": "{\"geometries\":20,\"textures\":0,\"programs\":4,\"colliders\":7,\"bodies\":1,\"controllers\":1,\"droppedMs\":0}",
+        "collisionVisible": "false",
+        "vehicleStatus": "ready",
+        "physicsColliders": "7",
+        "physicsSetupMs": "155.69999998807907",
+        "physicsInitializationMs": "522.8000000119209",
+        "playEnvelope": "{\"minimumX\":-349.0164489746094,\"maximumX\":349.0157165527344,\"minimumZ\":-349.0090026855469,\"maximumZ\":348.9909973144531}",
+        "boundaryHeight": "20",
+        "vehiclePose": "{\"position\":{\"x\":-346.7258605957031,\"y\":0.8006762266159058,\"z\":316.86004638671875},\"rotation\":{\"x\":-0.008126504719257355,\"y\":-0.6724579334259033,\"z\":0.007386353798210621,\"w\":0.7400538921356201},\"wheels\":[{\"length\":0.36795251846313476,\"steering\":0,\"rotation\":91.21624755859375},{\"length\":0.3994416522979736,\"steering\":0,\"rotation\":90.08963775634766},{\"length\":0.36229728937149047,\"steering\":0,\"rotation\":91.78702545166016},{\"length\":0.39378618478775024,\"steering\":0,\"rotation\":90.79277801513672}]}",
+        "vehicleSpeed": "0.025164491000133925",
+        "vehicleResets": "0",
+        "vehicleRecoveries": "0",
+        "chaseCamera": "{\"target\":[-346.7256494140625,1.1506725556850435,316.85937060546877],\"position\":[-337.7699514695019,6.650547796832438,315.9397418707134],\"occluded\":false,\"overhead\":false}"
+      }
+    },
+    {
+      "at": 13522.700000017881,
+      "raf": 748,
+      "timer": 125,
+      "lastRaf": 13519.6,
+      "lastTimer": 13508.5,
+      "events": [
+        {
+          "type": "focus",
+          "at": 8.900000005960464,
+          "hidden": false,
+          "focus": true
+        }
+      ],
+      "hidden": false,
+      "focus": true,
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000298023224
+      },
+      "state": {
+        "engine": "three.js r179",
+        "zoneSlug": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+        "roadTriangles": "1800",
+        "buildingTriangles": "33372",
+        "qaLines": "0",
+        "sourceVisible": "false",
+        "generatedVisible": "true",
+        "physicsStatus": "running",
+        "physicsSteps": "722",
+        "drivingMode": "driving",
+        "cameraOwner": "chase",
+        "qualificationResources": "{\"geometries\":20,\"textures\":0,\"programs\":4,\"colliders\":7,\"bodies\":1,\"controllers\":1,\"droppedMs\":0}",
+        "collisionVisible": "false",
+        "vehicleStatus": "ready",
+        "physicsColliders": "7",
+        "physicsSetupMs": "155.69999998807907",
+        "physicsInitializationMs": "522.8000000119209",
+        "playEnvelope": "{\"minimumX\":-349.0164489746094,\"maximumX\":349.0157165527344,\"minimumZ\":-349.0090026855469,\"maximumZ\":348.9909973144531}",
+        "boundaryHeight": "20",
+        "vehiclePose": "{\"position\":{\"x\":-346.7464599609375,\"y\":0.8002128601074219,\"z\":316.91717529296875},\"rotation\":{\"x\":-0.008325017057359219,\"y\":-0.6817774176597595,\"z\":0.007877021096646786,\"w\":0.7314698696136475},\"wheels\":[{\"length\":0.3658908534049988,\"steering\":0,\"rotation\":91.44242095947266},{\"length\":0.39883976459503173,\"steering\":0,\"rotation\":90.34758758544922},{\"length\":0.36200641870498657,\"steering\":0,\"rotation\":92.01351928710938},{\"length\":0.39495550870895385,\"steering\":0,\"rotation\":91.05103302001953}]}",
+        "vehicleSpeed": "0.021705439156934937",
+        "vehicleResets": "0",
+        "vehicleRecoveries": "0",
+        "chaseCamera": "{\"target\":[-346.74624444580076,1.1502580907344817,316.91654833984376],\"position\":[-337.7702391356991,6.650342093228838,316.22030958558605],\"occluded\":false,\"overhead\":false}"
+      }
+    },
+    {
+      "at": 14526.40000000596,
+      "raf": 809,
+      "timer": 135,
+      "lastRaf": 14511.9,
+      "lastTimer": 14508.800000011921,
+      "events": [
+        {
+          "type": "focus",
+          "at": 8.900000005960464,
+          "hidden": false,
+          "focus": true
+        }
+      ],
+      "hidden": false,
+      "focus": true,
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000298023224
+      },
+      "state": {
+        "engine": "three.js r179",
+        "zoneSlug": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+        "roadTriangles": "1800",
+        "buildingTriangles": "33372",
+        "qaLines": "0",
+        "sourceVisible": "false",
+        "generatedVisible": "true",
+        "physicsStatus": "running",
+        "physicsSteps": "781",
+        "drivingMode": "driving",
+        "cameraOwner": "chase",
+        "qualificationResources": "{\"geometries\":20,\"textures\":0,\"programs\":4,\"colliders\":7,\"bodies\":1,\"controllers\":1,\"droppedMs\":0}",
+        "collisionVisible": "false",
+        "vehicleStatus": "ready",
+        "physicsColliders": "7",
+        "physicsSetupMs": "155.69999998807907",
+        "physicsInitializationMs": "522.8000000119209",
+        "playEnvelope": "{\"minimumX\":-349.0164489746094,\"maximumX\":349.0157165527344,\"minimumZ\":-349.0090026855469,\"maximumZ\":348.9909973144531}",
+        "boundaryHeight": "20",
+        "vehiclePose": "{\"position\":{\"x\":-346.7699890136719,\"y\":0.80014568567276,\"z\":316.9743347167969},\"rotation\":{\"x\":-0.008477265946567059,\"y\":-0.6915132999420166,\"z\":0.008148681372404099,\"w\":0.7222681045532227},\"wheels\":[{\"length\":0.36476343154907226,\"steering\":0,\"rotation\":91.66989135742188},{\"length\":0.3986060547828674,\"steering\":0,\"rotation\":90.60738372802734},{\"length\":0.36212783336639404,\"steering\":0,\"rotation\":92.24118041992188},{\"length\":0.39597057580947875,\"steering\":0,\"rotation\":91.31107330322266}]}",
+        "vehicleSpeed": "0.029723134402937234",
+        "vehicleResets": "0",
+        "vehicleRecoveries": "0",
+        "chaseCamera": "{\"target\":[-346.7699287109375,1.1501415758132936,316.9742331542969],\"position\":[-337.7784369842814,6.650050156622804,316.51569045281434],\"occluded\":false,\"overhead\":false}"
+      }
+    },
+    {
+      "at": 15529.5,
+      "raf": 870,
+      "timer": 145,
+      "lastRaf": 15519.9,
+      "lastTimer": 15509.100000023842,
+      "events": [
+        {
+          "type": "focus",
+          "at": 8.900000005960464,
+          "hidden": false,
+          "focus": true
+        }
+      ],
+      "hidden": false,
+      "focus": true,
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000298023224
+      },
+      "state": {
+        "engine": "three.js r179",
+        "zoneSlug": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+        "roadTriangles": "1800",
+        "buildingTriangles": "33372",
+        "qaLines": "0",
+        "sourceVisible": "false",
+        "generatedVisible": "true",
+        "physicsStatus": "running",
+        "physicsSteps": "842",
+        "drivingMode": "driving",
+        "cameraOwner": "chase",
+        "qualificationResources": "{\"geometries\":20,\"textures\":0,\"programs\":4,\"colliders\":7,\"bodies\":1,\"controllers\":1,\"droppedMs\":0}",
+        "collisionVisible": "false",
+        "vehicleStatus": "ready",
+        "physicsColliders": "7",
+        "physicsSetupMs": "155.69999998807907",
+        "physicsInitializationMs": "522.8000000119209",
+        "playEnvelope": "{\"minimumX\":-349.0164489746094,\"maximumX\":349.0157165527344,\"minimumZ\":-349.0090026855469,\"maximumZ\":348.9909973144531}",
+        "boundaryHeight": "20",
+        "vehiclePose": "{\"position\":{\"x\":-346.7969055175781,\"y\":0.800003707408905,\"z\":317.03350830078125},\"rotation\":{\"x\":-0.00841293390840292,\"y\":-0.7018256783485413,\"z\":0.00836736150085926,\"w\":0.7122499942779541},\"wheels\":[{\"length\":0.3634631562232971,\"steering\":0,\"rotation\":91.90763854980469},{\"length\":0.3976414132118225,\"steering\":0,\"rotation\":90.87944793701172},{\"length\":0.362816743850708,\"steering\":0,\"rotation\":92.47908020019531},{\"length\":0.3969950008392334,\"steering\":0,\"rotation\":91.58322143554688}]}",
+        "vehicleSpeed": "0.026692816638312647",
+        "vehicleResets": "0",
+        "vehicleRecoveries": "0",
+        "chaseCamera": "{\"target\":[-346.7965246582031,1.1500121502876282,317.03289892578124],\"position\":[-337.7955629924378,6.650098699292776,316.8280715712388],\"occluded\":false,\"overhead\":false}"
+      }
+    },
+    {
+      "at": 16533,
+      "raf": 933,
+      "timer": 155,
+      "lastRaf": 16529.6,
+      "lastTimer": 16508.5,
+      "events": [
+        {
+          "type": "focus",
+          "at": 8.900000005960464,
+          "hidden": false,
+          "focus": true
+        }
+      ],
+      "hidden": false,
+      "focus": true,
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1.0000000298023224
+      },
+      "state": {
+        "engine": "three.js r179",
+        "zoneSlug": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+        "roadTriangles": "1800",
+        "buildingTriangles": "33372",
+        "qaLines": "0",
+        "sourceVisible": "false",
+        "generatedVisible": "true",
+        "physicsStatus": "running",
+        "physicsSteps": "902",
+        "drivingMode": "driving",
+        "cameraOwner": "chase",
+        "qualificationResources": "{\"geometries\":20,\"textures\":0,\"programs\":4,\"colliders\":7,\"bodies\":1,\"controllers\":1,\"droppedMs\":0}",
+        "collisionVisible": "false",
+        "vehicleStatus": "ready",
+        "physicsColliders": "7",
+        "physicsSetupMs": "155.69999998807907",
+        "physicsInitializationMs": "522.8000000119209",
+        "playEnvelope": "{\"minimumX\":-349.0164489746094,\"maximumX\":349.0157165527344,\"minimumZ\":-349.0090026855469,\"maximumZ\":348.9909973144531}",
+        "boundaryHeight": "20",
+        "vehiclePose": "{\"position\":{\"x\":-346.81103515625,\"y\":0.8018760085105896,\"z\":317.07666015625},\"rotation\":{\"x\":-0.005731557030230761,\"y\":-0.7071166038513184,\"z\":0.005931511987000704,\"w\":0.7070488929748535},\"wheels\":[{\"length\":0.3697253394126892,\"steering\":0,\"rotation\":92.10406494140625},{\"length\":0.393479220867157,\"steering\":0,\"rotation\":91.09334564208984},{\"length\":0.37049102067947387,\"steering\":0,\"rotation\":92.67552185058594},{\"length\":0.3942450213432312,\"steering\":0,\"rotation\":91.79712677001953}]}",
+        "vehicleSpeed": "-0.030304426528517312",
+        "vehicleResets": "0",
+        "vehicleRecoveries": "0",
+        "chaseCamera": "{\"target\":[-346.8110505371094,1.1518842446804047,317.07664862060545],\"position\":[-337.81119845995,6.651843423699259,317.07076663028647],\"occluded\":false,\"overhead\":false}"
+      }
+    }
+  ],
+  "errors": [],
+  "browser": "Chrome/152.0.7977.82",
+  "launchArgs": [
+    "/usr/bin/google-chrome",
+    "--allow-pre-commit-input",
+    "--disable-background-networking",
+    "--disable-background-timer-throttling",
+    "--disable-backgrounding-occluded-windows",
+    "--disable-breakpad",
+    "--disable-client-side-phishing-detection",
+    "--disable-component-extensions-with-background-pages",
+    "--disable-crash-reporter",
+    "--disable-default-apps",
+    "--disable-dev-shm-usage",
+    "--disable-hang-monitor",
+    "--disable-infobars",
+    "--disable-ipc-flooding-protection",
+    "--disable-popup-blocking",
+    "--disable-prompt-on-repost",
+    "--disable-renderer-backgrounding",
+    "--disable-search-engine-choice-screen",
+    "--disable-sync",
+    "--enable-automation",
+    "--export-tagged-pdf",
+    "--force-color-profile=srgb",
+    "--generate-pdf-document-outline",
+    "--metrics-recording-only",
+    "--no-first-run",
+    "--password-store=basic",
+    "--use-mock-keychain",
+    "--disable-features=Translate,AcceptCHFrame,MediaRouter,OptimizationHints,WebUIReloadButton,WebUIOmniboxPopup,WebUIOmniboxAimPopup,ProcessPerSiteUpToMainFrameThreshold,IsolateSandboxedIframes",
+    "--enable-features=PdfOopif",
+    "--disable-extensions",
+    "about:blank",
+    "--window-size=1460,1020",
+    "--remote-debugging-port=0",
+    "--user-data-dir=/tmp/puppeteer_dev_chrome_profile-aXaY2V"
+  ],
+  "systemInfo": {
+    "gpu": {
+      "devices": [
+        {
+          "vendorId": 4318,
+          "deviceId": 9989,
+          "vendorString": "Google Inc. (NVIDIA Corporation)",
+          "deviceString": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL ES 3.2 NVIDIA 610.57.04)",
+          "driverVendor": "NVIDIA",
+          "driverVersion": "610.57.04"
+        }
+      ],
+      "auxAttributes": {
+        "amdSwitchable": false,
+        "canSupportThreadedTextureMailbox": false,
+        "directRenderingVersion": "",
+        "displayType": "ANGLE_OPENGL",
+        "glExtensions": "GL_AMD_performance_monitor GL_ANGLE_blob_cache GL_ANGLE_client_arrays GL_ANGLE_clip_cull_distance GL_ANGLE_compressed_texture_etc GL_ANGLE_depth_texture GL_ANGLE_framebuffer_blit GL_ANGLE_framebuffer_multisample GL_ANGLE_get_serialized_context_string GL_ANGLE_get_tex_level_parameter GL_ANGLE_instanced_arrays GL_ANGLE_memory_size GL_ANGLE_polygon_mode GL_ANGLE_program_binary_readiness_query GL_ANGLE_program_cache_control GL_ANGLE_renderability_validation GL_ANGLE_request_extension GL_ANGLE_robust_client_memory GL_ANGLE_shader_pixel_local_storage GL_ANGLE_stencil_texturing GL_ANGLE_texture_compression_dxt3 GL_ANGLE_texture_compression_dxt5 GL_ANGLE_texture_multisample GL_ANGLE_translated_shader_source GL_ARM_rgba8 GL_CHROMIUM_bind_generates_resource GL_CHROMIUM_bind_uniform_location GL_CHROMIUM_copy_texture GL_CHROMIUM_framebuffer_mixed_samples GL_CHROMIUM_lose_context GL_EXT_EGL_image_array GL_EXT_EGL_image_external_wrap_modes GL_EXT_blend_func_extended GL_EXT_blend_minmax GL_EXT_clear_texture GL_EXT_clip_control GL_EXT_clip_cull_distance GL_EXT_color_buffer_float GL_EXT_color_buffer_half_float GL_EXT_compressed_ETC1_RGB8_sub_texture GL_EXT_conservative_depth GL_EXT_debug_label GL_EXT_debug_marker GL_EXT_depth_clamp GL_EXT_discard_framebuffer GL_EXT_disjoint_timer_query GL_EXT_draw_buffers_indexed GL_EXT_float_blend GL_EXT_frag_depth GL_EXT_instanced_arrays GL_EXT_map_buffer_range GL_EXT_memory_object GL_EXT_memory_object_fd GL_EXT_multisample_compatibility GL_EXT_multisampled_render_to_texture GL_EXT_multisampled_render_to_texture2 GL_EXT_occlusion_query_boolean GL_EXT_polygon_offset_clamp GL_EXT_read_format_bgra GL_EXT_render_snorm GL_EXT_robustness GL_EXT_sRGB GL_EXT_sRGB_write_control GL_EXT_semaphore GL_EXT_semaphore_fd GL_EXT_shader_texture_lod GL_EXT_shadow_samplers GL_EXT_texture_border_clamp GL_EXT_texture_compression_bptc GL_EXT_texture_compression_dxt1 GL_EXT_texture_compression_rgtc GL_EXT_texture_compression_s3tc_srgb GL_EXT_texture_filter_anisotropic GL_EXT_texture_format_BGRA8888 GL_EXT_texture_mirror_clamp_to_edge GL_EXT_texture_norm16 GL_EXT_texture_rg GL_EXT_texture_sRGB_R8 GL_EXT_texture_sRGB_decode GL_EXT_texture_shadow_lod GL_EXT_texture_storage GL_EXT_unpack_subimage GL_KHR_blend_equation_advanced GL_KHR_blend_equation_advanced_coherent GL_KHR_debug GL_KHR_parallel_shader_compile GL_KHR_robustness GL_KHR_texture_compression_astc_hdr GL_KHR_texture_compression_astc_ldr GL_KHR_texture_compression_astc_sliced_3d GL_NV_fence GL_NV_framebuffer_blit GL_NV_pack_subimage GL_NV_pixel_buffer_object GL_NV_polygon_mode GL_NV_read_depth GL_NV_read_stencil GL_NV_robustness_video_memory_purge GL_NV_shader_noperspective_interpolation GL_OES_EGL_image GL_OES_EGL_image_external GL_OES_EGL_image_external_essl3 GL_OES_EGL_sync GL_OES_compressed_ETC1_RGB8_texture GL_OES_depth24 GL_OES_depth32 GL_OES_depth_texture GL_OES_draw_buffers_indexed GL_OES_element_index_uint GL_OES_fbo_render_mipmap GL_OES_get_program_binary GL_OES_mapbuffer GL_OES_packed_depth_stencil GL_OES_rgb8_rgba8 GL_OES_sample_variables GL_OES_shader_multisample_interpolation GL_OES_standard_derivatives GL_OES_surfaceless_context GL_OES_texture_3D GL_OES_texture_border_clamp GL_OES_texture_float GL_OES_texture_float_linear GL_OES_texture_half_float GL_OES_texture_half_float_linear GL_OES_texture_npot GL_OES_texture_stencil8 GL_OES_texture_storage_multisample_2d_array GL_OES_vertex_array_object ",
+        "glImplementationParts": "(gl=egl-angle,angle=opengl)",
+        "glRenderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL ES 3.2 NVIDIA 610.57.04)",
+        "glResetNotificationStrategy": 33362,
+        "glVendor": "Google Inc. (NVIDIA Corporation)",
+        "glVersion": "OpenGL ES 3.0 (ANGLE 2.1.28468 git hash: 7df613367a1d)",
+        "glWsExtensions": "EGL_EXT_create_context_robustness EGL_KHR_create_context EGL_KHR_image EGL_KHR_image_base EGL_KHR_gl_colorspace EGL_KHR_gl_texture_2D_image EGL_KHR_gl_texture_cubemap_image EGL_KHR_gl_texture_3D_image EGL_KHR_gl_renderbuffer_image EGL_KHR_get_all_proc_addresses EGL_KHR_fence_sync EGL_KHR_wait_sync EGL_ANGLE_create_context_webgl_compatibility EGL_CHROMIUM_create_context_bind_generates_resource EGL_KHR_swap_buffers_with_damage EGL_EXT_pixel_format_float EGL_KHR_surfaceless_context EGL_ANGLE_display_texture_share_group EGL_ANGLE_display_semaphore_share_group EGL_ANGLE_create_context_client_arrays EGL_ANGLE_program_cache_control EGL_ANGLE_robust_resource_initialization EGL_ANGLE_create_context_extensions_enabled EGL_ANDROID_blob_cache EGL_ANDROID_recordable EGL_ANDROID_native_fence_sync EGL_ANGLE_create_context_backwards_compatible EGL_KHR_no_config_context EGL_KHR_create_context_no_error EGL_EXT_image_dma_buf_import EGL_EXT_image_dma_buf_import_modifiers EGL_NV_robustness_video_memory_purge EGL_KHR_reusable_sync EGL_ANGLE_external_context_and_surface EGL_EXT_buffer_age EGL_ANGLE_context_virtualization EGL_ANGLE_memory_usage_report EGL_ANGLE_create_context_passthrough_shaders ",
+        "glWsVendor": "Google Inc. (NVIDIA Corporation)",
+        "glWsVersion": "1.5 (ANGLE 2.1.28468 git hash: 7df613367a1d)",
+        "hardwareSupportsVulkan": true,
+        "inProcessGpu": false,
+        "initializationTime": 0.453497,
+        "isAsan": false,
+        "isClangCoverage": false,
+        "jpegDecodeAcceleratorSupported": false,
+        "maxMsaaSamples": "8",
+        "optimus": false,
+        "passthroughCmdDecoder": true,
+        "pixelShaderVersion": "3.00",
+        "processCrashCount": 0,
+        "sandboxed": true,
+        "skiaBackendType": "GaneshGL",
+        "subpixelFontRendering": true,
+        "targetCpuBits": 64,
+        "vertexShaderVersion": "3.00",
+        "visibilityCallbackCallCount": 0
+      },
+      "featureStatus": {
+        "2d_canvas": "enabled",
+        "direct_rendering_display_compositor": "disabled_off_ok",
+        "gpu_compositing": "enabled",
+        "multiple_raster_threads": "enabled_on",
+        "opengl": "enabled_on",
+        "rasterization": "enabled",
+        "raw_draw": "disabled_off_ok",
+        "skia_graphite": "disabled_off",
+        "trees_in_viz": "disabled_off",
+        "video_decode": "enabled",
+        "video_encode": "disabled_software",
+        "vulkan": "disabled_off",
+        "webgl": "enabled",
+        "webgpu": "enabled",
+        "webgpu_on_vk_via_gl_interop": "enabled",
+        "webnn": "disabled_off"
+      },
+      "driverBugWorkarounds": [
+        "disable_discard_framebuffer",
+        "disable_rgb_to_yuv_conversion",
+        "enable_webgl_timer_query_extensions",
+        "exit_on_context_lost",
+        "force_cube_complete",
+        "init_gl_position_in_vertex_shader",
+        "unpack_overlapping_rows_separately_unpack_buffer",
+        "disabled_extension_GL_KHR_blend_equation_advanced",
+        "disabled_extension_GL_KHR_blend_equation_advanced_coherent"
+      ],
+      "videoDecoding": [],
+      "videoEncoding": []
+    },
+    "modelName": "",
+    "modelVersion": "",
+    "commandLine": "/usr/bin/google-chrome --allow-pre-commit-input --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-crash-reporter --disable-default-apps --disable-dev-shm-usage --disable-hang-monitor --disable-infobars --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-search-engine-choice-screen --disable-sync --enable-automation --export-tagged-pdf --force-color-profile=srgb --generate-pdf-document-outline --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --disable-features=Translate,AcceptCHFrame,MediaRouter,OptimizationHints,WebUIReloadButton,WebUIOmniboxPopup,WebUIOmniboxAimPopup,ProcessPerSiteUpToMainFrameThreshold,IsolateSandboxedIframes --enable-features=PdfOopif --disable-extensions --window-size=1460,1020 --remote-debugging-port=0 --user-data-dir=/tmp/puppeteer_dev_chrome_profile-aXaY2V --ozone-platform=wayland --flag-switches-begin --flag-switches-end --render-node-override=/dev/dri/renderD128 about:blank"
+  }
+}

@@ -1,0 +1,404 @@
+{
+  "checkedAt": "2026-09-08T19:08:00.107Z",
+  "engine": "chromium",
+  "base": "http://127.0.0.1:4196",
+  "os": "Fedora Linux 44 / 7.1.13-200.fc44.x86_64",
+  "cpu": "AMD Ryzen 7 5700X3D 8-Core Processor",
+  "viewport": {
+    "width": 1440,
+    "height": 900,
+    "deviceScaleFactor": 1
+  },
+  "headless": false,
+  "budgetsCommit": "d6dd37f",
+  "artifacts": [
+    {
+      "id": "cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410",
+      "sha256": "4a9037e4db68a6cd55cd3db90a0aa50988b550ca1f3cd7d68125d4a35f6473b6"
+    },
+    {
+      "id": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43",
+      "sha256": "6dea8e06c7a3f40ac306b07236dcbd3779ba8cf4e87caaa3e490069217760cd4"
+    },
+    {
+      "id": "cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a",
+      "sha256": "5f4887e391bafe1ded5e82519e42ceaaed35998655810b61b1f4019571cfb00d"
+    },
+    {
+      "id": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+      "sha256": "8eff07f47eba43f30f5084232c0f4bfd086f6cc740660ad9435f6493c044e3cf"
+    },
+    {
+      "id": "trafalgar-square-london",
+      "sha256": "3636dcb2c69face98dea581333c9309ed5c021364a0b953074b1a98c19e2fc6a"
+    }
+  ],
+  "cold": [],
+  "functional": [],
+  "sustained": [],
+  "lifecycle": [],
+  "failures": [],
+  "build": {
+    "index-CdNYqW5q.css": "06f29bdd9fe5db477aa2ee64ba5fa1981eba2f8a290ca69fb8d9669a28ef6171",
+    "index-DevJONO8.js": "1066bbce2b64afb954b1dd6a22ae70a1d45b0b0e57eea8eda364af2bb3832618",
+    "load-fixture-6987g8ig.js": "a1c101317e5e8944faff984099678f493afe5b65a08d4d63b066b38355e9c1f0",
+    "vehicle-BLw_iexE.js": "238a8022be918ba2d5bc484ce8bed402f3349ad30d65263c9b23641f7262e24d"
+  },
+  "runnerSha256": "797e5bf01f631c170ea6be5b3621342162c38191e890f53a4185b44110e27074",
+  "protocolObserverSha256": "83ee4aa527670751833da067127b67ddddc8a07e19a5d7b7774fc87f7a09ce1c",
+  "sustainedSelection": null,
+  "commit": "7222cd4681524a3b8bb3dc336ec35051ba59b7a0",
+  "diffSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "supportSha256": "1a0514416c6d7b00a5e82b93c0dc8268d22161fb000b3e2af78e5178dd8773c3",
+  "workload": "Fedora Wayland desktop; ordinary background apps, canonical and isolated previews; no parallel build/test/benchmark. Operator focus availability not confirmed; foreground guard enforced.",
+  "loadBefore": [
+    13.1,
+    8.91,
+    4.68
+  ],
+  "browser": "Chrome/152.0.7977.82",
+  "launchArgs": [
+    "/usr/bin/google-chrome",
+    "--allow-pre-commit-input",
+    "--disable-background-networking",
+    "--disable-background-timer-throttling",
+    "--disable-backgrounding-occluded-windows",
+    "--disable-breakpad",
+    "--disable-client-side-phishing-detection",
+    "--disable-component-extensions-with-background-pages",
+    "--disable-crash-reporter",
+    "--disable-default-apps",
+    "--disable-dev-shm-usage",
+    "--disable-hang-monitor",
+    "--disable-infobars",
+    "--disable-ipc-flooding-protection",
+    "--disable-popup-blocking",
+    "--disable-prompt-on-repost",
+    "--disable-renderer-backgrounding",
+    "--disable-search-engine-choice-screen",
+    "--disable-sync",
+    "--enable-automation",
+    "--export-tagged-pdf",
+    "--force-color-profile=srgb",
+    "--generate-pdf-document-outline",
+    "--metrics-recording-only",
+    "--no-first-run",
+    "--password-store=basic",
+    "--use-mock-keychain",
+    "--disable-features=Translate,AcceptCHFrame,MediaRouter,OptimizationHints,WebUIReloadButton,WebUIOmniboxPopup,WebUIOmniboxAimPopup,ProcessPerSiteUpToMainFrameThreshold,IsolateSandboxedIframes",
+    "--enable-features=PdfOopif",
+    "--disable-extensions",
+    "about:blank",
+    "--enable-precise-memory-info",
+    "--window-size=1460,1020",
+    "--remote-debugging-port=0",
+    "--user-data-dir=/tmp/puppeteer_dev_chrome_profile-NJSbth"
+  ],
+  "servedBuildVerified": true,
+  "renderer": {
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+    "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4070 Ti SUPER/PCIe/SSE2, OpenGL ES 3.2)",
+    "vendor": "Google Inc. (NVIDIA Corporation)",
+    "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+    "memoryApi": true,
+    "viewport": {
+      "width": 1440,
+      "height": 900,
+      "dpr": 1.0000000298023224
+    },
+    "hidden": false,
+    "hasFocus": false
+  },
+  "lifecycleAttempt": {
+    "cycle": 1,
+    "id": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+    "drives": [],
+    "resetsCompleted": 0
+  },
+  "lastPageSnapshot": {
+    "at": 13443.800000011921,
+    "state": {
+      "engine": "three.js r179",
+      "zoneSlug": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+      "roadTriangles": "1800",
+      "buildingTriangles": "33372",
+      "qaLines": "0",
+      "sourceVisible": "false",
+      "generatedVisible": "true",
+      "physicsStatus": "running",
+      "physicsSteps": "25",
+      "drivingMode": "driving",
+      "cameraOwner": "chase",
+      "qualificationResources": "{\"geometries\":20,\"textures\":0,\"programs\":4,\"colliders\":7,\"bodies\":1,\"controllers\":1,\"droppedMs\":0}",
+      "collisionVisible": "false",
+      "vehicleStatus": "ready",
+      "physicsColliders": "7",
+      "physicsSetupMs": "170.5",
+      "physicsInitializationMs": "347.39999997615814",
+      "playEnvelope": "{\"minimumX\":-349.0164489746094,\"maximumX\":349.0157165527344,\"minimumZ\":-349.0090026855469,\"maximumZ\":348.9909973144531}",
+      "boundaryHeight": "20",
+      "vehiclePose": "{\"position\":{\"x\":-318.2891540527344,\"y\":0.796369731426239,\"z\":318.9963073730469},\"rotation\":{\"x\":-0.0031282438430935144,\"y\":-0.7309947609901428,\"z\":-0.0033515500836074352,\"w\":0.682367742061615},\"wheels\":[{\"length\":0.38878243446350097,\"steering\":0,\"rotation\":0.2984332740306854},{\"length\":0.38878171920776367,\"steering\":0,\"rotation\":0.29843318462371826},{\"length\":0.36402475118637084,\"steering\":0,\"rotation\":0.29875943064689636},{\"length\":0.36402403593063354,\"steering\":0,\"rotation\":0.2987592816352844}]}",
+      "vehicleSpeed": "0.752656124539311",
+      "vehicleResets": "0",
+      "vehicleRecoveries": "0",
+      "chaseCamera": "{\"target\":[-318.28912915039064,1.146365946650505,318.99630932617185],\"position\":[-309.25961222875645,6.668587934072817,319.6185126489812],\"occluded\":false,\"overhead\":false}"
+    },
+    "hidden": false,
+    "hasFocus": true,
+    "focus": "CANVAS",
+    "diagnostics": {
+      "rafCount": 39,
+      "lastRaf": 1847.3,
+      "timerCount": 126,
+      "lastTimer": 13417.800000011921,
+      "focusEvents": [
+        {
+          "name": "focus",
+          "at": 18.200000017881393,
+          "hidden": false,
+          "hasFocus": true,
+          "target": null
+        },
+        {
+          "name": "blur",
+          "at": 1070.9000000059605,
+          "hidden": false,
+          "hasFocus": false,
+          "target": null
+        },
+        {
+          "name": "pageshow",
+          "at": 1072,
+          "hidden": false,
+          "hasFocus": false,
+          "target": null
+        },
+        {
+          "name": "focus",
+          "at": 1402,
+          "hidden": false,
+          "hasFocus": true,
+          "target": null
+        },
+        {
+          "name": "focus",
+          "at": 1403.300000011921,
+          "hidden": false,
+          "hasFocus": true,
+          "target": "CANVAS"
+        },
+        {
+          "name": "focusin",
+          "at": 1403.300000011921,
+          "hidden": false,
+          "hasFocus": true,
+          "target": "CANVAS"
+        }
+      ],
+      "errors": []
+    },
+    "protocol": {
+      "version": 1,
+      "clock": "page performance.now milliseconds",
+      "phase": "drive",
+      "startedAt": 1436.6000000238419,
+      "endedAt": null,
+      "complete": false,
+      "intervals": [
+        {
+          "phase": "drive",
+          "startMs": 1436.6000000238419,
+          "endMs": 13436.5,
+          "startState": {
+            "mode": "driving",
+            "physics": "running",
+            "vehicle": "ready",
+            "steps": 1,
+            "hidden": false,
+            "hasFocus": true
+          },
+          "endState": {
+            "mode": "driving",
+            "physics": "running",
+            "vehicle": "ready",
+            "steps": 25,
+            "hidden": false,
+            "hasFocus": true
+          },
+          "source": "checkpoint:start",
+          "invalid": []
+        }
+      ],
+      "checkpoints": [
+        {
+          "label": "start",
+          "atMs": 1436.7000000178814,
+          "phase": "drive",
+          "state": {
+            "mode": "driving",
+            "physics": "running",
+            "vehicle": "ready",
+            "steps": 1,
+            "hidden": false,
+            "hasFocus": true
+          }
+        }
+      ],
+      "violations": [],
+      "droppedRecords": 0,
+      "timingScope": "Observed state intervals; mutation times are delivery times, not exact onset times.",
+      "totals": {
+        "driveMs": 11999.899999976158,
+        "resetMs": 0,
+        "unexpectedMs": 0
+      },
+      "accepted": false
+    }
+  },
+  "error": "Error: External physics-progress deadline exceeded",
+  "interruption": {
+    "at": 13443.800000011921,
+    "state": {
+      "engine": "three.js r179",
+      "zoneSlug": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+      "roadTriangles": "1800",
+      "buildingTriangles": "33372",
+      "qaLines": "0",
+      "sourceVisible": "false",
+      "generatedVisible": "true",
+      "physicsStatus": "running",
+      "physicsSteps": "25",
+      "drivingMode": "driving",
+      "cameraOwner": "chase",
+      "qualificationResources": "{\"geometries\":20,\"textures\":0,\"programs\":4,\"colliders\":7,\"bodies\":1,\"controllers\":1,\"droppedMs\":0}",
+      "collisionVisible": "false",
+      "vehicleStatus": "ready",
+      "physicsColliders": "7",
+      "physicsSetupMs": "170.5",
+      "physicsInitializationMs": "347.39999997615814",
+      "playEnvelope": "{\"minimumX\":-349.0164489746094,\"maximumX\":349.0157165527344,\"minimumZ\":-349.0090026855469,\"maximumZ\":348.9909973144531}",
+      "boundaryHeight": "20",
+      "vehiclePose": "{\"position\":{\"x\":-318.2891540527344,\"y\":0.796369731426239,\"z\":318.9963073730469},\"rotation\":{\"x\":-0.0031282438430935144,\"y\":-0.7309947609901428,\"z\":-0.0033515500836074352,\"w\":0.682367742061615},\"wheels\":[{\"length\":0.38878243446350097,\"steering\":0,\"rotation\":0.2984332740306854},{\"length\":0.38878171920776367,\"steering\":0,\"rotation\":0.29843318462371826},{\"length\":0.36402475118637084,\"steering\":0,\"rotation\":0.29875943064689636},{\"length\":0.36402403593063354,\"steering\":0,\"rotation\":0.2987592816352844}]}",
+      "vehicleSpeed": "0.752656124539311",
+      "vehicleResets": "0",
+      "vehicleRecoveries": "0",
+      "chaseCamera": "{\"target\":[-318.28912915039064,1.146365946650505,318.99630932617185],\"position\":[-309.25961222875645,6.668587934072817,319.6185126489812],\"occluded\":false,\"overhead\":false}"
+    },
+    "hidden": false,
+    "hasFocus": true,
+    "focus": "CANVAS",
+    "diagnostics": {
+      "rafCount": 39,
+      "lastRaf": 1847.3,
+      "timerCount": 126,
+      "lastTimer": 13417.800000011921,
+      "focusEvents": [
+        {
+          "name": "focus",
+          "at": 18.200000017881393,
+          "hidden": false,
+          "hasFocus": true,
+          "target": null
+        },
+        {
+          "name": "blur",
+          "at": 1070.9000000059605,
+          "hidden": false,
+          "hasFocus": false,
+          "target": null
+        },
+        {
+          "name": "pageshow",
+          "at": 1072,
+          "hidden": false,
+          "hasFocus": false,
+          "target": null
+        },
+        {
+          "name": "focus",
+          "at": 1402,
+          "hidden": false,
+          "hasFocus": true,
+          "target": null
+        },
+        {
+          "name": "focus",
+          "at": 1403.300000011921,
+          "hidden": false,
+          "hasFocus": true,
+          "target": "CANVAS"
+        },
+        {
+          "name": "focusin",
+          "at": 1403.300000011921,
+          "hidden": false,
+          "hasFocus": true,
+          "target": "CANVAS"
+        }
+      ],
+      "errors": []
+    },
+    "protocol": {
+      "version": 1,
+      "clock": "page performance.now milliseconds",
+      "phase": "drive",
+      "startedAt": 1436.6000000238419,
+      "endedAt": null,
+      "complete": false,
+      "intervals": [
+        {
+          "phase": "drive",
+          "startMs": 1436.6000000238419,
+          "endMs": 13436.5,
+          "startState": {
+            "mode": "driving",
+            "physics": "running",
+            "vehicle": "ready",
+            "steps": 1,
+            "hidden": false,
+            "hasFocus": true
+          },
+          "endState": {
+            "mode": "driving",
+            "physics": "running",
+            "vehicle": "ready",
+            "steps": 25,
+            "hidden": false,
+            "hasFocus": true
+          },
+          "source": "checkpoint:start",
+          "invalid": []
+        }
+      ],
+      "checkpoints": [
+        {
+          "label": "start",
+          "atMs": 1436.7000000178814,
+          "phase": "drive",
+          "state": {
+            "mode": "driving",
+            "physics": "running",
+            "vehicle": "ready",
+            "steps": 1,
+            "hidden": false,
+            "hasFocus": true
+          }
+        }
+      ],
+      "violations": [],
+      "droppedRecords": 0,
+      "timingScope": "Observed state intervals; mutation times are delivery times, not exact onset times.",
+      "totals": {
+        "driveMs": 11999.899999976158,
+        "resetMs": 0,
+        "unexpectedMs": 0
+      },
+      "accepted": false
+    }
+  },
+  "loadAfter": [
+    14.92,
+    9.49,
+    4.94
+  ]
+}
