@@ -17,6 +17,10 @@ describe('saved Chrome trace validation', () => {
     input.traceEvents.push(event('driveability:step', 'e', 135), event('driveability:step', 'b', 120));
     expect(summarizeTrace(input, 3).valid).toBe(true);
   });
+  it('matches the final span despite rounded timestamps across the completion marker', () => {
+    const input = trace(); input.traceEvents[5].ts = 141;
+    expect(summarizeTrace(input, 2).valid).toBe(true);
+  });
   it('rejects a missing end even when the number of starts matches', () => {
     const input = trace(); input.traceEvents.splice(2, 1);
     expect(summarizeTrace(input, 2).valid).toBe(false);

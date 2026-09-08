@@ -7,13 +7,14 @@ export function summarizeTrace(trace, expectedSteps = 7200) {
   // Chrome encodes zero-duration User Timing measures as nestable async
   // instants (n). Count those too, but reject unclosed or unmatched spans.
   const measures = name => {
-    const selected = events.filter(e => e.name === name && e.pid === start?.pid && e.ts <= end?.ts)
+    if (!start || !end) return { count: 0, complete: false };
+    const selected = events.filter(e => e.name === name && e.pid === start?.pid)
       .sort((a, b) => a.ts - b.ts || (a.ph === 'e' ? -1 : b.ph === 'e' ? 1 : 0));
     const open = new Map();
     let count = 0, complete = true;
     for (const event of selected) {
       const key = JSON.stringify([event.pid, event.tid, event.id2, event.id]);
-      const measured = event.ts >= start.ts;
+      const measured = event.ts >= start.ts && event.ts <= end.ts;
       if (event.ph === 'n' && measured) count++;
       if (event.ph === 'b') {
         const stack = open.get(key) ?? [];
@@ -21,12 +22,14 @@ export function summarizeTrace(trace, expectedSteps = 7200) {
         if (measured) count++;
       } else if (event.ph === 'e') {
         // Chrome can reuse async IDs after a measure closes. Match in time
-        // order, including a warm-up frame whose end crosses measure-start.
+        // order, including a warm-up frame crossing measure-start. Match ends
+        // from the whole saved trace: rounded measure timestamps can put the
+        // final end just after the higher-resolution completion mark.
         const began = open.get(key)?.pop();
         if (measured && began === undefined) complete = false;
       }
     }
-    for (const stack of open.values()) if (stack.some(ts => ts >= start.ts)) complete = false;
+    for (const stack of open.values()) if (stack.some(ts => ts >= start.ts && ts <= end.ts)) complete = false;
     return { count, complete };
   };
   const steps = measures('driveability:step'), frames = measures('driveability:frame');
