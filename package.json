@@ -19,8 +19,8 @@
     "zone:artifact:inspect": "tsx tools/zone-compiler/src/run.ts inspect",
     "zone:verify": "tsx tools/zone-compiler/src/run.ts verify",
     "verify": "npm run zone:verify && npm test && npm run check && npm run build",
-    "test": "vitest run",
-    "test:watch": "vitest",
+    "test": "vitest run tests && node --test tools/physics/qualification-protocol.test.mjs",
+    "test:watch": "vitest tests",
     "zone:request": "tsx tools/zone-compiler/src/run.ts request",
     "zone:acquire": "tsx tools/zone-compiler/src/run.ts acquire",
     "zone:create": "tsx tools/zone-compiler/src/run.ts create",
@@ -33,7 +33,10 @@
     "vehicle:measure": "tsx tools/physics/measure-vehicle.ts",
     "vehicle:browser": "node tools/physics/verify-vehicle-browser.mjs",
     "driving:browser": "node tools/physics/verify-driving-browser.mjs",
-    "driving:generation": "node tools/physics/verify-driving-generation.mjs"
+    "driving:generation": "node tools/physics/verify-driving-generation.mjs",
+    "benchmark:bake": "tsx tools/physics/benchmark/bake-route.ts",
+    "benchmark:run": "node tools/physics/benchmark/run-browser.mjs",
+    "benchmark:compare": "node tools/physics/benchmark/compare.mjs"
   },
   "dependencies": {
     "@dimforge/rapier3d-compat": "0.20.0",

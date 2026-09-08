@@ -9,9 +9,12 @@ export interface VehicleSnapshot extends Pose { wheels: { length: number; steeri
 export interface VehicleState { status: 'ready' | 'unavailable'; message: string; resets: number; recoveries: number; inputReady: boolean }
 
 /** The session owns this controller and calls beforeStep -> world.step -> afterStep at 60 Hz. */
-export function createVehicle(physical: PhysicalWorld, artifact: ZoneArtifact) {
+export function createVehicle(physical: PhysicalWorld, artifact: ZoneArtifact, fixtureStart?: Pose) {
   const search = createSpawnSearch(artifact, physical);
-  const start = search.find();
+  // Only the opt-in benchmark supplies a frozen fixture start. Apply the same
+  // full spawn validation; ordinary driving continues to use generic search.
+  if (fixtureStart && !search.validate(fixtureStart).clear) throw new Error('Benchmark fixture start is not safe');
+  const start = fixtureStart ? { pose: fixtureStart, attempts: 1, rejections: {} } : search.find();
   let body: RAPIER.RigidBody | undefined;
   let controller: RAPIER.DynamicRayCastVehicleController | undefined;
   let previous: VehicleSnapshot | undefined, current: VehicleSnapshot | undefined;

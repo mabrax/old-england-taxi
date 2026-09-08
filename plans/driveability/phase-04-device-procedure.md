@@ -1,5 +1,7 @@
 # Phase 04 — Remaining browser/device procedure
 
+> **Desktop priority amendment — 2026-09-08:** The user has prioritized desktop web driving and authorized the [repeatable desktop benchmark](./desktop-benchmark/README.md). iPad Safari session, interaction, performance and accessibility acceptance is **deferred, not passed**; preserve the existing touch behavior and all historical evidence. Chrome is the first profiling target, not a decision to support Chromium alone. The desktop browser/OS matrix, including the existing desktop Safari gate, remains open. Fixed desktop budgets and unresolved sustained/lifecycle/memory gates remain in force.
+
 **Open acceptance gate.** Actual desktop Safari and representative iPad Safari evidence is required. Linux Chromium touch/viewports and Firefox do not establish Safari, iPad ergonomics, browser chrome, accessibility or device performance. No native app is required. Apply the unchanged numeric targets and durations in the [Phase 04 brief](./phase-04-qualification.md#prospective-budgets-fixed-before-acceptance-runs); preserve failures. Do not close the full stage exit from this procedure alone.
 
 ## Reproduce the available runs

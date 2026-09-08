@@ -1,5 +1,7 @@
 # 03 — Driveability
 
+> **Desktop priority amendment — 2026-09-08:** The user has prioritized desktop web driving and authorized the [repeatable desktop benchmark](./desktop-benchmark/README.md). iPad Safari session, interaction, performance and accessibility acceptance is **deferred, not passed**; preserve the existing touch behavior and all historical evidence. Chrome is the first profiling target, not a decision to support Chromium alone. The desktop browser/OS matrix, including the existing desktop Safari gate, remains open. Fixed desktop budgets and unresolved sustained/lifecycle/memory gates remain in force.
+
 See the [rollout roadmap](../README.md) for stage order and dependencies.
 
 ## Goal

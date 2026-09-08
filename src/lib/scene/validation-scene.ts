@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { createBenchmarkReplay, type BenchmarkFixture, type BenchmarkReplay } from '../benchmark/replay';
 import { createDrivingInput, type DrivingAction } from './driving-input';
 import { createChaseCamera } from './chase-camera';
 import { onPageExit } from './page-lifetime';
@@ -22,6 +23,7 @@ import {
 } from './camera';
 
 export interface SceneController {
+  benchmark?: { start: () => void; snapshot: BenchmarkReplay['snapshot'] };
   resetCamera: () => void;
   drive: () => void;
   pauseDriving: (reason?: string) => void;
@@ -51,11 +53,16 @@ export function createValidationScene(
   artifact: ZoneArtifact,
   qa?: ZoneQa,
   onPhysicsState: (state: PhysicsState) => void = () => {},
-  onDrivingState: (state: DrivingState) => void = () => {}
+  onDrivingState: (state: DrivingState) => void = () => {},
+  benchmarkFixture?: BenchmarkFixture
 ): SceneController {
   // Opt-in, passive qualification instrumentation. Observers consume and clear entries;
   // no pose mutation or physics/control handle is exposed to the browser harness.
   const measuring = new URLSearchParams(window.location.search).get('qualify') === '1';
+  const benchmark = benchmarkFixture ? createBenchmarkReplay(benchmarkFixture, undefined, name => {
+    performance.mark(name); performance.clearMarks(name);
+    window.dispatchEvent(new Event(name));
+  }) : undefined;
   const measure = (name: string, start: number, end: number) => {
     performance.measure(name, { start, end });
     performance.clearMeasures(name);
@@ -229,6 +236,7 @@ export function createValidationScene(
   };
   const pauseDriving = (reason = 'Paused. Release controls, then Resume driving.') => {
     if (disposed) return;
+    benchmark?.invalidate(reason);
     input.clear(); physics.pause();
     if (mode !== 'inspect') mode = 'paused';
     message = reason; lastFrame = undefined; notify();
@@ -271,6 +279,7 @@ export function createValidationScene(
   vehicleView.root.visible = false;
   scene.add(vehicleView.root);
   const physics = createPhysicsSession(artifact, state => {
+    if (state.status !== 'running' && benchmark?.active && !benchmark.pendingComplete) benchmark.invalidate(state.message ?? `Physics ${state.status}`);
     renderer.domElement.dataset.physicsStatus = state.status;
     renderer.domElement.dataset.vehicleStatus = state.vehicle?.status ?? 'loading';
     renderer.domElement.dataset.physicsColliders = String(state.metrics?.colliders ?? 0);
@@ -285,7 +294,7 @@ export function createValidationScene(
     }
     onPhysicsState(state);
     notify();
-  }, undefined, measuring ? (start, end) => measure('driveability:step', start, end) : undefined);
+  }, undefined, measuring ? (start, end) => measure('driveability:step', start, end) : undefined, benchmark?.driver);
   renderer.domElement.dataset.physicsStatus = 'loading';
   void physics.ready.then(() => {
     if (disposed || !physics.physical) return;
@@ -323,7 +332,7 @@ export function createValidationScene(
   const render = (now = performance.now()) => {
     if (disposed) return;
     const started = measuring ? performance.now() : 0;
-    if (mode === 'driving') physics.submit(input.command());
+    if (mode === 'driving' && !benchmark) physics.submit(input.command());
     physics.advance(now);
     const frames = physics.vehicle?.frames;
     vehicleView.root.visible = !!frames?.current;
@@ -353,6 +362,10 @@ export function createValidationScene(
     }
     renderer.render(scene, camera);
     if (measuring) measure('driveability:frame', started, performance.now());
+    if (benchmark?.active) {
+      benchmark.afterFrame();
+      if (!benchmark.active) { physics.pause(); notify(); }
+    }
     frame = document.hidden ? 0 : window.requestAnimationFrame(render);
   };
 
@@ -367,9 +380,17 @@ export function createValidationScene(
   };
   document.addEventListener('visibilitychange', visibilityChanged);
   window.addEventListener('blur', pause);
+  const benchmarkInput = () => { if (benchmark?.active) pauseDriving('User input during benchmark'); };
+  if (benchmark) {
+    window.addEventListener('keydown', benchmarkInput, true);
+    window.addEventListener('pointerdown', benchmarkInput, true);
+  }
 
   const resize = () => {
     if (disposed) return;
+    if (benchmark?.active && benchmarkFixture && (window.innerWidth !== benchmarkFixture.viewport.width || window.innerHeight !== benchmarkFixture.viewport.height || window.devicePixelRatio !== benchmarkFixture.viewport.deviceScaleFactor)) {
+      pauseDriving('Benchmark viewport changed');
+    }
     const size = getViewportSize(container);
     renderer.setSize(size.width, size.height, false);
     resizeValidationCamera(camera, size);
@@ -381,6 +402,7 @@ export function createValidationScene(
 
   const resetCamera = () => {
     if (disposed) return;
+    if (benchmark?.active) pauseDriving('Camera reset during benchmark');
     if (mode !== 'inspect') { chase.reset(); return; }
     camera.up.set(0, 1, 0);
     controls.minDistance = span * 0.18;
@@ -394,6 +416,7 @@ export function createValidationScene(
 
   const dispose = () => {
     if (disposed) return;
+    benchmark?.invalidate('Scene disposed');
     disposed = true;
     input.dispose();
     physics.dispose();
@@ -401,6 +424,10 @@ export function createValidationScene(
     document.removeEventListener('visibilitychange', visibilityChanged);
     window.removeEventListener('blur', pause);
     window.removeEventListener('orientationchange', orientationChanged);
+    if (benchmark) {
+      window.removeEventListener('keydown', benchmarkInput, true);
+      window.removeEventListener('pointerdown', benchmarkInput, true);
+    }
     detachPageExit();
     observer.disconnect();
     controls.dispose();
@@ -410,22 +437,38 @@ export function createValidationScene(
   };
   const detachPageExit = onPageExit(dispose);
 
+  const drive = () => {
+    if (disposed || blocked || document.hidden || !document.hasFocus() || !roads.visible || !buildings.visible || physics.vehicle?.state.status !== 'ready') return;
+    input.clear(); physics.pause();
+    controls.enableDamping = false; controls.update(); controls.enableDamping = true;
+    controls.enabled = false; controls.minDistance = 3;
+    camera.near = 0.1; camera.updateProjectionMatrix();
+    chase.reset(); lastFrame = undefined;
+    mode = 'driving'; message = 'Driving · S / ↓ brakes, then reverses. Space holds the brake.';
+    renderer.domElement.focus({ preventScroll: true });
+    physics.resume(); physics.submit(NEUTRAL); notify();
+  };
+
   return {
+    benchmark: benchmark && benchmarkFixture ? {
+      snapshot: () => ({ ...benchmark.snapshot(), timing: { ...physics.timing }, resources: {
+        colliders: physics.physical?.world.colliders.len() ?? 0,
+        bodies: physics.physical?.world.bodies.len() ?? 0,
+        controllers: physics.physical?.world.vehicleControllers.size ?? 0,
+        geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures, programs: renderer.info.programs?.length
+      } }),
+      start() {
+        const v = benchmarkFixture.viewport;
+        if (disposed || blocked || document.hidden || !document.hasFocus() || benchmark.snapshot().phase !== 'ready' || physics.vehicle?.state.status !== 'ready' || physics.timing.steps !== 0 ||
+            window.innerWidth !== v.width || window.innerHeight !== v.height || window.devicePixelRatio !== v.deviceScaleFactor || qa || collisionVisible || !roads.visible || !buildings.visible) throw new Error('Benchmark needs a fresh ready foreground scene at 1440×900 / DPR 1 with QA off');
+        drive(); benchmark.start();
+        message = 'Benchmark running. Keep this window in the foreground; inspect the trace after completion.'; notify();
+      }
+    } : undefined,
     resetCamera,
     inspectVehicle,
     resetVehicle,
-    drive: () => {
-      if (disposed || blocked || document.hidden || !document.hasFocus() || !roads.visible || !buildings.visible || physics.vehicle?.state.status !== 'ready') return;
-      input.clear(); physics.pause();
-      // Flush orbit inertia before disabling it; only chase writes the camera in driving/paused mode.
-      controls.enableDamping = false; controls.update(); controls.enableDamping = true;
-      controls.enabled = false; controls.minDistance = 3;
-      camera.near = 0.1; camera.updateProjectionMatrix();
-      chase.reset(); lastFrame = undefined;
-      mode = 'driving'; message = 'Driving · S / ↓ brakes, then reverses. Space holds the brake.';
-      renderer.domElement.focus({ preventScroll: true });
-      physics.resume(); physics.submit(NEUTRAL); notify();
-    },
+    drive,
     pauseDriving,
     setDrivingBlocked: value => {
       blocked = value;

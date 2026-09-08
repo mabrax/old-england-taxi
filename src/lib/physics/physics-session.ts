@@ -2,6 +2,13 @@ import type { FirstVehicle, VehicleState } from './vehicle';
 import type { VehicleCommand } from './vehicle-config';
 import type { ZoneArtifact } from '../zone/types';
 import type { PhysicalWorld, WorldMetrics } from './physical-world';
+import type { Pose } from './vehicle-config';
+
+export interface PhysicsStepDriver {
+  startPose: Pose;
+  beforeStep: (vehicle: FirstVehicle) => VehicleCommand | null;
+  afterStep: (vehicle: FirstVehicle) => boolean | void;
+}
 
 export const STEP_MS = 1000 / 60;
 export const MAX_CATCH_UP_STEPS = 5;
@@ -15,7 +22,8 @@ export function createPhysicsSession(
   artifact: ZoneArtifact,
   onState: (state: PhysicsState) => void,
   load: () => Promise<PhysicsModule> = () => import('./vehicle'),
-  measureStep?: (start: number, end: number) => void
+  measureStep?: (start: number, end: number) => void,
+  driver?: PhysicsStepDriver
 ) {
   let physical: PhysicalWorld | undefined;
   let vehicle: FirstVehicle | undefined;
@@ -50,7 +58,7 @@ export function createPhysicsSession(
     await module.initializeRapier();
     if (!isLoading()) return;
     physical = module.createPhysicalWorld(artifact);
-    vehicle = module.createVehicle?.(physical, artifact);
+    vehicle = module.createVehicle?.(physical, artifact, driver?.startPose);
     publish({ status: 'paused', metrics: { ...physical.metrics, ...(vehicle ? { colliders: physical.world.colliders.len(), rigidBodies: physical.world.bodies.len() } : {}) }, vehicle: vehicle?.state, initializationMs: performance.now() - started });
   });
   const ready = Promise.race([initializing, timeout, cancelled]).catch(fail).finally(() => clearTimeout(deadline));
@@ -92,6 +100,11 @@ export function createPhysicsSession(
       accumulator = Math.min(accumulator + elapsed, budget);
       try {
         for (let steps = 0; steps < MAX_CATCH_UP_STEPS && accumulator + 1e-8 >= STEP_MS; steps++) {
+          if (driver && vehicle) {
+            const command = driver.beforeStep(vehicle);
+            if (!command) { vehicle.clearInput(); resetClock(); publish({ ...state, status: 'paused', vehicle: vehicle.state }); break; }
+            if (!vehicle.submit(command)) throw new Error('Benchmark command was rejected');
+          }
           const start = performance.now();
           vehicle?.beforeStep();
           physical.step();
@@ -108,6 +121,9 @@ export function createPhysicsSession(
           timing.maximumStepMs = Math.max(timing.maximumStepMs, duration);
           timing.steps++;
           accumulator = Math.max(0, accumulator - STEP_MS);
+          // Let the scene present the final step and mark completion before it
+          // pauses. A spare catch-up slot must not publish an early pause.
+          if (driver && vehicle && driver.afterStep(vehicle) === false) break;
           if (commandSteps > 0 && --commandSteps === 0) {
             vehicle?.clearInput(); resetClock(); publish({ ...state, status: 'paused', vehicle: vehicle?.state }); break;
           }

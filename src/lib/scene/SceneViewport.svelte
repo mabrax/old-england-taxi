@@ -6,6 +6,7 @@
   import { createValidationScene, type SceneController, type DrivingMode, type DrivingState } from './validation-scene';
   import type { PhysicsState } from '../physics/physics-session';
   import { onPageExit } from './page-lifetime';
+  import type { BenchmarkFixture, BenchmarkReplay } from '../benchmark/replay';
 
   export let blocked = false;
   export let drivingMode: DrivingMode = 'inspect';
@@ -27,6 +28,13 @@
   let physics: PhysicsState = { status: 'loading' };
   let collisionVisible = false;
   let vehicleHarness = false;
+  let benchmarkFixture: BenchmarkFixture | undefined;
+  let benchmarkReport: ReturnType<BenchmarkReplay['snapshot']> | undefined;
+  let benchmarkError = '';
+  function startBenchmark() {
+    try { controller?.benchmark?.start(); benchmarkError = ''; }
+    catch (error) { benchmarkError = String(error); }
+  }
   $: controller?.setDrivingBlocked(blocked);
   $: controller?.setQaVisibility(qaEnabled && sourceVisible, generatedVisible);
   $: controller?.setCollisionVisibility(collisionVisible);
@@ -48,6 +56,7 @@
       disposed = true;
       detachPageExit();
       loadController.abort();
+      if (controller?.benchmark && window.__drivingBenchmark === controller.benchmark) delete window.__drivingBenchmark;
       controller?.dispose();
       controller = undefined;
     };
@@ -56,11 +65,20 @@
     const detachPageExit = onPageExit(cleanup);
 
     void loadSelectedZone(window.location.search, undefined, { signal: loadController.signal })
-      .then((loaded) => {
+      .then(async (loaded) => {
         const loadedArtifact = loaded.artifact;
         if (disposed) return;
+        if (new URLSearchParams(window.location.search).has('benchmark')) {
+          const { loadBenchmarkFixture } = await import('../benchmark/load-fixture');
+          benchmarkFixture = await loadBenchmarkFixture(window.location.search, { id: loadedArtifact.slug, sha256: loaded.artifactHash }, loadController.signal);
+          if (disposed) return;
+        }
         artifactSlug = loadedArtifact.slug;
-        controller = createValidationScene(container, loadedArtifact, loaded.qa, state => { physics = state; }, state => { driving = state; drivingMode = state.mode; });
+        controller = createValidationScene(container, loadedArtifact, loaded.qa, state => { physics = state; }, state => {
+          driving = state; drivingMode = state.mode;
+          benchmarkReport = controller?.benchmark?.snapshot();
+        }, benchmarkFixture);
+        if (controller.benchmark) { window.__drivingBenchmark = controller.benchmark; benchmarkReport = controller.benchmark.snapshot(); }
         catalogue = loaded.catalogue;
         qaEnabled = !!loaded.qa;
         reportUrl = loaded.reportUrl;
@@ -118,7 +136,7 @@
         <span class="speed-readout">{Math.abs(driving.speed * 3.6).toFixed(0)} km/h {driving.speed < -0.08 ? '· Reverse' : ''}</span>
         {#if driving.mode === 'driving'}
           <button type="button" on:click={() => controller?.pauseDriving()}>Pause driving</button>
-        {:else}
+        {:else if !benchmarkFixture}
           <button class="drive-primary" type="button" disabled={blocked || physics.vehicle?.status !== 'ready' || !generatedVisible || physics.status === 'error'} on:click={drive}>{driving.mode === 'paused' ? 'Resume driving' : 'Drive'}</button>
         {/if}
         {#if driving.mode !== 'inspect'}<button type="button" on:click={() => controller?.inspectVehicle()}>Inspect</button>{/if}
@@ -126,6 +144,14 @@
         <button type="button" on:click={() => controller?.resetCamera()}>Reset view</button>
       </div>
       <p class="driving-message" role="status">{blocked ? 'Location work in progress. Driving is paused.' : physics.status === 'loading' ? 'Preparing physical world…' : physics.status === 'error' ? 'Physics unavailable. Geometry inspection remains available.' : physics.vehicle?.status === 'unavailable' ? physics.vehicle.message : driving.message}</p>
+      {#if benchmarkFixture}
+        <div class="benchmark-controls driving-toolbar" data-benchmark-phase={benchmarkReport?.phase}>
+          <strong>Driving benchmark · {benchmarkReport?.phase ?? 'preparing'}</strong>
+          <span>{benchmarkReport?.step ?? 0} / {benchmarkFixture.warmupSteps + benchmarkFixture.measuredSteps} steps</span>
+          <button type="button" disabled={blocked || physics.vehicle?.status !== 'ready' || benchmarkReport?.phase !== 'ready'} on:click={startBenchmark}>Start benchmark</button>
+          {#if benchmarkError || benchmarkReport?.failure}<p role="alert">{benchmarkError || benchmarkReport?.failure}</p>{/if}
+        </div>
+      {/if}
       {#if driving.mode === 'driving' && driving.onPavement === false}<p class="driving-surface" role="status">At the pavement edge or off road. Drive back within the amber limit; reset if stuck or overturned.</p>{/if}
       {#if driving.mode !== 'inspect'}
         <p class="driving-help">WASD / arrows · Hold S / ↓ to brake, then reverse · Space to stop · R to reset</p>
