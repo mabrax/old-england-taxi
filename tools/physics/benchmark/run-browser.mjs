@@ -36,7 +36,7 @@ const report = { version: 1, runId: randomUUID(), checkedAt: new Date().toISOStr
   deadlineMs, noScreenshotsDuringRun: true, errors: [] };
 const save = () => writeFileSync(output + '/results.json', JSON.stringify(report, null, 2) + '\n');
 save();
-let browser, page, cdp, tracing = false;
+let browser, page, cdp, traceComplete, tracing = false;
 try {
   const launchArgs = ['--enable-precise-memory-info'];
   if (!headless) launchArgs.push('--window-size=1460,1020');
@@ -72,8 +72,11 @@ try {
   if (mode === 'trace') {
     // Omit screenshot categories. Buffer and output limits fail explicitly on data loss.
     report.traceConfig = { recordMode: 'recordUntilFull', traceBufferSizeInKb: 131072,
-      includedCategories: ['devtools.timeline', 'v8.execute', 'blink.user_timing', 'toplevel', 'cc', 'gpu', 'disabled-by-default-devtools.timeline', 'disabled-by-default-devtools.timeline.frame', 'disabled-by-default-devtools.timeline.stack', 'disabled-by-default-v8.cpu_profiler'],
+      includedCategories: ['devtools.timeline', 'v8.execute', 'blink.user_timing', 'toplevel', 'disabled-by-default-devtools.timeline', 'disabled-by-default-devtools.timeline.frame', 'disabled-by-default-devtools.timeline.stack', 'disabled-by-default-v8.cpu_profiler'],
       excludedCategories: ['*', 'disabled-by-default-devtools.screenshot'] };
+    // A bounded trace can finish early. Subscribe before start so that event and
+    // its partial stream cannot be lost while the real-time workload continues.
+    traceComplete = new Promise(resolve => cdp.once('Tracing.tracingComplete', resolve));
     await cdp.send('Tracing.start', { transferMode: 'ReturnAsStream', streamFormat: 'json', traceConfig: report.traceConfig });
     tracing = true;
     await cdp.send('Tracing.recordClockSyncMarker', { syncId: report.runId });
@@ -86,13 +89,14 @@ try {
     try { window.__drivingBenchmark.start(); } catch (error) { reject(error); }
   })), deadlineMs, 'External wall-clock deadline exceeded; run incomplete');
   report.metrics = { scope: 'entire replay including fixed warm-up; identical counters enabled in all modes', before: metricsBefore.metrics, after: (await cdp.send('Performance.getMetrics')).metrics };
+  save();
+  console.log(JSON.stringify({ stage: 'workload-finished', mode, phase: report.replay.phase, steps: report.replay.step }));
 } catch (error) { report.failure = String(error); }
 finally {
   if (tracing) {
     try {
-      const complete = new Promise(resolve => cdp.once('Tracing.tracingComplete', resolve));
       await bounded(cdp.send('Tracing.end'), 10000, 'Trace stop timed out');
-      const trace = await bounded(complete, 15000, 'Trace flush timed out');
+      const trace = await bounded(traceComplete, 60000, 'Trace flush timed out');
       report.trace = { dataLossOccurred: trace.dataLossOccurred, bytes: 0, path: output + '/trace.json' };
       const file = openSync(report.trace.path, 'wx');
       try {
@@ -111,6 +115,7 @@ finally {
   if (page) {
     try {
       const final = await bounded(page.evaluate(() => ({ replay: window.__drivingBenchmark?.snapshot(), capture: window.__benchmarkCapture,
+        partialProtocol: window.__benchmarkCapture?.protocol ? null : window.__qualificationProtocol?.snapshot(),
         state: { ...document.querySelector('canvas')?.dataset }, canvases: document.querySelectorAll('canvas').length,
         hidden: document.hidden, hasFocus: document.hasFocus() })), 3000, 'Final page snapshot unavailable');
       report.replay = final.replay; report.final = { ...final, capture: undefined };
