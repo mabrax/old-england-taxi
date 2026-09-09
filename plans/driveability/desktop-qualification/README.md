@@ -1,5 +1,7 @@
 # Desktop qualification continuation — 2026-09-08
 
+> **Current disposition — 2026-09-09:** The champion completed independent review through `700cdfd`. The user has deferred the unexplained Chrome frame stall and recorded process-memory investigation to open issues [#2](https://github.com/mabrax/old-england-taxi/issues/2) and [#1](https://github.com/mabrax/old-england-taxi/issues/1). Stage 04 planning can continue. See [disposition](disposition.md) for the decision and limits; the protocol and dated evidence below remain unchanged.
+
 Isolated branch `codex/desktop-qualification-astra`, starting at reviewed `179814c`. Canonical main `712fe6f` and the reviewed benchmark worktree remain unchanged. No runtime, vehicle, compiler, prepared artifact or schema change is planned. The user explicitly selected **Linux Chrome, Linux Firefox, and macOS Microsoft Edge** during this task. Desktop Safari is removed from acceptance scope, superseding its historical gate. iPad acceptance remains deferred. The user has a Mac but explicitly deferred its testing and limited this task to Linux Chrome/Firefox. macOS Edge is not passed and is not a required execution step in this task.
 
 ## Protocol recorded before new acceptance runs
@@ -12,7 +14,7 @@ Lifecycle remains 20 same-tab alternating Lucca/Trafalgar loads, three reset/dri
 
 Use normal Chrome sandboxing and a 1460×1020 outer window, as in the successful benchmark. This is a named configuration change from the older runner's unsized/no-sandbox launch, not proof that either setting caused the historical stall. Record all arguments. Do not change desktop compositor settings or add throttling-disabling flags in response to a failure.
 
-## Supplementary memory method (acceptance unresolved)
+## Supplementary memory method (original protocol)
 
 Keep the original post-GC JS-heap limit and cycle-5-to-20 growth limit. Check every sample against 256 MiB, not just the last. Firefox without reliable forced GC/heap reporting stays unmeasured for that metric.
 
@@ -26,7 +28,7 @@ Run `npm ci`, `npm run verify`, and `npm run preview -- --host 127.0.0.1 --port 
 
 Set `PUPPETEER_MODULE`, `BROWSER_PATH`, `HEADED=1` and `QUALIFICATION_WORKLOAD`. Run `node tools/physics/qualify-browser.mjs chromium http://127.0.0.1:4196 <new-output-directory>`. `FUNCTIONAL_ONLY=1`, `SUSTAINED_ZONE=<original-cell-id>` and `LIFECYCLE_ONLY=1` provide independently recorded subsets; run them sequentially. Substitute `firefox` and its executable for the second engine. Do not reuse output directories or modify original Phase 04/benchmark records.
 
-**Results:** the [qualification record](verification.md) and [immutable-evidence manifest](results-summary.json) now retain Linux Chrome/Firefox cold, functional, sustained, lifecycle, interruption and memory observations. Full acceptance remains open for the unexplained RAF-stall disposition and champion review; no Stage 04 implementation, merge, push or deployment follows from these sessions.
+**Results:** the [qualification record](verification.md) and [immutable-evidence manifest](results-summary.json) now retain Linux Chrome/Firefox cold, functional, sustained, lifecycle, interruption and memory observations. Champion review is complete and the remaining RAF/memory work is explicitly deferred in the [2026-09-09 disposition](disposition.md); no Stage 04 implementation, merge, push or deployment follows from these sessions.
 
 The coordinated Chrome lifecycle completed, but its cycle-20 PSS snapshot retained an `ENOENT` after a child exited during enumeration. That original record remains incomplete for PSS. Before a separate memory repeat, the sampler now permits up to three whole-tree attempts for incomplete reads, retains every attempt, and takes the first complete sample. It never retries a high value to obtain a lower one. Unsupported platforms stay unmeasured immediately. Budgets and active driving are unchanged.
 

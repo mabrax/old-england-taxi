@@ -1,5 +1,7 @@
 # Linux desktop qualification — 2026-09-08
 
+> **Decision update — 2026-09-09:** Independent champion review is complete through `700cdfd`. The user deferred the unexplained RAF stall to [issue #2](https://github.com/mabrax/old-england-taxi/issues/2), alongside recorded process-memory growth in [issue #1](https://github.com/mabrax/old-england-taxi/issues/1). See [current disposition](disposition.md). Both remain unresolved and do not block Stage 04 planning. The report below preserves the original handoff recommendation and unchanged evidence.
+
 **Linux Chrome and Firefox now have passing cold/keyboard, complete sustained-foreground, and 20-cycle lifecycle evidence under the unchanged budgets. Full Phase 04 / Stage 03 acceptance is not recommended yet:** the earlier displayed Chrome RAF stall is reproduced but not causally resolved, and the final disposition of that observation needs champion review. The user has accepted the predeclared Linux memory method; complete process/GPU observations and fixed JS/resource results are supplied, with process-memory growth explicitly retained for review. A successful later session does not turn an earlier incomplete observation into a pass.
 
 The user explicitly limited this task to **Linux Chrome and Firefox**. Desktop Safari is removed from scope. macOS Edge remains a future target whose testing the user explicitly deferred; iPad acceptance also remains deferred. Neither is passed, and neither is a required execution step in this Linux task.

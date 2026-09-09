@@ -2,6 +2,8 @@
 
 > **Desktop priority amendment — 2026-09-08:** The user has prioritized desktop web driving and authorized the [repeatable desktop benchmark](./desktop-benchmark/README.md). iPad Safari session, interaction, performance and accessibility acceptance is **deferred, not passed**; preserve the existing touch behavior and all historical evidence. **Current desktop matrix, explicitly selected by the user in this continuation: Linux Chrome, Linux Firefox, and macOS Microsoft Edge. Desktop Safari is removed from acceptance scope; earlier Safari requirements below are historical and superseded.** Chrome remains the first profiling target. The user explicitly deferred macOS Edge testing and limited this continuation to Linux Chrome/Firefox; Linux evidence does not qualify the deferred Mac target. See the [desktop continuation](./desktop-qualification/README.md). Fixed desktop budgets and unresolved sustained/lifecycle/memory gates remain in force.
 
+> **Follow-up decision — 2026-09-09:** Linux qualification evidence is independently reviewed through `700cdfd`. The user deferred the unexplained Chrome frame stall to [issue #2](https://github.com/mabrax/old-england-taxi/issues/2), alongside recorded process-memory growth in [issue #1](https://github.com/mabrax/old-england-taxi/issues/1). Both remain unresolved and do not block Stage 04 planning. See the [current disposition](./desktop-qualification/disposition.md); deferred observations are not passed and integration remains pending.
+
 See the [rollout roadmap](../README.md) for stage order and dependencies.
 
 ## Goal
@@ -27,7 +29,7 @@ Four sequential phases follow the [Zone Compiler working agreement](../zone-comp
 1. [Phase 01 — Physical world](./phase-01-physical-world.md) — complete; [verification](./phase-01-verification.md)
 2. [Phase 02 — First vehicle](./phase-02-first-vehicle.md) — complete; [verification](./phase-02-verification.md)
 3. [Phase 03 — Driving interaction](./phase-03-driving-interaction.md) — implemented and independently reviewed; [verification and remaining device evidence](./phase-03-verification.md)
-4. [Phase 04 — Qualification](./phase-04-qualification.md) — original evidence independently reviewed; [new Linux continuation](./desktop-qualification/verification.md) awaits review; full acceptance open; [record](./phase-04-verification.md), [remaining-device procedure](./phase-04-device-procedure.md)
+4. [Phase 04 — Qualification](./phase-04-qualification.md) — original evidence independently reviewed; [Linux continuation](./desktop-qualification/verification.md) independently reviewed through `700cdfd`; residual stall/memory work explicitly deferred in the [current disposition](./desktop-qualification/disposition.md); unconditional stage acceptance is not claimed; [record](./phase-04-verification.md), [remaining-device procedure](./phase-04-device-procedure.md)
 
 ## Bounded scope
 
