@@ -13,3 +13,9 @@ The standalone `index.html` was opened directly from disk in Chromium. No extern
 This verifies the companion artifact. It adds no simulator acceptance evidence or cross-browser qualification claim. Project facts are a dated snapshot of the reviewed plans and handoffs, with canonical integration tracked separately.
 
 After the Linux qualification handoff, the companion was checked again at 1440 px and 720 px. The snapshot date stays visible in the narrow header, the next-decision card selects Driveability, the sources dialog resolves the absolute champion-review path, all 12 unique source references exist, and no horizontal overflow or browser error was observed. The independent simulator evidence review is recorded separately in `reviews/2026-09-08-linux-qualification.md`.
+
+## Follow-up deferral update — 9 September 2026
+
+The companion now records the user's deferral of the Chrome frame stall to issue #2 alongside process-memory growth/GC in issue #1. Both open issue bodies were read back and verified. The qualification plans record the decision at `9506cb1`; implementation/evidence review remains through `700cdfd`. Original evidence and runtime/tooling files are unchanged.
+
+The rebuilt page was inspected at 1440 px and 720 px with no horizontal overflow or browser errors. The next-conversation card selects Stage 04 and focuses its heading; the stall decision expands to the correct issue link. The sources dialog opens to the current disposition, closes with Escape, and all 13 unique local source references resolve. Build freshness and whitespace checks pass. Deferred checks and pending integration remain distinct from implemented/reviewed work.
