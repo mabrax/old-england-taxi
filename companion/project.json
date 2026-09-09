@@ -1,0 +1,442 @@
+{
+  "project": "Old England Taxi",
+  "description": "A driving and route-learning simulator built from real places.",
+  "synced": "2026-09-09",
+  "syncNote": "After the follow-up deferral decision",
+  "currentStage": "03",
+  "nextStage": "04",
+  "headline": "Linux runs reviewed.\nFollow-ups tracked.",
+  "summary": "The Chrome frame stall and recorded memory growth are deferred for later investigation. Next: plan selection and continuity.",
+  "sourceRoot": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi",
+  "canonical": {
+    "branch": "main",
+    "commit": "712fe6f",
+    "label": "Generation foundation"
+  },
+  "reviewed": {
+    "branch": "codex/desktop-qualification-astra",
+    "commit": "9506cb1",
+    "reviewCommit": "700cdfd",
+    "label": "Reviewed Linux qualification + follow-up disposition"
+  },
+  "gatesHeading": "Tracked for later",
+  "integration": {
+    "title": "Integration is a separate step",
+    "note": "Reviewed driving and Linux qualification remain on their branch. Canonical main holds the generation foundation."
+  },
+  "next": {
+    "label": "Next conversation",
+    "targetStage": "04",
+    "title": "Plan selection & continuity",
+    "topics": [
+      "Map selection",
+      "Cache behavior",
+      "Adjacent cells"
+    ],
+    "note": "The stall and memory issues are tracked for later. Neither blocks this planning discussion."
+  },
+  "stages": [
+    {
+      "id": "00",
+      "title": "Project setup",
+      "short": "Foundation",
+      "state": "complete",
+      "status": "Complete",
+      "summary": "An application shell with a working 3D viewport and clear module boundaries.",
+      "outcome": "A stable starting point for the simulator.",
+      "source": "plans/00-project-setup.md",
+      "phases": [
+        {
+          "title": "Application shell",
+          "state": "complete",
+          "status": "Delivered"
+        },
+        {
+          "title": "3D viewport",
+          "state": "complete",
+          "status": "Delivered"
+        }
+      ],
+      "dimensions": [
+        "Delivered",
+        "Reviewed",
+        "Complete",
+        "In main"
+      ]
+    },
+    {
+      "id": "01",
+      "title": "Zone compiler",
+      "short": "OSM → 3D",
+      "state": "complete",
+      "status": "Complete",
+      "summary": "One immutable OpenStreetMap snapshot becomes deterministic roads, buildings and a street graph.",
+      "outcome": "Validated geometry, provenance and reproducible artifacts.",
+      "source": "plans/zone-compiler/README.md",
+      "phases": [
+        {
+          "title": "Fixed OSM source",
+          "state": "complete",
+          "status": "Complete"
+        },
+        {
+          "title": "Local coordinates",
+          "state": "complete",
+          "status": "Complete"
+        },
+        {
+          "title": "Road surfaces",
+          "state": "complete",
+          "status": "Complete"
+        },
+        {
+          "title": "Building volumes",
+          "state": "complete",
+          "status": "Complete"
+        },
+        {
+          "title": "Zone artifact",
+          "state": "complete",
+          "status": "Complete"
+        }
+      ],
+      "dimensions": [
+        "Delivered",
+        "Reviewed",
+        "Complete",
+        "In main"
+      ]
+    },
+    {
+      "id": "02",
+      "title": "Zone generation",
+      "short": "Build a real place",
+      "state": "complete",
+      "status": "Complete",
+      "summary": "Coordinate-based generation qualified across five real cells, extended with place search and local on-demand builds.",
+      "outcome": "Choose a place, build its zone, recover from errors and reuse the verified result.",
+      "source": "plans/parameterized-zone-generation/README.md",
+      "phases": [
+        {
+          "title": "Request & acquisition",
+          "state": "complete",
+          "status": "Complete"
+        },
+        {
+          "title": "Compilation & catalogue",
+          "state": "complete",
+          "status": "Complete"
+        },
+        {
+          "title": "Validation & five-cell QA",
+          "state": "complete",
+          "status": "Complete"
+        },
+        {
+          "title": "On-demand generation",
+          "extension": true,
+          "state": "complete",
+          "status": "Delivered extension"
+        }
+      ],
+      "dimensions": [
+        "Delivered",
+        "Reviewed",
+        "Complete",
+        "In main"
+      ]
+    },
+    {
+      "id": "03",
+      "title": "Driveability",
+      "short": "One cell. One vehicle.",
+      "state": "open",
+      "status": "Follow-ups deferred",
+      "summary": "Drive, collide, inspect and recover inside one flat cell. Linux Chrome/Firefox evidence is independently reviewed; the remaining stall and memory investigations are tracked for later.",
+      "outcome": "Reliable desktop driving, supported by explicit qualification evidence.",
+      "source": "plans/driveability/README.md",
+      "phases": [
+        {
+          "title": "Physical world",
+          "state": "complete",
+          "status": "Complete",
+          "detail": "Ground, building collision, clearance and a marked play boundary."
+        },
+        {
+          "title": "First vehicle",
+          "state": "complete",
+          "status": "Complete",
+          "detail": "Safe spawn, real physics, steering, braking, reverse and recovery."
+        },
+        {
+          "title": "Driving interaction",
+          "state": "reviewed",
+          "status": "Reviewed",
+          "detail": "Keyboard/touch controls, chase camera, pause and inspection ownership."
+        },
+        {
+          "title": "Qualification",
+          "state": "reviewed",
+          "status": "Reviewed",
+          "detail": "Linux cold/keyboard, all four sustained cases and 20-cycle lifecycle evidence pass review. The Chrome RAF stall and recorded process-memory growth remain unresolved in issues #2 and #1. Mac and iPad checks remain deferred."
+        },
+        {
+          "title": "Desktop benchmark",
+          "extension": true,
+          "state": "reviewed",
+          "status": "Reviewed extension",
+          "detail": "A fixed Chicago control tape, deterministic checkpoints and bounded Chrome trace capture."
+        }
+      ],
+      "dimensions": [
+        "Implemented",
+        "Reviewed",
+        "Deferred checks",
+        "Pending"
+      ]
+    },
+    {
+      "id": "04",
+      "title": "Selection & continuity",
+      "short": "Next to plan",
+      "state": "next",
+      "status": "Planning next",
+      "summary": "Define richer map selection and cache behavior, then how adjacent cells connect during driving.",
+      "outcome": "Move between selected areas with understandable loading and continuity.",
+      "source": "plans/03-zone-generalization.md",
+      "phases": [
+        {
+          "title": "Map-based selection",
+          "state": "planned",
+          "status": "Scope to discuss"
+        },
+        {
+          "title": "Richer cache behavior",
+          "state": "planned",
+          "status": "Scope to discuss"
+        },
+        {
+          "title": "Adjacent-cell continuity",
+          "state": "planned",
+          "status": "Scope to discuss"
+        }
+      ],
+      "dimensions": [
+        "Not started",
+        "Not started",
+        "Not assessed",
+        "Not started"
+      ]
+    },
+    {
+      "id": "05",
+      "title": "Geographic fidelity",
+      "short": "Recognize the place",
+      "state": "planned",
+      "status": "Later",
+      "summary": "Add the slopes, crossings and geographic details that materially improve recognition and orientation.",
+      "outcome": "Places become recognizable enough to support spatial memory.",
+      "source": "plans/04-geographic-fidelity.md",
+      "phases": [
+        {
+          "title": "Terrain & road layers",
+          "state": "planned",
+          "status": "Scope to discuss"
+        },
+        {
+          "title": "Buildings & landmarks",
+          "state": "planned",
+          "status": "Scope to discuss"
+        }
+      ],
+      "dimensions": [
+        "Not started",
+        "Not started",
+        "Not assessed",
+        "Not started"
+      ]
+    },
+    {
+      "id": "06",
+      "title": "Training experience",
+      "short": "Study → drive → repeat",
+      "state": "planned",
+      "status": "Later",
+      "summary": "Build a complete route-learning session with progressive aids, recovery from mistakes and a useful review.",
+      "outcome": "Practice a route, understand difficult decisions and repeat with fewer aids.",
+      "source": "plans/05-training-experience.md",
+      "phases": [
+        {
+          "title": "Study & drive",
+          "state": "planned",
+          "status": "Scope to discuss"
+        },
+        {
+          "title": "Review & repetition",
+          "state": "planned",
+          "status": "Scope to discuss"
+        }
+      ],
+      "dimensions": [
+        "Not started",
+        "Not started",
+        "Not assessed",
+        "Not started"
+      ]
+    }
+  ],
+  "gates": [
+    {
+      "title": "#2 · Chrome frame stall",
+      "detail": "Deferred for investigation and fix. Independent RAF stopped while timers continued; later passing runs have not established a cause or fix.",
+      "source": "plans/driveability/desktop-qualification/disposition.md"
+    },
+    {
+      "title": "#1 · Memory growth & GC",
+      "detail": "Deferred for investigation. Complete Linux process/GPU observations are retained; passing Chrome JS limits does not certify a resident-memory plateau.",
+      "source": "plans/driveability/desktop-qualification/disposition.md"
+    }
+  ],
+  "decisions": [
+    {
+      "title": "Chrome stall tracked",
+      "summary": "Issue #2 · investigate and fix later.",
+      "detail": "The user deferred the unexplained frame stall alongside recorded memory growth. Preserve the incomplete attempt and require evidence of a fix or validated mitigation before closing the issue. It does not block next-stage planning.",
+      "kind": "Deferred",
+      "href": "https://github.com/mabrax/old-england-taxi/issues/2",
+      "source": "plans/driveability/desktop-qualification/disposition.md"
+    },
+    {
+      "title": "Memory & GC follow-up",
+      "summary": "Issue #1 · recorded growth included.",
+      "detail": "Investigate resident process-memory growth, allocation pressure and garbage collection later. The issue now includes complete Chrome/Firefox lifecycle observations and their limits. No new profiling campaign is active.",
+      "kind": "Deferred",
+      "href": "https://github.com/mabrax/old-england-taxi/issues/1",
+      "source": "plans/driveability/desktop-qualification/disposition.md"
+    },
+    {
+      "title": "Linux Chrome + Firefox now",
+      "summary": "Safari removed; Mac and iPad deferred.",
+      "detail": "The user removed Safari from desktop scope and deferred macOS Edge testing. This continuation covers Linux Chrome/Firefox only; deferred platforms are not passed.",
+      "kind": "Agreed",
+      "source": "plans/driveability/desktop-qualification/README.md"
+    },
+    {
+      "title": "Linux memory method agreed",
+      "summary": "Complete records; growth stays explicit.",
+      "detail": "Use unchanged post-GC JS limits where available, stable ownership counts, browser-tree PSS for resident native/WASM mappings and separate GPU allocations. Do not sum them or invent a new threshold after measurement.",
+      "kind": "Agreed",
+      "source": "plans/driveability/desktop-qualification/verification.md"
+    },
+    {
+      "title": "Plan the next boundary",
+      "summary": "Planning can move ahead.",
+      "detail": "Stage 04 planning can proceed with both issues explicitly deferred. This scheduling decision does not claim unconditional Driveability acceptance or authorize later-stage implementation.",
+      "kind": "Agreed",
+      "source": "plans/README.md"
+    },
+    {
+      "title": "Keep the foundation intact",
+      "summary": "Deterministic source → geometry.",
+      "detail": "Preserve schema-v1, provenance, bounded acquisition and the compiler/runtime separation. Hosted generation remains a separate decision.",
+      "kind": "Guardrail",
+      "source": "plans/driveability/README.md"
+    },
+    {
+      "title": "Keep phases lean",
+      "summary": "Detail each phase when ready.",
+      "detail": "The roadmap is living. Discuss implementation at the next phase boundary; promote necessary backbone work explicitly and remove duplicated scope.",
+      "kind": "Working agreement",
+      "source": "plans/zone-compiler/README.md"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "A reproducible world",
+      "text": "Immutable OSM, roads, buildings and a street graph.",
+      "status": "Delivered",
+      "state": "complete",
+      "stage": "01"
+    },
+    {
+      "title": "Build somewhere new",
+      "text": "Place search, local generation and connection recovery.",
+      "status": "Delivered",
+      "state": "complete",
+      "stage": "02"
+    },
+    {
+      "title": "A vehicle to drive",
+      "text": "Real physics, collision, chase view and recovery.",
+      "status": "Reviewed",
+      "state": "reviewed",
+      "stage": "03"
+    },
+    {
+      "title": "Two Linux engines checked",
+      "text": "Five-cell controls, sustained runs and 20-cycle lifecycle records.",
+      "status": "Evidence reviewed",
+      "state": "reviewed",
+      "stage": "03"
+    }
+  ],
+  "evidence": [
+    {
+      "title": "Current follow-up decision",
+      "path": "plans/driveability/desktop-qualification/disposition.md",
+      "note": "9 September: unresolved stall and memory work deferred to issues #2 and #1; next-stage planning can continue."
+    },
+    {
+      "title": "Champion independent review",
+      "path": "/home/mabrax/.codex/worktrees/8f0d/old-england-taxi/companion/reviews/2026-09-08-linux-qualification.md",
+      "note": "Independent full verification, raw-evidence checks, memory assessment and remaining acceptance concerns."
+    },
+    {
+      "title": "Roadmap & current direction",
+      "path": "plans/README.md",
+      "note": "Stage ordering and the current platform scope."
+    },
+    {
+      "title": "Linux qualification evidence",
+      "path": "plans/driveability/desktop-qualification/verification.md",
+      "note": "Passing named Linux runs, preserved interruptions and complete memory observations."
+    },
+    {
+      "title": "Earlier desktop benchmark",
+      "path": "plans/driveability/desktop-benchmark/verification.md",
+      "note": "The reviewed Chicago control tape and saved-trace parser foundation."
+    }
+  ],
+  "handoffs": [
+    {
+      "date": "9 Sep",
+      "title": "Follow-ups tracked for later",
+      "detail": "Chrome stall and recorded memory growth are deferred; next is Stage 04 planning.",
+      "reference": "Issues #2 / #1"
+    },
+    {
+      "date": "8 Sep",
+      "title": "Linux qualification reviewed",
+      "detail": "Chrome/Firefox evidence verified; RAF and memory acceptance remain open.",
+      "reference": "700cdfd"
+    },
+    {
+      "date": "8 Sep",
+      "title": "GC investigation deferred",
+      "detail": "Tracked in issue #1 alongside next-phase planning.",
+      "reference": "179814c"
+    },
+    {
+      "date": "8 Sep",
+      "title": "Benchmark reviewed",
+      "detail": "Saved trace validated; final-span rounding bounded to 1 µs.",
+      "reference": "84cedae"
+    },
+    {
+      "date": "7 Sep",
+      "title": "Driveability handed back",
+      "detail": "Implementation reviewed; full stage acceptance remains open.",
+      "reference": "e9743e0"
+    }
+  ]
+}
