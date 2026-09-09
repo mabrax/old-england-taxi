@@ -3,7 +3,7 @@
   import { GenerationApiError, GenerationConnectionError, generationApi, generationFailureMessage, parseGenerationJob, parseLocationChoices } from '../zone/generation-client';
   import { isFinished, type GenerationJob, type LocationChoice } from '../zone/generation-types';
 
-  let { onReady, onProgress }: { onReady: (id: string) => void; onProgress: (job: GenerationJob | undefined) => void } = $props();
+  let { onReady, onProgress, onBusy }: { onBusy: (busy: boolean) => void; onReady: (id: string) => void; onProgress: (job: GenerationJob | undefined) => void } = $props();
   let mode = $state<'place' | 'coordinates'>('place');
   let query = $state('');
   let latitude = $state<number | undefined>();
@@ -23,7 +23,9 @@
   let reconnecting = $state(false);
   let disposed = false;
   let pollTimer: ReturnType<typeof setTimeout> | undefined;
+  let pollRevision = 0;
   const busy = $derived(submitting || !!pendingId || !!job && !isFinished(job.state));
+  $effect(() => { onBusy(busy || searching); });
   const stages = ['queued', 'acquiring', 'compiling', 'verifying', 'ready'];
   const currentStage = $derived(job ? stages.indexOf(job.state) : -1);
   const storageKey = 'zone-generation-job';
@@ -74,19 +76,22 @@
     }
   }
   async function poll(id: string) {
+    const revision = ++pollRevision;
     try {
       const next = parseGenerationJob(await generationApi(`/jobs/${id}`));
-      if (disposed) return;
+      if (disposed || revision !== pollRevision) return;
       connectionError = false; error = '';
       accept(next);
     } catch (reason) {
-      if (disposed) return;
+      if (disposed || revision !== pollRevision) return;
       handleConnectionFailure(reason);
       // Keep the job ID for manual reconnection or a reload; a lost connection is not job failure.
     }
   }
   async function cancel() {
     if (!job) return;
+    // A progress response already in flight must not revive a cancelled job.
+    ++pollRevision;
     clearTimeout(pollTimer);
     try {
       const next = parseGenerationJob(await generationApi(`/jobs/${job.jobId}/cancel`, {}));

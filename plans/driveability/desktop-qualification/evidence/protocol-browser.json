@@ -1,0 +1,697 @@
+{
+  "checkedAt": "2026-09-08T19:05:45.869Z",
+  "browser": "Chrome/152.0.7977.82",
+  "appPerformanceEvidence": false,
+  "cases": [
+    {
+      "kind": "deliberate reset",
+      "protocol": {
+        "version": 1,
+        "clock": "page performance.now milliseconds",
+        "phase": "finished",
+        "startedAt": 18.099999994039536,
+        "endedAt": 115.5,
+        "complete": true,
+        "intervals": [
+          {
+            "phase": "drive",
+            "startMs": 18.5,
+            "endMs": 49.69999998807907,
+            "startState": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            },
+            "endState": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            },
+            "source": "checkpoint:start",
+            "invalid": []
+          },
+          {
+            "phase": "reset",
+            "startMs": 49.69999998807907,
+            "endMs": 49.89999997615814,
+            "startState": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            },
+            "endState": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            },
+            "source": "begin reset 1",
+            "invalid": []
+          },
+          {
+            "phase": "reset",
+            "startMs": 49.89999997615814,
+            "endMs": 80,
+            "startState": {
+              "mode": "paused",
+              "physics": "paused",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            },
+            "endState": {
+              "mode": "paused",
+              "physics": "paused",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            },
+            "source": "mutation:data-driving-mode",
+            "invalid": []
+          },
+          {
+            "phase": "reset",
+            "startMs": 80,
+            "endMs": 80.09999999403954,
+            "startState": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            },
+            "endState": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            },
+            "source": "mutation:data-driving-mode",
+            "invalid": []
+          },
+          {
+            "phase": "drive",
+            "startMs": 80.09999999403954,
+            "endMs": 115.5,
+            "startState": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            },
+            "endState": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            },
+            "source": "checkpoint:resumed 1",
+            "invalid": []
+          }
+        ],
+        "checkpoints": [
+          {
+            "label": "start",
+            "atMs": 18.599999994039536,
+            "phase": "drive",
+            "state": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            }
+          },
+          {
+            "label": "before reset 1",
+            "atMs": 49.69999998807907,
+            "phase": "drive",
+            "state": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            }
+          },
+          {
+            "label": "resumed 1",
+            "atMs": 80.09999999403954,
+            "phase": "drive",
+            "state": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            }
+          }
+        ],
+        "violations": [],
+        "droppedRecords": 0,
+        "timingScope": "Observed state intervals; mutation times are delivery times, not exact onset times.",
+        "totals": {
+          "driveMs": 66.59999999403954,
+          "resetMs": 30.400000005960464,
+          "unexpectedMs": 0
+        },
+        "accepted": true
+      },
+      "testResult": "pass"
+    },
+    {
+      "kind": "paused endpoint",
+      "rejection": "Error: Foreground-driving protocol invalid; retained violations cannot be cleared by reset",
+      "protocol": {
+        "version": 1,
+        "clock": "page performance.now milliseconds",
+        "phase": "finished",
+        "startedAt": 16.599999994039536,
+        "endedAt": 110,
+        "complete": true,
+        "intervals": [
+          {
+            "phase": "drive",
+            "startMs": 17.099999994039536,
+            "endMs": 48.30000001192093,
+            "startState": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            },
+            "endState": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            },
+            "source": "checkpoint:start",
+            "invalid": []
+          },
+          {
+            "phase": "drive",
+            "startMs": 48.30000001192093,
+            "endMs": 110,
+            "startState": {
+              "mode": "paused",
+              "physics": "paused",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            },
+            "endState": {
+              "mode": "paused",
+              "physics": "paused",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            },
+            "source": "mutation:data-driving-mode",
+            "invalid": [
+              "unexpected non-driving mode",
+              "unexpected non-running physics"
+            ]
+          }
+        ],
+        "checkpoints": [
+          {
+            "label": "start",
+            "atMs": 17.200000017881393,
+            "phase": "drive",
+            "state": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            }
+          },
+          {
+            "label": "before reset 28",
+            "atMs": 78.30000001192093,
+            "phase": "drive",
+            "state": {
+              "mode": "paused",
+              "physics": "paused",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            }
+          }
+        ],
+        "violations": [
+          {
+            "atMs": 48.30000001192093,
+            "source": "mutation:data-driving-mode",
+            "phase": "drive",
+            "state": {
+              "mode": "paused",
+              "physics": "paused",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            },
+            "reasons": [
+              "unexpected non-driving mode",
+              "unexpected non-running physics"
+            ]
+          }
+        ],
+        "droppedRecords": 0,
+        "timingScope": "Observed state intervals; mutation times are delivery times, not exact onset times.",
+        "totals": {
+          "driveMs": 31.200000017881393,
+          "resetMs": 0,
+          "unexpectedMs": 61.69999998807907
+        },
+        "accepted": false
+      },
+      "testResult": "pass"
+    },
+    {
+      "kind": "transient pause before reset",
+      "rejection": "Error: Foreground-driving protocol invalid; retained violations cannot be cleared by reset",
+      "protocol": {
+        "version": 1,
+        "clock": "page performance.now milliseconds",
+        "phase": "finished",
+        "startedAt": 15.300000011920929,
+        "endedAt": 78.2000000178814,
+        "complete": true,
+        "intervals": [
+          {
+            "phase": "drive",
+            "startMs": 15.700000017881393,
+            "endMs": 46.60000002384186,
+            "startState": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            },
+            "endState": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            },
+            "source": "checkpoint:start",
+            "invalid": []
+          },
+          {
+            "phase": "drive",
+            "startMs": 46.60000002384186,
+            "endMs": 46.60000002384186,
+            "startState": {
+              "mode": "paused",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            },
+            "endState": {
+              "mode": "paused",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            },
+            "source": "mutation:data-driving-mode",
+            "invalid": [
+              "unexpected non-driving mode"
+            ]
+          },
+          {
+            "phase": "drive",
+            "startMs": 46.60000002384186,
+            "endMs": 46.60000002384186,
+            "startState": {
+              "mode": "driving",
+              "physics": "paused",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            },
+            "endState": {
+              "mode": "driving",
+              "physics": "paused",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            },
+            "source": "mutation:data-physics-status",
+            "invalid": [
+              "unexpected non-running physics"
+            ]
+          },
+          {
+            "phase": "drive",
+            "startMs": 46.60000002384186,
+            "endMs": 78.2000000178814,
+            "startState": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            },
+            "endState": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            },
+            "source": "mutation:data-driving-mode",
+            "invalid": []
+          }
+        ],
+        "checkpoints": [
+          {
+            "label": "start",
+            "atMs": 15.800000011920929,
+            "phase": "drive",
+            "state": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            }
+          },
+          {
+            "label": "before reset 28",
+            "atMs": 46.60000002384186,
+            "phase": "drive",
+            "state": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            }
+          }
+        ],
+        "violations": [
+          {
+            "atMs": 46.60000002384186,
+            "source": "mutation:data-driving-mode",
+            "phase": "drive",
+            "state": {
+              "mode": "paused",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            },
+            "reasons": [
+              "unexpected non-driving mode"
+            ]
+          },
+          {
+            "atMs": 46.60000002384186,
+            "source": "mutation:data-physics-status",
+            "phase": "drive",
+            "state": {
+              "mode": "driving",
+              "physics": "paused",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            },
+            "reasons": [
+              "unexpected non-running physics"
+            ]
+          }
+        ],
+        "droppedRecords": 0,
+        "timingScope": "Observed state intervals; mutation times are delivery times, not exact onset times.",
+        "totals": {
+          "driveMs": 62.5,
+          "resetMs": 0,
+          "unexpectedMs": 0
+        },
+        "accepted": false
+      },
+      "testResult": "pass"
+    },
+    {
+      "kind": "hidden tab",
+      "protocol": {
+        "version": 1,
+        "clock": "page performance.now milliseconds",
+        "phase": "finished",
+        "startedAt": 12.300000011920929,
+        "endedAt": 189,
+        "complete": true,
+        "intervals": [
+          {
+            "phase": "drive",
+            "startMs": 12.599999994039536,
+            "endMs": 46.5,
+            "startState": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            },
+            "endState": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            },
+            "source": "checkpoint:start",
+            "invalid": []
+          },
+          {
+            "phase": "drive",
+            "startMs": 46.5,
+            "endMs": 46.69999998807907,
+            "startState": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": false
+            },
+            "endState": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": false
+            },
+            "source": "window blur",
+            "invalid": [
+              "window lacks focus"
+            ]
+          },
+          {
+            "phase": "drive",
+            "startMs": 46.69999998807907,
+            "endMs": 156.19999998807907,
+            "startState": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": true,
+              "hasFocus": false
+            },
+            "endState": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": true,
+              "hasFocus": false
+            },
+            "source": "visibilitychange",
+            "invalid": [
+              "page hidden",
+              "window lacks focus"
+            ]
+          },
+          {
+            "phase": "drive",
+            "startMs": 156.19999998807907,
+            "endMs": 156.30000001192093,
+            "startState": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": false
+            },
+            "endState": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": false
+            },
+            "source": "visibilitychange",
+            "invalid": [
+              "window lacks focus"
+            ]
+          },
+          {
+            "phase": "drive",
+            "startMs": 156.30000001192093,
+            "endMs": 189,
+            "startState": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            },
+            "endState": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            },
+            "source": "window focus",
+            "invalid": []
+          }
+        ],
+        "checkpoints": [
+          {
+            "label": "start",
+            "atMs": 12.699999988079071,
+            "phase": "drive",
+            "state": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": true
+            }
+          }
+        ],
+        "violations": [
+          {
+            "atMs": 46.5,
+            "source": "window blur",
+            "phase": "drive",
+            "state": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": false
+            },
+            "reasons": [
+              "window lacks focus"
+            ]
+          },
+          {
+            "atMs": 46.69999998807907,
+            "source": "visibilitychange",
+            "phase": "drive",
+            "state": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": true,
+              "hasFocus": false
+            },
+            "reasons": [
+              "page hidden",
+              "window lacks focus"
+            ]
+          },
+          {
+            "atMs": 156.19999998807907,
+            "source": "visibilitychange",
+            "phase": "drive",
+            "state": {
+              "mode": "driving",
+              "physics": "running",
+              "vehicle": "ready",
+              "steps": 120,
+              "hidden": false,
+              "hasFocus": false
+            },
+            "reasons": [
+              "window lacks focus"
+            ]
+          }
+        ],
+        "droppedRecords": 0,
+        "timingScope": "Observed state intervals; mutation times are delivery times, not exact onset times.",
+        "totals": {
+          "driveMs": 66.59999999403954,
+          "resetMs": 0,
+          "unexpectedMs": 109.80000001192093
+        },
+        "accepted": false
+      },
+      "testResult": "pass"
+    }
+  ],
+  "result": "pass"
+}

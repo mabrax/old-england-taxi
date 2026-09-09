@@ -1,0 +1,1769 @@
+{
+  "checkedAt": "2026-09-07T22:07:37.102621+00:00",
+  "baseline": "5b12c38",
+  "prospectiveBudgetCommit": "d6dd37f",
+  "worktree": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi",
+  "branch": "codex/driveability-qualification",
+  "environment": {
+    "os": "Fedora Linux 44",
+    "cpu": "AMD Ryzen 7 5700X3D",
+    "physicalGpu": "NVIDIA RTX 4070 Ti SUPER",
+    "nvidiaDriver": "610.57.04",
+    "node": "v26.8.1",
+    "puppeteerVersion": "25.10.0",
+    "PUPPETEER_MODULE": "/home/mabrax/.npm/_npx/b5218505bf6a8451/node_modules/puppeteer/lib/puppeteer/puppeteer.js",
+    "chromiumExecutable": "/home/mabrax/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome",
+    "firefoxExecutable": "/usr/bin/firefox",
+    "agentBrowserChromiumExecutable": "/home/mabrax/.agent-browser/browsers/chrome-152.0.7977.82/chrome"
+  },
+  "checks": [
+    {
+      "command": "npm run verify",
+      "result": "pass",
+      "scope": "5-cell offline corpus, 248 tests / 24 files, static 0 errors / 0 warnings, production build",
+      "log": "verify.log",
+      "retainedWarning": "Vite chunks larger than 500 kB"
+    },
+    {
+      "command": "npx tsx tools/physics/qualify-physics.ts .zone-cache/phase-04/physics-qualified.json",
+      "result": "pass",
+      "record": "physics.json"
+    },
+    {
+      "command": "npx tsx tools/physics/qualify-source-queries.ts .zone-cache/phase-04/source-queries.json",
+      "result": "pass",
+      "record": "source-queries.json"
+    },
+    {
+      "command": "npm run zone:browser -- http://127.0.0.1:4191",
+      "result": "pass",
+      "record": "zone-browser.json",
+      "outputArchive": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/zone-browser"
+    },
+    {
+      "command": "npm run physics:browser -- http://127.0.0.1:4191 .zone-cache/phase-04/physics-browser",
+      "result": "pass",
+      "exitCode": 0,
+      "record": "physics-browser.json"
+    },
+    {
+      "command": "npm run vehicle:browser -- http://127.0.0.1:4191 .zone-cache/phase-04/vehicle-browser",
+      "result": "pass",
+      "exitCode": 0,
+      "record": "vehicle-browser.json"
+    },
+    {
+      "command": "npm run driving:generation -- http://127.0.0.1:4191 .zone-cache/phase-04/generation-browser",
+      "result": "all assertions completed and final result JSON written; shell session later reported 143, retained",
+      "record": "generation-browser.json"
+    },
+    {
+      "command": "RECORD_DRIVING=1 npm run driving:browser -- http://127.0.0.1:4191 .zone-cache/phase-04/driving-browser-complete",
+      "result": "pass",
+      "exitCode": 0,
+      "record": "driving-browser.json"
+    },
+    {
+      "command": "CAMERA_ONLY=1 npm run driving:browser -- http://127.0.0.1:4191 .zone-cache/phase-04/camera-full-frame",
+      "result": "pass",
+      "exitCode": 0,
+      "record": "camera-browser.json"
+    },
+    {
+      "command": "npm run zone:rendering -- 'http://127.0.0.1:4191/?zone=cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43' .zone-cache/phase-04/rendering-serial",
+      "result": "pass",
+      "exitCode": 0,
+      "record": "rendering.json"
+    },
+    {
+      "command": "node tools/physics/qualify-firefox-interactions.mjs http://127.0.0.1:4191 .zone-cache/phase-04/firefox-interactions-final",
+      "result": "pass",
+      "record": "firefox-interactions.json"
+    },
+    {
+      "command": "HEADED=1 node tools/physics/qualify-browser.mjs chromium http://127.0.0.1:4191 .zone-cache/phase-04/chromium-headed-final",
+      "result": "15 cold + 5 functional + 4 sustained pass; lifecycle stops at cycle 4",
+      "record": "chromium-headed.json"
+    },
+    {
+      "command": "node tools/physics/qualify-browser.mjs firefox http://127.0.0.1:4191 .zone-cache/phase-04/firefox-final",
+      "result": "15 cold + 5 functional + 4 sustained + 20 lifecycle + Back pass; heap unmeasured",
+      "record": "firefox.json"
+    },
+    {
+      "command": "LIFECYCLE_ONLY=1 node tools/physics/qualify-browser.mjs chromium http://127.0.0.1:4191 .zone-cache/phase-04/chromium-headless-lifecycle-final",
+      "result": "20 cycles / 60 resets + JS heap / Back pass",
+      "record": "chromium-memory.json"
+    },
+    {
+      "command": "HEADED=1 LIFECYCLE_ONLY=1 node tools/physics/qualify-browser.mjs chromium http://127.0.0.1:4191 .zone-cache/phase-04/chromium-headed-lifecycle-observed",
+      "result": "startup rendered-vehicle wait timeout; zero completed cycles",
+      "record": "chromium-headed-lifecycle-startup-timeout.json"
+    }
+  ],
+  "finalToolHashes": {
+    "tools/physics/qualify-physics.ts": "ae35dc8c88790569a3e51b285493463426ac663439bc09e3a0bbba8e2bb9655c",
+    "tools/physics/qualify-source-queries.ts": "9c9b76ba37becdf310ca658b9c92928ac4b05487e79e969fd6ddc13c3d463962",
+    "tools/physics/qualify-browser.mjs": "6b8807c8fb7510539247d5be1e501067e3417a7dbbe3be62989c398c71ab0e85",
+    "tools/physics/qualify-firefox-interactions.mjs": "30d05f5338d4d9bfe142115b0280aa2f617ea4a74a1f728c3f9ddbc1a6d793d4",
+    "tools/physics/verify-driving-browser.mjs": "8434e7d3dc34b6c69da4c5e0e3c75868dc98a3e80494a374ec5c6a30512adab3",
+    "tools/physics/box-contact.ts": "5ffaca1625ab03fb726303566c6d2eb3ec56696f57c2dd85e58d6ce778349583",
+    "tools/physics/vehicle-evidence.ts": "11b9a31a61f90eca1eadef891bd9325ad6fdc9053d2a196eb510627282381fef"
+  },
+  "review": {
+    "method": "Inspected named PNGs and sampled extracted recording frames, not every video frame. Exact viewports independently asserted. No FPS inferred from video.",
+    "viewed": [
+      "driving-browser-complete/phone-portrait.png",
+      "camera-full-frame/rear-wall-retraction.png",
+      "camera-full-frame/rear-wall-overhead.png",
+      "firefox-interactions-final/camera-overhead.png",
+      "firefox-interactions-final/module-failure.png",
+      "driving-final-motion-review.png",
+      "driving-final-tail-review.png",
+      "orbit-review.png"
+    ],
+    "additionalCorrectDimensionStillsViewedInPriorSameBuildAttempt": [
+      "driving-browser-verified-viewport/tablet-portrait.png",
+      "driving-browser-verified-viewport/phone-portrait.png",
+      "driving-browser-verified-viewport/phone-landscape.png"
+    ],
+    "limitations": [
+      "Recorded portrait/phone dimensions were wrong in earlier attempts; excluded.",
+      "Post-resize recording/CLI camera crops are excluded from full-frame acceptance; supplemental 1440x900 CDP camera stills used.",
+      "Actual iPad/Safari/physical orientation/browser controls/accessibility untested."
+    ]
+  },
+  "media": [
+    {
+      "path": ".zone-cache/phase-04/camera-full-frame/rear-wall-overhead.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/camera-full-frame/rear-wall-overhead.png",
+      "sha256": "df7a0f20d45de529e1be90045ee0c42de98d1d7f1b86d17224c4415def88f0f0",
+      "bytes": 49632,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/camera-full-frame/rear-wall-retraction.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/camera-full-frame/rear-wall-retraction.png",
+      "sha256": "c2c154743ff32569ea4454a5d613df48781c73305e762d5e64707aabb80ec6d2",
+      "bytes": 51467,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/camera-full-frame/unavailable.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/camera-full-frame/unavailable.png",
+      "sha256": "e308fc85c6386a2d29abeba6a12be51c40c7c59ded840e32fdf8122a958cea2f",
+      "bytes": 229202,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/chase-initial.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/chase-initial.png",
+      "sha256": "f0612ca8012ca89bc4a8973bb99af9898a4f9797bbcac3c525d3cde7ba4407bd",
+      "bytes": 53631,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1280,
+        577
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/chromium-acceptance/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-driving.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/chromium-acceptance/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-driving.png",
+      "sha256": "d4282d9378a196ee8e062a632ff0d821860562c0900a66a11f6b30a3773cb7e6",
+      "bytes": 65910,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/chromium-acceptance/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-overview.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/chromium-acceptance/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-overview.png",
+      "sha256": "59f6505438df534fda203adfa3fbc0b2dd9e4ce1ed5c28b6df6cb313a1093421",
+      "bytes": 191642,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/chromium-acceptance/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-sustained.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/chromium-acceptance/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-sustained.png",
+      "sha256": "f706ce5da654bcbee863b95fbab5612c19bf4d31a7fb84ceb57c91fa1d174479",
+      "bytes": 57153,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/chromium-acceptance/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-driving.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/chromium-acceptance/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-driving.png",
+      "sha256": "a9a0ba653c51e3a4d40017b97241ca2cceb7771713f69203dfc5ef8415122690",
+      "bytes": 64509,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/chromium-acceptance/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-overview.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/chromium-acceptance/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-overview.png",
+      "sha256": "a3b394f4cb5f7a53f5f4d5d5547721597172dd0289e6b39b5f59981b820b1275",
+      "bytes": 231875,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/chromium-acceptance/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-sustained.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/chromium-acceptance/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-sustained.png",
+      "sha256": "f9c05b523106ccbcd75241744632386ba662a414c3a7bfab88c2474c32e74db5",
+      "bytes": 62784,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/chromium-acceptance/cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a-driving.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/chromium-acceptance/cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a-driving.png",
+      "sha256": "23313a4e54d53879634a306a39cbe9376302dba7f9ba35ae60c952afcea18bb1",
+      "bytes": 58695,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/chromium-acceptance/cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a-overview.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/chromium-acceptance/cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a-overview.png",
+      "sha256": "76062f09f48fcb4b2acb855bbb9323525e7396fdb72cc22fd295fe3ef7924b67",
+      "bytes": 185082,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/chromium-acceptance/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87-driving.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/chromium-acceptance/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87-driving.png",
+      "sha256": "81a8da28fce23dff9afc53165eeda26d55c8a72aeab19035be5cef7491a89a4f",
+      "bytes": 59565,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/chromium-acceptance/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87-overview.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/chromium-acceptance/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87-overview.png",
+      "sha256": "79644d8aa3f9582707c0646463a3d29e6c9a31d34d59c76f4217c49a078831e3",
+      "bytes": 282253,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/chromium-acceptance/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87-sustained.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/chromium-acceptance/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87-sustained.png",
+      "sha256": "985be3dbbdef435859a902789b044e7e39704797bb53fd1bb7794c9514760f74",
+      "bytes": 61713,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/chromium-acceptance/trafalgar-square-london-driving.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/chromium-acceptance/trafalgar-square-london-driving.png",
+      "sha256": "0cec5ccf9f79c71f78d060bf2b4fc730aa3a34108c0ad9a702bea5d5c3426ddc",
+      "bytes": 57313,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/chromium-acceptance/trafalgar-square-london-overview.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/chromium-acceptance/trafalgar-square-london-overview.png",
+      "sha256": "df1c93b093c1ef2016d87b889c6a9296ba112ad6a48861b164c1908a41fecc21",
+      "bytes": 232236,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/chromium-acceptance/trafalgar-square-london-sustained.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/chromium-acceptance/trafalgar-square-london-sustained.png",
+      "sha256": "bf28440b1452b4b8acea85f0e95d7edfc6901a4acd087e26e41c14827a14b3e5",
+      "bytes": 56019,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/chromium-headed-final/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-driving.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/chromium-headed-final/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-driving.png",
+      "sha256": "3d44d37d312ca854b1ac151877f594efc0bb9bed4126cf12ce53c5bfef6c38aa",
+      "bytes": 71461,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/chromium-headed-final/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-overview.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/chromium-headed-final/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-overview.png",
+      "sha256": "d33799db492cae2fe22715e448d69fdc604cd6f8bf121a47583f0fd117c8a7b4",
+      "bytes": 195152,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/chromium-headed-final/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-sustained.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/chromium-headed-final/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-sustained.png",
+      "sha256": "8c7fc28a47fbf73b5dcc669704d8125fe803fbf29fb18722e45fd872f5a8c3de",
+      "bytes": 62783,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/chromium-headed-final/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-driving.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/chromium-headed-final/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-driving.png",
+      "sha256": "846f8ccf00967795094e6ea659113c1d4ee08d938ec74b5e2d269f21be8b22a5",
+      "bytes": 65201,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/chromium-headed-final/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-overview.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/chromium-headed-final/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-overview.png",
+      "sha256": "788647b49b9c150b34d9a920baf7d264277ee55c9eb33d975332033f6fc9e86b",
+      "bytes": 238377,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/chromium-headed-final/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-sustained.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/chromium-headed-final/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-sustained.png",
+      "sha256": "ccaebd859624b71a5b5189cf2c1cba656f4fdffac3112f4376c0cdd2f3048222",
+      "bytes": 66301,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/chromium-headed-final/cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a-driving.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/chromium-headed-final/cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a-driving.png",
+      "sha256": "452047a68802338e36b21b5e6dd75687b53d23e1373c4141ec7200e973fbe717",
+      "bytes": 61753,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/chromium-headed-final/cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a-overview.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/chromium-headed-final/cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a-overview.png",
+      "sha256": "4df5c961c364c55e172b713f3ec3a29803f59950f9e5e22c5bbf007bdcf9bd71",
+      "bytes": 193080,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/chromium-headed-final/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87-driving.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/chromium-headed-final/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87-driving.png",
+      "sha256": "b748313f570f8d22ea71cbd41549e728c45591f3a750b5b2c79ed0670c7d7c0b",
+      "bytes": 62350,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/chromium-headed-final/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87-overview.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/chromium-headed-final/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87-overview.png",
+      "sha256": "312a417a0865b5e937383519b30ce61c506e444c9445b588b3ae433de7398d12",
+      "bytes": 279304,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/chromium-headed-final/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87-sustained.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/chromium-headed-final/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87-sustained.png",
+      "sha256": "4b0c0189be04731a6ebecfd7a74d95952ca2fc76bac83453cdb081613dbdfc11",
+      "bytes": 67504,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/chromium-headed-final/trafalgar-square-london-driving.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/chromium-headed-final/trafalgar-square-london-driving.png",
+      "sha256": "e4d92d843c45f5f478f08f485e1fc591ff998aaa7181bc6c166120269fb72982",
+      "bytes": 62349,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/chromium-headed-final/trafalgar-square-london-overview.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/chromium-headed-final/trafalgar-square-london-overview.png",
+      "sha256": "9d5d43f2ee56227b82700e0bca22dbcd2880f97981f063f1aa59e90535746a3c",
+      "bytes": 237492,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/chromium-headed-final/trafalgar-square-london-sustained.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/chromium-headed-final/trafalgar-square-london-sustained.png",
+      "sha256": "959eb6213f7bcd947ae2a1670ffb9c4b519c7d0eed36af7fcddf20af29946e3d",
+      "bytes": 60878,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser/driving.webm",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser/driving.webm",
+      "sha256": "ea8b03473ecc06bde2d8ab6072e909a195b8254e015d02da36602659a3e2ff7d",
+      "bytes": 134908,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass"
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser/failure-debug.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser/failure-debug.png",
+      "sha256": "16c118ba51a7f3805055361d60b05d8e029060dbfecf432afee72e6f5ba0b608",
+      "bytes": 59301,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser-complete/desktop-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser-complete/desktop-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410.png",
+      "sha256": "ad1d684e9fb3cdb7513f2f4bbca61ff4552371a164ab57b65cc6043ddb56a98e",
+      "bytes": 69069,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser-complete/desktop-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser-complete/desktop-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43.png",
+      "sha256": "e6b558290e9a9260e4163b093839f6531aa7ab8f1e4bc21c0e98de49a503e214",
+      "bytes": 70380,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser-complete/driving.webm",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser-complete/driving.webm",
+      "sha256": "316fb8c1abc45fa218f2beedc8cc7445f80149039956e34d4b34e7fc91456f38",
+      "bytes": 2189951,
+      "scope": "completed named scenario; see per-run record and review limits"
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser-complete/phone-landscape.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser-complete/phone-landscape.png",
+      "sha256": "1317ed987d03162685c79d087c3d91dd15cfc8ff0351b94dee8c83b3851816d2",
+      "bytes": 44828,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        844,
+        390
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser-complete/phone-portrait.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser-complete/phone-portrait.png",
+      "sha256": "e720f2c509c3fa46426d682b4bf5d79bad67f085573e27ecff8464ed1062978a",
+      "bytes": 35413,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        390,
+        844
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser-complete/rear-wall-overhead.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser-complete/rear-wall-overhead.png",
+      "sha256": "69da5f148ba6ab0dcaf94c6e8c10b219645d8db873126fed30b0c4af125666eb",
+      "bytes": 31769,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1280,
+        577
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser-complete/rear-wall-retraction.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser-complete/rear-wall-retraction.png",
+      "sha256": "cbf34da47aa85b935e1bcb236a03dd4cee198a4a90afc31761a60c8cdb7f44b6",
+      "bytes": 32383,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1280,
+        577
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser-complete/tablet-landscape.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser-complete/tablet-landscape.png",
+      "sha256": "5ede116a6969588bc516d2aec742718af1cdbdca868fde2fc78e51581b8c793a",
+      "bytes": 58685,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1180,
+        820
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser-complete/tablet-portrait.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser-complete/tablet-portrait.png",
+      "sha256": "6f8e66b36d6d0336c9f3f7719a3aa9535c0f8c636315602ec311f11a571df8f5",
+      "bytes": 55630,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        820,
+        1180
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser-complete/unavailable.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser-complete/unavailable.png",
+      "sha256": "a3b661ce8e527da50af64fc33472ff461a264b38630a894e77fa8266d6159408",
+      "bytes": 153206,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1280,
+        577
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser-final/desktop-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser-final/desktop-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410.png",
+      "sha256": "5601587140cc65a1fd666755b9426965395d6bfde62876e979ccf6350d7b0b7f",
+      "bytes": 67527,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser-final/desktop-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser-final/desktop-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43.png",
+      "sha256": "37113c0a376f3ff6799635c5568712e99ffaac7944f8e298766717fc762484f0",
+      "bytes": 71940,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser-final/driving.webm",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser-final/driving.webm",
+      "sha256": "28a23d7f9e3e4ab4bab6975b93b6823ac60330e34c348d47618320c938efee7d",
+      "bytes": 1273483,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass"
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser-serial/desktop-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser-serial/desktop-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410.png",
+      "sha256": "e8edbbe8e2ef7fb063bde9e5b5cf9e5b054ee014fe5ca277b1caa5b8a9d7e4f2",
+      "bytes": 67340,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser-serial/desktop-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser-serial/desktop-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43.png",
+      "sha256": "0b3f406038f0ec10d243c378f0745ea7b0039ef5d2af182d6014e08879dcbde5",
+      "bytes": 71261,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser-serial/driving.webm",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser-serial/driving.webm",
+      "sha256": "7800c26ee7ca59c91f63314b5e86066dd06311dad80ca52853c16f14fab9808e",
+      "bytes": 1693313,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass"
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser-serial/failure-debug.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser-serial/failure-debug.png",
+      "sha256": "b498adbc3e8e6501ac6c476b22b96e1ec9be59be79cb1f56b43b8d0038d67895",
+      "bytes": 58738,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1180,
+        820
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser-serial/phone-landscape.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser-serial/phone-landscape.png",
+      "sha256": "1392572fecc035adb6edd133e155df566b38d8a9479e144334cdcdeae530b2fa",
+      "bytes": 58695,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1180,
+        820
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser-serial/phone-portrait.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser-serial/phone-portrait.png",
+      "sha256": "c373509dba669d4c662664cd97e3139c438219ed0f7059e3341e607b90d99670",
+      "bytes": 58696,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1180,
+        820
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser-serial/tablet-landscape.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser-serial/tablet-landscape.png",
+      "sha256": "fe89a07a9d36670ef9f58b6bcb4637f76b95395a30e3c2c1b5c1ba7e3647827d",
+      "bytes": 58685,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1180,
+        820
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser-serial/tablet-portrait.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser-serial/tablet-portrait.png",
+      "sha256": "e3e9e56076e47236eab9ccdd23d526c7d8932f583df4df64918d6fa151806e99",
+      "bytes": 62715,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser-verified-viewport/desktop-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser-verified-viewport/desktop-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410.png",
+      "sha256": "71dffaad7e3dbd6f747fc59f7d7fd7f57e17c69d9ccb640c92476b8327730e4f",
+      "bytes": 68789,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser-verified-viewport/desktop-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser-verified-viewport/desktop-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43.png",
+      "sha256": "5c6abeb63a4351b1a71bc72936256fafdff6e764f14fa316adedc2884857327c",
+      "bytes": 72308,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser-verified-viewport/driving.webm",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser-verified-viewport/driving.webm",
+      "sha256": "ef41258979178d45606f31e7adb4a53128fad9462366c14114f883b0214871a9",
+      "bytes": 1126005,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass"
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser-verified-viewport/failure-debug.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser-verified-viewport/failure-debug.png",
+      "sha256": "0245a989dab75d0d89783d235bc81aea7dd05dac87bbdade394b63ed9c0f04e2",
+      "bytes": 134290,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1280,
+        577
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser-verified-viewport/phone-landscape.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser-verified-viewport/phone-landscape.png",
+      "sha256": "7e7af39992c4009e85fcba15f24d4056f186f71e18305d98ef5b73a8aa13aad2",
+      "bytes": 44829,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        844,
+        390
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser-verified-viewport/phone-portrait.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser-verified-viewport/phone-portrait.png",
+      "sha256": "738cc69c5ddeafd586fcfce0f1b5cbb4a9fd7ff0beffa37210c577119a12b115",
+      "bytes": 35408,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        390,
+        844
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser-verified-viewport/rear-wall-overhead.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser-verified-viewport/rear-wall-overhead.png",
+      "sha256": "a9dd31607ea5bfadab8207719e86ac049da257230a7907734654693776606d6e",
+      "bytes": 31778,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1280,
+        577
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser-verified-viewport/rear-wall-retraction.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser-verified-viewport/rear-wall-retraction.png",
+      "sha256": "4147675fac0d2236cefc9a67818f3aff5044fadf7f7e95cb05b6d9827a71d66d",
+      "bytes": 32380,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1280,
+        577
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser-verified-viewport/tablet-landscape.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser-verified-viewport/tablet-landscape.png",
+      "sha256": "3d20d49804fd14f8f8c3bd3efadd54b4ec94ca1611f981f5bf4d30364424fa9e",
+      "bytes": 58627,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1180,
+        820
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser-verified-viewport/tablet-portrait.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser-verified-viewport/tablet-portrait.png",
+      "sha256": "1fd1b6c7661746ad6a3c8538734ffd8a1baea497313bf72e8d7305a7e511b278",
+      "bytes": 55622,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        820,
+        1180
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-browser-verified-viewport/unavailable.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-browser-verified-viewport/unavailable.png",
+      "sha256": "a3b661ce8e527da50af64fc33472ff461a264b38630a894e77fa8266d6159408",
+      "bytes": 153206,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1280,
+        577
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-final-motion-review.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-final-motion-review.png",
+      "sha256": "cfd38b5fb3c1495edb2b28f84c3d7f92233e01eb4b71a1c2a5ff335a3f2ab7d0",
+      "bytes": 435806,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        2000,
+        543
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-final-tail-review.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-final-tail-review.png",
+      "sha256": "7cad8a8b9268042cbb5ed9ffe05e3cc9360c37802a6276b2accbcc7e890d3005",
+      "bytes": 277396,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1600,
+        543
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/driving-motion-review.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/driving-motion-review.png",
+      "sha256": "3ed4f5b8b93e4bc192924389c8910c9d4418ed800184ba76df00b86b668e5958",
+      "bytes": 409520,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        2000,
+        543
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/firefox-final/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-driving.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/firefox-final/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-driving.png",
+      "sha256": "13544f18707a82f7b9e08592e372737386785d752ad61ef40491aacfc644374e",
+      "bytes": 76975,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/firefox-final/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-overview.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/firefox-final/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-overview.png",
+      "sha256": "77a9c9f0212e6f8484c102be54d27ae49debc2291e3a7dfba05ef87c61f6c32c",
+      "bytes": 180550,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/firefox-final/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-sustained.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/firefox-final/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-sustained.png",
+      "sha256": "26767e0f24048bae53b22f97ca46d30189b89b0f12e248f19180aea1265b3ad9",
+      "bytes": 70485,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/firefox-final/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-driving.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/firefox-final/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-driving.png",
+      "sha256": "f18419c027c71822b0fbc620fda3b656faa4810c9ae37c9101e5bd2276519caf",
+      "bytes": 74066,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/firefox-final/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-overview.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/firefox-final/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-overview.png",
+      "sha256": "de2f176eb01046f2b4348ce5d8999a5c37a38411b974fe184a6ab275d43e44e8",
+      "bytes": 231320,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/firefox-final/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-sustained.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/firefox-final/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-sustained.png",
+      "sha256": "aafed1629ae440b30bfef0ebe9d6897f2cb7600cecacbda81bdbd24fe788016e",
+      "bytes": 73791,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/firefox-final/cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a-driving.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/firefox-final/cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a-driving.png",
+      "sha256": "35c2a9a886ff865af971b1d81b79961a52b465a94a7e0c885d6de93382f6bd44",
+      "bytes": 71250,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/firefox-final/cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a-overview.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/firefox-final/cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a-overview.png",
+      "sha256": "8ae6f89c1445c51d215914ba7bbfb443c2dfe2430fe4609170c48f9639d9a928",
+      "bytes": 182430,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/firefox-final/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87-driving.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/firefox-final/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87-driving.png",
+      "sha256": "00f8b456bab7763d19636df82dcccd45defa6eb12be86f9789e6c3102b2d252f",
+      "bytes": 69613,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/firefox-final/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87-overview.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/firefox-final/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87-overview.png",
+      "sha256": "2a47b3bf7c331aa613abbda9960f1aa15c36b56f79aefb0cc438532ecc335fe2",
+      "bytes": 248347,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/firefox-final/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87-sustained.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/firefox-final/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87-sustained.png",
+      "sha256": "b3e7f76b66cc8447d8c01cfaa4bb39f242e06663a3ae0325d685a7788ef9ce6f",
+      "bytes": 75486,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/firefox-final/trafalgar-square-london-driving.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/firefox-final/trafalgar-square-london-driving.png",
+      "sha256": "bfdfe32bc79a83ae26f6fb872811a295ebb4153b5d8f2a3cadd0f563aeeed6f5",
+      "bytes": 68091,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/firefox-final/trafalgar-square-london-overview.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/firefox-final/trafalgar-square-london-overview.png",
+      "sha256": "386ac618685b330fb9d0b401e3dffadbe580e0975a229aba4bc0854f090253e4",
+      "bytes": 227950,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/firefox-final/trafalgar-square-london-sustained.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/firefox-final/trafalgar-square-london-sustained.png",
+      "sha256": "7b83b1abe9e2799c8ffad3eab19412da3706d4e458fd7cf1845a8c6cc3e0409a",
+      "bytes": 66655,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/firefox-functional-2/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-driving.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/firefox-functional-2/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-driving.png",
+      "sha256": "855a1a86a6b6f70f1569f1e2ecb9f7e51ada32c5e2089fb7e5ae5d34dfb1f6cd",
+      "bytes": 76996,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/firefox-functional-3/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-driving.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/firefox-functional-3/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-driving.png",
+      "sha256": "13544f18707a82f7b9e08592e372737386785d752ad61ef40491aacfc644374e",
+      "bytes": 76975,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/firefox-functional-3/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-overview.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/firefox-functional-3/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-overview.png",
+      "sha256": "77a9c9f0212e6f8484c102be54d27ae49debc2291e3a7dfba05ef87c61f6c32c",
+      "bytes": 180550,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/firefox-functional-3/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-driving.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/firefox-functional-3/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-driving.png",
+      "sha256": "018d9193717cc18eb30405547ba197e684c778245b9521f49a0a87e4c7d3be09",
+      "bytes": 74057,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/firefox-functional-3/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-overview.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/firefox-functional-3/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-overview.png",
+      "sha256": "de2f176eb01046f2b4348ce5d8999a5c37a38411b974fe184a6ab275d43e44e8",
+      "bytes": 231320,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/firefox-functional-3/cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a-driving.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/firefox-functional-3/cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a-driving.png",
+      "sha256": "95621b99d1eae5fa99aad35c3b8df518fa17dd6e5403cfc95eadd048dafe99ea",
+      "bytes": 71136,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/firefox-functional-3/cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a-overview.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/firefox-functional-3/cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a-overview.png",
+      "sha256": "8ae6f89c1445c51d215914ba7bbfb443c2dfe2430fe4609170c48f9639d9a928",
+      "bytes": 182430,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/firefox-functional-3/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87-driving.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/firefox-functional-3/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87-driving.png",
+      "sha256": "f889359684ae7f3ef0c57495bc7737e426f136c0946ddf086eb80ee1aec5b5bc",
+      "bytes": 70822,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/firefox-functional-3/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87-overview.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/firefox-functional-3/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87-overview.png",
+      "sha256": "2a47b3bf7c331aa613abbda9960f1aa15c36b56f79aefb0cc438532ecc335fe2",
+      "bytes": 248347,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/firefox-functional-3/trafalgar-square-london-driving.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/firefox-functional-3/trafalgar-square-london-driving.png",
+      "sha256": "a08906fda8301f2f2099095dbc44d0bd875e2a5d0097a5e8e8635646cb299072",
+      "bytes": 67978,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/firefox-functional-3/trafalgar-square-london-overview.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/firefox-functional-3/trafalgar-square-london-overview.png",
+      "sha256": "386ac618685b330fb9d0b401e3dffadbe580e0975a229aba4bc0854f090253e4",
+      "bytes": 227950,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/firefox-interactions/camera-overhead.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/firefox-interactions/camera-overhead.png",
+      "sha256": "c9d36a450830fe07dccdf0ed7f8ceeefbd92d5c80680fdbbbdb4dd3202706516",
+      "bytes": 62276,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/firefox-interactions/failure.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/firefox-interactions/failure.png",
+      "sha256": "1ae0e58acbab786769158b42942aebaaac73dffd7b0ded97cce310e34834faba",
+      "bytes": 150144,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/firefox-interactions-final/camera-overhead.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/firefox-interactions-final/camera-overhead.png",
+      "sha256": "e80066e5a08f18efefcddf40b8a9b5dff649d608a5f05842680741a5ec0a3544",
+      "bytes": 62303,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/firefox-interactions-final/generation-failure.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/firefox-interactions-final/generation-failure.png",
+      "sha256": "434ca504f79b42fe58259a13366ec7b044f84246c06741b1b5fc34b421e1959f",
+      "bytes": 136592,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/firefox-interactions-final/module-failure.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/firefox-interactions-final/module-failure.png",
+      "sha256": "84bae53440e880fcb9fe6613ff16aee7c22e616087b469a539585567a26e937f",
+      "bytes": 164942,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/generation-browser/desktop-failure.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/generation-browser/desktop-failure.png",
+      "sha256": "b04f7a538e678681d1a7203ba79ac78863278d72fc42e5e448428eca60b7e1d3",
+      "bytes": 127308,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/generation-browser/tablet-portrait-emulation-failure.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/generation-browser/tablet-portrait-emulation-failure.png",
+      "sha256": "87eb66479abc20b996e3e362436e4a1278467882df8ba0eddce565814de3da3a",
+      "bytes": 131842,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        820,
+        1180
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/headed-startup-diagnostic.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/headed-startup-diagnostic.png",
+      "sha256": "96d771ace52654018f6836b7e6cc27c081da475e816c87153991d46e91ab2ea9",
+      "bytes": 262273,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/headed-startup-raf-diagnostic.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/headed-startup-raf-diagnostic.png",
+      "sha256": "96d771ace52654018f6836b7e6cc27c081da475e816c87153991d46e91ab2ea9",
+      "bytes": 262273,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/orbit-review.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/orbit-review.png",
+      "sha256": "96978e8113226cf8b82ae21f6901581c6e9f36b883558310bad4f6cc954933da",
+      "bytes": 468139,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1600,
+        500
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/physics-browser/desktop-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/physics-browser/desktop-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410.png",
+      "sha256": "1ef83bf4ff4ba16c3a93a438140dc232520af61f23369145d51ee5878740aed9",
+      "bytes": 420522,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/physics-browser/desktop-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/physics-browser/desktop-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43.png",
+      "sha256": "ddea00e7aa5216000e21a1864008a5577ff8f85f4363eea3ea1f34fc74441a18",
+      "bytes": 425454,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/physics-browser/desktop-cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/physics-browser/desktop-cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a.png",
+      "sha256": "336eb181c8f31353f2f9ce3910e6215656e92965143be0275e34668838c6debb",
+      "bytes": 298522,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/physics-browser/desktop-cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/physics-browser/desktop-cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87.png",
+      "sha256": "87c57a322c00e6a9fa2a9b927a3658882f5cc634fb03f76e82d9a9034bc0685b",
+      "bytes": 528256,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/physics-browser/desktop-trafalgar-square-london.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/physics-browser/desktop-trafalgar-square-london.png",
+      "sha256": "f9018ea0714a07ccdf0bb590462442c79460445feff64aef258d70d04fdfed5f",
+      "bytes": 397797,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/physics-browser/mobile-viewport-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/physics-browser/mobile-viewport-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410.png",
+      "sha256": "cad9eca411fb30b755326dfe400bbbcf084ad96ba60ce80bd0e7f39541cb0b0f",
+      "bytes": 169167,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        390,
+        844
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/physics-browser/mobile-viewport-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/physics-browser/mobile-viewport-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43.png",
+      "sha256": "73c16d73713842b99103b1aab70183d735f3ab8c72789bae04d85006f903520f",
+      "bytes": 170538,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        390,
+        844
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/physics-browser/mobile-viewport-cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/physics-browser/mobile-viewport-cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a.png",
+      "sha256": "77d5dfaa89922d9c5f719fbce3bfbcd9a884b8fce89dd478dc135bec03abb24d",
+      "bytes": 137845,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        390,
+        844
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/physics-browser/mobile-viewport-cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/physics-browser/mobile-viewport-cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87.png",
+      "sha256": "de8cb132c2266bf702dbb862342c016daa1efc70cfc9e3d121845db567fbfa8a",
+      "bytes": 120972,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        390,
+        844
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/physics-browser/mobile-viewport-trafalgar-square-london.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/physics-browser/mobile-viewport-trafalgar-square-london.png",
+      "sha256": "7be3f6f3218507e2ac1cedf4e5f37c2bc8c8f0e09c846d5b4d8c2631a7490574",
+      "bytes": 96432,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        390,
+        844
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/physics-browser/physics-unavailable.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/physics-browser/physics-unavailable.png",
+      "sha256": "ad2857fcd1c756e4a9df4afb6dde118cfa5a8d74fe802201ec82a19dd78326f4",
+      "bytes": 216759,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/rendering/00-overview.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/rendering/00-overview.png",
+      "sha256": "834cf26add7b3a337eabf6144737774f2b2880946990c213579096e4d9cd02a7",
+      "bytes": 199024,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1280,
+        800
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/rendering/01-orbit.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/rendering/01-orbit.png",
+      "sha256": "8c7e0d585e15006c375230e34ba13c64dbbc6c22be223a00f06034b8bedd79bf",
+      "bytes": 209835,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1280,
+        800
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/rendering/02-low-angle.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/rendering/02-low-angle.png",
+      "sha256": "3d4164fcaaaac79d232037d22d1e6029ab1b68541432ae54ff14b6d7f2e41fca",
+      "bytes": 103852,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1280,
+        800
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/rendering/03-close.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/rendering/03-close.png",
+      "sha256": "8d1333384a60f56794bcabadcc78232e7777b2d04e30d83e73b3d407a19340c5",
+      "bytes": 164761,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass",
+      "pixelDimensions": [
+        1280,
+        800
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/rendering/camera-motion.webm",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/rendering/camera-motion.webm",
+      "sha256": "597bfdcf6609bbf6473c6e7f7b9759650582dd019b8b3a08096eef35b3d1b6fc",
+      "bytes": 1810759,
+      "scope": "retained diagnostic, earlier attempt or review sheet; not a new acceptance pass"
+    },
+    {
+      "path": ".zone-cache/phase-04/rendering-serial/00-overview.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/rendering-serial/00-overview.png",
+      "sha256": "834cf26add7b3a337eabf6144737774f2b2880946990c213579096e4d9cd02a7",
+      "bytes": 199024,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1280,
+        800
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/rendering-serial/01-orbit.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/rendering-serial/01-orbit.png",
+      "sha256": "8c5894de708dfd840528b8d5c0f685b51efbefd75135f24aaed91340a133b9a5",
+      "bytes": 209720,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1280,
+        800
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/rendering-serial/02-low-angle.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/rendering-serial/02-low-angle.png",
+      "sha256": "ac1cad67ebb9b7d928cf81346510e774ec93a96fe7691d9312bb4d0e21199d98",
+      "bytes": 103911,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1280,
+        800
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/rendering-serial/03-close.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/rendering-serial/03-close.png",
+      "sha256": "8d1333384a60f56794bcabadcc78232e7777b2d04e30d83e73b3d407a19340c5",
+      "bytes": 164761,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1280,
+        800
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/rendering-serial/04-pan.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/rendering-serial/04-pan.png",
+      "sha256": "f25847c4085341dee76929d95ef68bbf0a66fa7d5af8e6e225e0978fe8e8bab9",
+      "bytes": 157044,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1280,
+        800
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/rendering-serial/05-overhead.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/rendering-serial/05-overhead.png",
+      "sha256": "358685e941daa3bba38af107d263fe5f2b15c6862ef99fa8c8e3b3e2756d4268",
+      "bytes": 275721,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1280,
+        800
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/rendering-serial/06-far.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/rendering-serial/06-far.png",
+      "sha256": "2e76cfa6d6561705689dfaf80dad205ef2878e6668d5a47e7b4d5bcd611ae9ca",
+      "bytes": 113704,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1280,
+        800
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/rendering-serial/07-reset.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/rendering-serial/07-reset.png",
+      "sha256": "834cf26add7b3a337eabf6144737774f2b2880946990c213579096e4d9cd02a7",
+      "bytes": 199024,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1280,
+        800
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/rendering-serial/camera-motion.webm",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/rendering-serial/camera-motion.webm",
+      "sha256": "ea84d98a6986b99a3085574d0438b88e07d9c05c409648078940fafdb4b304b4",
+      "bytes": 2912948,
+      "scope": "completed named scenario; see per-run record and review limits"
+    },
+    {
+      "path": ".zone-cache/phase-04/vehicle-browser/desktop-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-driven.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/vehicle-browser/desktop-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-driven.png",
+      "sha256": "7efe02ab4b13415332764361edaf02b44351d5e5acdfb58476a64b5d70afb9a2",
+      "bytes": 96169,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/vehicle-browser/desktop-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-vehicle.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/vehicle-browser/desktop-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-vehicle.png",
+      "sha256": "7a565cd99d35f983a0d40de4394416aefc952f08ee266fb2f7f0e7ab153167ea",
+      "bytes": 99521,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/vehicle-browser/desktop-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-driven.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/vehicle-browser/desktop-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-driven.png",
+      "sha256": "619d0d303e047b78c9951698b58819ac25d028f313f2e41e98cc1b69fa60e07e",
+      "bytes": 88007,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/vehicle-browser/desktop-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-vehicle.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/vehicle-browser/desktop-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-vehicle.png",
+      "sha256": "cf84845442896047d448716cb1495b249f29363841dba8855e03af5c2efd66dc",
+      "bytes": 98966,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/vehicle-browser/mobile-viewport-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-driven.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/vehicle-browser/mobile-viewport-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-driven.png",
+      "sha256": "f75b900b9c519ecb2ffd52205f81ef5265642fec21661473e28fc10bec9a2fb9",
+      "bytes": 56219,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        390,
+        844
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/vehicle-browser/mobile-viewport-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-vehicle.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/vehicle-browser/mobile-viewport-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-vehicle.png",
+      "sha256": "3b14d5218e7587332dfd8809df782da5f895930b02c624a2c2df5ee3f5f3b115",
+      "bytes": 56450,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        390,
+        844
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/vehicle-browser/mobile-viewport-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-driven.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/vehicle-browser/mobile-viewport-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-driven.png",
+      "sha256": "be4ed612b3a7098175fef82e7090117404d4af10a301fc3159e79c938bcf608e",
+      "bytes": 52571,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        390,
+        844
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/vehicle-browser/mobile-viewport-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-vehicle.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/vehicle-browser/mobile-viewport-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-vehicle.png",
+      "sha256": "c246e795a6f55bcceb949977765324c97e7e6f60f096b1d7c1b1cd148017872b",
+      "bytes": 56265,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        390,
+        844
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/vehicle-browser/unavailable.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/vehicle-browser/unavailable.png",
+      "sha256": "cf895737ff5b8ec914ab741b965f982337bfef666e37d5a6df64413b5a56ff67",
+      "bytes": 191694,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/zone-browser/desktop-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/zone-browser/desktop-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410.png",
+      "sha256": "3b11a2032d2f038cf1548c741d100942bb0bfa809da8607e79cc564bce9fb7f9",
+      "bytes": 355650,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/zone-browser/desktop-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/zone-browser/desktop-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43.png",
+      "sha256": "3341a7d3eb755d57d248efaf7ea74e7cc114e58e0c60515dbaa3fbf83879e520",
+      "bytes": 389261,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/zone-browser/desktop-cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/zone-browser/desktop-cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a.png",
+      "sha256": "b7eff6d82ecff47c9f1fbb2ce18e35d051068695af29865ef521f95e46aea963",
+      "bytes": 284964,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/zone-browser/desktop-cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/zone-browser/desktop-cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87.png",
+      "sha256": "722279c708fbeb2fb9a5615eefe05da032f673c7cc545e47eb5c85137f27e466",
+      "bytes": 480389,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/zone-browser/desktop-trafalgar-square-london.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/zone-browser/desktop-trafalgar-square-london.png",
+      "sha256": "19e1816b1d72c7fc7e6e7bd6381b517d9b2c01f19c8fcd47de441d04863d0ee0",
+      "bytes": 422614,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1440,
+        900
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/zone-browser/mobile-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/zone-browser/mobile-cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410.png",
+      "sha256": "2d076f8bff07bf0011902beea16011f5d143a6993a6a43652e0d469602f9fe23",
+      "bytes": 1217668,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1170,
+        2532
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/zone-browser/mobile-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/zone-browser/mobile-cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43.png",
+      "sha256": "bdfee10516bc99f49c375a9885b1a9ba348d4fd4708216f07f5f369780a87e56",
+      "bytes": 1219776,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1170,
+        2532
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/zone-browser/mobile-cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/zone-browser/mobile-cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a.png",
+      "sha256": "8153da5e168cae48d58f0ba77c9b04250a75eeb36e809d2606a86d70a6b23814",
+      "bytes": 856589,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1170,
+        2532
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/zone-browser/mobile-cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/zone-browser/mobile-cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87.png",
+      "sha256": "1e16dfe5f9f213c7c8bd4e19a9fc23843a2c8d76dc91c4530a70cc0354bc67f8",
+      "bytes": 1525473,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1170,
+        2532
+      ]
+    },
+    {
+      "path": ".zone-cache/phase-04/zone-browser/mobile-trafalgar-square-london.png",
+      "absolutePath": "/home/mabrax/.codex/worktrees/63c8/old-england-taxi/.zone-cache/phase-04/zone-browser/mobile-trafalgar-square-london.png",
+      "sha256": "940c34e3809cc11ae618a6e24d2721ec11ae38819f4689991e8c29bb5ac53506",
+      "bytes": 1414817,
+      "scope": "completed named scenario; see per-run record and review limits",
+      "pixelDimensions": [
+        1170,
+        2532
+      ]
+    }
+  ],
+  "failedAndPartialAttempts": [
+    "development-attempts.json",
+    "physics-initial-failed.json",
+    "chromium-software-initial.json",
+    "chromium-headed.json",
+    "chromium-headed-lifecycle-interrupted.json",
+    "chromium-headed-lifecycle-startup-timeout.json",
+    "headed-startup-diagnostic.json",
+    "headed-startup-raf-diagnostic.json"
+  ],
+  "finalChecks": {
+    "checkedAt": "2026-09-07T22:08:49.340190+00:00",
+    "jsonRecordsParse": true,
+    "documentFileLinksResolve": true,
+    "noUnfilledPlaceholders": true,
+    "protectedBytesEqualBaseline": 50,
+    "canonicalHead": "712fe6f",
+    "canonicalClean": true,
+    "phase03SourceHead": "5b12c38",
+    "phase03SourceClean": true,
+    "ownedPreviewStopped": {
+      "pid": 622410,
+      "port": 4191
+    },
+    "allBrowserHarnessSyntaxChecks": "pass",
+    "gitDiffCheck": "pass"
+  },
+  "diagnosticToolSources": {
+    "probe-headed-startup.mjs": "import puppeteer from '/home/mabrax/.npm/_npx/b5218505bf6a8451/node_modules/puppeteer/lib/puppeteer/puppeteer.js';\nimport {writeFileSync} from 'node:fs';\nconst record={checkedAt:new Date().toISOString(),errors:[]};\nconst browser=await puppeteer.launch({executablePath:'/home/mabrax/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome',headless:false,args:['--no-sandbox','--enable-precise-memory-info'],defaultViewport:{width:1440,height:900}});\ntry {const context=await browser.createBrowserContext(),page=await context.newPage();page.on('pageerror',e=>record.errors.push(String(e)));page.on('console',e=>{if(e.type()==='error')record.errors.push(e.text())});await page.bringToFront();await page.goto('http://127.0.0.1:4191/?zone=cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87&qualify=1');await new Promise(r=>setTimeout(r,3000));record.state=await page.evaluate(()=>({dataset:{...document.querySelector('canvas')?.dataset},body:document.body.innerText,hidden:document.hidden,hasFocus:document.hasFocus(),width:innerWidth,height:innerHeight}));await page.screenshot({path:'.zone-cache/phase-04/headed-startup-diagnostic.png'});console.log(JSON.stringify(record));}finally{writeFileSync('.zone-cache/phase-04/headed-startup-diagnostic.json',JSON.stringify(record,null,2)+'\\n');await browser.close();}\n",
+    "probe-headed-raf.mjs": "import puppeteer from '/home/mabrax/.npm/_npx/b5218505bf6a8451/node_modules/puppeteer/lib/puppeteer/puppeteer.js';\nimport {writeFileSync} from 'node:fs';\nconst record={checkedAt:new Date().toISOString(),errors:[],httpErrors:[]};\nconst browser=await puppeteer.launch({executablePath:'/home/mabrax/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome',headless:false,args:['--no-sandbox','--enable-precise-memory-info'],defaultViewport:{width:1440,height:900}});\ntry {const context=await browser.createBrowserContext(),page=await context.newPage();await page.evaluateOnNewDocument(()=>{window.__independentRaf=0;const tick=()=>{window.__independentRaf++;requestAnimationFrame(tick)};requestAnimationFrame(tick)});page.on('response',r=>{if(r.status()>=400)record.httpErrors.push({url:r.url(),status:r.status()})});page.on('pageerror',e=>record.errors.push(String(e)));page.on('console',e=>{if(e.type()==='error')record.errors.push(e.text())});await page.bringToFront();await page.goto('http://127.0.0.1:4191/?zone=cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87&qualify=1');await new Promise(r=>setTimeout(r,3000));record.state=await page.evaluate(()=>({independentRaf:window.__independentRaf,dataset:{...document.querySelector('canvas')?.dataset},body:document.body.innerText,hidden:document.hidden,hasFocus:document.hasFocus(),width:innerWidth,height:innerHeight}));await page.screenshot({path:'.zone-cache/phase-04/headed-startup-raf-diagnostic.png'});console.log(JSON.stringify(record));}finally{writeFileSync('.zone-cache/phase-04/headed-startup-raf-diagnostic.json',JSON.stringify(record,null,2)+'\\n');await browser.close();}\n"
+  }
+}

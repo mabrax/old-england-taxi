@@ -23,5 +23,5 @@ export async function loadSelectedZone(search: string, fetcher: typeof fetch = f
   const qa = qaEnabled ? await loadPreparedJson(qaUrl, fetcher, { ...options, sha256: entry?.qa.sha256 }, parseZoneQa) : undefined;
   if (qa && (qa.id !== artifact.slug || qa.sourceSha256 !== artifact.source.snapshot.sha256 ||
       qa.artifactSha256 !== artifactHash)) throw new Error('QA provenance does not match artifact');
-  return { artifact, qa, catalogue, reportUrl: entry ? assetUrl(entry.report.url) : artifactUrl.replace(/\.zone\.json$/, '.report.json') };
+  return { artifact, artifactHash, qa, catalogue, reportUrl: entry ? assetUrl(entry.report.url) : artifactUrl.replace(/\.zone\.json$/, '.report.json') };
 }

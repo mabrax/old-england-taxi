@@ -3,7 +3,8 @@
   import type { ZoneSummary } from '../zone/types';
   import type { GenerationJob } from '../zone/generation-types';
 
-  let { onReset, resetEnabled, summary, onProgress }: {
+  let { onReset, resetEnabled, summary, onProgress, onBusy }: {
+    onBusy: (busy: boolean) => void;
     onReset: () => void;
     resetEnabled: boolean;
     summary: ZoneSummary | undefined;
@@ -18,7 +19,7 @@
     <p>Search the world, choose a point, and build its roads and buildings.</p>
   </div>
 
-  <GenerationPanel {onProgress} onReady={(id) => {
+  <GenerationPanel {onProgress} {onBusy} onReady={(id) => {
     const url = new URL(window.location.href);
     url.searchParams.delete('artifact');
     url.searchParams.set('zone', id);
@@ -48,7 +49,7 @@
 
   <div class="rail-note">
     <span class="note-marker" aria-hidden="true"></span>
-    <p>Geometry, graph, coordinates, and OSM provenance load from one deterministic artifact. Routing and driveability remain deferred.</p>
+    <p>Drive with WASD, arrows or touch controls inside the amber simulation limit. Inspect pauses driving. Flat geometry does not certify legal routes.</p>
   </div>
 
   <div class="rail-footer">

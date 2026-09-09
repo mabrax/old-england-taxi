@@ -672,3 +672,85 @@ button {
 
 .generation-connection { padding: 12px; border: 1px solid #c48d69; border-radius: 7px; background: #38291f; color: #ffd5ba; font-size: 12px; line-height: 1.5; }
 .generation-connection p { margin: 6px 0 10px; }
+/* Physics inspection remains separate from source QA and generation controls. */
+.physics-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem 1rem;
+  flex-basis: 100%;
+  padding-block: 0.45rem;
+  border-block: 1px solid #cbd5d0;
+}
+
+.physics-controls button {
+  font: inherit;
+  color: inherit;
+  background: #f4f7f4;
+  border: 1px solid #9bafa4;
+  border-radius: 4px;
+  padding: 0.35rem 0.6rem;
+  cursor: pointer;
+}
+
+.vehicle-harness { width: 100%; }
+.vehicle-harness summary { cursor: pointer; }
+.vehicle-harness > span { display: block; margin-block: 6px; }
+.vehicle-harness button { margin: 3px; }
+.qa-controls { max-height: calc(100% - 90px); overflow-y: auto; }
+
+/* Driving owns the viewport. Workspace and QA remain available in inspection. */
+.workspace-toggle { position: absolute; top: max(14px, env(safe-area-inset-top)); left: max(16px, env(safe-area-inset-left)); z-index: 6; min-height: 44px; padding: 10px 14px; color: var(--ink); background: #2b4045; border: 1px solid #647e77; border-radius: 8px; font-size: 12px; }
+.app-shell:not(.workspace-open) .control-rail { display: none; }
+.driving-panel { position: absolute; top: 14px; left: 16px; right: 16px; z-index: 2; max-width: 760px; padding: 10px 12px; border: 1px solid #b1c2b5; border-radius: 10px; background: #f7fbf2f2; color: #233d3a; box-shadow: 0 4px 14px #102b2220; }
+.driving-toolbar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.driving-toolbar strong { font-size: 14px; }
+.speed-readout { font: 12px 'DM Mono', monospace; min-width: 75px; }
+.driving-toolbar button { min-height: 44px; padding: 8px 11px; border: 1px solid #91a897; border-radius: 6px; background: #fff; color: #233d3a; font-size: 12px; }
+.driving-toolbar .drive-primary { background: #d2e879; border-color: #9aaf51; font-weight: 800; }
+.driving-toolbar button:disabled { opacity: .5; cursor: not-allowed; }
+.driving-message, .driving-help { margin: 7px 0 0; font-size: 12px; line-height: 1.45; }
+.driving-help { color: #547065; font-size: 11px; }
+.driving-panel ~ .touch-driving { position: absolute; bottom: max(18px, env(safe-area-inset-bottom)); left: max(18px, env(safe-area-inset-left)); right: max(18px, env(safe-area-inset-right)); display: flex; justify-content: space-between; align-items: end; gap: 12px; z-index: 2; pointer-events: none; }
+.touch-steering, .touch-pedals { display: flex; gap: 9px; align-items: end; }
+.touch-driving button { pointer-events: auto; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; min-width: 64px; min-height: 68px; padding: 10px; border: 2px solid #56796d; border-radius: 14px; background: #f7fbf2ec; color: #244637; font-size: 12px; font-weight: 800; box-shadow: 0 4px 12px #17352933; }
+.touch-steering button { font-size: 30px; }
+.touch-driving button[data-drive-input="forward"] { min-height: 92px; background: #d2e8a0ed; }
+.touch-driving button[data-held] { background: #315d48; color: white; transform: translateY(2px); }
+.touch-driving button:disabled { opacity: .5; }
+.scene-canvas:focus-visible { outline: 3px solid #809c42; outline-offset: -3px; }
+.scene-badge { display: none; }
+.qa-controls { top: 162px; max-height: calc(100% - 230px); }
+.has-generation-notice .driving-panel { visibility: hidden; }
+@media (max-width: 1100px) {
+  .workspace { position: relative; }
+  .control-rail { position: absolute; inset: 0 auto 0 0; width: min(360px, 100%); max-height: 100%; padding: 20px; display: flex; background: #142026fa; }
+  .workspace-open .qa-controls { visibility: hidden; }
+}
+@media (max-width: 640px) {
+  .driving-panel { top: 8px; left: 8px; right: 8px; padding: 8px; }
+  .driving-toolbar { gap: 5px; }
+  .driving-toolbar button { padding: 6px 8px; font-size: 11px; }
+  .driving-message { font-size: 11px; }
+  .driving-help { display: none; }
+  .touch-driving button { min-width: 48px; min-height: 64px; padding: 7px; font-size: 10px; max-width: 80px; }
+  .touch-steering button { font-size: 26px; }
+  .touch-steering, .touch-pedals { gap: 5px; }
+  .driving-panel ~ .touch-driving { left: max(8px, env(safe-area-inset-left)); right: max(8px, env(safe-area-inset-right)); gap: 6px; }
+  .qa-controls { top: 168px; max-height: calc(100% - 225px); }
+}
+@media (max-height: 540px) {
+  .top-bar { min-height: 52px; }
+  .workspace-toggle { top: 4px; }
+  .viewport-area { height: calc(100dvh - 52px); }
+  .scene-viewport { min-height: 100%; }
+  .driving-panel { top: 5px; padding: 5px 8px; }
+  .driving-help { display: none; }
+  .driving-toolbar button { min-height: 40px; }
+  .touch-driving button, .touch-driving button[data-drive-input="forward"] { min-height: 58px; }
+  .qa-controls { top: 110px; max-height: calc(100% - 155px); }
+}
+
+.driving-surface { margin: 7px 0 0; font-size: 11px; color: #6b4818; line-height: 1.4; }
+.driving-attribution { margin: 5px 0 0; font-size: 10px; color: #547065; }
+.driving-attribution a { color: inherit; }

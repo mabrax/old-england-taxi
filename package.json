@@ -4,6 +4,8 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
+    "physics:measure": "node --expose-gc --import tsx tools/physics/measure-world.ts",
+    "physics:browser": "node tools/physics/verify-browser.mjs",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
@@ -17,8 +19,8 @@
     "zone:artifact:inspect": "tsx tools/zone-compiler/src/run.ts inspect",
     "zone:verify": "tsx tools/zone-compiler/src/run.ts verify",
     "verify": "npm run zone:verify && npm test && npm run check && npm run build",
-    "test": "vitest run",
-    "test:watch": "vitest",
+    "test": "vitest run tests && node --test tools/physics/qualification-*.test.mjs",
+    "test:watch": "vitest tests",
     "zone:request": "tsx tools/zone-compiler/src/run.ts request",
     "zone:acquire": "tsx tools/zone-compiler/src/run.ts acquire",
     "zone:create": "tsx tools/zone-compiler/src/run.ts create",
@@ -27,9 +29,17 @@
     "zone:browser": "node tools/zone-compiler/verify-browser.mjs",
     "zone:live-browser": "node tools/zone-server/verify-browser.mjs",
     "zone:rendering": "node tools/zone-server/verify-rendering.mjs",
-    "preview:start": "node tools/zone-server/start-preview.mjs"
+    "preview:start": "node tools/zone-server/start-preview.mjs",
+    "vehicle:measure": "tsx tools/physics/measure-vehicle.ts",
+    "vehicle:browser": "node tools/physics/verify-vehicle-browser.mjs",
+    "driving:browser": "node tools/physics/verify-driving-browser.mjs",
+    "driving:generation": "node tools/physics/verify-driving-generation.mjs",
+    "benchmark:bake": "tsx tools/physics/benchmark/bake-route.ts",
+    "benchmark:run": "node tools/physics/benchmark/run-browser.mjs",
+    "benchmark:compare": "node tools/physics/benchmark/compare.mjs"
   },
   "dependencies": {
+    "@dimforge/rapier3d-compat": "0.20.0",
     "earcut": "^3.2.3",
     "polygon-clipping": "^0.15.7",
     "svelte": "^5.38.7",

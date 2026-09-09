@@ -1,0 +1,26 @@
+[
+  {
+    "name": "chrome-diagnostic-default-minimal-01",
+    "exitCode": 0
+  },
+  {
+    "name": "chrome-diagnostic-default-app-01",
+    "exitCode": 0
+  },
+  {
+    "name": "chrome-diagnostic-x11-minimal-01",
+    "exitCode": 0
+  },
+  {
+    "name": "chrome-diagnostic-x11-app-01",
+    "exitCode": 0
+  },
+  {
+    "name": "chrome-diagnostic-wayland-minimal-01",
+    "exitCode": 0
+  },
+  {
+    "name": "chrome-diagnostic-wayland-app-01",
+    "exitCode": 0
+  }
+]

@@ -34,7 +34,7 @@ try {
       run('uncheck', `@${generatedRef}`);
       assert(evaluate('document.querySelector("canvas").dataset.generatedVisible') === 'false', 'Generated toggle failed');
       run('check', `@${generatedRef}`);
-      run('click', '.reset-button');
+      run('find', 'role', 'button', 'click', '--name', 'Reset view', '--exact');
       if (mode === 'mobile') run('scroll', 'up', '1000');
       const screenshot = join(output, `${mode}-${zone.id}.png`);
       run('screenshot', screenshot);

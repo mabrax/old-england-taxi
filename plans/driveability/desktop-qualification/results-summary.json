@@ -1,0 +1,920 @@
+{
+  "runs": [
+    {
+      "run": "chrome-coordinated-chicago-01",
+      "path": "plans/driveability/desktop-qualification/evidence/chrome-coordinated-chicago-01.json",
+      "originalPath": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/chrome-coordinated-chicago-01/results.json",
+      "bytes": 327319,
+      "sha256": "4ea5ed46e0050494d4ff89caf090d501b5206979be3cbbcd42b7ac1f4ef0c73a",
+      "commit": "d49050cfb69aa85005b4e32608572f4482e57b93",
+      "browser": "Chrome/152.0.7977.82",
+      "headless": false,
+      "error": null,
+      "coldVisits": 0,
+      "coldPass": null,
+      "functionalCases": 0,
+      "sustained": [
+        {
+          "id": "cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410",
+          "seconds": 60,
+          "elapsedMs": 60647.020742999994,
+          "acceptance": {
+            "numericBudgets": true,
+            "foregroundProtocol": true,
+            "correctness": true,
+            "overall": true
+          },
+          "numericBudgets": {
+            "step": true,
+            "frame": true,
+            "raf": true,
+            "dropped": true
+          },
+          "step": {
+            "count": 3590,
+            "p50": 0.09999999403953552,
+            "p95": 0.20000001788139343,
+            "p99": 0.20000001788139343,
+            "max": 0.800000011920929
+          },
+          "frame": {
+            "count": 3643,
+            "p50": 0.29999998211860657,
+            "p95": 0.5,
+            "p99": 0.5999999940395355,
+            "max": 1.5999999940395355
+          },
+          "raf": {
+            "count": 3642,
+            "p50": 16.69999999999709,
+            "p95": 16.799999999999272,
+            "p99": 16.900000000001455,
+            "max": 36
+          },
+          "protocolTotals": {
+            "driveMs": 59740.5000000298,
+            "resetMs": 903.0999999642372,
+            "unexpectedMs": 0
+          },
+          "violations": []
+        }
+      ],
+      "lifecycleCycles": 0,
+      "memoryAcceptance": null
+    },
+    {
+      "run": "chrome-coordinated-lifecycle-01",
+      "path": "plans/driveability/desktop-qualification/evidence/chrome-coordinated-lifecycle-01.json",
+      "originalPath": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/chrome-coordinated-lifecycle-01/results.json",
+      "bytes": 412406,
+      "sha256": "0254cf0514922cc3906a81be687bd44735ee74677adf844acab8d9438eed4d77",
+      "commit": "d49050cfb69aa85005b4e32608572f4482e57b93",
+      "browser": "Chrome/152.0.7977.82",
+      "headless": false,
+      "error": null,
+      "coldVisits": 0,
+      "coldPass": null,
+      "functionalCases": 0,
+      "sustained": [],
+      "lifecycleCycles": 20,
+      "memoryAcceptance": {
+        "postGcHeap": true,
+        "growth": 10129814,
+        "allowedGrowth": 20971520,
+        "growthPass": true,
+        "scope": "JS heap only; excludes native/WASM/GPU allocations"
+      }
+    },
+    {
+      "run": "chrome-coordinated-lucca-01",
+      "path": "plans/driveability/desktop-qualification/evidence/chrome-coordinated-lucca-01.json",
+      "originalPath": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/chrome-coordinated-lucca-01/results.json",
+      "bytes": 641386,
+      "sha256": "82a9af48f78a6108988a807f305befe5c48020274d69b5a3b99ffe8f5ca4cb6a",
+      "commit": "d49050cfb69aa85005b4e32608572f4482e57b93",
+      "browser": "Chrome/152.0.7977.82",
+      "headless": false,
+      "error": null,
+      "coldVisits": 0,
+      "coldPass": null,
+      "functionalCases": 0,
+      "sustained": [
+        {
+          "id": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+          "seconds": 120,
+          "elapsedMs": 121195.606397,
+          "acceptance": {
+            "numericBudgets": true,
+            "foregroundProtocol": true,
+            "correctness": true,
+            "overall": true
+          },
+          "numericBudgets": {
+            "step": true,
+            "frame": true,
+            "raf": true,
+            "dropped": true
+          },
+          "step": {
+            "count": 7178,
+            "p50": 0.09999999403953552,
+            "p95": 0.20000001788139343,
+            "p99": 0.20000001788139343,
+            "max": 0.8999999761581421
+          },
+          "frame": {
+            "count": 7284,
+            "p50": 0.30000001192092896,
+            "p95": 0.5,
+            "p99": 0.699999988079071,
+            "max": 2.699999988079071
+          },
+          "raf": {
+            "count": 7283,
+            "p50": 16.69999999999709,
+            "p95": 16.80000000000291,
+            "p99": 16.900000000001455,
+            "max": 19.600000000002183
+          },
+          "protocolTotals": {
+            "driveMs": 119454.60000002384,
+            "resetMs": 1733.8999999761581,
+            "unexpectedMs": 0
+          },
+          "violations": []
+        }
+      ],
+      "lifecycleCycles": 0,
+      "memoryAcceptance": null
+    },
+    {
+      "run": "chrome-coordinated-memory-02",
+      "path": "plans/driveability/desktop-qualification/evidence/chrome-coordinated-memory-02.json",
+      "originalPath": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/chrome-coordinated-memory-02/results.json",
+      "bytes": 629186,
+      "sha256": "3ee10ab2381f0e03735f676504ed2b5de5dfad6189aadd94de0f46ebc6bc6860",
+      "commit": "01fe3a840c0e5cfe9792835c264674e132987f65",
+      "browser": "Chrome/152.0.7977.82",
+      "headless": false,
+      "error": null,
+      "coldVisits": 0,
+      "coldPass": null,
+      "functionalCases": 0,
+      "sustained": [],
+      "lifecycleCycles": 20,
+      "memoryAcceptance": {
+        "postGcHeap": true,
+        "growth": 10136705,
+        "allowedGrowth": 20971520,
+        "growthPass": true,
+        "scope": "JS heap only; excludes native/WASM/GPU allocations"
+      }
+    },
+    {
+      "run": "chrome-coordinated-trafalgar-01",
+      "path": "plans/driveability/desktop-qualification/evidence/chrome-coordinated-trafalgar-01.json",
+      "originalPath": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/chrome-coordinated-trafalgar-01/results.json",
+      "bytes": 639825,
+      "sha256": "4ee699ffa1e305daea896c77a50e7158be6d3fd0afd5c52bd2958aa7da1b85b7",
+      "commit": "d49050cfb69aa85005b4e32608572f4482e57b93",
+      "browser": "Chrome/152.0.7977.82",
+      "headless": false,
+      "error": null,
+      "coldVisits": 0,
+      "coldPass": null,
+      "functionalCases": 0,
+      "sustained": [
+        {
+          "id": "trafalgar-square-london",
+          "seconds": 120,
+          "elapsedMs": 121179.53820200001,
+          "acceptance": {
+            "numericBudgets": true,
+            "foregroundProtocol": true,
+            "correctness": true,
+            "overall": true
+          },
+          "numericBudgets": {
+            "step": true,
+            "frame": true,
+            "raf": true,
+            "dropped": true
+          },
+          "step": {
+            "count": 7176,
+            "p50": 0.09999999403953552,
+            "p95": 0.20000001788139343,
+            "p99": 0.20000001788139343,
+            "max": 1.199999988079071
+          },
+          "frame": {
+            "count": 7277,
+            "p50": 0.29999998211860657,
+            "p95": 0.4000000059604645,
+            "p99": 0.5999999940395355,
+            "max": 2.0999999940395355
+          },
+          "raf": {
+            "count": 7276,
+            "p50": 16.69999999999709,
+            "p95": 16.80000000000291,
+            "p99": 16.89999999999418,
+            "max": 19.400000000001455
+          },
+          "protocolTotals": {
+            "driveMs": 119437.69999995828,
+            "resetMs": 1734.5000000298023,
+            "unexpectedMs": 0
+          },
+          "violations": []
+        }
+      ],
+      "lifecycleCycles": 0,
+      "memoryAcceptance": null
+    },
+    {
+      "run": "chrome-diagnostic-default-app-01",
+      "path": "plans/driveability/desktop-qualification/evidence/chrome-diagnostic-default-app-01.json",
+      "originalPath": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/chrome-diagnostic-default-app-01/results.json",
+      "bytes": 47638,
+      "sha256": "eed1ee22cb7956c7cf92bf57b9ece004819681259f08868abb565153adf5a549",
+      "commit": "3f27aba4b79dedfd8d572811b09c6ecf1d73aa47",
+      "browser": "Chrome/152.0.7977.82",
+      "headless": null,
+      "error": null
+    },
+    {
+      "run": "chrome-diagnostic-default-minimal-01",
+      "path": "plans/driveability/desktop-qualification/evidence/chrome-diagnostic-default-minimal-01.json",
+      "originalPath": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/chrome-diagnostic-default-minimal-01/results.json",
+      "bytes": 17981,
+      "sha256": "14cbcb425e15fec9d55a0e076230535df911ac4bf97f9677dead00f2267b1a49",
+      "commit": "3f27aba4b79dedfd8d572811b09c6ecf1d73aa47",
+      "browser": "Chrome/152.0.7977.82",
+      "headless": null,
+      "error": null
+    },
+    {
+      "run": "chrome-diagnostic-wayland-app-01",
+      "path": "plans/driveability/desktop-qualification/evidence/chrome-diagnostic-wayland-app-01.json",
+      "originalPath": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/chrome-diagnostic-wayland-app-01/results.json",
+      "bytes": 47200,
+      "sha256": "af803c836fec533f6310264e30e80c871f157aeeaff07ac1df5055ddbf4cdf1c",
+      "commit": "3f27aba4b79dedfd8d572811b09c6ecf1d73aa47",
+      "browser": "Chrome/152.0.7977.82",
+      "headless": null,
+      "error": null
+    },
+    {
+      "run": "chrome-diagnostic-wayland-minimal-01",
+      "path": "plans/driveability/desktop-qualification/evidence/chrome-diagnostic-wayland-minimal-01.json",
+      "originalPath": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/chrome-diagnostic-wayland-minimal-01/results.json",
+      "bytes": 18051,
+      "sha256": "9661631c621d30689e7e127a3a0c53f10488e9902d4a30076b03a5c93f98206d",
+      "commit": "3f27aba4b79dedfd8d572811b09c6ecf1d73aa47",
+      "browser": "Chrome/152.0.7977.82",
+      "headless": null,
+      "error": null
+    },
+    {
+      "run": "chrome-diagnostic-x11-app-01",
+      "path": "plans/driveability/desktop-qualification/evidence/chrome-diagnostic-x11-app-01.json",
+      "originalPath": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/chrome-diagnostic-x11-app-01/results.json",
+      "bytes": 46928,
+      "sha256": "774be3bcebaf453b6657bc3924e995773805b54bd52cc7837c34cfa7fcd7f578",
+      "commit": "3f27aba4b79dedfd8d572811b09c6ecf1d73aa47",
+      "browser": "Chrome/152.0.7977.82",
+      "headless": null,
+      "error": null
+    },
+    {
+      "run": "chrome-diagnostic-x11-minimal-01",
+      "path": "plans/driveability/desktop-qualification/evidence/chrome-diagnostic-x11-minimal-01.json",
+      "originalPath": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/chrome-diagnostic-x11-minimal-01/results.json",
+      "bytes": 17584,
+      "sha256": "6c1e6fd2972ef9188728028d96217053c2c70b30912434c5f72f876bf2e3b950",
+      "commit": "3f27aba4b79dedfd8d572811b09c6ecf1d73aa47",
+      "browser": "Chrome/152.0.7977.82",
+      "headless": null,
+      "error": null
+    },
+    {
+      "run": "chrome-functional-01",
+      "path": "plans/driveability/desktop-qualification/evidence/chrome-functional-01.json",
+      "originalPath": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/chrome-functional-01/results.json",
+      "bytes": 93296,
+      "sha256": "14cbe6c786e263c3791c98f570c061ea85a866920435d62d1d0a4e5ece25c2df",
+      "commit": "7222cd4681524a3b8bb3dc336ec35051ba59b7a0",
+      "browser": "Chrome/152.0.7977.82",
+      "headless": false,
+      "error": null,
+      "coldVisits": 15,
+      "coldPass": true,
+      "functionalCases": 5,
+      "sustained": [],
+      "lifecycleCycles": 0,
+      "memoryAcceptance": null
+    },
+    {
+      "run": "chrome-headless-memory-01",
+      "path": "plans/driveability/desktop-qualification/evidence/chrome-headless-memory-01.json",
+      "originalPath": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/chrome-headless-memory-01/results.json",
+      "bytes": 408591,
+      "sha256": "0da0fa09feb2a5e385510ef160d414749034684fcdad493dddd2eed5edebf6d7",
+      "commit": "3f27aba4b79dedfd8d572811b09c6ecf1d73aa47",
+      "browser": "Chrome/152.0.7977.82",
+      "headless": true,
+      "error": null,
+      "coldVisits": 0,
+      "coldPass": null,
+      "functionalCases": 0,
+      "sustained": [],
+      "lifecycleCycles": 20,
+      "memoryAcceptance": {
+        "postGcHeap": true,
+        "growth": 10191692,
+        "allowedGrowth": 20971520,
+        "growthPass": true,
+        "scope": "JS heap only; excludes native/WASM/GPU allocations"
+      }
+    },
+    {
+      "run": "chrome-lifecycle-01",
+      "path": "plans/driveability/desktop-qualification/evidence/chrome-lifecycle-01.json",
+      "originalPath": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/chrome-lifecycle-01/results.json",
+      "bytes": 13891,
+      "sha256": "1f490141c3b32c08d59cda1b1cf0df8c51cab906e9b7b97745f6082d6fb3fca1",
+      "commit": "7222cd4681524a3b8bb3dc336ec35051ba59b7a0",
+      "browser": "Chrome/152.0.7977.82",
+      "headless": false,
+      "error": "Error: External physics-progress deadline exceeded",
+      "coldVisits": 0,
+      "coldPass": null,
+      "functionalCases": 0,
+      "sustained": [],
+      "lifecycleCycles": 0,
+      "memoryAcceptance": null
+    },
+    {
+      "run": "chrome-performance-01",
+      "path": "plans/driveability/desktop-qualification/evidence/chrome-performance-01.json",
+      "originalPath": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/chrome-performance-01/results.json",
+      "bytes": 519447,
+      "sha256": "486e54ea8fe0868799b0f9d3663401daca19ea0a7c9c31bafb35b73b42f1cf04",
+      "commit": "3f27aba4b79dedfd8d572811b09c6ecf1d73aa47",
+      "browser": "Chrome/152.0.7977.82",
+      "headless": false,
+      "error": "Error: Chicago River North grid: sustained qualification incomplete or failed; Error: Foreground-driving protocol invalid; retained violations cannot be cleared by reset",
+      "coldVisits": 0,
+      "coldPass": null,
+      "functionalCases": 0,
+      "sustained": [
+        {
+          "id": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43",
+          "seconds": 60,
+          "elapsedMs": 60682.913848,
+          "acceptance": {
+            "numericBudgets": true,
+            "foregroundProtocol": true,
+            "correctness": true,
+            "overall": true
+          },
+          "numericBudgets": {
+            "step": true,
+            "frame": true,
+            "raf": true,
+            "dropped": true
+          },
+          "step": {
+            "count": 3589,
+            "p50": 0.09999999403953552,
+            "p95": 0.20000001788139343,
+            "p99": 0.20000001788139343,
+            "max": 1
+          },
+          "frame": {
+            "count": 3667,
+            "p50": 0.30000001192092896,
+            "p95": 0.5,
+            "p99": 0.7999999821186066,
+            "max": 2.5999999940395355
+          },
+          "raf": {
+            "count": 3666,
+            "p50": 16.69999999999709,
+            "p95": 16.799999999999272,
+            "p99": 17.099999999998545,
+            "max": 19
+          },
+          "protocolTotals": {
+            "driveMs": 59745.899999946356,
+            "resetMs": 932.7000000476837,
+            "unexpectedMs": 0
+          },
+          "violations": []
+        },
+        {
+          "id": "cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410",
+          "seconds": 60,
+          "elapsedMs": 40222.134964,
+          "acceptance": {
+            "numericBudgets": true,
+            "foregroundProtocol": false,
+            "correctness": true,
+            "overall": false
+          },
+          "numericBudgets": {
+            "step": true,
+            "frame": true,
+            "raf": true,
+            "dropped": true
+          },
+          "step": {
+            "count": 2323,
+            "p50": 0.09999999403953552,
+            "p95": 0.20000001788139343,
+            "p99": 0.29999998211860657,
+            "max": 0.7000000178813934
+          },
+          "frame": {
+            "count": 2422,
+            "p50": 0.30000001192092896,
+            "p95": 0.5,
+            "p99": 0.7999999821186066,
+            "max": 2.5
+          },
+          "raf": {
+            "count": 2421,
+            "p50": 16.69999999999891,
+            "p95": 16.799999999999272,
+            "p99": 17.099999999998545,
+            "max": 22.700000000004366
+          },
+          "protocolTotals": {
+            "driveMs": 38661.5,
+            "resetMs": 614,
+            "unexpectedMs": 944.8000000119209
+          },
+          "violations": [
+            {
+              "atMs": 41982.59999999404,
+              "source": "mutation:data-physics-status",
+              "phase": "drive",
+              "state": {
+                "mode": "paused",
+                "physics": "paused",
+                "vehicle": "ready",
+                "steps": 2445,
+                "hidden": false,
+                "hasFocus": false
+              },
+              "reasons": [
+                "window lacks focus",
+                "unexpected non-driving mode",
+                "unexpected non-running physics"
+              ]
+            },
+            {
+              "atMs": 42925.59999999404,
+              "source": "window focus",
+              "phase": "drive",
+              "state": {
+                "mode": "paused",
+                "physics": "paused",
+                "vehicle": "ready",
+                "steps": 2445,
+                "hidden": false,
+                "hasFocus": true
+              },
+              "reasons": [
+                "unexpected non-driving mode",
+                "unexpected non-running physics"
+              ]
+            }
+          ]
+        }
+      ],
+      "lifecycleCycles": 0,
+      "memoryAcceptance": null
+    },
+    {
+      "run": "firefox-functional-01",
+      "path": "plans/driveability/desktop-qualification/evidence/firefox-functional-01.json",
+      "originalPath": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/firefox-functional-01/results.json",
+      "bytes": 90426,
+      "sha256": "bf72e12e349643fa6a05d2a00bf893b16a43702c92f3a4c94e731adc9e15d84a",
+      "commit": "7222cd4681524a3b8bb3dc336ec35051ba59b7a0",
+      "browser": "firefox/155.0",
+      "headless": false,
+      "error": null,
+      "coldVisits": 15,
+      "coldPass": true,
+      "functionalCases": 5,
+      "sustained": [],
+      "lifecycleCycles": 0,
+      "memoryAcceptance": null
+    },
+    {
+      "run": "firefox-performance-01",
+      "path": "plans/driveability/desktop-qualification/evidence/firefox-performance-01.json",
+      "originalPath": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/firefox-performance-01/results.json",
+      "bytes": 1486402,
+      "sha256": "a1625ab456f04da4bdb48f9cbe081f8bf79e33a0b6572b7d2708cdeb58d4de99",
+      "commit": "7222cd4681524a3b8bb3dc336ec35051ba59b7a0",
+      "browser": "firefox/155.0",
+      "headless": false,
+      "error": null,
+      "coldVisits": 0,
+      "coldPass": null,
+      "functionalCases": 0,
+      "sustained": [
+        {
+          "id": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43",
+          "seconds": 60,
+          "elapsedMs": 60931.190602,
+          "acceptance": {
+            "numericBudgets": true,
+            "foregroundProtocol": true,
+            "correctness": true,
+            "overall": true
+          },
+          "numericBudgets": {
+            "step": true,
+            "frame": true,
+            "raf": true,
+            "dropped": true
+          },
+          "step": {
+            "count": 3621,
+            "p50": 0,
+            "p95": 1,
+            "p99": 1,
+            "max": 3
+          },
+          "frame": {
+            "count": 3674,
+            "p50": 0,
+            "p95": 1,
+            "p99": 2,
+            "max": 7
+          },
+          "raf": {
+            "count": 3673,
+            "p50": 17.05999999999767,
+            "p95": 17.080000000001746,
+            "p99": 17.139999999999418,
+            "max": 17.600000000002183
+          },
+          "protocolTotals": {
+            "driveMs": 60025,
+            "resetMs": 886,
+            "unexpectedMs": 0
+          },
+          "violations": []
+        },
+        {
+          "id": "cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410",
+          "seconds": 60,
+          "elapsedMs": 60891.121312,
+          "acceptance": {
+            "numericBudgets": true,
+            "foregroundProtocol": true,
+            "correctness": true,
+            "overall": true
+          },
+          "numericBudgets": {
+            "step": true,
+            "frame": true,
+            "raf": true,
+            "dropped": true
+          },
+          "step": {
+            "count": 3615,
+            "p50": 0,
+            "p95": 1,
+            "p99": 1,
+            "max": 3
+          },
+          "frame": {
+            "count": 3668,
+            "p50": 0,
+            "p95": 1,
+            "p99": 2,
+            "max": 7
+          },
+          "raf": {
+            "count": 3667,
+            "p50": 17.05999999999767,
+            "p95": 17.080000000001746,
+            "p99": 17.18000000000029,
+            "max": 33.80000000000291
+          },
+          "protocolTotals": {
+            "driveMs": 59952,
+            "resetMs": 885,
+            "unexpectedMs": 0
+          },
+          "violations": []
+        },
+        {
+          "id": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+          "seconds": 120,
+          "elapsedMs": 122645.43362999998,
+          "acceptance": {
+            "numericBudgets": true,
+            "foregroundProtocol": true,
+            "correctness": true,
+            "overall": true
+          },
+          "numericBudgets": {
+            "step": true,
+            "frame": true,
+            "raf": true,
+            "dropped": true
+          },
+          "step": {
+            "count": 7276,
+            "p50": 0,
+            "p95": 1,
+            "p99": 1,
+            "max": 7
+          },
+          "frame": {
+            "count": 7384,
+            "p50": 1,
+            "p95": 2,
+            "p99": 3,
+            "max": 14
+          },
+          "raf": {
+            "count": 7383,
+            "p50": 16.89999999999418,
+            "p95": 17.219999999997526,
+            "p99": 17.480000000000018,
+            "max": 17.6200000000008
+          },
+          "protocolTotals": {
+            "driveMs": 120559,
+            "resetMs": 2051,
+            "unexpectedMs": 0
+          },
+          "violations": []
+        },
+        {
+          "id": "trafalgar-square-london",
+          "seconds": 120,
+          "elapsedMs": 121704.94177899999,
+          "acceptance": {
+            "numericBudgets": true,
+            "foregroundProtocol": true,
+            "correctness": true,
+            "overall": true
+          },
+          "numericBudgets": {
+            "step": true,
+            "frame": true,
+            "raf": true,
+            "dropped": true
+          },
+          "step": {
+            "count": 7223,
+            "p50": 0,
+            "p95": 1,
+            "p99": 1,
+            "max": 4
+          },
+          "frame": {
+            "count": 7321,
+            "p50": 0,
+            "p95": 1,
+            "p99": 2,
+            "max": 7
+          },
+          "raf": {
+            "count": 7320,
+            "p50": 17.05999999999767,
+            "p95": 17.099999999998545,
+            "p99": 17.25999999999476,
+            "max": 57.73999999999796
+          },
+          "protocolTotals": {
+            "driveMs": 119901,
+            "resetMs": 1768,
+            "unexpectedMs": 0
+          },
+          "violations": []
+        }
+      ],
+      "lifecycleCycles": 20,
+      "memoryAcceptance": {
+        "result": "unmeasured",
+        "reason": "Requires 20 reliable post-GC JS heap samples"
+      }
+    }
+  ],
+  "media": [
+    {
+      "path": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/chrome-coordinated-chicago-01/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-sustained.png",
+      "sha256": "c0c9318d0ffc53da715146b40e51551145dd969dd2dd58a502fb58c2c18d3777",
+      "bytes": 60112,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "path": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/chrome-coordinated-lucca-01/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87-sustained.png",
+      "sha256": "8750d6a1b15a28b5753175397c61eedf86dc3cd747834645cbc5840823e793d1",
+      "bytes": 64849,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "path": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/chrome-coordinated-trafalgar-01/trafalgar-square-london-sustained.png",
+      "sha256": "691c2d607ff39e70a42fe2a6b01d4c43af0f3ef8d46a607ea880f95315de81bc",
+      "bytes": 58225,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "path": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/chrome-functional-01/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-driving.png",
+      "sha256": "ef3478cf1cce98570edec04150ab9810cd0530d064a6eafff77f456f11ae937a",
+      "bytes": 68528,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "path": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/chrome-functional-01/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-overview.png",
+      "sha256": "47de1407114a606908af5aa02cd88181a9384c4ea4155773def684a6e33b2da2",
+      "bytes": 191002,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "path": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/chrome-functional-01/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-driving.png",
+      "sha256": "d48db6b4a4d69c9dd4d2a017a5784c7967685685d6490d837f5025c7a9199436",
+      "bytes": 62480,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "path": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/chrome-functional-01/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-overview.png",
+      "sha256": "36f7fc899f2decef5a4dfd05691f64e05ec90e42ca356f993a33be87ba179f77",
+      "bytes": 233658,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "path": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/chrome-functional-01/cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a-driving.png",
+      "sha256": "f88ae0600777ba8a72b807771a235b88a05c0762176a56b2e0fa2cdf79aa77fb",
+      "bytes": 58929,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "path": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/chrome-functional-01/cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a-overview.png",
+      "sha256": "25a2043af53c799c21c3f80923fe9ccf110efee59eacaefa3e532398ec9bb6ae",
+      "bytes": 188420,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "path": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/chrome-functional-01/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87-driving.png",
+      "sha256": "17d2135367c31e329bb9c4018bd9dc52cbea5b2a193776679a662e6f47a6f7dd",
+      "bytes": 59638,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "path": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/chrome-functional-01/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87-overview.png",
+      "sha256": "0f6e62159d9fac575c5cf7fe523cd511768fa9b15166d3b77b3d4485bf8d1c7e",
+      "bytes": 275113,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "path": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/chrome-functional-01/trafalgar-square-london-driving.png",
+      "sha256": "bb8b330b64337e4d72cc8dec30a701279e6643c6f00eb09af384030ed97162cf",
+      "bytes": 59630,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "path": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/chrome-functional-01/trafalgar-square-london-overview.png",
+      "sha256": "4da9a7bbbc6c462d46b803b2dcaafc17791e2c21d9721699338fb8780171a052",
+      "bytes": 232930,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "path": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/chrome-performance-01/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-sustained.png",
+      "sha256": "c6f6353fa6d4742af581cbf940c8429bed385066fa715b67709b3dc0c7c963e3",
+      "bytes": 58667,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "path": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/chrome-performance-01/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-sustained.png",
+      "sha256": "9225a217e52a948fa6409444bc6e6c6ade8c582f5ed1ce6b4e3c1acce3fd6499",
+      "bytes": 63494,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "path": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/firefox-functional-01/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-driving.png",
+      "sha256": "14e4874987e58d3a310526a09d07c2a229ebeb80a5c1cae5bfd90084654f3a9a",
+      "bytes": 80206,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "path": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/firefox-functional-01/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-overview.png",
+      "sha256": "3b8e1a6e1f7274960a793fe533c3e910b897bfaf310602c6c8735290de8b03ae",
+      "bytes": 183384,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "path": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/firefox-functional-01/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-driving.png",
+      "sha256": "39c56150154cc5cdae7e227bce4bba9ea7a0a0940af203cf21717b9895b4625c",
+      "bytes": 77503,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "path": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/firefox-functional-01/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-overview.png",
+      "sha256": "e66b4a0075af9e7089e49c2417859c7fb568ef51496d6bd6eb2525e0e4976059",
+      "bytes": 236943,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "path": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/firefox-functional-01/cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a-driving.png",
+      "sha256": "4607a872f011c493a9021b916950e7d6c56771be95eccb8374f497956627b301",
+      "bytes": 74591,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "path": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/firefox-functional-01/cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a-overview.png",
+      "sha256": "91d52d023ce2829242549d20104f731d5daa93b003dfd6b45fd133481f9d1804",
+      "bytes": 183924,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "path": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/firefox-functional-01/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87-driving.png",
+      "sha256": "0ae498701824cc363d04a0cb244dfed0242e65eb912c07d157a423762151484b",
+      "bytes": 73444,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "path": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/firefox-functional-01/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87-overview.png",
+      "sha256": "5302ea3e26610f6edafc2f3e84665dd9b35f903fcef4903107f1dbba83b122cc",
+      "bytes": 252006,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "path": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/firefox-functional-01/trafalgar-square-london-driving.png",
+      "sha256": "ff65d07bb8bd6eaf52350778a4561b416d1512418b1cbf86c248f0bbe65d4970",
+      "bytes": 70274,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "path": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/firefox-functional-01/trafalgar-square-london-overview.png",
+      "sha256": "a78cbe80042e5558f4c31d3038e338219712836ebb3bea454d3a8e3e96705343",
+      "bytes": 231468,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "path": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/firefox-performance-01/cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410-sustained.png",
+      "sha256": "3e26414f848dc5024811108d3927bc8754e51b4d410dba901055472b59121b90",
+      "bytes": 73079,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "path": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/firefox-performance-01/cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43-sustained.png",
+      "sha256": "f281ead5a09689776363d06b8ca1efbb33b591bdb0b2cff0cb28ce84259d57fe",
+      "bytes": 77178,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "path": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/firefox-performance-01/cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87-sustained.png",
+      "sha256": "305adf286d8be7b51dd66537c8bd1b1aa8f6fa65375eccc56b183b51087f7a53",
+      "bytes": 77763,
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "path": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi/.zone-cache/desktop-qualification/firefox-performance-01/trafalgar-square-london-sustained.png",
+      "sha256": "5c0bfc440f5699b7f3d0ade71c287d75113746cfc027689393bf307446139249",
+      "bytes": 68835,
+      "width": 1440,
+      "height": 900
+    }
+  ]
+}

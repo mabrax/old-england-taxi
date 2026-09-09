@@ -19,7 +19,7 @@ Approved libraries, introduced only when their stage needs them:
 | Application | Svelte, Vite, TypeScript | 00 |
 | 3D rendering | Three.js | 00 |
 | Geometry | Earcut, polygon-clipping | 01 |
-| Physics | Rapier 3D | 02 |
+| Physics | Rapier 3D | 03 |
 | Checks | svelte-check, Vitest | 00 |
 
 ## Project shape

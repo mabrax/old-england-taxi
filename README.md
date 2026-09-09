@@ -28,6 +28,28 @@ Open `http://127.0.0.1:4175`. This launcher returns once the generation API is r
 
 If the server becomes unreachable, the loaded map stays visible and the generation form offers **Reconnect**. Restore the server, then reconnect to resume a known job or retry your search with the entered location preserved. Reconnecting does not submit a new search or build automatically.
 
+## Physical world inspection
+
+Each validated zone also initializes a paused Rapier world. **Collision surfaces** shows the ground, complete building mesh and four boundary walls independently of source outlines or generated-geometry visibility. **Resume physics** runs the fixed-step world; **Pause physics** stops it. Leaving the tab/window pauses it and returning requires an explicit resume. A safe-start check adds one visible vehicle where eligible; READY still refers to artifact/render readiness. A physics failure leaves geometry inspection available.
+
+Amber lines mark a simulation rectangle inset 1 m from the clipped-road mesh's X/Z bounds. It is not an exact acquisition-cell boundary, a legal route, or a claim that off-road land/water is traversable. Flat ground is at y=0; the road's 4 cm rendering lift adds no collider or kerb. Building occupancy checks preserve courtyards. See [Physical world decisions and evidence](./plans/driveability/phase-01-physical-world.md) for the boundary, clearance contract, measured costs and later vehicle requirements.
+
+```sh
+npm run physics:measure -- /tmp/physical-world-measurements.json
+npm run physics:browser -- http://127.0.0.1:4186
+```
+
+The browser check expects a production preview on the supplied port. For an isolated check, build and run `npm run preview -- --host 127.0.0.1 --port 4186 --strictPort` in another terminal. Measurements use a small test probe, not a vehicle or phone performance test. Vehicle-specific evidence and limitations are in [Phase 02 verification](./plans/driveability/phase-02-verification.md).
+
+**Inspect vehicle** brings the orbit camera nearby; **Reset vehicle** revalidates its start, clears motion/input and pauses without reloading the cell. Add `?vehicle=1` (or `&vehicle=1` after a zone selection) to expose **Vehicle development exercises**. Each button runs acceleration, coasting, braking, reverse or a turn for exactly 60 physics steps, then pauses. Repeat a command to continue, or reset after being stuck/overturned. Keyboard/touch driving and a chase camera are Phase 03 work. A cell without a safe paved start retains inspection and explains driving unavailability.
+
+```sh
+npm run vehicle:measure -- /tmp/vehicle-measurements.json
+npm run vehicle:browser -- http://127.0.0.1:4187
+```
+
+The vehicle is 2.0 × 4.4 m, capped at 8 m/s forward and 3 m/s reverse. Opposing throttle brakes before reversing; brake overrides throttle. Off-road travel inside the simulation limit can return by driving, but the flat model does not establish real-world traversability. Phase 02 evidence uses prepared cells and controlled fixtures; it does not qualify every street or phone performance.
+
 ## Compiler and verification
 
 ```sh

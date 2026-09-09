@@ -1,0 +1,16 @@
+✔ separates deliberate reset time from valid driving intervals (6.442029ms)
+✔ a paused maneuver endpoint cannot be excused by the next scripted reset (1.09984ms)
+✔ retains a transient pause/resume in a pending mutation batch before reset (0.883848ms)
+✔ hidden or blurred intervals stay rejected after focus and visibility return (1.527244ms)
+✔ watchdog observes invalid state even when no animation frame or mutation callback arrives (0.788188ms)
+✔ reset markers do not excuse hidden state, a still-paused resume, or unfinished transitions (2.478033ms)
+✔ lack of physics progress and incomplete runs cannot pass on state alone (1.344333ms)
+✔ bounded evidence overflow rejects acceptance instead of silently discarding evidence (14.548524ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 88.273552

@@ -1,0 +1,1108 @@
+{
+  "checkedAt": "2026-09-07T20:50:44.367Z",
+  "method": "Read source footprints only to locate queries; actual clearance uses artifact roof/mesh index. No source data enters runtime.",
+  "cells": [
+    {
+      "id": "cell-865afa942cecf07997117878c0868f89804cfe35c85fa6d5e1f4a87bf7d51410",
+      "label": "Chicago River North grid",
+      "sha256": "4a9037e4db68a6cd55cd3db90a0aa50988b550ca1f3cd7d68125d4a35f6473b6",
+      "holes": 0,
+      "courtyard": null,
+      "limitations": {
+        "excludedBuildings": [
+          {
+            "id": "relation/9522023",
+            "building": "unsupported-geometry",
+            "boundary": "relation-see-members",
+            "reasons": [
+              "Building relation/9522023 rings 0 and 1 intersect or touch"
+            ],
+            "tags": {
+              "building": "apartments"
+            }
+          }
+        ],
+        "examples": [
+          {
+            "category": "flattened bridge",
+            "count": 54,
+            "examples": [
+              {
+                "id": "way/79657216",
+                "road": "included",
+                "boundary": "inside",
+                "reasons": [
+                  "bridge-not-reconstructed",
+                  "layer-not-reconstructed"
+                ],
+                "tags": {
+                  "bridge": "yes",
+                  "highway": "secondary",
+                  "layer": "1"
+                }
+              },
+              {
+                "id": "way/149215070",
+                "road": "excluded-highway-class",
+                "boundary": "inside",
+                "reasons": [
+                  "bridge-not-reconstructed",
+                  "layer-not-reconstructed"
+                ],
+                "tags": {
+                  "bridge": "yes",
+                  "highway": "footway",
+                  "layer": "1"
+                }
+              }
+            ]
+          },
+          {
+            "category": "flattened tunnel",
+            "count": 34,
+            "examples": [
+              {
+                "id": "way/24096761",
+                "road": "included",
+                "boundary": "crosses-boundary",
+                "reasons": [
+                  "tunnel-not-reconstructed",
+                  "layer-not-reconstructed"
+                ],
+                "tags": {
+                  "highway": "service",
+                  "layer": "-2",
+                  "tunnel": "yes"
+                }
+              },
+              {
+                "id": "way/48842352",
+                "road": "included",
+                "boundary": "crosses-boundary",
+                "reasons": [
+                  "tunnel-not-reconstructed",
+                  "layer-not-reconstructed"
+                ],
+                "tags": {
+                  "highway": "service",
+                  "layer": "-1",
+                  "tunnel": "yes"
+                }
+              }
+            ]
+          },
+          {
+            "category": "nonzero layer",
+            "count": 94,
+            "examples": [
+              {
+                "id": "way/24096761",
+                "road": "included",
+                "boundary": "crosses-boundary",
+                "reasons": [
+                  "tunnel-not-reconstructed",
+                  "layer-not-reconstructed"
+                ],
+                "tags": {
+                  "highway": "service",
+                  "layer": "-2",
+                  "tunnel": "yes"
+                }
+              },
+              {
+                "id": "way/48842264",
+                "road": "included",
+                "boundary": "inside",
+                "reasons": [
+                  "layer-not-reconstructed"
+                ],
+                "tags": {
+                  "highway": "service",
+                  "layer": "-1"
+                }
+              }
+            ]
+          },
+          {
+            "category": "building part",
+            "count": 23,
+            "examples": [
+              {
+                "id": "relation/14035868",
+                "building": "unsupported-building-part",
+                "boundary": "relation-see-members",
+                "reasons": [
+                  "building-part-excluded"
+                ],
+                "tags": {
+                  "building:part": "yes"
+                }
+              },
+              {
+                "id": "relation/17520199",
+                "building": "unsupported-building-part",
+                "boundary": "relation-see-members",
+                "reasons": [
+                  "building-part-excluded"
+                ],
+                "tags": {
+                  "building:part": "yes"
+                }
+              }
+            ]
+          },
+          {
+            "category": "excluded footway",
+            "count": 379,
+            "examples": [
+              {
+                "id": "way/149215070",
+                "road": "excluded-highway-class",
+                "boundary": "inside",
+                "reasons": [
+                  "bridge-not-reconstructed",
+                  "layer-not-reconstructed"
+                ],
+                "tags": {
+                  "bridge": "yes",
+                  "highway": "footway",
+                  "layer": "1"
+                }
+              },
+              {
+                "id": "way/231046937",
+                "road": "excluded-highway-class",
+                "boundary": "inside",
+                "reasons": [
+                  "tunnel-not-reconstructed",
+                  "layer-not-reconstructed"
+                ],
+                "tags": {
+                  "highway": "footway",
+                  "layer": "1",
+                  "tunnel": "building_passage"
+                }
+              }
+            ]
+          },
+          {
+            "category": "boundary outlier",
+            "count": 148,
+            "examples": [
+              {
+                "id": "way/4476709",
+                "road": "included",
+                "boundary": "crosses-boundary",
+                "reasons": [],
+                "tags": {
+                  "highway": "secondary"
+                }
+              },
+              {
+                "id": "way/24096761",
+                "road": "included",
+                "boundary": "crosses-boundary",
+                "reasons": [
+                  "tunnel-not-reconstructed",
+                  "layer-not-reconstructed"
+                ],
+                "tags": {
+                  "highway": "service",
+                  "layer": "-2",
+                  "tunnel": "yes"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "startArea": {
+        "position": {
+          "x": -83.77054413980494,
+          "y": 1.02,
+          "z": 217.48772349694485
+        },
+        "nearestSourceWay": 1275373140,
+        "name": "West Kinzie Street",
+        "highway": "service",
+        "distanceToSegment": 0
+      }
+    },
+    {
+      "id": "cell-976969d235a150cda1f36084fb9559d8777e9d64004ebe3228780286831eaa43",
+      "label": "Cambridge centre",
+      "sha256": "6dea8e06c7a3f40ac306b07236dcbd3779ba8cf4e87caaa3e490069217760cd4",
+      "holes": 8,
+      "courtyard": {
+        "source": {
+          "type": "relation",
+          "id": 3240,
+          "footprintIndex": 0
+        },
+        "ringIndex": 1,
+        "ringNodeIds": [
+          130121641,
+          1776208636,
+          1776209121,
+          1776208629,
+          130121642,
+          1776209106,
+          1776209086,
+          1776209057,
+          130121643,
+          1776209035,
+          1776209059,
+          1776209082,
+          1776209094,
+          1776209084,
+          1776209089,
+          130121644,
+          1776208656,
+          1776209123,
+          1776209133,
+          1776208646
+        ],
+        "query": {
+          "minimumX": -103.82260542300001,
+          "maximumX": -102.82260542300001,
+          "minimumZ": -221.75494591242733,
+          "maximumZ": -220.75494591242733,
+          "minimumY": 0.1,
+          "maximumY": 2
+        },
+        "clearance": {
+          "clear": true,
+          "reasons": []
+        },
+        "surfaceIntersection": false,
+        "purpose": "1 m query box in real included courtyard; not vehicle spawn or accessible entrance"
+      },
+      "limitations": {
+        "excludedBuildings": [],
+        "examples": [
+          {
+            "category": "flattened bridge",
+            "count": 9,
+            "examples": [
+              {
+                "id": "way/26201064",
+                "road": "excluded-highway-class",
+                "boundary": "inside",
+                "reasons": [
+                  "bridge-not-reconstructed",
+                  "layer-not-reconstructed"
+                ],
+                "tags": {
+                  "bridge": "yes",
+                  "highway": "footway",
+                  "layer": "1"
+                }
+              },
+              {
+                "id": "way/131111088",
+                "road": "excluded-highway-class",
+                "boundary": "inside",
+                "reasons": [
+                  "bridge-not-reconstructed",
+                  "layer-not-reconstructed"
+                ],
+                "tags": {
+                  "bridge": "yes",
+                  "highway": "footway",
+                  "layer": "1"
+                }
+              }
+            ]
+          },
+          {
+            "category": "flattened tunnel",
+            "count": 129,
+            "examples": [
+              {
+                "id": "way/3993052",
+                "road": "included",
+                "boundary": "inside",
+                "reasons": [
+                  "tunnel-not-reconstructed",
+                  "layer-not-reconstructed"
+                ],
+                "tags": {
+                  "highway": "service",
+                  "layer": "-1",
+                  "tunnel": "yes"
+                }
+              },
+              {
+                "id": "way/3993055",
+                "road": "included",
+                "boundary": "inside",
+                "reasons": [
+                  "tunnel-not-reconstructed"
+                ],
+                "tags": {
+                  "highway": "service",
+                  "tunnel": "covered"
+                }
+              }
+            ]
+          },
+          {
+            "category": "nonzero layer",
+            "count": 106,
+            "examples": [
+              {
+                "id": "way/3993052",
+                "road": "included",
+                "boundary": "inside",
+                "reasons": [
+                  "tunnel-not-reconstructed",
+                  "layer-not-reconstructed"
+                ],
+                "tags": {
+                  "highway": "service",
+                  "layer": "-1",
+                  "tunnel": "yes"
+                }
+              },
+              {
+                "id": "way/26201064",
+                "road": "excluded-highway-class",
+                "boundary": "inside",
+                "reasons": [
+                  "bridge-not-reconstructed",
+                  "layer-not-reconstructed"
+                ],
+                "tags": {
+                  "bridge": "yes",
+                  "highway": "footway",
+                  "layer": "1"
+                }
+              }
+            ]
+          },
+          {
+            "category": "building part",
+            "count": 7,
+            "examples": [
+              {
+                "id": "way/1257152553",
+                "building": "unsupported-building-part",
+                "boundary": "inside",
+                "reasons": [
+                  "building-part-excluded"
+                ],
+                "tags": {
+                  "building:part": "roof"
+                }
+              },
+              {
+                "id": "way/1257152554",
+                "building": "unsupported-building-part",
+                "boundary": "inside",
+                "reasons": [
+                  "building-part-excluded"
+                ],
+                "tags": {
+                  "building:part": "yes"
+                }
+              }
+            ]
+          },
+          {
+            "category": "excluded footway",
+            "count": 571,
+            "examples": [
+              {
+                "id": "way/3986781",
+                "road": "excluded-highway-class",
+                "boundary": "crosses-boundary",
+                "reasons": [],
+                "tags": {
+                  "highway": "footway"
+                }
+              },
+              {
+                "id": "way/3993017",
+                "road": "excluded-highway-class",
+                "boundary": "inside",
+                "reasons": [],
+                "tags": {
+                  "highway": "footway"
+                }
+              }
+            ]
+          },
+          {
+            "category": "boundary outlier",
+            "count": 149,
+            "examples": [
+              {
+                "id": "way/3986751",
+                "road": "included",
+                "boundary": "crosses-boundary",
+                "reasons": [],
+                "tags": {
+                  "highway": "unclassified"
+                }
+              },
+              {
+                "id": "way/3986774",
+                "road": "included",
+                "boundary": "crosses-boundary",
+                "reasons": [],
+                "tags": {
+                  "highway": "residential"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "startArea": {
+        "position": {
+          "x": 152.41670111327755,
+          "y": 1.02,
+          "z": -318.1046747868087
+        },
+        "nearestSourceWay": 100328270,
+        "name": "Malcolm Street",
+        "highway": "residential",
+        "distanceToSegment": 1.432144669219779e-14
+      }
+    },
+    {
+      "id": "cell-bc662dbb6af4d9776e6f0949104133900761f4c6cd0f4fdd567041c1cb06996a",
+      "label": "London Tower Bridge",
+      "sha256": "5f4887e391bafe1ded5e82519e42ceaaed35998655810b61b1f4019571cfb00d",
+      "holes": 0,
+      "courtyard": null,
+      "limitations": {
+        "excludedBuildings": [
+          {
+            "id": "relation/6974419",
+            "building": "unsupported-geometry",
+            "boundary": "relation-see-members",
+            "reasons": [
+              "Building relation/6974419 rings 0 and 3 intersect or touch"
+            ],
+            "tags": {
+              "building": "yes"
+            }
+          }
+        ],
+        "examples": [
+          {
+            "category": "flattened bridge",
+            "count": 29,
+            "examples": [
+              {
+                "id": "way/24951423",
+                "road": "included",
+                "boundary": "inside",
+                "reasons": [
+                  "bridge-not-reconstructed",
+                  "layer-not-reconstructed"
+                ],
+                "tags": {
+                  "bridge": "yes",
+                  "highway": "trunk",
+                  "layer": "1"
+                }
+              },
+              {
+                "id": "way/26446232",
+                "road": "excluded-highway-class",
+                "boundary": "inside",
+                "reasons": [
+                  "bridge-not-reconstructed",
+                  "layer-not-reconstructed"
+                ],
+                "tags": {
+                  "bridge": "yes",
+                  "highway": "footway",
+                  "layer": "1"
+                }
+              }
+            ]
+          },
+          {
+            "category": "flattened tunnel",
+            "count": 40,
+            "examples": [
+              {
+                "id": "way/44048201",
+                "road": "excluded-highway-class",
+                "boundary": "inside",
+                "reasons": [
+                  "tunnel-not-reconstructed",
+                  "layer-not-reconstructed"
+                ],
+                "tags": {
+                  "highway": "footway",
+                  "layer": "-1",
+                  "tunnel": "yes"
+                }
+              },
+              {
+                "id": "way/54665155",
+                "road": "excluded-highway-class",
+                "boundary": "inside",
+                "reasons": [
+                  "tunnel-not-reconstructed"
+                ],
+                "tags": {
+                  "highway": "steps",
+                  "tunnel": "building_passage"
+                }
+              }
+            ]
+          },
+          {
+            "category": "nonzero layer",
+            "count": 74,
+            "examples": [
+              {
+                "id": "way/24951423",
+                "road": "included",
+                "boundary": "inside",
+                "reasons": [
+                  "bridge-not-reconstructed",
+                  "layer-not-reconstructed"
+                ],
+                "tags": {
+                  "bridge": "yes",
+                  "highway": "trunk",
+                  "layer": "1"
+                }
+              },
+              {
+                "id": "way/26446232",
+                "road": "excluded-highway-class",
+                "boundary": "inside",
+                "reasons": [
+                  "bridge-not-reconstructed",
+                  "layer-not-reconstructed"
+                ],
+                "tags": {
+                  "bridge": "yes",
+                  "highway": "footway",
+                  "layer": "1"
+                }
+              }
+            ]
+          },
+          {
+            "category": "building part",
+            "count": 368,
+            "examples": [
+              {
+                "id": "relation/19280259",
+                "building": "unsupported-building-part",
+                "boundary": "relation-see-members",
+                "reasons": [
+                  "building-part-excluded"
+                ],
+                "tags": {
+                  "building:part": "yes"
+                }
+              },
+              {
+                "id": "way/93710847",
+                "building": "unsupported-building-part",
+                "boundary": "inside",
+                "reasons": [
+                  "building-part-excluded"
+                ],
+                "tags": {
+                  "building:part": "yes"
+                }
+              }
+            ]
+          },
+          {
+            "category": "excluded footway",
+            "count": 387,
+            "examples": [
+              {
+                "id": "way/3978922",
+                "road": "excluded-highway-class",
+                "boundary": "inside",
+                "reasons": [],
+                "tags": {
+                  "highway": "footway"
+                }
+              },
+              {
+                "id": "way/11547478",
+                "road": "excluded-highway-class",
+                "boundary": "inside",
+                "reasons": [],
+                "tags": {
+                  "highway": "footway"
+                }
+              }
+            ]
+          },
+          {
+            "category": "boundary outlier",
+            "count": 137,
+            "examples": [
+              {
+                "id": "way/3978914",
+                "road": "included",
+                "boundary": "crosses-boundary",
+                "reasons": [],
+                "tags": {
+                  "highway": "residential"
+                }
+              },
+              {
+                "id": "way/3978917",
+                "road": "included",
+                "boundary": "crosses-boundary",
+                "reasons": [],
+                "tags": {
+                  "highway": "residential"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "startArea": {
+        "position": {
+          "x": 85.47010788395892,
+          "y": 1.02,
+          "z": -255.52688148377655
+        },
+        "nearestSourceWay": 156043630,
+        "name": "Tower Bridge Approach",
+        "highway": "trunk",
+        "distanceToSegment": 1.0695084443661336e-14
+      }
+    },
+    {
+      "id": "cell-d815e08a99cee7a31b46d4e3ddddfd889fb0ea011c1261f06fc2b2b3360ecf87",
+      "label": "Lucca historic centre",
+      "sha256": "8eff07f47eba43f30f5084232c0f4bfd086f6cc740660ad9435f6493c044e3cf",
+      "holes": 27,
+      "courtyard": {
+        "source": {
+          "type": "relation",
+          "id": 2317787,
+          "footprintIndex": 0
+        },
+        "ringIndex": 1,
+        "ringNodeIds": [
+          1843992669,
+          1843992651,
+          1843992713,
+          1843992664
+        ],
+        "query": {
+          "minimumX": 196.1981900940459,
+          "maximumX": 197.1981900940459,
+          "minimumZ": 142.97205072718083,
+          "maximumZ": 143.97205072718083,
+          "minimumY": 0.1,
+          "maximumY": 2
+        },
+        "clearance": {
+          "clear": true,
+          "reasons": []
+        },
+        "surfaceIntersection": false,
+        "purpose": "1 m query box in real included courtyard; not vehicle spawn or accessible entrance"
+      },
+      "limitations": {
+        "excludedBuildings": [],
+        "examples": [
+          {
+            "category": "flattened bridge",
+            "count": 0,
+            "examples": []
+          },
+          {
+            "category": "flattened tunnel",
+            "count": 47,
+            "examples": [
+              {
+                "id": "way/35164691",
+                "road": "excluded-highway-class",
+                "boundary": "inside",
+                "reasons": [
+                  "tunnel-not-reconstructed"
+                ],
+                "tags": {
+                  "highway": "pedestrian",
+                  "tunnel": "building_passage"
+                }
+              },
+              {
+                "id": "way/35164692",
+                "road": "excluded-highway-class",
+                "boundary": "inside",
+                "reasons": [
+                  "tunnel-not-reconstructed"
+                ],
+                "tags": {
+                  "highway": "pedestrian",
+                  "tunnel": "building_passage"
+                }
+              }
+            ]
+          },
+          {
+            "category": "nonzero layer",
+            "count": 3,
+            "examples": [
+              {
+                "id": "way/753516736",
+                "road": "excluded-highway-class",
+                "boundary": "inside",
+                "reasons": [
+                  "tunnel-not-reconstructed",
+                  "layer-not-reconstructed"
+                ],
+                "tags": {
+                  "highway": "pedestrian",
+                  "layer": "-1",
+                  "tunnel": "yes"
+                }
+              },
+              {
+                "id": "way/753516738",
+                "road": "excluded-highway-class",
+                "boundary": "inside",
+                "reasons": [
+                  "tunnel-not-reconstructed",
+                  "layer-not-reconstructed"
+                ],
+                "tags": {
+                  "highway": "pedestrian",
+                  "layer": "-1",
+                  "tunnel": "yes"
+                }
+              }
+            ]
+          },
+          {
+            "category": "building part",
+            "count": 17,
+            "examples": [
+              {
+                "id": "way/368742667",
+                "building": "unsupported-building-part",
+                "boundary": "inside",
+                "reasons": [
+                  "building-part-excluded"
+                ],
+                "tags": {
+                  "building:part": "yes"
+                }
+              },
+              {
+                "id": "way/368742678",
+                "building": "unsupported-building-part",
+                "boundary": "inside",
+                "reasons": [
+                  "building-part-excluded"
+                ],
+                "tags": {
+                  "building:part": "yes"
+                }
+              }
+            ]
+          },
+          {
+            "category": "excluded footway",
+            "count": 51,
+            "examples": [
+              {
+                "id": "way/48631077",
+                "road": "excluded-highway-class",
+                "boundary": "inside",
+                "reasons": [],
+                "tags": {
+                  "highway": "footway"
+                }
+              },
+              {
+                "id": "way/163740107",
+                "road": "excluded-highway-class",
+                "boundary": "inside",
+                "reasons": [],
+                "tags": {
+                  "highway": "footway"
+                }
+              }
+            ]
+          },
+          {
+            "category": "boundary outlier",
+            "count": 136,
+            "examples": [
+              {
+                "id": "way/26828779",
+                "road": "included",
+                "boundary": "crosses-boundary",
+                "reasons": [],
+                "tags": {
+                  "highway": "residential"
+                }
+              },
+              {
+                "id": "way/43199888",
+                "road": "excluded-highway-class",
+                "boundary": "crosses-boundary",
+                "reasons": [],
+                "tags": {
+                  "highway": "pedestrian"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "startArea": {
+        "position": {
+          "x": -318.1946648150051,
+          "y": 1.02,
+          "z": 319.0031438932979
+        },
+        "nearestSourceWay": 178667310,
+        "name": "Corso Giuseppe Garibaldi",
+        "highway": "residential",
+        "distanceToSegment": 2.6645352591003757e-14
+      }
+    },
+    {
+      "id": "trafalgar-square-london",
+      "label": "Trafalgar Square, London",
+      "sha256": "3636dcb2c69face98dea581333c9309ed5c021364a0b953074b1a98c19e2fc6a",
+      "holes": 48,
+      "courtyard": {
+        "source": {
+          "type": "relation",
+          "id": 78595,
+          "footprintIndex": 0
+        },
+        "ringIndex": 1,
+        "ringNodeIds": [
+          11682219721,
+          12918250799,
+          12918397266,
+          11682219717,
+          11682219719,
+          346337256,
+          346337252,
+          11682219723,
+          12918357227
+        ],
+        "query": {
+          "minimumX": 475.22151229354057,
+          "maximumX": 476.22151229354057,
+          "minimumZ": -172.0513889181085,
+          "maximumZ": -171.0513889181085,
+          "minimumY": 0.1,
+          "maximumY": 2
+        },
+        "clearance": {
+          "clear": true,
+          "reasons": []
+        },
+        "surfaceIntersection": false,
+        "purpose": "1 m query box in real included courtyard; not vehicle spawn or accessible entrance"
+      },
+      "limitations": {
+        "excludedBuildings": [],
+        "examples": [
+          {
+            "category": "flattened bridge",
+            "count": 17,
+            "examples": [
+              {
+                "id": "way/4254120",
+                "road": "excluded-highway-class",
+                "boundary": "crosses-boundary",
+                "reasons": [
+                  "bridge-not-reconstructed",
+                  "layer-not-reconstructed"
+                ],
+                "tags": {
+                  "bridge": "yes",
+                  "highway": "footway",
+                  "layer": "2"
+                }
+              },
+              {
+                "id": "way/4254121",
+                "road": "excluded-highway-class",
+                "boundary": "inside",
+                "reasons": [
+                  "bridge-not-reconstructed"
+                ],
+                "tags": {
+                  "bridge": "yes",
+                  "highway": "steps"
+                }
+              }
+            ]
+          },
+          {
+            "category": "flattened tunnel",
+            "count": 218,
+            "examples": [
+              {
+                "id": "way/4082561",
+                "road": "included",
+                "boundary": "inside",
+                "reasons": [
+                  "tunnel-not-reconstructed"
+                ],
+                "tags": {
+                  "highway": "service",
+                  "tunnel": "building_passage"
+                }
+              },
+              {
+                "id": "way/4256532",
+                "road": "excluded-highway-class",
+                "boundary": "inside",
+                "reasons": [
+                  "tunnel-not-reconstructed",
+                  "layer-not-reconstructed"
+                ],
+                "tags": {
+                  "highway": "footway",
+                  "layer": "-1",
+                  "tunnel": "building_passage"
+                }
+              }
+            ]
+          },
+          {
+            "category": "nonzero layer",
+            "count": 246,
+            "examples": [
+              {
+                "id": "relation/17074208",
+                "building": "included",
+                "boundary": "relation-see-members",
+                "reasons": [
+                  "layer-not-reconstructed"
+                ],
+                "tags": {
+                  "building": "arch",
+                  "layer": "1"
+                }
+              },
+              {
+                "id": "way/4254120",
+                "road": "excluded-highway-class",
+                "boundary": "crosses-boundary",
+                "reasons": [
+                  "bridge-not-reconstructed",
+                  "layer-not-reconstructed"
+                ],
+                "tags": {
+                  "bridge": "yes",
+                  "highway": "footway",
+                  "layer": "2"
+                }
+              }
+            ]
+          },
+          {
+            "category": "building part",
+            "count": 616,
+            "examples": [
+              {
+                "id": "relation/78616",
+                "building": "unsupported-building-part",
+                "boundary": "relation-see-members",
+                "reasons": [
+                  "building-part-excluded"
+                ],
+                "tags": {
+                  "building": "office",
+                  "building:part": "yes"
+                }
+              },
+              {
+                "id": "relation/13333026",
+                "building": "unsupported-building-part",
+                "boundary": "relation-see-members",
+                "reasons": [
+                  "building-part-excluded"
+                ],
+                "tags": {
+                  "building:part": "yes"
+                }
+              }
+            ]
+          },
+          {
+            "category": "excluded footway",
+            "count": 1601,
+            "examples": [
+              {
+                "id": "way/4253884",
+                "road": "excluded-highway-class",
+                "boundary": "crosses-boundary",
+                "reasons": [],
+                "tags": {
+                  "highway": "footway"
+                }
+              },
+              {
+                "id": "way/4254102",
+                "road": "excluded-highway-class",
+                "boundary": "inside",
+                "reasons": [],
+                "tags": {
+                  "highway": "footway"
+                }
+              }
+            ]
+          },
+          {
+            "category": "boundary outlier",
+            "count": 290,
+            "examples": [
+              {
+                "id": "way/2424941",
+                "road": "included",
+                "boundary": "crosses-boundary",
+                "reasons": [],
+                "tags": {
+                  "highway": "unclassified"
+                }
+              },
+              {
+                "id": "way/4082552",
+                "road": "included",
+                "boundary": "crosses-boundary",
+                "reasons": [],
+                "tags": {
+                  "highway": "unclassified"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "startArea": {
+        "position": {
+          "x": -448.627529192787,
+          "y": 1.02,
+          "z": 413.0413833055337
+        },
+        "nearestSourceWay": 155313766,
+        "name": "The Mall",
+        "highway": "tertiary",
+        "distanceToSegment": 0
+      }
+    }
+  ]
+}
