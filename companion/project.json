@@ -2,27 +2,27 @@
   "project": "Old England Taxi",
   "description": "A driving and route-learning simulator built from real places.",
   "synced": "2026-09-09",
-  "syncNote": "After the follow-up deferral decision",
+  "syncNote": "After Stage 03 acceptance and canonical integration",
   "currentStage": "03",
   "nextStage": "04",
-  "headline": "Linux runs reviewed.\nFollow-ups tracked.",
-  "summary": "The Chrome frame stall and recorded memory growth are deferred for later investigation. Next: plan selection and continuity.",
-  "sourceRoot": "/home/mabrax/.codex/worktrees/1e4a/old-england-taxi",
+  "headline": "Stage 03 accepted with deferrals.\nStage 04 planning is next.",
+  "summary": "Linux Chrome/Firefox implementation and qualification are integrated in main for the current desktop scope. The Chrome frame stall, process-memory growth, macOS Edge and iPad checks remain deferred.",
+  "sourceRoot": "/home/mabrax/Projects/old-england-taxi",
   "canonical": {
     "branch": "main",
-    "commit": "712fe6f",
-    "label": "Generation foundation"
+    "commit": "b1a5d06",
+    "label": "Reviewed Driveability integration"
   },
   "reviewed": {
-    "branch": "codex/desktop-qualification-astra",
+    "branch": "main",
     "commit": "9506cb1",
     "reviewCommit": "700cdfd",
     "label": "Reviewed Linux qualification + follow-up disposition"
   },
   "gatesHeading": "Tracked for later",
   "integration": {
-    "title": "Integration is a separate step",
-    "note": "Reviewed driving and Linux qualification remain on their branch. Canonical main holds the generation foundation."
+    "title": "Stage 03 accepted with deferrals",
+    "note": "Reviewed Linux Chrome/Firefox implementation and qualification are integrated in canonical main. Chrome stall, process-memory growth, macOS Edge and iPad checks remain explicitly deferred."
   },
   "next": {
     "label": "Next conversation",
@@ -151,9 +151,9 @@
       "title": "Driveability",
       "short": "One cell. One vehicle.",
       "state": "open",
-      "status": "Follow-ups deferred",
-      "summary": "Drive, collide, inspect and recover inside one flat cell. Linux Chrome/Firefox evidence is independently reviewed; the remaining stall and memory investigations are tracked for later.",
-      "outcome": "Reliable desktop driving, supported by explicit qualification evidence.",
+      "status": "Accepted with deferrals",
+      "summary": "Drive, collide, inspect and recover inside one flat cell. Linux Chrome/Firefox evidence is reviewed and integrated; residual stall, memory and deferred-device checks remain explicit.",
+      "outcome": "Stage 03 is accepted for the current Linux desktop scope with explicit follow-up deferrals.",
       "source": "plans/driveability/README.md",
       "phases": [
         {
@@ -192,7 +192,13 @@
         "Implemented",
         "Reviewed",
         "Deferred checks",
-        "Pending"
+        "In main"
+      ],
+      "dimensionStates": [
+        "complete",
+        "reviewed",
+        "open",
+        "complete"
       ]
     },
     {
@@ -388,7 +394,7 @@
     },
     {
       "title": "Champion independent review",
-      "path": "/home/mabrax/.codex/worktrees/8f0d/old-england-taxi/companion/reviews/2026-09-08-linux-qualification.md",
+      "path": "/home/mabrax/Projects/old-england-taxi/companion/reviews/2026-09-08-linux-qualification.md",
       "note": "Independent full verification, raw-evidence checks, memory assessment and remaining acceptance concerns."
     },
     {
@@ -408,6 +414,12 @@
     }
   ],
   "handoffs": [
+    {
+      "date": "9 Sep",
+      "title": "Stage 03 integrated",
+      "detail": "Accepted for the current Linux desktop scope with explicit deferrals; canonical main includes the reviewed implementation and qualification.",
+      "reference": "b1a5d06"
+    },
     {
       "date": "9 Sep",
       "title": "Follow-ups tracked for later",
