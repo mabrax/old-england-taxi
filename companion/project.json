@@ -1,17 +1,17 @@
 {
   "project": "Old England Taxi",
   "description": "A driving and route-learning simulator built from real places.",
-  "synced": "2026-09-09",
-  "syncNote": "After Stage 03 acceptance and canonical integration",
+  "synced": "2026-10-17",
+  "syncNote": "After the Drift City restyle integration",
   "currentStage": "03",
   "nextStage": "04",
-  "headline": "Stage 03 accepted with deferrals.\nStage 04 planning is next.",
-  "summary": "Linux Chrome/Firefox implementation and qualification are integrated in main for the current desktop scope. The Chrome frame stall, process-memory growth, macOS Edge and iPad checks remain deferred.",
-  "sourceRoot": "/home/mabrax/Projects/old-england-taxi",
+  "headline": "Stage 03 accepted with deferrals.\nDrift City restyle integrated; Stage 04 next.",
+  "summary": "Linux Chrome/Firefox implementation and qualification are integrated in main for the current desktop scope. A user-requested Drift City restyle is now in main, unreviewed and unmeasured. The Chrome frame stall, process-memory growth, C-08 source completeness, macOS Edge and iPad checks remain deferred.",
+  "sourceRoot": "/mnt/projects/old-england-taxi",
   "canonical": {
     "branch": "main",
-    "commit": "b1a5d06",
-    "label": "Reviewed Driveability integration"
+    "commit": "afd91ce",
+    "label": "Drift City restyle integration"
   },
   "reviewed": {
     "branch": "main",
@@ -21,8 +21,8 @@
   },
   "gatesHeading": "Tracked for later",
   "integration": {
-    "title": "Stage 03 accepted with deferrals",
-    "note": "Reviewed Linux Chrome/Firefox implementation and qualification are integrated in canonical main. Chrome stall, process-memory growth, macOS Edge and iPad checks remain explicitly deferred."
+    "title": "Restyle integrated · unreviewed",
+    "note": "The Drift City restyle (014fbd9) was merged into main at afd91ce at the user's direction without independent review. Stage 03 acceptance and its Linux evidence predate the new renderer; the stall, memory, C-08, macOS Edge and iPad items stay deferred."
   },
   "next": {
     "label": "Next conversation",
@@ -33,7 +33,7 @@
       "Cache behavior",
       "Adjacent cells"
     ],
-    "note": "The stall and memory issues are tracked for later. Neither blocks this planning discussion."
+    "note": "Stage 04 adjacent-pair work is reported on local branch codex/qualified-adjacent-pair (issue #3). It is not in main, so publish that branch before planning further from here."
   },
   "stages": [
     {
@@ -152,7 +152,7 @@
       "short": "One cell. One vehicle.",
       "state": "open",
       "status": "Accepted with deferrals",
-      "summary": "Drive, collide, inspect and recover inside one flat cell. Linux Chrome/Firefox evidence is reviewed and integrated; residual stall, memory and deferred-device checks remain explicit.",
+      "summary": "Drive, collide, inspect and recover inside one flat cell. Linux Chrome/Firefox evidence is reviewed and integrated; a later Drift City restyle changed the renderer after that evidence. Residual stall, memory and deferred-device checks remain explicit.",
       "outcome": "Stage 03 is accepted for the current Linux desktop scope with explicit follow-up deferrals.",
       "source": "plans/driveability/README.md",
       "phases": [
@@ -186,6 +186,13 @@
           "state": "reviewed",
           "status": "Reviewed extension",
           "detail": "A fixed Chicago control tape, deterministic checkpoints and bounded Chrome trace capture."
+        },
+        {
+          "title": "Drift City restyle",
+          "extension": true,
+          "state": "open",
+          "status": "Integrated · unreviewed",
+          "detail": "User-requested cel shading, ink outlines, sky and haze, decorative facades, painted roads and a restyled taxi. Physics, inputs and the chase camera are unchanged. 272 tests, checks and build pass; no benchmark has measured the new renderer."
         }
       ],
       "dimensions": [
@@ -206,8 +213,8 @@
       "title": "Selection & continuity",
       "short": "Next to plan",
       "state": "next",
-      "status": "Planning next",
-      "summary": "Define richer map selection and cache behavior, then how adjacent cells connect during driving.",
+      "status": "Next · work outside main",
+      "summary": "Define richer map selection and cache behavior, then how adjacent cells connect during driving. Issue #3 reports adjacent-pair work on local branch codex/qualified-adjacent-pair; it is not in main and is unverified here.",
       "outcome": "Move between selected areas with understandable loading and continuity.",
       "source": "plans/03-zone-generalization.md",
       "phases": [
@@ -228,10 +235,10 @@
         }
       ],
       "dimensions": [
-        "Not started",
-        "Not started",
+        "Unverified here",
         "Not assessed",
-        "Not started"
+        "Not assessed",
+        "Not in main"
       ]
     },
     {
@@ -293,6 +300,11 @@
   ],
   "gates": [
     {
+      "title": "Restyle performance unmeasured",
+      "detail": "The Drift City renderer has no benchmark or qualification run. Linux frame and memory evidence predates it; rerun the desktop benchmark before relying on those numbers.",
+      "source": "plans/drift-city-restyle.md"
+    },
+    {
       "title": "#2 · Chrome frame stall",
       "detail": "Deferred for investigation and fix. Independent RAF stopped while timers continued; later passing runs have not established a cause or fix.",
       "source": "plans/driveability/desktop-qualification/disposition.md"
@@ -301,9 +313,21 @@
       "title": "#1 · Memory growth & GC",
       "detail": "Deferred for investigation. Complete Linux process/GPU observations are retained; passing Chrome JS limits does not certify a resident-memory plateau.",
       "source": "plans/driveability/desktop-qualification/disposition.md"
+    },
+    {
+      "title": "#3 · C-08 source completeness",
+      "detail": "Deferred and non-blocking. Discovery of every building crossing or enclosing the Chicago adjacent pair is unproved; evidence sits on an unpublished branch.",
+      "source": "plans/README.md"
     }
   ],
   "decisions": [
+    {
+      "title": "Drift City look now",
+      "summary": "Restyle integrated at the user's direction.",
+      "detail": "On 17 October the user requested an immediate Drift City restyle outside the stage order, then directed its commit, merge and this record. Integration is not review or acceptance. Facade detail is decoration, not Stage 05 fidelity; markings carry no legal-route meaning.",
+      "kind": "User directive",
+      "source": "plans/drift-city-restyle.md"
+    },
     {
       "title": "Chrome stall tracked",
       "summary": "Issue #2 · investigate and fix later.",
@@ -319,6 +343,14 @@
       "kind": "Deferred",
       "href": "https://github.com/mabrax/old-england-taxi/issues/1",
       "source": "plans/driveability/desktop-qualification/disposition.md"
+    },
+    {
+      "title": "C-08 deferred",
+      "summary": "Issue #3 · non-blocking.",
+      "detail": "On 14 September the user deferred proving complete enclosing-feature discovery for the Stage 04 adjacent pair. Deferral does not establish source completeness; future acceptance records must state the limitation.",
+      "kind": "Deferred",
+      "href": "https://github.com/mabrax/old-england-taxi/issues/3",
+      "source": "plans/README.md"
     },
     {
       "title": "Linux Chrome + Firefox now",
@@ -384,9 +416,21 @@
       "status": "Evidence reviewed",
       "state": "reviewed",
       "stage": "03"
+    },
+    {
+      "title": "A Drift City look",
+      "text": "Cel shading, outlines, windows and painted roads.",
+      "status": "Integrated · unreviewed",
+      "state": "open",
+      "stage": "03"
     }
   ],
   "evidence": [
+    {
+      "title": "Drift City restyle record",
+      "path": "plans/drift-city-restyle.md",
+      "note": "17 October: delivered scope, verification, and what the earlier Linux evidence no longer covers."
+    },
     {
       "title": "Current follow-up decision",
       "path": "plans/driveability/desktop-qualification/disposition.md",
@@ -394,7 +438,7 @@
     },
     {
       "title": "Champion independent review",
-      "path": "/home/mabrax/Projects/old-england-taxi/companion/reviews/2026-09-08-linux-qualification.md",
+      "path": "companion/reviews/2026-09-08-linux-qualification.md",
       "note": "Independent full verification, raw-evidence checks, memory assessment and remaining acceptance concerns."
     },
     {
@@ -414,6 +458,18 @@
     }
   ],
   "handoffs": [
+    {
+      "date": "17 Oct",
+      "title": "Drift City restyle integrated",
+      "detail": "User-directed merge into main; unreviewed, and no benchmark has measured the new renderer.",
+      "reference": "afd91ce"
+    },
+    {
+      "date": "14 Sep",
+      "title": "C-08 source limit deferred",
+      "detail": "Stage 04 adjacent-pair evidence stays on an unpublished local branch.",
+      "reference": "Issue #3"
+    },
     {
       "date": "9 Sep",
       "title": "Stage 03 integrated",

@@ -19,3 +19,9 @@ After the Linux qualification handoff, the companion was checked again at 1440 p
 The companion now records the user's deferral of the Chrome frame stall to issue #2 alongside process-memory growth/GC in issue #1. Both open issue bodies were read back and verified. The qualification plans record the decision at `9506cb1`; implementation/evidence review remains through `700cdfd`. Original evidence and runtime/tooling files are unchanged.
 
 The rebuilt page was inspected at 1440 px and 720 px with no horizontal overflow or browser errors. The next-conversation card selects Stage 04 and focuses its heading; the stall decision expands to the correct issue link. The sources dialog opens to the current disposition, closes with Escape, and all 13 unique local source references resolve. Build freshness and whitespace checks pass. Deferred checks and pending integration remain distinct from implemented/reviewed work.
+
+## Drift City restyle update — 17 October 2026
+
+The companion records the user-directed Drift City restyle (`014fbd9`, integrated at `afd91ce`) as a Stage 03 extension. It is marked integrated but unreviewed, with its performance unmeasured. Issue #3 was read back and added as a deferred C-08 gate. Stage 04 now notes that its reported adjacent-pair work sits on an unpublished local branch. `sourceRoot` now points to this checkout, and the champion-review evidence path is relative to it. All 14 unique source references resolve.
+
+The rebuilt page was rendered headlessly at 1440, 720 and 390 px. No layout had horizontal overflow, and no browser errors were reported. The 1440 px glance view, Stage 03 panel and four tracked gates were inspected visually. Build freshness passes. Stage 03 acceptance, its Linux evidence and the earlier deferrals are unchanged.
