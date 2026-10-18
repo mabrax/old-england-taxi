@@ -15,6 +15,10 @@ import type { ZoneArtifact } from '../zone/types';
 import { createPhysicsSession, type PhysicsState } from '../physics/physics-session';
 import { BOUNDARY_HEIGHT_METRES } from '../physics/world-geometry';
 import {
+  DRIFT_PALETTE as palette, SUN_DIRECTION, createFacadeMaterial, createGroundMaterial, createInkOutline, createSky, createStripGeometry,
+  createToonGradient, prepareFacadeAttributes, roadBoundarySegments, roadMarkingSegments, toonMaterial
+} from './drift-style';
+import {
   clampPixelRatio,
   createValidationCamera,
   getViewportSize,
@@ -39,15 +43,6 @@ export interface SceneController {
   setPhysicsPaused: (paused: boolean) => void;
 }
 
-const palette = {
-  background: 0xd9e2e1,
-  ground: 0xe8ece8,
-  gridMinor: 0xd0d8d4,
-  gridMajor: 0xaabbb5,
-  road: 0x4b5960,
-  building: 0xb8aa92
-};
-
 export function createValidationScene(
   container: HTMLElement,
   artifact: ZoneArtifact,
@@ -68,7 +63,11 @@ export function createValidationScene(
     performance.clearMeasures(name);
   };
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(palette.background);
+  scene.background = new THREE.Color(palette.haze);
+  scene.add(createSky());
+  const fog = new THREE.Fog(palette.haze, 1, 2);
+  scene.fog = fog;
+  const gradientMap = createToonGradient();
 
   const bounds = artifact.coordinates.localBounds;
   const width = bounds.maximumX - bounds.minimumX;
@@ -109,21 +108,19 @@ export function createValidationScene(
   );
   container.appendChild(renderer.domElement);
 
-  const hemisphereLight = new THREE.HemisphereLight(0xf7faf8, 0x87928e, 2.4);
+  const hemisphereLight = new THREE.HemisphereLight(palette.skyFill, palette.groundFill, 1.1);
   scene.add(hemisphereLight);
 
-  const keyLight = new THREE.DirectionalLight(0xfff8ed, 2.2);
-  keyLight.position.set(centerX + span * 0.5, span * 1.5, centerZ + span * 0.4);
-  scene.add(keyLight);
+  const keyLight = new THREE.DirectionalLight(palette.sun, 2);
+  keyLight.position.copy(SUN_DIRECTION).multiplyScalar(span * 1.5).add(new THREE.Vector3(centerX, 0, centerZ));
+  keyLight.target.position.set(centerX, 0, centerZ);
+  scene.add(keyLight, keyLight.target);
 
   const groundMargin = span * 0.08;
+  // Visual pavement extends past the zone and fades into the haze; physics keeps its own limit.
   const ground = new THREE.Mesh(
-    new THREE.PlaneGeometry(width + groundMargin, depth + groundMargin),
-    new THREE.MeshStandardMaterial({
-      color: palette.ground, roughness: 0.94, metalness: 0,
-      // Keep the base below the grid and roads in the depth buffer at distant angles.
-      polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1
-    })
+    new THREE.PlaneGeometry(width + span * 2, depth + span * 2),
+    createGroundMaterial(gradientMap, centerX, centerZ, span * 0.75, span * 1.35)
   );
   ground.rotation.x = -Math.PI / 2;
   ground.position.set(centerX, 0, centerZ);
@@ -132,8 +129,8 @@ export function createValidationScene(
   const grid = new THREE.GridHelper(
     span + groundMargin,
     10,
-    palette.gridMajor,
-    palette.gridMinor
+    0x8f9a96,
+    0xb4bbb6
   );
   grid.position.x = centerX;
   grid.position.y = 0.012;
@@ -154,10 +151,7 @@ export function createValidationScene(
 
   const roads = new THREE.Mesh(
     roadGeometry,
-    new THREE.MeshStandardMaterial({
-      color: palette.road,
-      roughness: 0.92,
-      metalness: 0,
+    toonMaterial(palette.asphalt, gradientMap, {
       // A 4 cm world-space lift alone loses depth precision when zoomed out.
       // Bias the surface toward the camera while retaining building occlusion.
       polygonOffset: true,
@@ -167,6 +161,15 @@ export function createValidationScene(
   );
   roads.name = 'phase-05-road-surfaces';
   roads.position.y = 0.04;
+  // Painted curbs and centre lines ride on the road surface and share its visibility.
+  const paint = (geometry: THREE.BufferGeometry, color: number, offset: number) => new THREE.Mesh(geometry,
+    toonMaterial(color, gradientMap, { polygonOffset: true, polygonOffsetFactor: offset, polygonOffsetUnits: offset }));
+  const markings = roadMarkingSegments(artifact.streetGraph, bounds);
+  roads.add(
+    paint(createStripGeometry(roadBoundarySegments(roadGeometry), 0.3, 0.01), palette.curb, -2),
+    paint(createStripGeometry(markings.white, 0.15, 0.02), palette.markingWhite, -3),
+    paint(createStripGeometry(markings.yellow, 0.12, 0.02), palette.markingYellow, -3)
+  );
   scene.add(roads);
 
   const buildingGeometry = new THREE.BufferGeometry();
@@ -177,16 +180,11 @@ export function createValidationScene(
   buildingGeometry.setIndex(artifact.geometry.buildings.indices);
   buildingGeometry.computeVertexNormals();
   buildingGeometry.computeBoundingSphere();
+  prepareFacadeAttributes(buildingGeometry);
 
-  const buildings = new THREE.Mesh(
-    buildingGeometry,
-    new THREE.MeshStandardMaterial({
-      color: palette.building,
-      roughness: 0.88,
-      metalness: 0
-    })
-  );
+  const buildings = new THREE.Mesh(buildingGeometry, createFacadeMaterial());
   buildings.name = 'phase-05-building-volumes';
+  buildings.add(createInkOutline(buildingGeometry, 25));
   scene.add(buildings);
 
   const overlays = new THREE.Group();
@@ -215,6 +213,8 @@ export function createValidationScene(
   const setQaVisibility = (source: boolean, generated: boolean) => {
     if (!generated) inspect('Inspection pauses driving while geometry is hidden.');
     overlays.visible = source;
+    // The measurement grid belongs to source comparison, not the styled street view.
+    grid.visible = source;
     roads.visible = buildings.visible = generated;
     renderer.domElement.dataset.sourceVisible = String(source);
     renderer.domElement.dataset.generatedVisible = String(generated);
@@ -344,6 +344,9 @@ export function createValidationScene(
       renderer.domElement.dataset.vehicleRecoveries = String(physics.vehicle?.state.recoveries);
     }
     renderer.domElement.dataset.physicsSteps = String(physics.timing.steps);
+    // Street-level haze while driving; only the far edge of the overview fades.
+    fog.near = mode === 'inspect' ? span * 1.6 : 220;
+    fog.far = mode === 'inspect' ? span * 5 : 900;
     if (mode === 'inspect') controls.update();
     else if (frames?.current) {
       const result = chase.update({ position: vehicleView.root.position, rotation: vehicleView.root.quaternion }, lastFrame === undefined ? 0 : (now - lastFrame) / 1000);
@@ -498,6 +501,9 @@ function disposeObject(object: THREE.Object3D): void {
     child.geometry.dispose();
 
     const materials = Array.isArray(child.material) ? child.material : [child.material];
-    materials.forEach((material) => material.dispose());
+    materials.forEach((material) => {
+      for (const value of Object.values(material)) if (value instanceof THREE.Texture) value.dispose();
+      material.dispose();
+    });
   });
 }
